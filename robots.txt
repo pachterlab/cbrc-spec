@@ -1,1 +1,1 @@
-Sitemap: https://mcaskey6.github.io/CBRC-SPEC_Website/sitemap.xml
+Sitemap: https://pachterlab.github.io/cbrc-spec/sitemap.xml
