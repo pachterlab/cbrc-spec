@@ -247,14 +247,14 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome to SPEC Tutorials!",
+    "title": "Welcome to CBRC-SPEC Tutorials!",
     "section": "",
     "text": "This site is designed to guide Caltech students and staff through the full process of working with single-cell data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment."
   },
   {
     "objectID": "index.html#explore-our-single-cell-workflows",
     "href": "index.html#explore-our-single-cell-workflows",
-    "title": "Welcome to SPEC Tutorials!",
+    "title": "Welcome to CBRC-SPEC Tutorials!",
     "section": "Explore Our Single Cell Workflows",
     "text": "Explore Our Single Cell Workflows\n\nClick a technology below to access step-by-step tutorials tailored to each single-cell assay.\n\n\nSingle-Cell RNA Sequencing Tutorials\n\n\n\n\n10x Genomics Chromium Single Cell 3’\n\n\n\n\n\n\n\nParse Biosciences Evercode WT\n\n\n\n\n\nSpatial Transcriptomics Tutorials\n\n\n\n\nseqFISH"
   },
