@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "SPEC Tutorials"
+  title: "CBRC-SPEC Tutorials"
   navbar:
     background: "#013c58"
     pinned: true

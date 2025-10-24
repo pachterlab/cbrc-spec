@@ -1,5 +1,5 @@
 ---
-title: "Welcome to SPEC Tutorials!"
+title: "Welcome to CBRC-SPEC Tutorials!"
 toc: false
 toc-location: body
 ---
