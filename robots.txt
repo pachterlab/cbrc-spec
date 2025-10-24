@@ -1,1 +1,1 @@
-Sitemap: https://mcaskey6.github.io/SPEC_Website/sitemap.xml
+Sitemap: https://mcaskey6.github.io/CBRC-SPEC_Website/sitemap.xml
