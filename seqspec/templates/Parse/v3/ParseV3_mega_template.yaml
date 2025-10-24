@@ -1,0 +1,261 @@
+!Assay
+seqspec_version: 0.3.0
+assay_id: Parse-Evercode-WT-Mega-v3
+name: Dual-Indexed Parse Evercode WT Mega v3
+doi: https://support.parsebiosciences.com/hc/en-us/article_attachments/31841833600532
+date: 2024-02-20
+description: Parse Evercode WT Mega v3 using dual Illumina multiplex index
+modalities: rna
+lib_struct: ##TBD##
+sequence_protocol: ##PROTOCOL##
+sequence_kit: ##SEQ_KIT##
+library_protocol: Parse Evercode WT v3
+library_kit: Parse Evercode WT Mega v3 
+
+sequence_spec:
+- !Read
+  read_id: read_1
+  name: Read 1
+  modality: rna
+  primer_id: truseq_read1
+  min_len: 64
+  max_len: 64
+  strand: pos
+  files:
+  - !File
+    file_id: ##R1_File_ID##
+    filename: ##R1_Filename##
+    filetype: ##R1_Filetype##
+    filesize: ##R1_File_Size##
+    url: ##R1_URL##
+    urltype: ##R1_URL_Type##
+    md5: ##R1_MD5##
+- !Read
+    read_id: index_1
+    name: Index 1 (i7 index)
+    modality: rna
+    primer_id: Read_2_primer
+    min_len: 8
+    max_len: 8
+    strand: pos
+    files:
+    - !File
+      file_id: ##I1_File_ID##
+      filename: ##I1_Filename##
+      filetype: ##I1_Filetype##
+      filesize: ##I1_File_Size##
+      url: ##I1_URL##
+      urltype: ##I1_URL_Type##
+      md5: ##I1_MD5##
+- !Read
+    read_id: index_2
+    name: Index 2 (i5 index)
+    modality: rna
+    primer_id: Read_1_primer
+    min_len: 8
+    max_len: 8
+    strand: neg
+    files:
+    - !File
+      file_id: ##I2_File_ID##
+      filename: ##I2_Filename##
+      filetype: ##I2_Filetype##
+      filesize: ##I2_File_Size##
+      url: ##I2_URL##
+      urltype: ##I2_URL_Type##
+      md5: ##I2_MD5##
+- !Read
+  read_id: read_2
+  name: Read 2
+  modality: rna
+  primer_id: truseq_read2
+  min_len: 58
+  max_len: 58
+  strand: neg
+  files:
+  - !File
+    file_id: ##R2_File_ID##
+    filename: ##R2_Filename##
+    filetype: ##R2_Filetype##
+    filesize: ##R2_File_Size##
+    url: ##R2_URL##
+    urltype: ##R2_URL_Type##
+    md5: ##R2_MD5##
+
+library_spec:
+- !Region
+  region_id: rna
+  region_type: named
+  name: rna
+  sequence_type: joined
+  sequence: AATGATACGGCGACCACCGAGATCTACACNNNNNNNNTCTTTCCCTACACGACGCTCTTCCGATCTXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXNNNNNNNNGAGGTGGTTGGANNNNNNNNCTGACCCCTCATNNNNNNNNNNNNNNNNNNAGATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG
+  min_len: 256
+  max_len: 256
+  onlist: null
+  parent_id: null
+  regions:
+  - !Region
+    parent_id: null
+    region_id: P5
+    region_type: primer
+    name: Illumina P5 Primer
+    sequence_type: fixed
+    sequence: AATGATACGGCGACCACCGAGATCTACAC
+    min_len: 29
+    max_len: 29
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: i5_index
+    region_type: index
+    name: Illumina i5 Index
+    sequence_type: onlist
+    sequence: NNNNNNNN
+    min_len: 8
+    max_len: 8
+    onlist: !Onlist
+      location: local
+      filename: onlist_i5.txt
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: truseq_read1
+    region_type: primer
+    name: Truseq Read 1
+    sequence_type: fixed
+    sequence: TCTTTCCCTACACGACGCTCTTCCGATCT
+    min_len: 29
+    max_len: 29
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: rna
+    region_id: cdna
+    region_type: cdna
+    name: cDNA
+    sequence_type: random
+    sequence: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    min_len: 64
+    max_len: 64
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: R1_BC
+    region_type: barcode
+    name: Round 1 Barcode
+    sequence_type: onlist
+    sequence: NNNNNNNN
+    min_len: 8
+    max_len: 8
+    onlist: !Onlist
+      location: local
+      filename: onlist_round1.txt
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: linker_1
+    region_type: linker
+    name: Parse v3 linker 1
+    sequence_type: fixed
+    sequence: GAGGTGGTTGGA
+    min_len: 12
+    max_len: 12
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: R2_BC
+    region_type: barcode
+    name: Round 2 Barcode
+    sequence_type: onlist
+    sequence: NNNNNNNN
+    min_len: 8
+    max_len: 8
+    onlist: !Onlist
+      location: local
+      filename: onlist_round2.txt
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: linker_2
+    region_type: linker
+    name: Parse v3 Linker 2
+    sequence_type: fixed
+    sequence: CTGACCCCTCAT
+    min_len: 12
+    max_len: 12
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: R3_BC
+    region_type: barcode
+    name: Round 3 Barcode
+    sequence_type: onlist
+    sequence: NNNNNNNN
+    min_len: 8
+    max_len: 8
+    onlist: !Onlist
+      location: local
+      filename: onlist_round3.txt
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: umi
+    region_type: umi
+    name: UMI
+    sequence_type: random
+    sequence: NNNNNNNNNN
+    min_len: 10
+    max_len: 10
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: truseq_read2
+    region_type: primer
+    name: Truseq Read 2
+    sequence_type: fixed
+    sequence: AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+    min_len: 34
+    max_len: 34
+    onlist: null
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: illumina_i7
+    region_type: index
+    namer: Illumina i7 Index
+    sequence_type: onlist
+    sequence: NNNNNNNN
+    min_len: 8
+    max_len: 8
+    onlist: !Onlist
+      location: local
+      filename: onlist_i7.txt
+    regions: null
+
+  - !Region
+    parent_id: null
+    region_id: illumina_p7
+    region_type: primer
+    name: Illumina P7 Primer
+    sequence_type: fixed
+    sequence: ATCTCGTATGCCGTCTTCTGCTTG
+    min_len: 24
+    max_len: 24
+    onlist: null
+    regions: null

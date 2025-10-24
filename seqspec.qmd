@@ -1,0 +1,250 @@
+---
+title: "What is `seqspec`?"
+---
+
+**seqspec** is a simple, standardized file format to describe how a genomics library was prepared and sequenced. Different genomics assays require unique processing steps. Including a seqspec file with your data makes it easy for others (and future you!) to reanalyze your dataset. Here we will give a brief description of the seqspec format. For a more in-depth description of seqspec and the seqspec file format, refer to the [GitHub page](https://github.com/pachterlab/seqspec).
+
+## Understanding the `seqspec` File Format
+
+A seqspec file is a **YAML-formatted document** with three main sections:
+
+1. **Assay Info** – metadata describing the assay and protocols used  
+2. **Library Structure** – layout and sequence of regions in the library  
+3. **Read Structure** – how the sequencing reads correspond to library regions
+
+Each section depends on the specific **library preparation** and **sequencing technology** used in your assay.
+
+::: {.callout-note title="Why YAML?"}
+YAML (short for “YAML Ain’t Markup Language”) is a lightweight, human-readable format that is easy to edit and interpret, yet structured enough for automated parsing by software. This balance makes it ideal for encoding experimental metadata that must be both transparent to researchers and machine-accessible for reproducible analysis.
+:::
+
+## Section 1: Assay Info
+
+The first section describes the overall experiment — what assay was used, which kit, and how it was sequenced.
+
+### Basic Format
+
+```yaml
+!Assay
+seqspec_version: 0.3.0
+assay_id: 
+name: 
+doi: 
+date: 
+description:
+modalities: rna
+lib_struct: 
+sequence_protocol: 
+sequence_kit: 
+library_protocol: 
+library_kit:
+```
+
+**seqspec_version** — version of the seqspec format used (this tutorial will use version 0.3.0)
+
+**assay_id, name, doi, date, description** — metadata describing the assay
+
+**library_protocol, library_kit** — kit and reagents used for library prep
+
+**sequence_protocol, sequence_kit** — sequencing instrument and reagents used
+
+### Example
+
+Suppose you used the **Parse Biosciences Evercode WT Mega v2.0.1 dual index kit** to generate an scRNA-seq library, sequenced on **Illumina NovaSeq X**. The corresponding seqspec file might look like so:
+
+```yaml
+!Assay
+seqspec_version: 0.3.0
+assay_id: Evercode-WT-mega-v2-dual-index
+name: Parse Evercode Mega WT v2 using dual Illumina multiplex index
+doi: https://www.protocols.io/view/evercode-wt-mega-v2-2-1-8epv5xxrng1b/v1?step=21
+date: 08 November 2023
+description: split-pool ligation-based transcriptome sequencing
+modalities: rna
+lib_struct: https://igvf.github.io/seqspec/
+library_protocol: single-nucleus RNA sequencing assay (OBI:0003109)
+library_kit: Evercode WT Mega v2.0.1 dual index
+sequence_protocol: Illumina NovaSeq X (EFO:0022840)
+sequence_kit: NovaSeq X Series 25B Reagent Kit
+```
+
+## Section 2: Library Structure
+
+The library structure section lists all regions in the sequencing library (from 5’ to 3’), such as primers, linkers, UMIs, and barcodes.
+
+Each region is defined with the following template:
+
+``` yaml
+- !Region
+  parent_id: 
+  region_id: 
+  region_type:
+  name: 
+  sequence_type: 
+  sequence: 
+  min_len: 
+  max_len: 
+  onlist: 
+  regions: 
+```
+
+**region_id, region_type, name** — identifies and describes the region
+
+**parent_id** — refers to the parent region (if it exists)
+
+**sequence, sequence_type** — specifies the nucleotide sequence and its type (e.g., fixed, onlist, variable)
+
+**min_len, max_len** — defines expected sequence lengths
+
+**onlist** — references a file or list of valid sequences (e.g., known cell barcodes)
+
+### Nested Regions
+
+Parent regions can contain multiple child regions, forming a hierarchical structure.
+Here’s a minimal example with one parent and two child regions:
+
+``` yaml
+library_spec:
+- !Region
+  parent_id: null
+  region_id: parent
+  ...
+  regions:
+  - !Region
+    parent_id: parent
+    region_id: region_1
+    ...
+    regions: null
+  - !Region
+    parent_id: parent
+    region_id: region_2
+    ...
+    regions: null
+```
+
+### Examples
+
+Below are two example regions you might find in a seqspec file.
+
+#### Example 1: Illumina P5 primer
+``` yaml
+- !Region
+  parent_id: null
+  region_id: P5
+  region_type: primer
+  name: P5
+  sequence_type: fixed
+  sequence: AATGATACGGCGACCACCGAGATCTACAC
+  min_len: 29
+  max_len: 29
+  onlist: null
+  regions: null
+```
+
+#### Example 2: Parse Biosciences Evercode WT cell barcode
+``` yaml
+- !Region
+  parent_id: null
+  region_id: BC
+  region_type: barcode
+  name: cell barcode
+  sequence_type: onlist
+  sequence: NNNNNNNNNNNNNNNN
+  min_len: 16
+  max_len: 16
+  onlist: !Onlist
+    location: local
+    filename: onlist.txt
+  regions: null
+```
+
+::: {.callout-note title="What is an Onlist?"}
+In Parse Evercode libraries, barcode regions are validated against a fixed list of known barcodes called the “onlist”.
+:::
+
+## Section 3: Read Structure
+
+The read structure section links your FASTQ files to specific sequencing reads.
+
+Each read entry looks like this:
+
+``` yaml
+- !Read
+  read_id: 
+  name: 
+  modality: 
+  primer_id: 
+  min_len: 
+  max_len: 
+  strand: 
+  files:
+```
+
+**read_id, name** — identifies the read object
+
+**primer_id** — links to the corresponding primer region
+
+**strand** — direction of sequencing relative to the library layout
+
+**min_len, max_len** — expected read length
+
+**files** — references the FASTQ files containing this read
+
+### Example
+
+``` yaml
+sequence_spec:
+- !Read
+  read_id: read_1
+  name: Read 1
+  modality: rna
+  primer_id: truseq_read1
+  min_len: 28
+  max_len: 28
+  strand: pos
+  files:
+  - !File
+    file_id: read_1
+    filename: read_1.fastq.gz
+    filetype: fastq.gz
+    filesize: 10 GB
+    url: https://example.org/read_1.fastq.gz
+    urltype: https
+    md5: d1410f93b53357d4f95edb0ba0d73c07
+```
+
+### Step 3: Validate Your seqspec file with `seqspec check`
+You can use `seqspec check` command from the seqspec package to verify your seqspec file is correctly formatted.
+
+Install seqspec using **pip**.
+
+```bash
+pip install seqspec
+```
+
+Or, if you're using a conda environment, install it with:
+
+```bash
+conda install -c conda-forge -c bioconda seqspec
+``` 
+
+Once installed, you can validate your file - let’s call it seqspec.yaml - by running:
+
+```bash
+seqspec check seqspec.yaml
+```
+
+If your file is valid, the command will complete without errors; otherwise, it will print a description of any issues found in the specification.
+
+# Summary
+
+| Section           | Purpose                                          |
+|-------------------|:------------------------------------------------:|
+| Assay Info        | Defines the experimental and sequencing metadata | 
+| Library Structure | Describes regions within your sequencing library |
+| Read Structure    | Links reads and files to specific regions        | 
+<br>
+
+:::{.highlight-section}
+To get a get an assay-specific sample seq-spec file and tutorial, select your assay [here](seqspec_tutorials.qmd).
+:::

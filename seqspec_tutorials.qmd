@@ -1,0 +1,120 @@
+---
+title: "Choose an Assay to Begin Your `seqspec` Tutorial"
+---
+
+```{=html}
+<div class="tech-selector">
+
+  <!-- 10x Row -->
+  <div class="tech-row">
+    <button class="tech-btn tech-10x" data-link="seqspec/webpages/10x/10x_v3.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+      <h3>10x Genomics Next GEM v3</h3>
+    </button>
+    <button class="tech-btn tech-10x" data-link="seqspec/webpages/10x/10x_v4.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+      <h3>10x Genomics GEM X v4</h3>
+    </button>
+  </div>
+
+  <!-- Parse Row -->
+  <div class="tech-row">
+    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v2_single.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 9h6v6H9z"/></svg>
+      <h3>Parse Evercode WT v2 (Single Index)</h3>
+    </button>
+    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v2_dual.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M7 7h10v10H7z"/></svg>
+      <h3>Parse Evercode WT v2 (Dual Index)</h3>
+    </button>
+    <button class="tech-btn tech-parse" data-link="seqspec/webpages/parse/parse_v3.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="12" cy="12" r="4"/></svg>
+      <h3>Parse Evercode WT v3</h3>
+    </button>
+  </div>
+
+</div>
+
+<style>
+.tech-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 2em auto;
+  max-width: 900px;
+}
+
+.tech-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
+
+.tech-btn {
+  background: #f8f9fa;
+  border: 3px solid #005a91;
+  border-radius: 12px;
+  padding: 1.5em;
+  width: 260px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  color: #222;
+}
+
+.tech-btn svg {
+  margin-bottom: 0.5em;
+}
+
+.tech-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* 10x brand color */
+.tech-10x {
+  border-color: #ff6f00;
+}
+.tech-10x:hover {
+  background: #ff6f00;
+  color: white;
+}
+
+/* Parse brand color */
+.tech-parse {
+  border-color: #0072b2;
+}
+.tech-parse:hover {
+  background: #0072b2;
+  color: white;
+}
+
+.tech-btn h3 {
+  margin: 0.3em 0;
+  font-size: 1.2em;
+}
+
+.tech-btn p {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+h1.title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tech-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.link;
+      if (target) window.location.href = target;
+    });
+  });
+});
+</script>
+```
