@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ## Step 1: Align Your Library Reads with [`kb-python`](kb_python.qmd)
 
-Aligning reads from a 10x Genomics Library is relatively straightforward. After generating a reference index with `kb ref`, align your to the reference with `kb count`.
+Aligning reads from a 10x Genomics Library is relatively straightforward. After generating a reference index with `kb ref`, align your reads to the reference with `kb count`.
 
 ### An Example
 Here we provide a brief example of how to align a 10x library to a reference using `kb count`. For a more in-depth tutorial, see our page on [**kb-python**](kb_python.qmd).
