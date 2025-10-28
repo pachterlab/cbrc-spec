@@ -1,0 +1,10 @@
+---
+title: seqFISH
+subtitle: Sequential Fluorescence In Situ Hybridization
+toc: false
+toc-location: body
+---
+
+seqFISH is a powerful imaging-based single-cell transcriptomics technique that enables the **spatial mapping of gene expression** directly within tissue samples. Unlike droplet-based methods such as 10x Chromium or Parse Evercode, seqFISH preserves spatial context—allowing you to see not only which genes are active, but where they’re expressed within the cellular architecture.
+
+![**Figure**: seqFish Mouse Embryo Map](seqfish.jpg)
