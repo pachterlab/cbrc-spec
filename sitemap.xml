@@ -13,36 +13,40 @@
     <lastmod>2025-10-24T21:48:17.378Z</lastmod>
   </url>
   <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/Parse/parse_v2_dual.html</loc>
+    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/Parse/parse_v3.html</loc>
     <lastmod>2025-10-24T21:48:17.389Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/10x/10x_v4.html</loc>
-    <lastmod>2025-10-24T21:48:17.388Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/seqfish.html</loc>
-    <lastmod>2025-10-24T21:48:17.385Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/sample_pipeline.html</loc>
-    <lastmod>2025-10-24T22:35:04.968Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/index.html</loc>
-    <lastmod>2025-10-24T22:28:53.463Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/10x/10x_v3.html</loc>
-    <lastmod>2025-10-24T21:48:17.388Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/Parse/parse_v2_single.html</loc>
     <lastmod>2025-10-24T21:48:17.389Z</lastmod>
   </url>
   <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/Parse/parse_v3.html</loc>
+    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/10x/10x_v3.html</loc>
+    <lastmod>2025-10-24T21:48:17.388Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/index.html</loc>
+    <lastmod>2025-10-28T05:31:49.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/sample_pipeline.html</loc>
+    <lastmod>2025-10-24T22:35:04.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/seqfish.html</loc>
+    <lastmod>2025-10-28T05:22:13.056Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/10x/10x_v4.html</loc>
+    <lastmod>2025-10-24T21:48:17.388Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/Parse/parse_v2_dual.html</loc>
     <lastmod>2025-10-24T21:48:17.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/contact_us.html</loc>
+    <lastmod>2025-10-28T05:41:53.374Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec_tutorials.html</loc>
@@ -50,6 +54,6 @@
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/10x.html</loc>
-    <lastmod>2025-10-24T21:48:17.361Z</lastmod>
+    <lastmod>2025-10-28T04:42:18.496Z</lastmod>
   </url>
 </urlset>
