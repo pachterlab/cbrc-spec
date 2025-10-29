@@ -386,6 +386,19 @@ Note
 <li><p>v2_replace.txt for v2 chemistry <a href="v2_replace.txt" download="">here</a></p></li>
 <li><p>v3_replace.txt for v3 chemistry <a href="v3_replace.txt" download="">here</a></p></li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
+</div>
+</div>
 </section>
 </section>
 <section id="next-steps" class="level2">
@@ -469,7 +482,7 @@ Note
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

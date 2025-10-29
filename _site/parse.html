@@ -183,6 +183,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./contact_us.html"> 
+<span class="menu-text">Contact Us</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -338,6 +342,19 @@ document.addEventListener("DOMContentLoaded", () => {
 <h2 class="anchored" data-anchor-id="step-1-align-your-library-reads-with-kb-python">Step 1: Align Your Library Reads with <a href="./kb_python.html">kb-python</a></h2>
 <p>Aligning reads from a <strong>Parse Evercode WT</strong> library requires additional consideration compared to other scRNA-seq assays. Unlike most platforms, which use primers targeting a specific region of each mRNA molecule, Parse Evercode WT employs two types of primers — <strong>poly(T) primers</strong> that bind to the 3′ poly(A) tail and <strong>random oligo primers</strong> that bind to random internal regions of the transcript. Each primer type has its own corresponding set of cell-specific barcodes. As a result, each cell is represented by two barcodes rather than one, as in assays such as 10x Genomics.</p>
 <p>To generate a unified count matrix from the raw reads, the counts associated with these two barcodes must be collapsed so that each cell is represented once. In kb-python, this is accomplished by replacing all random oligo barcodes with their corresponding poly(T) barcodes using the <code>-r</code> argument.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
+</div>
+</div>
 </section>
 <section id="an-example-v2" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-v2">An Example (v2)</h2>
@@ -449,7 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

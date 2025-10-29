@@ -154,5 +154,9 @@ You can download:
 
 * v3_replace.txt for v3 chemistry <a href="v3_replace.txt" download>here</a>
 
+:::{.callout-important}
+When using `-r` to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file `counts_unfiltered`) and one with the replacement barcodes (stored in the output file `counts_unfiltered_modified`).
+:::
+
 ## Next Steps
 After generating your count matrix, you can import it into analysis tools such as **Scanpy**, **Seurat**, or **Bioconductor** for downstream processing, clustering, and visualization.
