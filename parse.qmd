@@ -106,6 +106,10 @@ Aligning reads from a **Parse Evercode WT** library requires additional consider
 
 To generate a unified count matrix from the raw reads, the counts associated with these two barcodes must be collapsed so that each cell is represented once. In kb-python, this is accomplished by replacing all random oligo barcodes with their corresponding poly(T) barcodes using the `-r` argument.
 
+:::{.callout-important}
+When using `-r` to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file `counts_unfiltered`) and one with the replacement barcodes (stored in the output file `counts_unfiltered_modified`).
+:::
+
 ## An Example (v2)
 Here we provide a brief example of how to align a Parse Evercode WT v2 library to a reference using `kb count`. For a more in-depth tutorial,  see our page on [**kb-python**](kb_python.qmd).
 
