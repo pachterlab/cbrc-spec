@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec.html</loc>
-    <lastmod>2025-10-24T21:48:17.385Z</lastmod>
+    <lastmod>2025-11-07T06:55:50.005Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqfish_pipeline.html</loc>
@@ -11,6 +11,10 @@
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec_tutorials.html</loc>
     <lastmod>2025-10-24T21:48:17.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/conda.html</loc>
+    <lastmod>2025-11-07T06:08:21.331Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/contact_us.html</loc>
@@ -29,12 +33,16 @@
     <lastmod>2025-11-07T01:42:35.964Z</lastmod>
   </url>
   <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/R_packages.html</loc>
+    <lastmod>2025-11-07T06:44:14.261Z</lastmod>
+  </url>
+  <url>
     <loc>https://pachterlab.github.io/cbrc-spec/sample_pipeline.html</loc>
     <lastmod>2025-11-07T00:45:51.006Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/index.html</loc>
-    <lastmod>2025-10-28T22:15:22.259Z</lastmod>
+    <lastmod>2025-11-07T07:02:16.959Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/10x/10x_v3.html</loc>
@@ -49,12 +57,16 @@
     <lastmod>2025-10-24T21:48:17.389Z</lastmod>
   </url>
   <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/python_packages.html</loc>
+    <lastmod>2025-11-07T06:22:19.197Z</lastmod>
+  </url>
+  <url>
     <loc>https://pachterlab.github.io/cbrc-spec/parse.html</loc>
     <lastmod>2025-10-28T22:24:51.366Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/kb_python.html</loc>
-    <lastmod>2025-10-28T22:25:45.470Z</lastmod>
+    <lastmod>2025-11-07T06:56:38.711Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/10x.html</loc>
