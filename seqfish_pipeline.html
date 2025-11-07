@@ -283,6 +283,7 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
+<p>In this vignette, we will demonstrate an example analysis workflow for spatial transcriptomics data collected using the <strong>seqFISH</strong> technology. The analysis will cover quality control, normalization, dimension reduction, clustering, and univariate spatial statistics. The workflow will make use of functions implemented in the <code>Voyager</code> R package as well as other Bioconductor packages.</p>
 </section>
 <section id="dataset" class="level1">
 <h1>Dataset</h1>
@@ -355,7 +356,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Notably, the cells in this dataset have fewer counts that would be expected in a single-cell sequencing experiment and the cells with higher counts seem to be dispersed throughout the tissue. Fewer counts are expected in seqFISH experiments where probing for highly expressed genes may lead to optical crowding over multiple imaging rounds.</p>
+<p>Notably, the cells in this dataset have fewer counts than would be expected in a single-cell sequencing experiment and the cells with higher counts seem to be dispersed throughout the tissue. Fewer counts are expected in seqFISH experiments where probing for highly expressed genes may lead to optical crowding over multiple imaging rounds.</p>
 <p>Since the counts are collected from several fields of view, we will visualize the number of cells and total counts for each field separately.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> <span class="fu">colData</span>(sfe)<span class="sc">$</span>pos</span>
@@ -578,7 +579,7 @@ window.Quarto = {
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">colData</span>(sfe)<span class="sc">$</span>celltype_mapped_refined)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rand.index</span>(g1, g2)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8426601</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8426913</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The relatively large Rand index suggests that cells are often found in the same cluster in both cases.</p>
 </section>
