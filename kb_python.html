@@ -170,12 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
     <a class="dropdown-item" href="./sample_pipeline.html">
- <span class="dropdown-text">An Example scRNA-seq Pipeline</span></a>
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="./seqfish_pipeline.html">
- <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
     </ul>
   </li>
@@ -264,7 +264,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This tutorial provides a brief introduction to kb-python. For a more in-depth guide, see the <a href="https://kallisto.readthedocs.io/en/latest/index.html">official documentation</a>.</p>
+<p>This tutorial provides a brief introduction to kb-python. For a more in-depth guide, see the <a href="https://kallisto.readthedocs.io/en/latest/index.html">official documentation</a> and reference the papers for <a href="https://www.nature.com/articles/s41596-024-01057-0">kb-python</a>, <a href="http://academic.oup.com/bioinformatics/article/35/21/4472/5487510?login=true">bustools</a>, and <a href="https://www.nature.com/articles/nbt.3519">kallisto</a>.</p>
 </div>
 </div>
 <p><strong>kb-python</strong> is a lightweight, command-line toolkit for processing single-cell RNA sequencing (scRNA-seq) data. It provides an efficient and transparent way to convert raw sequencing reads into gene count matrices ready for downstream analysis.</p>
@@ -388,7 +388,7 @@ Note
 <p>To see a complete list of technologies and their corresponding technology strings, type <code>kb --list</code> into your terminal.</p>
 <section id="parse-evercode-wt-v3-using-a-custom-specification" class="level3">
 <h3 class="anchored" data-anchor-id="parse-evercode-wt-v3-using-a-custom-specification">Parse Evercode WT v3: Using a Custom Specification</h3>
-<p>Currently, <strong>kb-python</strong> does not include a built-in specification for the <strong>Parse Evercode WT v3</strong> chemistry. To align Parse v3 data, you must manually specify the assay configuration by providing:</p>
+<p>Currently, <strong>kb-python</strong> does not include a built-in specification for the <strong>Parse Evercode WT v3</strong> chemistry. To pseudoalign Parse v3 data, you must manually specify the assay configuration by providing:</p>
 <ul>
 <li><p><a href="v3_onlist.txt" download="">v3_onlist.txt</a> — a list of valid cell barcodes</p></li>
 <li><p>a technology string defining barcode positions within the read: <code>-x "1,10,18,1,30,38,1,50,58:1,0,10:0,0,0"</code></p></li>

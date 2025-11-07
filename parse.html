@@ -170,12 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
     <a class="dropdown-item" href="./sample_pipeline.html">
- <span class="dropdown-text">An Example scRNA-seq Pipeline</span></a>
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="./seqfish_pipeline.html">
- <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
     </ul>
   </li>
@@ -221,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#seqspec-tutorials" id="toc-seqspec-tutorials" class="nav-link" data-scroll-target="#seqspec-tutorials">SEQSPEC Tutorials</a></li>
   </ul></li>
-  <li><a href="#step-1-align-your-library-reads-with-kb-python" id="toc-step-1-align-your-library-reads-with-kb-python" class="nav-link" data-scroll-target="#step-1-align-your-library-reads-with-kb-python">Step 1: Align Your Library Reads with kb-python</a></li>
+  <li><a href="#step-1-pseudoalign-your-library-reads-with-kb-python" id="toc-step-1-pseudoalign-your-library-reads-with-kb-python" class="nav-link" data-scroll-target="#step-1-pseudoalign-your-library-reads-with-kb-python">Step 1: Pseudoalign Your Library Reads with kb-python</a></li>
   <li><a href="#an-example-v2" id="toc-an-example-v2" class="nav-link" data-scroll-target="#an-example-v2">An Example (v2)</a></li>
   <li><a href="#an-example-v3" id="toc-an-example-v3" class="nav-link" data-scroll-target="#an-example-v3">An Example (v3)</a></li>
   <li><a href="#step-2-process-and-analyze-your-data" id="toc-step-2-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-2-process-and-analyze-your-data">Step 2: Process and Analyze Your Data</a></li>
@@ -353,8 +353,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </section>
 </section>
-<section id="step-1-align-your-library-reads-with-kb-python" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-align-your-library-reads-with-kb-python">Step 1: Align Your Library Reads with <a href="./kb_python.html">kb-python</a></h2>
+<section id="step-1-pseudoalign-your-library-reads-with-kb-python" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-pseudoalign-your-library-reads-with-kb-python">Step 1: Pseudoalign Your Library Reads with <a href="./kb_python.html">kb-python</a></h2>
 <p>Aligning reads from a <strong>Parse Evercode WT</strong> library requires additional consideration compared to other scRNA-seq assays. Unlike most platforms, which use primers targeting a specific region of each mRNA molecule, Parse Evercode WT employs two types of primers — <strong>poly(T) primers</strong> that bind to the 3′ poly(A) tail and <strong>random oligo primers</strong> that bind to random internal regions of the transcript. Each primer type has its own corresponding set of cell-specific barcodes. As a result, each cell is represented by two barcodes rather than one, as in assays such as 10x Genomics.</p>
 <p>To generate a unified count matrix from the raw reads, the counts associated with these two barcodes must be collapsed so that each cell is represented once. In kb-python, this is accomplished by replacing all random oligo barcodes with their corresponding poly(T) barcodes using the <code>-r</code> argument.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -373,12 +373,12 @@ Important
 </section>
 <section id="an-example-v2" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-v2">An Example (v2)</h2>
-<p>Here we provide a brief example of how to align a Parse Evercode WT v2 library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="./kb_python.html"><strong>kb-python</strong></a>.</p>
+<p>Here we provide a brief example of how to pseudoalign a Parse Evercode WT v2 library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="./kb_python.html"><strong>kb-python</strong></a>.</p>
 <p>To psuedoalign your Parse data, run:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> SPLIT-SEQ <span class="at">-r</span> v2_replace.txt <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>where index.idx and t2g.txt are files generated by <code>kb-ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. The replace.txt file specifies the barcode substitution. The <code>--h5ad</code> argument generates an <code>h5ad</code> formatted file for downstream processing with <strong>Scanpy</strong>.</p>
-<p>If you performed a <strong>single-nucleus RNA-seq</strong> experiment, instead use the <strong>NAC workflow</strong> to align both nascent and mature reads:</p>
+<p>If you performed a <strong>single-nucleus RNA-seq</strong> experiment, instead use the <strong>NAC workflow</strong> to pseaudoalign both nascent and mature reads:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-r</span> v2_replace.txt <span class="at">--workflow</span><span class="op">=</span>nac <span class="at">-x</span> 10XV3 <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-c1</span> cdna.txt <span class="at">-c2</span> nascent.txt R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Here, cdna.txt and nascent.text are files generated by <code>kb ref -workflow=nac</code>.</p>
