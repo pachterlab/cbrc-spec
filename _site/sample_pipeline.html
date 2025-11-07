@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./seqfish.html">
+    <a class="dropdown-item" href="./seqfish_pipeline.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
   </li>  
     </ul>
@@ -387,7 +387,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <h2 class="anchored" data-anchor-id="step-2-basic-quality-control">Step 2: Basic Quality Control</h2>
 <section id="test-for-library-saturation" class="level3">
 <h3 class="anchored" data-anchor-id="test-for-library-saturation">Test for Library Saturation</h3>
-<p>Below is a <strong>Gene vs.&nbsp;UMI plot</strong>, in which, for each cell, we visualize how many genes we detected. The purpose of this plot is to see if we have “saturated” our sequencing library and sampled a representative number of mRNA molecules for each cell. If this is the case, then increasing the number of UMI counts (x-axis) will not yield an appreciable increase in the number of genes detected (y-axis).</p>
+<p>Below is a <strong>Gene vs.&nbsp;UMI plot</strong>, in which, for each cell, we visualize how many genes we detected. The purpose of this plot is to see if we have “saturated” our sequencing library and sampled a representative number of mRNA molecules for each cell. If this is the case, the curve should plateau as we sequence more UMIs.</p>
 <div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:625}}" data-outputid="2304f482-ed5e-4eeb-ebdc-7ea6b46a396a">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot showing genes detected as a function of UMI counts.</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
@@ -414,7 +414,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </div>
 </div>
 </div>
-<p>The data looks good! The number of genes does not increase appreciably relative to the number of UMI counts as demonstrated by the linear relationship between genes to UMI counts in the above log-log plot.</p>
+<p>The number of genes detected continues to increase with the number of UMI counts (x-axis) indicating that we have not saturated our library. More sequencing would likely yield more genes detected per cell.</p>
 </section>
 <section id="examine-the-knee-plot" class="level3">
 <h3 class="anchored" data-anchor-id="examine-the-knee-plot">Examine the Knee Plot</h3>
@@ -870,7 +870,7 @@ Note
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
