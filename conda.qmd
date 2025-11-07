@@ -1,0 +1,77 @@
+---
+title: "Creating a Conda Environment"
+---
+
+## Why Should I Use Conda?
+Conda is an open-source package and environment management system designed to make scientific computing workflows reproducible and portable. It allows you to:
+
+* Install and manage software (including **Python** and **R** packages) along with all their dependencies — even complex bioinformatics tools that are difficult to install manually.
+
+* Create isolated environments, so different projects can use different versions of the same software without conflicts.
+
+* Reproduce analyses easily, since an environment file (environment.yml) can capture the exact software versions used in your workflow.
+
+This makes conda especially useful for computational biology and single-cell RNA-seq analysis, where multiple specialized tools (e.g., kb-python, scanpy, seqspec) must work together seamlessly.
+
+:::{.callout-note title="Installing Conda"}
+To install conda, follow the instructions [here](https://www.anaconda.com/docs/getting-started/miniconda/install). This page shows you how to install **miniconda**.
+:::
+
+## Create a New Environment
+There are many ways to organize your conda environments which depends on the uniqueness of your analysis workflows and the dependencies required. However you decide to use conda, you should have a dedicated conda environment for each project.
+
+To create a conda environment (with Python), type into the command line:
+
+```bash
+conda create --name myenv
+```
+
+and replace `myenv` with your desired environment name. Then, to activate your environment, type:
+
+```bash
+conda activate myenv
+```
+
+Now, anything you run in this shell will use only the packages that you have explicitly installed. To deactivate your environment, type:
+
+```bash
+conda deactivate
+```
+
+:::{.callout-note title="Python or R?"}
+To create your environment with a specific version of **Python** (e.g version 3.12), type into your command line:
+```bash
+conda create --name myenv python=3.12
+```
+
+If you are instead analyzing your data with **R**, in this case with version 4.2, you can create your environment as follows:
+```bash
+conda create --name myenv r-essentials r-base=4.2
+```
+:::
+
+## Installing a Package with Conda
+To install a package with conda, you usually have to specificy a **conda channel**. Conda channels are online repositories where packages are stored and distributed. When you install a package with conda, it looks for that package in one or more channels (for example, defaults, conda-forge, or bioconda).
+
+* The defaults channel is maintained by Anaconda and includes general-purpose packages.
+
+* **conda-forge** is a community-maintained channel that provides up-to-date and cross-platform builds of thousands of scientific and technical packages.
+
+* **bioconda** specializes in bioinformatics software and depends on conda-forge for many of its core libraries.
+
+When installing bioinformatics tools like kb-python or seqspec, it’s best practice to specify both conda-forge and bioconda as channels to ensure compatibility:
+
+```bash
+conda install -c conda-forge -c bioconda kb-python
+```
+
+## Recreate an Old Environment
+You can save your conda environment in a **YAML** file with:
+```bash
+conda env export --from-history > environment.yml
+```
+
+With the `environment.yml` file, you can produce an identical copy of your conda environment with:
+```bash
+conda env create -f environment.yml --name myenv
+```

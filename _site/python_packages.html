@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analyzing Your 10x Chromium Single Cell 3’ scRNA-seq Assay Data – CBRC-SPEC Tutorials</title>
+<title>Installing Python Packages – CBRC-SPEC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -217,15 +217,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#step-0-get-started-with-seqspec" id="toc-step-0-get-started-with-seqspec" class="nav-link active" data-scroll-target="#step-0-get-started-with-seqspec">Step 0: Get started with <code>seqspec</code></a>
+  <li><a href="#kb-python" id="toc-kb-python" class="nav-link active" data-scroll-target="#kb-python">kb-python</a>
   <ul class="collapse">
-  <li><a href="#seqspec-tutorials" id="toc-seqspec-tutorials" class="nav-link" data-scroll-target="#seqspec-tutorials">seqspec Tutorials</a></li>
+  <li><a href="#conda" id="toc-conda" class="nav-link" data-scroll-target="#conda">Conda</a></li>
+  <li><a href="#pip" id="toc-pip" class="nav-link" data-scroll-target="#pip">pip</a></li>
   </ul></li>
-  <li><a href="#step-1-align-your-library-reads-with-kb-python" id="toc-step-1-align-your-library-reads-with-kb-python" class="nav-link" data-scroll-target="#step-1-align-your-library-reads-with-kb-python">Step 1: Align Your Library Reads with <code>kb-python</code></a>
+  <li><a href="#seqspec" id="toc-seqspec" class="nav-link" data-scroll-target="#seqspec">seqspec</a>
   <ul class="collapse">
-  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An Example</a></li>
+  <li><a href="#conda-1" id="toc-conda-1" class="nav-link" data-scroll-target="#conda-1">Conda</a></li>
+  <li><a href="#pip-1" id="toc-pip-1" class="nav-link" data-scroll-target="#pip-1">pip</a></li>
   </ul></li>
-  <li><a href="#step-2-process-and-analyze-your-data" id="toc-step-2-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-2-process-and-analyze-your-data">Step 2: Process and Analyze Your Data</a></li>
   </ul>
 </nav>
 </nav>
@@ -238,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analyzing Your 10x Chromium Single Cell 3’ scRNA-seq Assay Data</h1>
+<h1 class="title">Installing Python Packages</h1>
 </div>
 
 
@@ -255,133 +256,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="step-0-get-started-with-seqspec" class="level2">
-<h2 class="anchored" data-anchor-id="step-0-get-started-with-seqspec">Step 0: Get started with <code>seqspec</code></h2>
-<p>To ensure that all data generated at Caltech are standardized and reproducible, we require that every dataset include a <strong>seqspec file</strong>. A seqspec file provides a machine-readable description of your experiment, specifying the assay information, library structure, and read structure in a YAML-formatted file.</p>
-<section id="seqspec-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="seqspec-tutorials">seqspec Tutorials</h3>
-<div class="tech-selector">
-  <!-- 10x Row -->
-  <div class="tech-row">
-    <button class="tech-btn tech-10x" data-link="seqspec/webpages/10x/10x_v3.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l2 2 4-4"></path></svg>
-      <h3 class="anchored">10x Genomics Next GEM v3</h3>
-    </button>
-    <button class="tech-btn tech-10x" data-link="seqspec/webpages/10x/10x_v4.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l2 2 4-4"></path></svg>
-      <h3 class="anchored">10x Genomics GEM X v4</h3>
-    </button>
-  </div>
-
-<style>
-.tech-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  margin: 2em auto;
-  max-width: 900px;
-}
-
-.tech-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5em;
-}
-
-.tech-btn {
-  background: #f8f9fa;
-  border: 3px solid #005a91;
-  border-radius: 12px;
-  padding: 1.5em;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  color: #222;
-}
-
-.tech-btn svg {
-  margin-bottom: 0.5em;
-}
-
-.tech-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
-}
-
-/* 10x brand color */
-.tech-10x {
-  border-color: #ff6f00;
-}
-.tech-10x:hover {
-  background: #ff6f00;
-  color: white;
-}
-
-.tech-btn h3 {
-  margin: 0.3em 0;
-  font-size: 0.92em;
-}
-
-.tech-btn p {
-  font-size: 0.9em;
-  opacity: 0.8;
-}
-
-h1.title {
-  text-align: center;
-  margin-bottom: 1em;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".tech-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.dataset.link;
-      if (target) window.location.href = target;
-    });
-  });
-});
-</script>
-</div></section>
+<p>How you install Python packages depends on whether you are using a <strong>conda environment</strong>. See our page on <a href="./conda.html">conda environments</a> to learn how conda can help with <strong>version control</strong> and <strong>reproducibility</strong>. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install packages using <strong>pip</strong>.</p>
+<section id="kb-python" class="level2">
+<h2 class="anchored" data-anchor-id="kb-python">kb-python</h2>
+<section id="conda" class="level3">
+<h3 class="anchored" data-anchor-id="conda">Conda</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="step-1-align-your-library-reads-with-kb-python" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-align-your-library-reads-with-kb-python">Step 1: Align Your Library Reads with <a href="./kb_python.html"><code>kb-python</code></a></h2>
-<p>Aligning reads from a 10x Genomics Library is relatively straightforward. After generating a reference index with <code>kb ref</code>, align your reads to the reference with <code>kb count</code>.</p>
-<section id="an-example" class="level3">
-<h3 class="anchored" data-anchor-id="an-example">An Example</h3>
-<p>Here we provide a brief example of how to align a 10x library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="./kb_python.html"><strong>kb-python</strong></a>.</p>
-<p>To psuedoalign your scRNA-seq 10x data, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> 10XV3 <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where index.idx and t2g.txt are files generated by <code>kb ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. The <code>--h5ad</code> argument outputs an <code>.h5ad</code> file suitable for downstream processing with <a href="https://scanpy.readthedocs.io/en/stable/"><strong>Scanpy</strong></a>.</p>
-<p>If you performed a <strong>single-nucleus RNA-seq</strong> experiment, instead use the <strong>NAC workflow</strong> to align both nascent and mature reads:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> 10XV3 <span class="at">--workflow</span><span class="op">=</span>nac <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx  <span class="dt">\ </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-c1</span> cdna.txt <span class="at">-c2</span> nascent.txt R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Here, cdna.txt and nascent.text are files generated by <code>kb ref --workflow=nac</code>.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This example is specifically for the <strong>10x Chromium Single Cell Next Gem v3</strong> chemistry for the v4 chemistry, replace the technology string <code>-x 10XV3</code> with <code>-x 10XV4</code>.</p>
-</div>
-</div>
+<section id="pip" class="level3">
+<h3 class="anchored" data-anchor-id="pip">pip</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="step-2-process-and-analyze-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-process-and-analyze-your-data">Step 2: Process and Analyze Your Data</h2>
-<p>Now you are ready to process your data! To continue with downstream analysis follow our <a href="./sample_pipeline.html"><strong>example scRNA-seq pipeline</strong></a>.</p>
+<section id="seqspec" class="level2">
+<h2 class="anchored" data-anchor-id="seqspec">seqspec</h2>
+<section id="conda-1" class="level3">
+<h3 class="anchored" data-anchor-id="conda-1">Conda</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda seqspec</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="pip-1" class="level3">
+<h3 class="anchored" data-anchor-id="pip-1">pip</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

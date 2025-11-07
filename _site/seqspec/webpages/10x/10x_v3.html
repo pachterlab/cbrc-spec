@@ -125,10 +125,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Tutorials</span>
@@ -143,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../seqfish.html">
+    <a class="dropdown-item" href="../../../seqfish_pipeline.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -180,6 +176,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../../seqfish_pipeline.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-installation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Installation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
+        <li>
+    <a class="dropdown-item" href="../../../conda.html">
+ <span class="dropdown-text">Creating a Conda Environment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../python_packages.html">
+ <span class="dropdown-text">Installing Python Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../R_packages.html">
+ <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
     </ul>
   </li>
@@ -535,7 +550,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
