@@ -31,7 +31,7 @@ website:
           - href: sample_pipeline.ipynb
             text: An Example scRNA-seq Pipeline
           - text: "---"
-          - href: seqfish.qmd
+          - href: seqfish_pipeline.Rmd
             text: An Example Spatial Transcriptomics Pipeline
       - href: contact_us.qmd
         text: Contact Us
