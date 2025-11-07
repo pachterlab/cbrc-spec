@@ -2,7 +2,7 @@
 title: "What is `seqspec`?"
 ---
 
-**seqspec** is a simple, standardized file format to describe how a genomics library was prepared and sequenced. Different genomics assays require unique processing steps. Including a seqspec file with your data makes it easy for others (and future you!) to reanalyze your dataset. Here we will give a brief description of the seqspec format. For a more in-depth description of seqspec and the seqspec file format, refer to the [GitHub page](https://github.com/pachterlab/seqspec).
+**seqspec** is a simple, standardized file format to describe how a genomics library was prepared and sequenced. Different genomics assays require unique processing steps. Including a seqspec file with your data makes it easy for others (and future you!) to reanalyze your dataset. Here we will give a brief description of the seqspec format. For a more in-depth description of seqspec and the seqspec file format, refer to the [GitHub page](https://github.com/pachterlab/seqspec) and the [paper](https://academic.oup.com/bioinformatics/article/40/4/btae168/7641535).
 
 ## Understanding the `seqspec` File Format
 

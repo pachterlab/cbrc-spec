@@ -27,10 +27,10 @@ website:
       - text: Workflows
         menu:
           - href: sample_pipeline.ipynb
-            text: An Example scRNA-seq Pipeline
+            text: An Example scRNA-seq Workflow
           - text: "---"
           - href: seqfish_pipeline.Rmd
-            text: An Example Spatial Transcriptomics Pipeline
+            text: An Example Spatial Transcriptomics Workflow
       - text: Installation
         menu:
           - href: conda.qmd

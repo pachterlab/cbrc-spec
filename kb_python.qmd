@@ -3,7 +3,7 @@ title: "Pseudoalignment of scRNA-seq Reads with `kb-python`"
 ---
 ::: {.callout-note}
 This tutorial provides a brief introduction to kb-python.
-For a more in-depth guide, see the [official documentation](https://kallisto.readthedocs.io/en/latest/index.html).
+For a more in-depth guide, see the [official documentation](https://kallisto.readthedocs.io/en/latest/index.html) and reference the papers for [kb-python](https://www.nature.com/articles/s41596-024-01057-0), [bustools](http://academic.oup.com/bioinformatics/article/35/21/4472/5487510?login=true), and [kallisto](https://www.nature.com/articles/nbt.3519).
 :::
 
 **kb-python** is a lightweight, command-line toolkit for processing single-cell RNA sequencing (scRNA-seq) data. It provides an efficient and transparent way to convert raw sequencing reads into gene count matrices ready for downstream analysis.
@@ -121,7 +121,7 @@ To see a complete list of technologies and their corresponding technology string
 
 ### Parse Evercode WT v3: Using a Custom Specification
 
-Currently, **kb-python** does not include a built-in specification for the **Parse Evercode WT v3** chemistry. To align Parse v3 data, you must manually specify the assay configuration by providing:
+Currently, **kb-python** does not include a built-in specification for the **Parse Evercode WT v3** chemistry. To pseudoalign Parse v3 data, you must manually specify the assay configuration by providing:
 
 * <a href="v3_onlist.txt" download>v3_onlist.txt</a> — a list of valid cell barcodes
 
