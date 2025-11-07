@@ -70,5 +70,17 @@
   },
   "seqfish_pipeline.Rmd": {
     "seqfish_pipeline.html": "8f698f48"
+  },
+  "conda.qmd": {
+    "conda.html": "317660c4"
+  },
+  "conda_packages.qmd": {
+    "conda_packages.html": "d2f9872a"
+  },
+  "python_packages.qmd": {
+    "python_packages.html": "c705d827"
+  },
+  "R_packages.qmd": {
+    "R_packages.html": "b2fe6043"
   }
 }

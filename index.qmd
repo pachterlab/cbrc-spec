@@ -29,7 +29,7 @@ Click a technology below to access step-by-step tutorials tailored to each singl
 
 ### Spatial Transcriptomics Tutorials
 
-:::{.banner data-href="seqfish.html"}
+:::{.banner data-href="seqfish_pipeline.html"}
 ![](probe.png){width=20}
 <div class="banner-text">
   <h3>seqFISH</h3>

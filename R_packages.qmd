@@ -1,0 +1,17 @@
+---
+title: "Installing R Packages"
+---
+
+How you install **R** packages depends on whether you are using a **conda environment**. See our page on [conda environments](conda.qmd) to learn how conda can help with **version control** and **reproducibility**. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install  packages within your R script.
+
+## Conda Installation
+```bash
+    conda install -c conda-forge r-<package_name>
+```
+Replace `<package_name>` with the name of the package you wish to install.
+
+## R Installation
+In R, you can install packages directly from within your script using the `install.packages()` function. For example, to install **ggplot2**, a popular package for data visualization, include the following line at the beginning of your script:
+```R
+install.packages("ggplot2")
+```

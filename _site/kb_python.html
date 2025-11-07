@@ -125,10 +125,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Tutorials</span>
@@ -143,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./seqfish.html">
+    <a class="dropdown-item" href="./seqfish_pipeline.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -180,6 +176,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./seqfish_pipeline.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-installation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Installation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
+        <li>
+    <a class="dropdown-item" href="./conda.html">
+ <span class="dropdown-text">Creating a Conda Environment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./python_packages.html">
+ <span class="dropdown-text">Installing Python Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./R_packages.html">
+ <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
     </ul>
   </li>
@@ -265,6 +280,19 @@ Note
 <li><p>Processing <strong>FASTQ</strong> files into the <strong>BUS format</strong> with <code>kb count</code></p></li>
 <li><p>Generating a count matrix summarizing gene expression per cell</p></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Install seqspec">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Install seqspec
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In order to install seqspec, follow our installation instructions <a href="./python_packages.html#kb-python">here</a>.</p>
+</div>
+</div>
 <section id="workflows" class="level2">
 <h2 class="anchored" data-anchor-id="workflows">Workflows</h2>
 <p>kb-python provides three workflows tailored to different experimental setups and analysis goals. The two most commonly used are:</p>
@@ -482,7 +510,7 @@ Important
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

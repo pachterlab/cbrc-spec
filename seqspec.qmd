@@ -216,25 +216,15 @@ sequence_spec:
 ### Step 3: Validate Your seqspec file with `seqspec check`
 You can use `seqspec check` command from the seqspec package to verify your seqspec file is correctly formatted.
 
-Install seqspec using **pip**.
-
-```bash
-pip install seqspec
-```
-
-Or, if you're using a conda environment, install it with:
-
-```bash
-conda install -c conda-forge -c bioconda seqspec
-``` 
-
-Once installed, you can validate your file - let’s call it seqspec.yaml - by running:
-
 ```bash
 seqspec check seqspec.yaml
 ```
 
 If your file is valid, the command will complete without errors; otherwise, it will print a description of any issues found in the specification.
+
+:::{.callout-note title="Install seqspec"}
+In order to install seqspec, follow our installation instructions [here](python_packages.qmd#seqspec).
+:::
 
 # Summary
 

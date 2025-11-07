@@ -8,15 +8,13 @@ website:
     pinned: true
     search: false
     left:
-      - href: index.qmd
-        text: Home
       - text: Tutorials
         menu:
           - href: 10x.qmd
             text: 10x Genomics Chromium
           - href: parse.qmd
             text: Parse Evercode WT
-          - href: seqfish.qmd
+          - href: seqfish_pipeline.Rmd
             text: seqFISH
       - text: seqspec
         menu:
@@ -33,6 +31,15 @@ website:
           - text: "---"
           - href: seqfish_pipeline.Rmd
             text: An Example Spatial Transcriptomics Pipeline
+      - text: Installation
+        menu:
+          - href: conda.qmd
+            text: Creating a Conda Environment
+          - href: python_packages.qmd
+            text: Installing Python Packages
+          - href: R_packages.qmd
+            text: Installing R Packages
+
       - href: contact_us.qmd
         text: Contact Us
   page-footer:

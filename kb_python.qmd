@@ -24,6 +24,10 @@ A typical kb-python workflow includes:
 
 * Generating a count matrix summarizing gene expression per cell
 
+:::{.callout-note title="Install seqspec"}
+In order to install seqspec, follow our installation instructions [here](python_packages.qmd#kb-python).
+:::
+
 ## Workflows
 
 kb-python provides three workflows tailored to different experimental setups and analysis goals. The two most commonly used are:
