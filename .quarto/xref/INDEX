@@ -85,5 +85,11 @@
   },
   "seqfish_pipeline.knit.md": {
     "seqfish_pipeline.knit.html": "c107ab85"
+  },
+  "fastqc.qmd": {
+    "fastqc.html": "bc5c09c5"
+  },
+  "fastqc_install.qmd": {
+    "fastqc_install.html": "791c7c9d"
   }
 }

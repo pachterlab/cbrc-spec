@@ -1,0 +1,55 @@
+---
+title: "Installing `FastQC`"
+---
+
+## Ensure Java is Properly Installed
+FastQC is written in [Java](https://www.java.com/en/), so before installing it, you must ensure that Java is properly installed on your machine (ideally the latest version). To check, open your terminal and run:
+
+```bash
+java -version
+```
+
+If Java has been properly installed you should get an output like:
+
+<pre>
+java version "1.8.0_471"
+Java(TM) SE Runtime Environment (build 1.8.0_471-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.471-b09, mixed mode)</pre>
+
+## Install FastQC
+
+:::{.callout-note title="Installing by OS"}
+This tutorial uses general installation commands that apply across operating systems.
+For detailed, OS-specific instructions, see the official FastQC [installation guide](https://github.com/s-andrews/FastQC/blob/master/INSTALL.md).
+:::
+
+The entire FastQC program is distributed as a standalone zip archive.
+Download the latest version (v0.12.1 at the time of writing) from the official [FastQC website](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip).
+
+Once downloaded, navigate to the directory containing the file and run:
+
+```bash
+# Unzip file
+tar -xf /path/to/fastqc_v0.12.1.zip
+
+# Make fastqc executable
+chmod 755 /path/to/FastQC/fastqc
+
+# (Optional) Make a symbolic link so you can run FASTQC from anywhere
+sudo ln -s /path/to/FastQC/fastqc /usr/local/bin/fastqc
+```
+
+:::{.callout-important title="Sudo Access"}
+If you don’t have **sudo** privileges on your machine, ask your system administrator to install FastQC for you.
+Otherwise, you’ll need to call the FastQC executable directly using a relative path each time:
+
+```bash
+./path/to/FastQC/fastqc ...
+```
+
+rather than simply:
+
+```bash
+fastqc ... 
+```
+:::

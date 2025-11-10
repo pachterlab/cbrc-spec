@@ -376,3 +376,59 @@ body[data-page="sample_pipeline.html"] .page-content {
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
+/* === Collapsible FASTQC details blocks === */
+
+details {
+  background-color: #f9fafc;
+  border: 2px solid var(--navy);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+details:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(255, 181, 71, 0.25);
+}
+
+summary {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+  outline: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Add custom caret icon */
+summary::before {
+  content: "▶";
+  color: var(--accent);
+  margin-right: 0.6em;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate caret when expanded */
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+/* Inside text styling */
+details p {
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Optional subtle color accent when open */
+details[open] {
+  border-color: var(--accent);
+  background-color: #fff9f0;
+  box-shadow: 0 4px 12px rgba(255, 181, 71, 0.25);
+}

@@ -170,12 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
     <a class="dropdown-item" href="./sample_pipeline.html">
- <span class="dropdown-text">An Example scRNA-seq Pipeline</span></a>
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="./seqfish_pipeline.html">
- <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
     </ul>
   </li>
@@ -217,13 +217,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#an-introductory-analysis-pipeline" id="toc-an-introductory-analysis-pipeline" class="nav-link active" data-scroll-target="#an-introductory-analysis-pipeline">An Introductory Analysis Pipeline</a></li>
+  <li><a href="#an-introductory-analysis-workflow" id="toc-an-introductory-analysis-workflow" class="nav-link active" data-scroll-target="#an-introductory-analysis-workflow">An Introductory Analysis Workflow</a></li>
   <li><a href="#initial-set-up" id="toc-initial-set-up" class="nav-link" data-scroll-target="#initial-set-up">Initial Set-Up</a>
   <ul class="collapse">
   <li><a href="#install-python-packages" id="toc-install-python-packages" class="nav-link" data-scroll-target="#install-python-packages">Install Python Packages</a></li>
   <li><a href="#download-the-scrna-seq-data" id="toc-download-the-scrna-seq-data" class="nav-link" data-scroll-target="#download-the-scrna-seq-data">Download the scRNA-seq data</a></li>
   </ul></li>
-  <li><a href="#step-1-read-alignment" id="toc-step-1-read-alignment" class="nav-link" data-scroll-target="#step-1-read-alignment">Step 1: Read Alignment</a>
+  <li><a href="#step-1-read-pseudoalignment" id="toc-step-1-read-pseudoalignment" class="nav-link" data-scroll-target="#step-1-read-pseudoalignment">Step 1: Read Pseudoalignment</a>
   <ul class="collapse">
   <li><a href="#download-a-pre-built-index-with-kb-ref" id="toc-download-a-pre-built-index-with-kb-ref" class="nav-link" data-scroll-target="#download-a-pre-built-index-with-kb-ref">Download a Pre-Built Index with <code>kb ref</code></a></li>
   <li><a href="#pseudoalign-the-scrna-seq-data-to-the-index-with-kb-count" id="toc-pseudoalign-the-scrna-seq-data-to-the-index-with-kb-count" class="nav-link" data-scroll-target="#pseudoalign-the-scrna-seq-data-to-the-index-with-kb-count">Pseudoalign the scRNA-seq Data to the Index with <code>kb count</code></a></li>
@@ -276,13 +276,13 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </h4>
 <p><br></p>
 <p>This notebook demonstrates pre-processing and basic analysis of the <a href="https://www.10xgenomics.com/datasets/1-k-human-pbm-cs-stained-with-a-panel-of-total-seq-b-antibodies-single-indexed-3-1-standard-4-0-0">1k Human PBMCs</a> dataset from 10x Genomics using the <strong>10x Genomics Chromium Single Cell 3’ Next Gen v3.1</strong> assay.</p>
-<section id="an-introductory-analysis-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="an-introductory-analysis-pipeline">An Introductory Analysis Pipeline</h2>
+<section id="an-introductory-analysis-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="an-introductory-analysis-workflow">An Introductory Analysis Workflow</h2>
 <p>There are many ways to perform a single-cell RNA sequencing (scRNA-seq) analysis and many aspects of your data to explore. In this tutorial, we outline a basic approach to quality control and analysis, along with some intuitive explanation of the underlying mathematics.</p>
 <div class="highlight-section">
 <p>This scRNA-seq workflow has the following steps:</p>
 <ol type="1">
-<li>Read Alignment</li>
+<li>Read Pseudoalignment</li>
 <li>Quality Control</li>
 <li>Cell and Gene Filters</li>
 <li>Normalization and Variance Stabilization</li>
@@ -339,8 +339,8 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </div>
 </section>
 </section>
-<section id="step-1-read-alignment" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-read-alignment">Step 1: Read Alignment</h2>
+<section id="step-1-read-pseudoalignment" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-read-pseudoalignment">Step 1: Read Pseudoalignment</h2>
 <section id="download-a-pre-built-index-with-kb-ref" class="level3">
 <h3 class="anchored" data-anchor-id="download-a-pre-built-index-with-kb-ref">Download a Pre-Built Index with <code>kb ref</code></h3>
 <div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d7f50e9c-6a87-475f-ba0b-ac624deb60b0">
@@ -885,7 +885,7 @@ Note
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

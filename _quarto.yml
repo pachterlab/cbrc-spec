@@ -22,8 +22,12 @@ website:
             text: What is seqspec?
           - href: seqspec_tutorials.qmd
             text: Tutorials
-      - href: kb_python.qmd
-        text: kb-python
+      - text: Packages
+        menu:
+        - href: fastqc.qmd
+          text: FastQC
+        - href: kb_python.qmd
+          text: kb-python
       - text: Workflows
         menu:
           - href: sample_pipeline.ipynb
@@ -39,7 +43,8 @@ website:
             text: Installing Python Packages
           - href: R_packages.qmd
             text: Installing R Packages
-
+          - href: fastqc_install.qmd
+            text: Installing FastQC
       - href: contact_us.qmd
         text: Contact Us
   page-footer:
