@@ -159,10 +159,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./kb_python.html"> 
-<span class="menu-text">kb-python</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-packages" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Packages</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
+        <li>
+    <a class="dropdown-item" href="./fastqc.html">
+ <span class="dropdown-text">FastQC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./kb_python.html">
+ <span class="dropdown-text">kb-python</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Workflows</span>
@@ -170,12 +181,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
     <a class="dropdown-item" href="./sample_pipeline.html">
- <span class="dropdown-text">An Example scRNA-seq Pipeline</span></a>
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="./seqfish_pipeline.html">
- <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
     </ul>
   </li>
@@ -195,6 +206,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./fastqc_install.html">
+ <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
   </li>
@@ -263,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><strong>seqspec</strong> is a simple, standardized file format to describe how a genomics library was prepared and sequenced. Different genomics assays require unique processing steps. Including a seqspec file with your data makes it easy for others (and future you!) to reanalyze your dataset. Here we will give a brief description of the seqspec format. For a more in-depth description of seqspec and the seqspec file format, refer to the <a href="https://github.com/pachterlab/seqspec">GitHub page</a>.</p>
+<p><strong>seqspec</strong> is a simple, standardized file format to describe how a genomics library was prepared and sequenced. Different genomics assays require unique processing steps. Including a seqspec file with your data makes it easy for others (and future you!) to reanalyze your dataset. Here we will give a brief description of the seqspec format. For a more in-depth description of seqspec and the seqspec file format, refer to the <a href="https://github.com/pachterlab/seqspec">GitHub page</a> and the <a href="https://academic.oup.com/bioinformatics/article/40/4/btae168/7641535">paper</a>.</p>
 <section id="understanding-the-seqspec-file-format" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-the-seqspec-file-format">Understanding the <code>seqspec</code> File Format</h2>
 <p>A seqspec file is a <strong>YAML-formatted document</strong> with three main sections:</p>
@@ -583,7 +598,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

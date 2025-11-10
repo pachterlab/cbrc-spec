@@ -2,10 +2,10 @@
 title: Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data
 ---
 
-## Step 0: Get started with SEQSPEC
+## Step 0: Get started with [`seqspec`](seqspec.qmd)
 To ensure that all data generated at Caltech are standardized and reproducible, we require that every dataset include a **seqspec file**. A seqspec file provides a machine-readable description of your experiment, specifying the assay information, library structure, and read structure in a YAML-formatted file.
 
-### SEQSPEC Tutorials
+### seqspec Tutorials
 ```{=html}
 <div class="tech-selector">
   <!-- Parse Row -->
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 ```
-## Step 1: Pseudoalign Your Library Reads with [kb-python](kb_python.qmd)
+## Step 1: Pseudoalign Your Library Reads with [`kb-python`](kb_python.qmd)
 
 Aligning reads from a **Parse Evercode WT** library requires additional consideration compared to other scRNA-seq assays. Unlike most platforms, which use primers targeting a specific region of each mRNA molecule, Parse Evercode WT employs two types of primers — **poly(T) primers** that bind to the 3′ poly(A) tail and **random oligo primers** that bind to random internal regions of the transcript. Each primer type has its own corresponding set of cell-specific barcodes. As a result, each cell is represented by two barcodes rather than one, as in assays such as 10x Genomics.
 
@@ -157,6 +157,24 @@ kb count --h5ad --strand=forward --parity=paired \
   -g t2g.txt -i index.idx R1.fastq.gz R2.fastq.gz
 ```
 
-## Step 2: Process and Analyze Your Data
+## Step 2: Assess the Quality of Your Sequencing Data with [`FastQC`](fastqc.qmd)
+
+You can launch the graphical interface by simply running:
+
+```bash
+fastqc
+```
+
+Alternatively, you can run FastQC directly from the command line:
+
+```bash
+fastqc --extract --outdir=<outdir> somefile.fastq someotherfile.fastq ...
+```
+
+where you list all the FASTQ files you wish to analyze after the fastq command and <outdir> is the directory in which you would like the output files to be stored.
+
+For a detailed tutorial on using FastQC and interpreting the output reports, see our page on [Quality Control of Raw Sequencing Data with FastQC](fastqc.qmd).
+
+## Step 3: Process and Analyze Your Data
 Now you are ready to process your data! To continue with downstream analysis follow our [**example scRNA-seq pipeline**](sample_pipeline.ipynb).
 

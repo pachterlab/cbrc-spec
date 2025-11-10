@@ -23,5 +23,5 @@ conda install -c conda-forge -c bioconda seqspec
 
 ### pip
 ```bash
-pip install kb-python
+pip install seqspec
 ```

@@ -159,10 +159,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./kb_python.html"> 
-<span class="menu-text">kb-python</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-packages" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Packages</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
+        <li>
+    <a class="dropdown-item" href="./fastqc.html">
+ <span class="dropdown-text">FastQC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./kb_python.html">
+ <span class="dropdown-text">kb-python</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Workflows</span>
@@ -170,12 +181,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
     <a class="dropdown-item" href="./sample_pipeline.html">
- <span class="dropdown-text">An Example scRNA-seq Pipeline</span></a>
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="./seqfish_pipeline.html">
- <span class="dropdown-text">An Example Spatial Transcriptomics Pipeline</span></a>
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
     </ul>
   </li>
@@ -195,6 +206,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./fastqc_install.html">
+ <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
   </li>
@@ -252,11 +267,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="why-should-i-use-conda" class="level2">
 <h2 class="anchored" data-anchor-id="why-should-i-use-conda">Why Should I Use Conda?</h2>
-<p>Conda is an open-source package and environment management system designed to make scientific computing workflows reproducible and portable. It allows you to:</p>
+<p>Conda is an open-source package and environment management system that simplifies software installation and version control. It ensures that scientific computing workflows are reproducible, portable, and isolated — ideal for complex bioinformatics pipelines.</p>
 <ul>
-<li><p>Install and manage software (including <strong>Python</strong> and <strong>R</strong> packages) along with all their dependencies — even complex bioinformatics tools that are difficult to install manually.</p></li>
-<li><p>Create isolated environments, so different projects can use different versions of the same software without conflicts.</p></li>
-<li><p>Reproduce analyses easily, since an environment file (environment.yml) can capture the exact software versions used in your workflow.</p></li>
+<li><p>Install and manage software (including <strong>Python</strong> and <strong>R</strong> packages) along with all their dependencies</p></li>
+<li><p>Create isolated environments so different projects can use different versions of the same software without conflicts.</p></li>
+<li><p>Reproduce analyses easily since an environment file (environment.yml) can capture the exact software versions used in your workflow.</p></li>
 </ul>
 <p>This makes conda especially useful for computational biology and single-cell RNA-seq analysis, where multiple specialized tools (e.g., kb-python, scanpy, seqspec) must work together seamlessly.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Installing Conda">
@@ -269,18 +284,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>To install conda, follow the instructions <a href="https://www.anaconda.com/docs/getting-started/miniconda/install">here</a>. This page shows you how to install <strong>miniconda</strong>.</p>
+<p>To install Conda, follow the <a href="https://www.anaconda.com/docs/getting-started/miniconda/install">Miniconda installation instructions</a>.<br>
+<strong>Miniconda</strong> is the lightweight version of Anaconda and is recommended for most users.</p>
 </div>
 </div>
 </section>
 <section id="create-a-new-environment" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-new-environment">Create a New Environment</h2>
-<p>There are many ways to organize your conda environments which depends on the uniqueness of your analysis workflows and the dependencies required. However you decide to use conda, you should have a dedicated conda environment for each project.</p>
+<p>There are many ways to organize your Conda environments, depending on your workflow and software dependencies. As a general rule, create a dedicated Conda environment for each project to prevent version conflicts and ensure reproducibility.</p>
 <p>To create a conda environment (with Python), type into the command line:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>and replace <code>myenv</code> with your desired environment name. Then, to activate your environment, type:</p>
+<p>and replace <code>myenv</code> with your desired environment name. Then, to activate your environment:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate myenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now, anything you run in this shell will use only the packages that you have explicitly installed. To deactivate your environment, type:</p>
+<p>Now, anything you run in this shell will use only the packages that you have explicitly installed. To deactivate your environment, run:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled" title="Python or R?">
 <div class="callout-header d-flex align-content-center">
@@ -294,18 +310,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>To create your environment with a specific version of <strong>Python</strong> (e.g version 3.12), type into your command line:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.12</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If you are instead analyzing your data with <strong>R</strong>, in this case with version 4.2, you can create your environment as follows:</p>
+<p>If your project uses <strong>R</strong> instead you can create an environment as follows (here using version 4.2):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv r-essentials r-base=4.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
 <section id="installing-a-package-with-conda" class="level2">
 <h2 class="anchored" data-anchor-id="installing-a-package-with-conda">Installing a Package with Conda</h2>
-<p>To install a package with conda, you usually have to specificy a <strong>conda channel</strong>. Conda channels are online repositories where packages are stored and distributed. When you install a package with conda, it looks for that package in one or more channels (for example, defaults, conda-forge, or bioconda).</p>
+<p>To install a package with Conda, you usually have to <strong>specify a channel</strong> — an online repository where packages are stored and distributed. Conda channels are online repositories where packages are stored and distributed. When you install a package with conda, it looks for that package in one or more channels (for example, defaults, conda-forge, or bioconda).</p>
 <ul>
-<li><p>The defaults channel is maintained by Anaconda and includes general-purpose packages.</p></li>
-<li><p><strong>conda-forge</strong> is a community-maintained channel that provides up-to-date and cross-platform builds of thousands of scientific and technical packages.</p></li>
-<li><p><strong>bioconda</strong> specializes in bioinformatics software and depends on conda-forge for many of its core libraries.</p></li>
+<li><p><strong>defaults</strong> — maintained by Anaconda; includes general-purpose packages.</p></li>
+<li><p><strong>conda-forge</strong> - a community-maintained channel providing up-to-date, cross-platform scientific software. uilds of thousands of scientific and technical packages.</p></li>
+<li><p><strong>bioconda</strong> — specializes in bioinformatics software and builds on conda-forge for its dependencies.</p></li>
 </ul>
 <p>When installing bioinformatics tools like kb-python or seqspec, it’s best practice to specify both conda-forge and bioconda as channels to ensure compatibility:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -314,7 +330,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="recreate-an-old-environment">Recreate an Old Environment</h2>
 <p>You can save your conda environment in a <strong>YAML</strong> file with:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>With the <code>environment.yml</code> file, you can produce an identical copy of your conda environment with:</p>
+<p>The <code>--from-history</code> flag saves only the packages you explicitly installed, keeping the file concise. If you prefer to include all dependencies and versions, omit this flag.</p>
+<p>To recreate the same environment elsewhere:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml <span class="at">--name</span> myenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
@@ -394,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
