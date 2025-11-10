@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data – CBRC-SPEC Tutorials</title>
+<title>Quality Control of Raw Sequencing Data with FastQC – CBRC-SPEC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,8 +103,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fastqc_figures.css">
 </head>
 
 <body class="floating nav-fixed quarto-light">
@@ -232,15 +262,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#step-0-get-started-with-seqspec" id="toc-step-0-get-started-with-seqspec" class="nav-link active" data-scroll-target="#step-0-get-started-with-seqspec">Step 0: Get started with <code>seqspec</code></a>
+  <li><a href="#run-fastqc" id="toc-run-fastqc" class="nav-link active" data-scroll-target="#run-fastqc">Run <code>FastQC</code></a></li>
+  <li><a href="#a-brief-tutorial-on-fastq-files" id="toc-a-brief-tutorial-on-fastq-files" class="nav-link" data-scroll-target="#a-brief-tutorial-on-fastq-files">A Brief Tutorial on FASTQ Files</a>
   <ul class="collapse">
-  <li><a href="#seqspec-tutorials" id="toc-seqspec-tutorials" class="nav-link" data-scroll-target="#seqspec-tutorials">seqspec Tutorials</a></li>
+  <li><a href="#what-are-quality-scores" id="toc-what-are-quality-scores" class="nav-link" data-scroll-target="#what-are-quality-scores">What Are Quality Scores?</a></li>
   </ul></li>
-  <li><a href="#step-1-pseudoalign-your-library-reads-with-kb-python" id="toc-step-1-pseudoalign-your-library-reads-with-kb-python" class="nav-link" data-scroll-target="#step-1-pseudoalign-your-library-reads-with-kb-python">Step 1: Pseudoalign Your Library Reads with <code>kb-python</code></a></li>
-  <li><a href="#an-example-v2" id="toc-an-example-v2" class="nav-link" data-scroll-target="#an-example-v2">An Example (v2)</a></li>
-  <li><a href="#an-example-v3" id="toc-an-example-v3" class="nav-link" data-scroll-target="#an-example-v3">An Example (v3)</a></li>
-  <li><a href="#step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" id="toc-step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="nav-link" data-scroll-target="#step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <code>FastQC</code></a></li>
-  <li><a href="#step-3-process-and-analyze-your-data" id="toc-step-3-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</a></li>
+  <li><a href="#understanding-fastqc-plots" id="toc-understanding-fastqc-plots" class="nav-link" data-scroll-target="#understanding-fastqc-plots">Understanding <code>FASTQC</code> Plots</a></li>
   </ul>
 </nav>
 </nav>
@@ -253,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data</h1>
+<h1 class="title">Quality Control of Raw Sequencing Data with <code>FastQC</code></h1>
 </div>
 
 
@@ -270,164 +297,218 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="step-0-get-started-with-seqspec" class="level2">
-<h2 class="anchored" data-anchor-id="step-0-get-started-with-seqspec">Step 0: Get started with <a href="./seqspec.html"><code>seqspec</code></a></h2>
-<p>To ensure that all data generated at Caltech are standardized and reproducible, we require that every dataset include a <strong>seqspec file</strong>. A seqspec file provides a machine-readable description of your experiment, specifying the assay information, library structure, and read structure in a YAML-formatted file.</p>
-<section id="seqspec-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="seqspec-tutorials">seqspec Tutorials</h3>
-<div class="tech-selector">
-  <!-- Parse Row -->
-  <div class="tech-row">
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v2_single.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M9 9h6v6H9z"></path></svg>
-      <h3 class="anchored">Parse Evercode WT v2 (Single Index)</h3>
-    </button>
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v2_dual.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M7 7h10v10H7z"></path></svg>
-      <h3 class="anchored">Parse Evercode WT v2 (Dual Index)</h3>
-    </button>
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/parse/parse_v3.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="12" r="4"></circle></svg>
-      <h3 class="anchored">Parse Evercode WT v3</h3>
-    </button>
-  </div>
-
-</div>
-
-<style>
-.tech-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  margin: 2em auto;
-  max-width: 900px;
-}
-
-.tech-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5em;
-}
-
-.tech-btn {
-  background: #f8f9fa;
-  border: 3px solid #005a91;
-  border-radius: 12px;
-  padding: 1.5em;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  color: #222;
-}
-
-.tech-btn svg {
-  margin-bottom: 0.5em;
-}
-
-.tech-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
-}
-
-/* Parse brand color */
-.tech-parse {
-  border-color: #0072b2;
-}
-.tech-parse:hover {
-  background: #0072b2;
-  color: white;
-}
-
-.tech-btn h3 {
-  margin: 0.3em 0;
-  font-size: 0.92em;
-}
-
-.tech-btn p {
-  font-size: 0.9em;
-  opacity: 0.8;
-}
-
-h1.title {
-  text-align: center;
-  margin-bottom: 1em;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".tech-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.dataset.link;
-      if (target) window.location.href = target;
-    });
-  });
-});
-</script>
-</section>
-</section>
-<section id="step-1-pseudoalign-your-library-reads-with-kb-python" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-pseudoalign-your-library-reads-with-kb-python">Step 1: Pseudoalign Your Library Reads with <a href="./kb_python.html"><code>kb-python</code></a></h2>
-<p>Aligning reads from a <strong>Parse Evercode WT</strong> library requires additional consideration compared to other scRNA-seq assays. Unlike most platforms, which use primers targeting a specific region of each mRNA molecule, Parse Evercode WT employs two types of primers — <strong>poly(T) primers</strong> that bind to the 3′ poly(A) tail and <strong>random oligo primers</strong> that bind to random internal regions of the transcript. Each primer type has its own corresponding set of cell-specific barcodes. As a result, each cell is represented by two barcodes rather than one, as in assays such as 10x Genomics.</p>
-<p>To generate a unified count matrix from the raw reads, the counts associated with these two barcodes must be collapsed so that each cell is represented once. In kb-python, this is accomplished by replacing all random oligo barcodes with their corresponding poly(T) barcodes using the <code>-r</code> argument.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<p><strong>FastQC</strong> is a quality control tool for high-throughput sequencing data. It provides a quick, visual summary of your raw <strong>FASTQ</strong> files, helping you identify potential issues such as low-quality reads, adapter contamination, or biased base composition. FastQC generates easy-to-read HTML reports that summarize key quality metrics like per-base quality scores, GC content, and sequence duplication levels. Running FastQC before alignment or downstream analysis ensures your sequencing data are high-quality and suitable for accurate biological interpretation.</p>
+<p>Here we provide a brief tutorial for analyzing your FASTQ files with FastQC. For a more in-depth explanation of FastQC please refer to the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">website</a> and <a href="https://github.com/s-andrews/FastQC">GitHub page</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Installing FastQC">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Note</span>Installing FastQC
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
+<p>To get instructions on how to install the FastQC package, see our page on <a href="./fastqc_install.html">Installing FastQC</a>.</p>
 </div>
 </div>
+<section id="run-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="run-fastqc">Run <code>FastQC</code></h2>
+<p>FastQC conveniently has a built-in GUI in which to run your analysis. To open the GUI simply type into your command-line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and follow the displayed instructions.</p>
+<p>If you would prefer to analyze your data through the command-line, simply specify a list of files following the <code>fastqc</code> command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=&lt;</span>outdir<span class="op">&gt;</span> somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and replace &lt;outdir&gt; with the path to the directory you wish to have your output stored.</p>
 </section>
-<section id="an-example-v2" class="level2">
-<h2 class="anchored" data-anchor-id="an-example-v2">An Example (v2)</h2>
-<p>Here we provide a brief example of how to pseudoalign a Parse Evercode WT v2 library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="./kb_python.html"><strong>kb-python</strong></a>.</p>
-<p>To psuedoalign your Parse data, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> SPLIT-SEQ <span class="at">-r</span> v2_replace.txt <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where index.idx and t2g.txt are files generated by <code>kb-ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. The replace.txt file specifies the barcode substitution. The <code>--h5ad</code> argument generates an <code>h5ad</code> formatted file for downstream processing with <strong>Scanpy</strong>.</p>
-<p>If you performed a <strong>single-nucleus RNA-seq</strong> experiment, instead use the <strong>NAC workflow</strong> to pseaudoalign both nascent and mature reads:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-r</span> v2_replace.txt <span class="at">--workflow</span><span class="op">=</span>nac <span class="at">-x</span> 10XV3 <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-c1</span> cdna.txt <span class="at">-c2</span> nascent.txt R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Here, cdna.txt and nascent.text are files generated by <code>kb ref -workflow=nac</code>.</p>
-<p>You can download the file <strong>v2_replace.txt</strong> for the v2 chemistry <a href="v2_replace.txt" download="">here</a>.</p>
-</section>
-<section id="an-example-v3" class="level2">
-<h2 class="anchored" data-anchor-id="an-example-v3">An Example (v3)</h2>
-<p>Currently, kb-python does not include a built-in specification for Parse Evercode WT v3. Instead, we must provide the assay information manually by specifying:</p>
+<section id="a-brief-tutorial-on-fastq-files" class="level2">
+<h2 class="anchored" data-anchor-id="a-brief-tutorial-on-fastq-files">A Brief Tutorial on FASTQ Files</h2>
+<p>To understand the FastQC output, we must first understand what a FASTQ file is and how it is generated.</p>
+<p>FASTQ files are the standard format for storing raw sequencing reads from next-generation sequencing instruments. Each read in a FASTQ file is represented by four lines:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode ruby code-with-copy"><code class="sourceCode ruby"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">@SEQ_ID</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cn">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span><span class="vs">''</span><span class="op">*</span>((((<span class="op">***+</span>))<span class="op">%</span><span class="ot">%%</span><span class="st">++)(</span><span class="ot">%</span><span class="op">%</span><span class="ot">%%</span><span class="st">).1***-+*''))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><p><a href="v3_onlist.txt" download="">v3_onlist.txt</a> — a list of valid cell barcodes</p></li>
-<li><p>a technology string defining barcode positions within the read: <code>-x "1,10,18,1,30,38,1,50,58:1,0,10:0,0,0"</code></p></li>
-<li><p><a href="splitseqv3_replace.txt" download="">v3_replace.txt</a> - mapping between poly(T) and random oligo barcodes</p></li>
-<li><p>the orientation of the first read (R1) with relative to your library specification: <code>--strand=forward</code></p></li>
-<li><p>the read parity (whether the assay produces single- or paired-end reads): <code>--paired=paired</code></p></li>
+<li><p><strong>Line 1</strong> – Read identifier (begins with @)</p></li>
+<li><p><strong>Line 2</strong> – Nucleotide sequence</p></li>
+<li><p><strong>Line 3</strong> – Separator line (usually just +)</p></li>
+<li><p><strong>Line 4</strong> – Quality scores for each base (encoded as ASCII characters)</p></li>
 </ul>
-<p>Then, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">--strand</span><span class="op">=</span>forward <span class="at">--parity</span><span class="op">=</span>paired <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> v3_replace.txt <span class="at">-w</span> v3_onlist.txt <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-x</span> <span class="st">"1,10,18,1,30,38,1,50,58:1,0,10:0,0,0 </span><span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">  -g t2g.txt -i index.idx R1.fastq.gz R2.fastq.gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="what-are-quality-scores" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-quality-scores">What Are Quality Scores?</h3>
+<p>Each entry in a FASTQ file contains not only the DNA or RNA sequence itself, but also a <strong>quality score</strong> for every base. These scores reflect the sequencing machine’s confidence in each base call — that is, how likely it is that a given nucleotide (A, T, G, or C) was correctly identified.</p>
+<p>FASTQ quality scores are typically encoded using the <strong>Phred scale</strong>, a logarithmic transformation of the error probability:</p>
+<p><span class="math display">\[Q = -10\times \log_{10}(P)\]</span></p>
+<p>where <span class="math inline">\(P\)</span> is the probability that a base call is incorrect. For example, a Phred score of 20 means there’s a 1% chance the base is wrong, while a score of 30 corresponds to a 0.1% error rate.</p>
+<p>These scores are stored as ASCII characters in the FASTQ file, allowing both sequence and quality information to be represented compactly.</p>
+<p>During quality control, tools like <strong>FastQC</strong> visualizes these scores across all reads helping identify low-quality regions that may need trimming or filtering before alignment and downstream analysis.</p>
 </section>
-<section id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <a href="./fastqc.html"><code>FastQC</code></a></h2>
-<p>You can launch the graphical interface by simply running:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Alternatively, you can run FastQC directly from the command line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=&lt;</span>outdir<span class="op">&gt;</span> somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where you list all the FASTQ files you wish to analyze after the fastq command and <outdir> is the directory in which you would like the output files to be stored.</outdir></p>
-<p>For a detailed tutorial on using FastQC and interpreting the output reports, see our page on <a href="./fastqc.html">Quality Control of Raw Sequencing Data with FastQC</a>.</p>
 </section>
-<section id="step-3-process-and-analyze-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</h2>
-<p>Now you are ready to process your data! To continue with downstream analysis follow our <a href="./sample_pipeline.html"><strong>example scRNA-seq pipeline</strong></a>.</p>
+<section id="understanding-fastqc-plots" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-fastqc-plots">Understanding <code>FASTQC</code> Plots</h2>
+<p>Below are the plots that <strong>FastQC</strong> generates, each providing diagnostic insights into your sequencing data quality.</p>
+<hr>
+<details>
+<summary>
+<strong>1. Per-Base Sequence Quality Over All Reads</strong>
+</summary>
+<p>This plot shows the distribution of quality scores for each base position across all reads. Typically, quality is highest near the 5′ end and drops toward the 3′ end of reads.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/per_base_SQ.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>A sharp decline in quality may indicate sequencing problems or the need for trimming low-quality bases before alignment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/bad/per_base_SQ.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+<strong>2. Per-Tile Sequence Quality Over All Reads</strong>
+</summary>
+<p>This graph visualizes quality variation across different tiles of the sequencing flow cell.<br>
+Each tile corresponds to a physical area on the sequencer’s imaging surface.</p>
+<p>Systematic differences between tiles may point to instrument issues, uneven illumination, or problems during image analysis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/bad/per_tile_SQ.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+<strong>3. Quality Score Distribution Over All Sequences</strong>
+</summary>
+<p>This plot summarizes the overall distribution of mean quality scores per read.<br>
+Ideally, most reads should have consistently high average scores.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/per_sequence_QC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>A broad or bimodal distribution suggests variable read quality, possibly due to uneven sequencing performance or mixed-quality samples.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/bad/per_sequence_QC.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+<strong>4. Sequence Content Across All Bases</strong>
+</summary>
+<p>This plot shows the proportion of each nucleotide (A, T, G, and C) at every base position.<br>
+In random libraries, the lines should be roughly parallel.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/per_base_SC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>Deviations early in the read may indicate biased priming, adapter contamination, or non-random base composition typical of certain assays (e.g., single-cell barcoding regions).</p>
+</details>
+<details>
+<summary>
+<strong>5. Per Sequence GC Content</strong>
+</summary>
+<p>This graph compares the GC content distribution of all reads to a theoretical normal distribution.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/per_sequence_GCC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>A shifted or multi-peaked curve may reflect contamination from other organisms, amplification bias, or targeted sequencing regions with atypical GC content.</p>
+</details>
+<details>
+<summary>
+<strong>6. Per Base N Content</strong>
+</summary>
+<p>This plot shows the percentage of ambiguous bases (“N”) called at each position in the read.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/per_base_NC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>High or position-specific N content indicates uncertainty in base calling and may suggest low signal intensity or sequencing chemistry problems.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/bad/per_base_NC.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+<strong>7. Sequence Length Distribution</strong>
+</summary>
+<p>This plot displays the distribution of read lengths in the dataset.<br>
+For most sequencing platforms, a single consistent read length is expected.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/seq_length_dist.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>Variable lengths may indicate trimming, read merging, or incomplete read cycles.</p>
+</details>
+<details>
+<summary>
+<strong>8. Sequence Duplication Levels</strong>
+</summary>
+<p>This plot shows how many sequences are duplicated and how often.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/seq_duplication.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>High duplication levels can indicate PCR amplification bias or low library complexity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/bad/seq_duplication.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+<p>However, in RNA-seq or scRNA-seq data, some duplication is expected due to highly expressed genes.</p>
+</details>
+<details>
+<summary>
+<strong>9. Overrepresented Sequences</strong>
+</summary>
+<p>This section lists any sequences that occur more frequently than expected by chance.<br>
+Overrepresentation may arise from adapter contamination, primer dimers, or abundant biological sequences such as rRNA.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/bad/overrepresented_sequences.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+<p>Identifying and removing these sequences improves downstream analysis accuracy.</p>
+</details>
+<details>
+<summary>
+<strong>10. Adapter Content</strong>
+</summary>
+<p>This plot quantifies how much adapter sequence remains untrimmed at each read position.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fastqc_plots/good/adapter_content.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+Increasing adapter content toward the 3′ end of reads is a common sign that reads are longer than the actual insert fragment and require adapter trimming before alignment.
+</details>
 
 
 </section>

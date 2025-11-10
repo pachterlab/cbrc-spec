@@ -159,10 +159,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./kb_python.html"> 
-<span class="menu-text">kb-python</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-packages" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Packages</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
+        <li>
+    <a class="dropdown-item" href="./fastqc.html">
+ <span class="dropdown-text">FastQC</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./kb_python.html">
+ <span class="dropdown-text">kb-python</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Workflows</span>
@@ -196,6 +207,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./fastqc_install.html">
+ <span class="dropdown-text">Installing FastQC</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -225,7 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An Example</a></li>
   </ul></li>
-  <li><a href="#step-2-process-and-analyze-your-data" id="toc-step-2-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-2-process-and-analyze-your-data">Step 2: Process and Analyze Your Data</a></li>
+  <li><a href="#step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" id="toc-step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="nav-link" data-scroll-target="#step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <code>FastQC</code></a></li>
+  <li><a href="#step-3-process-and-analyze-your-data" id="toc-step-3-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</a></li>
   </ul>
 </nav>
 </nav>
@@ -256,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="step-0-get-started-with-seqspec" class="level2">
-<h2 class="anchored" data-anchor-id="step-0-get-started-with-seqspec">Step 0: Get started with <code>seqspec</code></h2>
+<h2 class="anchored" data-anchor-id="step-0-get-started-with-seqspec">Step 0: Get started with <a href="./seqspec.html"><code>seqspec</code></a></h2>
 <p>To ensure that all data generated at Caltech are standardized and reproducible, we require that every dataset include a <strong>seqspec file</strong>. A seqspec file provides a machine-readable description of your experiment, specifying the assay information, library structure, and read structure in a YAML-formatted file.</p>
 <section id="seqspec-tutorials" class="level3">
 <h3 class="anchored" data-anchor-id="seqspec-tutorials">seqspec Tutorials</h3>
@@ -377,8 +393,17 @@ Important
 </div>
 </section>
 </section>
-<section id="step-2-process-and-analyze-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-process-and-analyze-your-data">Step 2: Process and Analyze Your Data</h2>
+<section id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <a href="./fastqc.html"><code>FastQC</code></a></h2>
+<p>You can launch the graphical interface by simply running:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alternatively, you can run FastQC directly from the command line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=&lt;</span>outdir<span class="op">&gt;</span> somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>where you list all the FASTQ files you wish to analyze after the fastq command and <outdir> is the directory in which you would like the output files to be stored.</outdir></p>
+<p>For a detailed tutorial on using FastQC and interpreting the output reports, see our page on <a href="./fastqc.html">Quality Control of Raw Sequencing Data with FastQC</a>.</p>
+</section>
+<section id="step-3-process-and-analyze-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</h2>
 <p>Now you are ready to process your data! To continue with downstream analysis follow our <a href="./sample_pipeline.html"><strong>example scRNA-seq pipeline</strong></a>.</p>
 
 

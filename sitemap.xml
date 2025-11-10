@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/conda.html</loc>
-    <lastmod>2025-11-07T06:08:21.331Z</lastmod>
+    <lastmod>2025-11-10T04:40:40.373Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/contact_us.html</loc>
@@ -33,12 +33,20 @@
     <lastmod>2025-11-07T01:42:35.964Z</lastmod>
   </url>
   <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/R_packages.html</loc>
-    <lastmod>2025-11-07T06:44:14.261Z</lastmod>
+    <loc>https://pachterlab.github.io/cbrc-spec/fastqc_install.html</loc>
+    <lastmod>2025-11-10T04:28:12.934Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/fastqc.html</loc>
+    <lastmod>2025-11-10T04:29:27.894Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/sample_pipeline.html</loc>
     <lastmod>2025-11-07T18:31:18.325Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/R_packages.html</loc>
+    <lastmod>2025-11-07T06:44:14.261Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/index.html</loc>
@@ -58,11 +66,11 @@
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/python_packages.html</loc>
-    <lastmod>2025-11-07T06:22:19.197Z</lastmod>
+    <lastmod>2025-11-07T19:47:03.976Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/parse.html</loc>
-    <lastmod>2025-11-07T18:26:50.583Z</lastmod>
+    <lastmod>2025-11-10T04:50:36.820Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/kb_python.html</loc>
@@ -70,6 +78,6 @@
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/10x.html</loc>
-    <lastmod>2025-11-07T18:27:18.588Z</lastmod>
+    <lastmod>2025-11-10T04:49:58.943Z</lastmod>
   </url>
 </urlset>

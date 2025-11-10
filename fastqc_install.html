@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data – CBRC-SPEC Tutorials</title>
+<title>Installing FastQC – CBRC-SPEC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -232,15 +232,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#step-0-get-started-with-seqspec" id="toc-step-0-get-started-with-seqspec" class="nav-link active" data-scroll-target="#step-0-get-started-with-seqspec">Step 0: Get started with <code>seqspec</code></a>
-  <ul class="collapse">
-  <li><a href="#seqspec-tutorials" id="toc-seqspec-tutorials" class="nav-link" data-scroll-target="#seqspec-tutorials">seqspec Tutorials</a></li>
-  </ul></li>
-  <li><a href="#step-1-pseudoalign-your-library-reads-with-kb-python" id="toc-step-1-pseudoalign-your-library-reads-with-kb-python" class="nav-link" data-scroll-target="#step-1-pseudoalign-your-library-reads-with-kb-python">Step 1: Pseudoalign Your Library Reads with <code>kb-python</code></a></li>
-  <li><a href="#an-example-v2" id="toc-an-example-v2" class="nav-link" data-scroll-target="#an-example-v2">An Example (v2)</a></li>
-  <li><a href="#an-example-v3" id="toc-an-example-v3" class="nav-link" data-scroll-target="#an-example-v3">An Example (v3)</a></li>
-  <li><a href="#step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" id="toc-step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="nav-link" data-scroll-target="#step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <code>FastQC</code></a></li>
-  <li><a href="#step-3-process-and-analyze-your-data" id="toc-step-3-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</a></li>
+  <li><a href="#ensure-java-is-properly-installed" id="toc-ensure-java-is-properly-installed" class="nav-link active" data-scroll-target="#ensure-java-is-properly-installed">Ensure Java is Properly Installed</a></li>
+  <li><a href="#install-fastqc" id="toc-install-fastqc" class="nav-link" data-scroll-target="#install-fastqc">Install FastQC</a></li>
   </ul>
 </nav>
 </nav>
@@ -253,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data</h1>
+<h1 class="title">Installing <code>FastQC</code></h1>
 </div>
 
 
@@ -270,164 +263,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="step-0-get-started-with-seqspec" class="level2">
-<h2 class="anchored" data-anchor-id="step-0-get-started-with-seqspec">Step 0: Get started with <a href="./seqspec.html"><code>seqspec</code></a></h2>
-<p>To ensure that all data generated at Caltech are standardized and reproducible, we require that every dataset include a <strong>seqspec file</strong>. A seqspec file provides a machine-readable description of your experiment, specifying the assay information, library structure, and read structure in a YAML-formatted file.</p>
-<section id="seqspec-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="seqspec-tutorials">seqspec Tutorials</h3>
-<div class="tech-selector">
-  <!-- Parse Row -->
-  <div class="tech-row">
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v2_single.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M9 9h6v6H9z"></path></svg>
-      <h3 class="anchored">Parse Evercode WT v2 (Single Index)</h3>
-    </button>
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v2_dual.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M7 7h10v10H7z"></path></svg>
-      <h3 class="anchored">Parse Evercode WT v2 (Dual Index)</h3>
-    </button>
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/parse/parse_v3.html">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="12" r="4"></circle></svg>
-      <h3 class="anchored">Parse Evercode WT v3</h3>
-    </button>
-  </div>
-
-</div>
-
-<style>
-.tech-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  margin: 2em auto;
-  max-width: 900px;
-}
-
-.tech-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5em;
-}
-
-.tech-btn {
-  background: #f8f9fa;
-  border: 3px solid #005a91;
-  border-radius: 12px;
-  padding: 1.5em;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  color: #222;
-}
-
-.tech-btn svg {
-  margin-bottom: 0.5em;
-}
-
-.tech-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
-}
-
-/* Parse brand color */
-.tech-parse {
-  border-color: #0072b2;
-}
-.tech-parse:hover {
-  background: #0072b2;
-  color: white;
-}
-
-.tech-btn h3 {
-  margin: 0.3em 0;
-  font-size: 0.92em;
-}
-
-.tech-btn p {
-  font-size: 0.9em;
-  opacity: 0.8;
-}
-
-h1.title {
-  text-align: center;
-  margin-bottom: 1em;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".tech-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = btn.dataset.link;
-      if (target) window.location.href = target;
-    });
-  });
-});
-</script>
+<section id="ensure-java-is-properly-installed" class="level2">
+<h2 class="anchored" data-anchor-id="ensure-java-is-properly-installed">Ensure Java is Properly Installed</h2>
+<p>FastQC is written in <a href="https://www.java.com/en/">Java</a>, so before installing it, you must ensure that Java is properly installed on your machine (ideally the latest version). To check, open your terminal and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If Java has been properly installed you should get an output like:</p>
+<pre>java version "1.8.0_471"
+Java(TM) SE Runtime Environment (build 1.8.0_471-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.471-b09, mixed mode)</pre>
 </section>
-</section>
-<section id="step-1-pseudoalign-your-library-reads-with-kb-python" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-pseudoalign-your-library-reads-with-kb-python">Step 1: Pseudoalign Your Library Reads with <a href="./kb_python.html"><code>kb-python</code></a></h2>
-<p>Aligning reads from a <strong>Parse Evercode WT</strong> library requires additional consideration compared to other scRNA-seq assays. Unlike most platforms, which use primers targeting a specific region of each mRNA molecule, Parse Evercode WT employs two types of primers — <strong>poly(T) primers</strong> that bind to the 3′ poly(A) tail and <strong>random oligo primers</strong> that bind to random internal regions of the transcript. Each primer type has its own corresponding set of cell-specific barcodes. As a result, each cell is represented by two barcodes rather than one, as in assays such as 10x Genomics.</p>
-<p>To generate a unified count matrix from the raw reads, the counts associated with these two barcodes must be collapsed so that each cell is represented once. In kb-python, this is accomplished by replacing all random oligo barcodes with their corresponding poly(T) barcodes using the <code>-r</code> argument.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<section id="install-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="install-fastqc">Install FastQC</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Installing by OS">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Note</span>Installing by OS
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
+<p>This tutorial uses general installation commands that apply across operating systems. For detailed, OS-specific instructions, see the official FastQC <a href="https://github.com/s-andrews/FastQC/blob/master/INSTALL.md">installation guide</a>.</p>
 </div>
 </div>
-</section>
-<section id="an-example-v2" class="level2">
-<h2 class="anchored" data-anchor-id="an-example-v2">An Example (v2)</h2>
-<p>Here we provide a brief example of how to pseudoalign a Parse Evercode WT v2 library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="./kb_python.html"><strong>kb-python</strong></a>.</p>
-<p>To psuedoalign your Parse data, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> SPLIT-SEQ <span class="at">-r</span> v2_replace.txt <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where index.idx and t2g.txt are files generated by <code>kb-ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. The replace.txt file specifies the barcode substitution. The <code>--h5ad</code> argument generates an <code>h5ad</code> formatted file for downstream processing with <strong>Scanpy</strong>.</p>
-<p>If you performed a <strong>single-nucleus RNA-seq</strong> experiment, instead use the <strong>NAC workflow</strong> to pseaudoalign both nascent and mature reads:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-r</span> v2_replace.txt <span class="at">--workflow</span><span class="op">=</span>nac <span class="at">-x</span> 10XV3 <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-c1</span> cdna.txt <span class="at">-c2</span> nascent.txt R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Here, cdna.txt and nascent.text are files generated by <code>kb ref -workflow=nac</code>.</p>
-<p>You can download the file <strong>v2_replace.txt</strong> for the v2 chemistry <a href="v2_replace.txt" download="">here</a>.</p>
-</section>
-<section id="an-example-v3" class="level2">
-<h2 class="anchored" data-anchor-id="an-example-v3">An Example (v3)</h2>
-<p>Currently, kb-python does not include a built-in specification for Parse Evercode WT v3. Instead, we must provide the assay information manually by specifying:</p>
-<ul>
-<li><p><a href="v3_onlist.txt" download="">v3_onlist.txt</a> — a list of valid cell barcodes</p></li>
-<li><p>a technology string defining barcode positions within the read: <code>-x "1,10,18,1,30,38,1,50,58:1,0,10:0,0,0"</code></p></li>
-<li><p><a href="splitseqv3_replace.txt" download="">v3_replace.txt</a> - mapping between poly(T) and random oligo barcodes</p></li>
-<li><p>the orientation of the first read (R1) with relative to your library specification: <code>--strand=forward</code></p></li>
-<li><p>the read parity (whether the assay produces single- or paired-end reads): <code>--paired=paired</code></p></li>
-</ul>
-<p>Then, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">--strand</span><span class="op">=</span>forward <span class="at">--parity</span><span class="op">=</span>paired <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> v3_replace.txt <span class="at">-w</span> v3_onlist.txt <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-x</span> <span class="st">"1,10,18,1,30,38,1,50,58:1,0,10:0,0,0 </span><span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">  -g t2g.txt -i index.idx R1.fastq.gz R2.fastq.gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <a href="./fastqc.html"><code>FastQC</code></a></h2>
-<p>You can launch the graphical interface by simply running:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Alternatively, you can run FastQC directly from the command line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=&lt;</span>outdir<span class="op">&gt;</span> somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where you list all the FASTQ files you wish to analyze after the fastq command and <outdir> is the directory in which you would like the output files to be stored.</outdir></p>
-<p>For a detailed tutorial on using FastQC and interpreting the output reports, see our page on <a href="./fastqc.html">Quality Control of Raw Sequencing Data with FastQC</a>.</p>
-</section>
-<section id="step-3-process-and-analyze-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</h2>
-<p>Now you are ready to process your data! To continue with downstream analysis follow our <a href="./sample_pipeline.html"><strong>example scRNA-seq pipeline</strong></a>.</p>
+<p>The entire FastQC program is distributed as a standalone zip archive. Download the latest version (v0.12.1 at the time of writing) from the official <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip">FastQC website</a>.</p>
+<p>Once downloaded, navigate to the directory containing the file and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xf</span> /path/to/fastqc_v0.12.1.zip</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make fastqc executable</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 /path/to/FastQC/fastqc</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Make a symbolic link so you can run FASTQC from anywhere</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /path/to/FastQC/fastqc /usr/local/bin/fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled" title="Sudo Access">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Sudo Access
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you don’t have <strong>sudo</strong> privileges on your machine, ask your system administrator to install FastQC for you. Otherwise, you’ll need to call the FastQC executable directly using a relative path each time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./path/to/FastQC/fastqc</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>rather than simply:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> ... </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 
 
 </section>
