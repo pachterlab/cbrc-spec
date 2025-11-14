@@ -116,8 +116,8 @@ library_spec: ##Adjust cdna length according to read length##
     min_len: 10
     max_len: 10
     onlist: !Onlist
-      location: local
       filename: onlist_i5.txt
+      location: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/10x/dual_i5.txt
     regions: null
 
   - !Region
