@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - seqspec/onlists/*
 
 website:
   title: "CBRC-SPEC Tutorials"
