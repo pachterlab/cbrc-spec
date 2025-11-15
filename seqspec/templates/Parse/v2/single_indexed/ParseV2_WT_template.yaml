@@ -123,8 +123,9 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_round1.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/v2/BC1_rev.txt
     regions: null
 
   - !Region
@@ -149,8 +150,10 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_round2.txt
+      filename: BC2_3_rev.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/v2/BC2_3_rev.txt
     regions: null
 
   - !Region
@@ -175,8 +178,10 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_round3.txt
+      filename: BC2_3_rev.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/v2/BC2_3_rev.txt
     regions: null
 
   - !Region
@@ -213,8 +218,10 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 6
     max_len: 6
     onlist: !Onlist
-      location: local
-      filename: onlist_i7.txt
+      filename: single_i7.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/single_i7.txt
     regions: null
 
   - !Region

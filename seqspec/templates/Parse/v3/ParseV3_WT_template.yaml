@@ -116,8 +116,10 @@ library_spec:
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_i5.txt
+      filename: dual_i5.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/dual_i5.txt
     regions: null
 
   - !Region
@@ -154,8 +156,10 @@ library_spec:
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_round1.txt
+      filename: BC1_rev.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/v2/BC1_rev.txt
     regions: null
 
   - !Region
@@ -180,8 +184,10 @@ library_spec:
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_round2.txt
+      filename: BC2_3_rev.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/v2/BC2_3_rev.txt
     regions: null
 
   - !Region
@@ -206,8 +212,10 @@ library_spec:
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_round3.txt
+      filename: BC2_3_rev.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/v2/BC2_3_rev.txt
     regions: null
 
   - !Region
@@ -244,8 +252,10 @@ library_spec:
     min_len: 8
     max_len: 8
     onlist: !Onlist
-      location: local
-      filename: onlist_i7.txt
+      filename: dual_i7.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/Parse/dual_i7.txt
     regions: null
 
   - !Region
