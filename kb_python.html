@@ -172,6 +172,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./scanpy.html">
+ <span class="dropdown-text">Scanpy and Anndata</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -240,8 +244,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#step-2-align-to-reference-genome" id="toc-step-2-align-to-reference-genome" class="nav-link" data-scroll-target="#step-2-align-to-reference-genome">Step 2: Align to Reference Genome</a>
   <ul class="collapse">
+  <li><a href="#batch-pseudoaligment" id="toc-batch-pseudoaligment" class="nav-link" data-scroll-target="#batch-pseudoaligment">Batch Pseudoaligment</a></li>
   <li><a href="#parse-evercode-wt-v3-using-a-custom-specification" id="toc-parse-evercode-wt-v3-using-a-custom-specification" class="nav-link" data-scroll-target="#parse-evercode-wt-v3-using-a-custom-specification">Parse Evercode WT v3: Using a Custom Specification</a></li>
   <li><a href="#parse-evercode-wt-substituting-barcodes-with-the--r-argument" id="toc-parse-evercode-wt-substituting-barcodes-with-the--r-argument" class="nav-link" data-scroll-target="#parse-evercode-wt-substituting-barcodes-with-the--r-argument">Parse Evercode WT: Substituting Barcodes with the <code>-r</code> Argument</a></li>
+  <li><a href="#validating-pseudoalignment-with-the-run_info.json-file" id="toc-validating-pseudoalignment-with-the-run_info.json-file" class="nav-link" data-scroll-target="#validating-pseudoalignment-with-the-run_info.json-file">Validating Pseudoalignment with the <code>run_info.json</code> file</a></li>
   </ul></li>
   <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
   </ul>
@@ -350,7 +356,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>See how the precompiled indices were generated <a href="https://github.com/pachterlab/kallisto-transcriptome-indices">here</a></p>
+<p>See how the precompiled indices were generated <a href="https://github.com/pachterlab/kallisto-transcriptome-indices">here</a>.</p>
 </div>
 </div>
 </section>
@@ -404,6 +410,17 @@ Note
 <li>Parse Evercode WT v2: <code>-x SPLITSEQ</code></li>
 </ul>
 <p>To see a complete list of technologies and their corresponding technology strings, type <code>kb --list</code> into your terminal.</p>
+<section id="batch-pseudoaligment" class="level3">
+<h3 class="anchored" data-anchor-id="batch-pseudoaligment">Batch Pseudoaligment</h3>
+<p>In most scRNA-seq experiments, you will have multiple samples, each with its own pair of FASTQ files. Instead of running <code>kb count</code> separately on every sample, kb-python allows you to process many samples in a single command using the<code>--batch-barcodes</code> flag.</p>
+<p>To perform a batch pseudoalignment, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count ... <span class="at">--batch-barcodes</span> batch.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>filling in the command with the parameters specific to your experiment. The batch.txt file must be a <strong>space-separated</strong> file, with one row per sample. Each row should contain:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_name read1.fastq.gz read2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>— that is, the name of the sample followed by the paths to its Read 1 and Read 2 FASTQ files.</p>
+<p>kb-python will automatically process each sample independently and prepend a <strong>unique, artificially generated sample-specific barcode</strong> to the beginning of every cell barcode. This ensures that cell barcodes from different samples remain distinguishable in the combined output without altering the underlying cellular barcodes themselves.</p>
+<p>A list of these sample-specific barcode prefixes is saved in <code>counts_unfiltered/cells_x_genes.barcodes.prefix.txt</code>, which maps each cell barcode to its corresponding sample barcode.</p>
+</section>
 <section id="parse-evercode-wt-v3-using-a-custom-specification" class="level3">
 <h3 class="anchored" data-anchor-id="parse-evercode-wt-v3-using-a-custom-specification">Parse Evercode WT v3: Using a Custom Specification</h3>
 <p>Currently, <strong>kb-python</strong> does not include a built-in specification for the <strong>Parse Evercode WT v3</strong> chemistry. To pseudoalign Parse v3 data, you must manually specify the assay configuration by providing:</p>
@@ -414,14 +431,14 @@ Note
 <li><p>the read parity (whether the assay produces single- or paired-end reads): <code>--paired=paired</code></p></li>
 </ul>
 <p>Then, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">--strand</span><span class="op">=</span>forward <span class="at">--parity</span><span class="op">=</span>paired <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-w</span> v3_onlist.txt <span class="at">-x</span> <span class="st">"1,10,18,1,30,38,1,50,58:1,0,10:0,0,0 </span><span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  -g t2g.txt -i index.idx R1.fastq.gz R2.fastq.gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">--strand</span><span class="op">=</span>forward <span class="at">--parity</span><span class="op">=</span>paired <span class="dt">\</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-w</span> v3_onlist.txt <span class="at">-x</span> <span class="st">"1,10,18,1,30,38,1,50,58:1,0,10:0,0,0 </span><span class="dt">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">  -g t2g.txt -i index.idx R1.fastq.gz R2.fastq.gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="parse-evercode-wt-substituting-barcodes-with-the--r-argument" class="level3">
 <h3 class="anchored" data-anchor-id="parse-evercode-wt-substituting-barcodes-with-the--r-argument">Parse Evercode WT: Substituting Barcodes with the <code>-r</code> Argument</h3>
-<p>The Parse Evercode WT chemistry is unique in that each cell has two cell-specific barcodes rather than one. Since kb-python expects a single barcode per cell, you must collapse barcode pairs before pseudoalignment. This is done using the -r argument in kb count, for example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">-r</span> <span class="op">&lt;</span>replace_file<span class="op">&gt;</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Parse Evercode WT chemistry is unique in that each cell has two cell-specific barcodes rather than one. Since kb-python expects a single barcode per cell, you must collapse barcode pairs before pseudoalignment. This is done using the <code>-r</code> argument in kb count, for example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">-r</span> <span class="op">&lt;</span>replace_file<span class="op">&gt;</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>where &lt;replace_file&gt; is a <strong>TSV</strong> file with two columns:</p>
 <ul>
 <li><p>Column 1: barcodes to be replaced</p></li>
@@ -445,6 +462,38 @@ Important
 <p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
 </div>
 </div>
+</section>
+<section id="validating-pseudoalignment-with-the-run_info.json-file" class="level3">
+<h3 class="anchored" data-anchor-id="validating-pseudoalignment-with-the-run_info.json-file">Validating Pseudoalignment with the <code>run_info.json</code> file</h3>
+<p>When you run kallisto through kb-python, it generates a file called run_info.json. This file summarizes essential metrics from the pseudoalignment step and helps you verify that your reads were successfully mapped to the reference transcriptome. Although it is a small file, it contains several important fields that give a quick indication of alignment quality and potential issues with your input data, reference files, or library chemistry.</p>
+<section id="key-metrics-to-evaluate" class="level4">
+<h4 class="anchored" data-anchor-id="key-metrics-to-evaluate">Key Metrics to Evaluate</h4>
+<ol type="1">
+<li><p><code>n_processed</code></p>
+<p>This value reports the total number of reads (or read pairs) that kallisto attempted to pseudoalign. It should match your expectation based on the number of reads in your FASTQ files. A much smaller number than expected usually indicates truncated FASTQ files, incorrect file paths, corrupted input, or an early pipeline failure.</p></li>
+<li><p><code>p_pseudoaligned</code></p>
+<p>This is the fraction of reads that successfully pseudoaligned (<code>n_pseudoaligned</code> / <code>n_processed</code>). It is the most important single metric. Typical expectations:</p>
+<ul>
+<li>Bulk RNA-seq: often &gt;80–90%</li>
+<li>scRNA-seq (10x): usually 60–90%</li>
+<li>Multiome or non-standard assays: more variable</li>
+</ul>
+<p>Very low values (e.g., &lt;30%) almost always indicate a mismatch between your reference and your reads rather than a biological.</p></li>
+<li><p><code>p_unique</code></p>
+<p>This value reports the fraction of reads that pseudoaligned uniquely to a single transcript rather than mapping to multiple possible targets. For most scRNA-seq datasets, a value above 20% is expected, though this depends heavily on the organism, assay, and read length; in some cases, values as low as 10% can still be normal.</p>
+<p>A low <code>p_unique</code> can occur when:</p>
+<ul>
+<li>many transcripts share highly similar sequences (e.g., paralogs, pseudogenes),</li>
+<li>the reference is incomplete or poorly annotated,</li>
+<li>reads are too short or low-quality,</li>
+<li>adapters or barcodes were not properly trimmed,</li>
+<li>a high percentage of the reads originate from ribosomal RNA.</li>
+</ul>
+<p>While <code>p_pseudoaligned</code> tells you how many reads mapped at all, <code>p_unique</code> tells you how confidently kallisto could assign those reads.</p></li>
+<li><p><code>Runtime information</code></p>
+<p>Fields like <code>start_time</code>, <code>end_time</code>, and sometimes call help you confirm that kallisto completed successfully and show exactly what command was executed.</p></li>
+</ol>
+</section>
 </section>
 </section>
 <section id="next-steps" class="level2">

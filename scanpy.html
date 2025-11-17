@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Creating a Conda Environment – CBRC-SPEC Tutorials</title>
+<title>Scanpy and the AnnData Object – CBRC-SPEC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -236,10 +236,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-should-i-use-conda" id="toc-why-should-i-use-conda" class="nav-link active" data-scroll-target="#why-should-i-use-conda">Why Should I Use Conda?</a></li>
-  <li><a href="#create-a-new-environment" id="toc-create-a-new-environment" class="nav-link" data-scroll-target="#create-a-new-environment">Create a New Environment</a></li>
-  <li><a href="#installing-a-package-with-conda" id="toc-installing-a-package-with-conda" class="nav-link" data-scroll-target="#installing-a-package-with-conda">Installing a Package with Conda</a></li>
-  <li><a href="#recreate-an-old-environment" id="toc-recreate-an-old-environment" class="nav-link" data-scroll-target="#recreate-an-old-environment">Recreate an Old Environment</a></li>
+  <li><a href="#what-is-anndata" id="toc-what-is-anndata" class="nav-link active" data-scroll-target="#what-is-anndata">What Is AnnData?</a></li>
+  <li><a href="#explore-the-anndata-object" id="toc-explore-the-anndata-object" class="nav-link" data-scroll-target="#explore-the-anndata-object">Explore the AnnData Object</a>
+  <ul class="collapse">
+  <li><a href="#the-anndata-structure-at-a-glance" id="toc-the-anndata-structure-at-a-glance" class="nav-link" data-scroll-target="#the-anndata-structure-at-a-glance">The AnnData Structure at a Glance</a></li>
+  <li><a href="#accessing-and-modifying-data-in-an-anndata-object" id="toc-accessing-and-modifying-data-in-an-anndata-object" class="nav-link" data-scroll-target="#accessing-and-modifying-data-in-an-anndata-object">Accessing and Modifying Data in an AnnData Object</a></li>
+  <li><a href="#merging-anndata-objects" id="toc-merging-anndata-objects" class="nav-link" data-scroll-target="#merging-anndata-objects">Merging Anndata Objects</a></li>
+  <li><a href="#saving-and-loading-anndata-objects" id="toc-saving-and-loading-anndata-objects" class="nav-link" data-scroll-target="#saving-and-loading-anndata-objects">Saving and Loading AnnData Objects</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -252,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Creating a Conda Environment</h1>
+<h1 class="title">Scanpy and the AnnData Object</h1>
 </div>
 
 
@@ -269,76 +273,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="why-should-i-use-conda" class="level2">
-<h2 class="anchored" data-anchor-id="why-should-i-use-conda">Why Should I Use Conda?</h2>
-<p>Conda is an open-source package and environment management system that simplifies software installation and version control. It ensures that scientific computing workflows are reproducible, portable, and isolated — ideal for complex bioinformatics pipelines.</p>
+<p><a href="https://scanpy.readthedocs.io/en/stable/"><strong>Scanpy</strong></a> is a widely used Python-based toolkit for analyzing single-cell RNA-seq data.<br>
+It provides a full analysis ecosystem, including tools for:</p>
 <ul>
-<li><p>Install and manage software (including <strong>Python</strong> and <strong>R</strong> packages) along with all their dependencies</p></li>
-<li><p>Create isolated environments so different projects can use different versions of the same software without conflicts.</p></li>
-<li><p>Reproduce analyses easily since an environment file (environment.yml) can capture the exact software versions used in your workflow.</p></li>
+<li>quality control and filtering<br>
+</li>
+<li>normalization and highly variable gene selection<br>
+</li>
+<li>dimensionality reduction (PCA, UMAP)<br>
+</li>
+<li>clustering<br>
+</li>
+<li>marker gene identification<br>
+</li>
+<li>trajectory inference<br>
+</li>
+<li>visualization</li>
 </ul>
-<p>This makes conda especially useful for computational biology and single-cell RNA-seq analysis, where multiple specialized tools (e.g., kb-python, scanpy, seqspec) must work together seamlessly.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Installing Conda">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Installing Conda
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To install Conda, follow the <a href="https://www.anaconda.com/docs/getting-started/miniconda/install">Miniconda installation instructions</a>.<br>
-<strong>Miniconda</strong> is the lightweight version of Anaconda and is recommended for most users.</p>
-</div>
-</div>
+<p>Scanpy is designed for large datasets through use of the <a href="https://anndata.readthedocs.io/en/stable/"><strong>AnnData</strong></a> data structure, allowing efficient storage and processing of millions of cells.</p>
+<section id="what-is-anndata" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-anndata">What Is AnnData?</h2>
+<p><strong>AnnData</strong> (“Annotated Data”) is a data structure designed to store single-cell omics datasets.<br>
+It organizes all parts of an scRNA-seq experiment—raw counts, metadata, embeddings, clustering labels, etc.- into a single, compact object.</p>
+<p>Scanpy <em>uses AnnData as its core data container</em>.</p>
+<p>Almost every Scanpy function takes an AnnData object as input and writes results back into it. This keeps your entire workflow contained in one place.</p>
 </section>
-<section id="create-a-new-environment" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-new-environment">Create a New Environment</h2>
-<p>There are many ways to organize your Conda environments, depending on your workflow and software dependencies. As a general rule, create a dedicated Conda environment for each project to prevent version conflicts and ensure reproducibility.</p>
-<p>To create a conda environment (with Python), type into the command line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>and replace <code>myenv</code> with your desired environment name. Then, to activate your environment:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate myenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now, anything you run in this shell will use only the packages that you have explicitly installed. To deactivate your environment, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Python or R?">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Python or R?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To create your environment with a specific version of <strong>Python</strong> (e.g version 3.12), type into your command line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.12</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If your project uses <strong>R</strong> instead you can create an environment as follows (here using version 4.2):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv r-essentials r-base=4.2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
+<section id="explore-the-anndata-object" class="level2">
+<h2 class="anchored" data-anchor-id="explore-the-anndata-object">Explore the AnnData Object</h2>
+<section id="the-anndata-structure-at-a-glance" class="level3">
+<h3 class="anchored" data-anchor-id="the-anndata-structure-at-a-glance">The AnnData Structure at a Glance</h3>
+<p>Every AnnData object contains the following major components:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>adata.X</code></td>
+<td>Expression matrix (cells × genes)</td>
+</tr>
+<tr class="even">
+<td><code>adata.obs</code></td>
+<td>Cell-level metadata (Pandas Dataframe)</td>
+</tr>
+<tr class="odd">
+<td><code>adata.var</code></td>
+<td>Gene-level metadata (Pandas Dataframce)</td>
+</tr>
+<tr class="even">
+<td><code>adata.layers</code></td>
+<td>Additional expression matrices</td>
+</tr>
+<tr class="odd">
+<td><code>adata.obsm</code></td>
+<td>Multi-dimensional cell data (e.g., PCA, UMAP)</td>
+</tr>
+<tr class="even">
+<td><code>adata.varm</code></td>
+<td>Multi-dimensional gene data (e.g., loadings)</td>
+</tr>
+<tr class="odd">
+<td><code>adata.uns</code></td>
+<td>Unstructured metadata (e.g., clustering results)</td>
+</tr>
+</tbody>
+</table>
+<p>This structure allows Scanpy to store every part of your analysis inside the same object.</p>
 </section>
-<section id="installing-a-package-with-conda" class="level2">
-<h2 class="anchored" data-anchor-id="installing-a-package-with-conda">Installing a Package with Conda</h2>
-<p>To install a package with Conda, you usually have to <strong>specify a channel</strong> — an online repository where packages are stored and distributed. Conda channels are online repositories where packages are stored and distributed. When you install a package with conda, it looks for that package in one or more channels (for example, defaults, conda-forge, or bioconda).</p>
-<ul>
-<li><p><strong>defaults</strong> — maintained by Anaconda; includes general-purpose packages.</p></li>
-<li><p><strong>conda-forge</strong> - a community-maintained channel providing up-to-date, cross-platform scientific software. uilds of thousands of scientific and technical packages.</p></li>
-<li><p><strong>bioconda</strong> — specializes in bioinformatics software and builds on conda-forge for its dependencies.</p></li>
-</ul>
-<p>When installing bioinformatics tools like kb-python or seqspec, it’s best practice to specify both conda-forge and bioconda as channels to ensure compatibility:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="accessing-and-modifying-data-in-an-anndata-object" class="level3">
+<h3 class="anchored" data-anchor-id="accessing-and-modifying-data-in-an-anndata-object">Accessing and Modifying Data in an AnnData Object</h3>
+<p>AnnData objects behave like structured containers, and you can access or modify their contents using standard Python indexing and assignment. For example, you can retrieve cell-level metadata from <code>adata.obs</code>, gene-level metadata from <code>adata.var</code>, or expression values from <code>adata.X</code> using familiar pandas- and NumPy-like operations. Adding new information is just as simple: assign a new column to <code>adata.obs</code> (e.g., <code>adata.obs["sample"] = "A"</code>) or create new layers or embeddings (e.g., adata.layers <code>["counts"] = adata.X.copy()</code> or <code>adata.obsm["X_umap"] = umap_coords</code>). Because AnnData enforces consistent dimensions, any added variables must match the number of cells or genes. This makes it easy to integrate new annotations, computed metrics, or analysis results directly into the same object that holds your expression data.</p>
 </section>
-<section id="recreate-an-old-environment" class="level2">
-<h2 class="anchored" data-anchor-id="recreate-an-old-environment">Recreate an Old Environment</h2>
-<p>You can save your conda environment in a <strong>YAML</strong> file with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The <code>--from-history</code> flag saves only the packages you explicitly installed, keeping the file concise. If you prefer to include all dependencies and versions, omit this flag.</p>
-<p>To recreate the same environment elsewhere:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml <span class="at">--name</span> myenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="merging-anndata-objects" class="level3">
+<h3 class="anchored" data-anchor-id="merging-anndata-objects">Merging Anndata Objects</h3>
+<p>Merging AnnData objects is useful when combining datasets from different samples, batches, or experimental conditions. The most common approach is to use <code>anndata.concat()</code>, which stacks objects along the observations (cells) or variables (genes) while automatically aligning shared features. For example, <code>anndata.concat([adata1, adata2], join="outer")</code> merges two datasets and keeps the union of all genes, filling in missing values where needed. You can also merge only cells with matching gene sets using <code>join="inner"</code>. Sample-level identifiers—such as batch labels—can be added automatically with the label argument (e.g., <code>label="batch"</code>). Because AnnData ensures that dimensions stay consistent, concatenation keeps your metadata synchronized, making it straightforward to integrate multiple datasets before downstream analysis.</p>
+</section>
+<section id="saving-and-loading-anndata-objects" class="level3">
+<h3 class="anchored" data-anchor-id="saving-and-loading-anndata-objects">Saving and Loading AnnData Objects</h3>
+<p>AnnData objects are saved in the HDF5-based .h5ad format, which is efficient and portable.</p>
+<section id="save-your-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="save-your-dataset">Save your dataset:</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>adata.write(<span class="st">"dataset.h5ad"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="load-it-later" class="level4">
+<h4 class="anchored" data-anchor-id="load-it-later">Load it later:</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adata <span class="op">=</span> ad.read_h5ad(<span class="st">"dataset.h5ad"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

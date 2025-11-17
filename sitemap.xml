@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec_tutorials.html</loc>
-    <lastmod>2025-10-24T21:48:17.389Z</lastmod>
+    <lastmod>2025-11-17T18:35:42.407Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/conda.html</loc>
@@ -29,28 +29,32 @@
     <lastmod>2025-10-24T21:48:17.388Z</lastmod>
   </url>
   <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/seqfish.html</loc>
-    <lastmod>2025-11-07T01:42:35.964Z</lastmod>
+    <loc>https://pachterlab.github.io/cbrc-spec/scanpy.html</loc>
+    <lastmod>2025-11-17T06:08:23.726Z</lastmod>
   </url>
   <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/fastqc_install.html</loc>
-    <lastmod>2025-11-10T04:28:12.934Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/fastqc.html</loc>
-    <lastmod>2025-11-10T04:29:27.894Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/sample_pipeline.html</loc>
-    <lastmod>2025-11-13T06:10:54.707Z</lastmod>
+    <loc>https://pachterlab.github.io/cbrc-spec/index.html</loc>
+    <lastmod>2025-11-13T06:06:54.379Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/R_packages.html</loc>
     <lastmod>2025-11-07T06:44:14.261Z</lastmod>
   </url>
   <url>
-    <loc>https://pachterlab.github.io/cbrc-spec/index.html</loc>
-    <lastmod>2025-11-13T06:06:54.379Z</lastmod>
+    <loc>https://pachterlab.github.io/cbrc-spec/sample_pipeline.html</loc>
+    <lastmod>2025-11-17T07:03:05.825Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/fastqc.html</loc>
+    <lastmod>2025-11-10T04:29:27.894Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/fastqc_install.html</loc>
+    <lastmod>2025-11-10T04:28:12.934Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pachterlab.github.io/cbrc-spec/seqfish.html</loc>
+    <lastmod>2025-11-07T01:42:35.964Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/seqspec/webpages/10x/10x_v3.html</loc>
@@ -70,11 +74,11 @@
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/parse.html</loc>
-    <lastmod>2025-11-10T04:50:36.820Z</lastmod>
+    <lastmod>2025-11-17T18:33:43.401Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/kb_python.html</loc>
-    <lastmod>2025-11-11T23:10:51.659Z</lastmod>
+    <lastmod>2025-11-17T18:46:23.028Z</lastmod>
   </url>
   <url>
     <loc>https://pachterlab.github.io/cbrc-spec/10x.html</loc>
