@@ -116,8 +116,10 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 10
     max_len: 10
     onlist: !Onlist
-      location: local
-      filename: onlist_i5.txt
+      filename: dual_i5.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/10x/dual_i5.txt
     regions: null
 
   - !Region
@@ -142,8 +144,10 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 16
     max_len: 16
     onlist: !Onlist
-      location: local
-      filename: v4BC_onlist.txt
+      filename: BC.txt.gz
+      filetype: txt
+      filesize: 13 MB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/10x/v4/BC.txt.gz
     regions: null
 
   - !Region
@@ -192,8 +196,10 @@ library_spec: ##Adjust cdna length according to sequence depth##
     min_len: 10
     max_len: 10
     onlist: !Onlist
-      location: local
-      filename: onlist_i7.txt
+      filename: dual_i7.txt
+      filetype: txt
+      filesize: 4.0 KB
+      url: https://pachterlab.github.io/cbrc-spec/seqspec/onlists/10x/dual_i7.txt
     regions: null
 
   - !Region

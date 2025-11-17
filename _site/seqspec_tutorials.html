@@ -137,6 +137,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./scanpy.html">
+ <span class="dropdown-text">Scanpy and Anndata</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -245,7 +249,7 @@ ul.task-list li input[type="checkbox"] {
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M7 7h10v10H7z"></path></svg>
       <h3 class="anchored">Parse Evercode WT v2 (Dual Index)</h3>
     </button>
-    <button class="tech-btn tech-parse" data-link="seqspec/webpages/parse/parse_v3.html">
+    <button class="tech-btn tech-parse" data-link="seqspec/webpages/Parse/parse_v3.html">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="12" r="4"></circle></svg>
       <h3 class="anchored">Parse Evercode WT v3</h3>
     </button>
@@ -412,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -66,7 +66,7 @@ kb ref --workflow=nac -d human -i index.idx \
 which will additionally generate the files cdna.txt and nascent.txt.
 
 ::: {.callout-note}
-See how the precompiled indices were generated [here](https://github.com/pachterlab/kallisto-transcriptome-indices)
+See how the precompiled indices were generated [here](https://github.com/pachterlab/kallisto-transcriptome-indices).
 :::
 
 ### Generating a Custom Index
@@ -130,6 +130,25 @@ Change `-x 10XV3` according to the specific technology you used to generate your
 
 To see a complete list of technologies and their corresponding technology strings, type `kb --list` into your terminal.
 
+### Batch Pseudoaligment
+In most scRNA-seq experiments, you will have multiple samples, each with its own pair of FASTQ files. Instead of running `kb count` separately on every sample, kb-python allows you to process many samples in a single command using the`--batch-barcodes` flag.
+
+To perform a batch pseudoalignment, run:
+```bash
+kb count ... --batch-barcodes batch.txt
+```
+filling in the command with the parameters specific to your experiment. The batch.txt file must be a **space-separated** file, with one row per sample. Each row should contain:
+
+```txt
+sample_name read1.fastq.gz read2.fastq.gz
+```
+
+— that is, the name of the sample followed by the paths to its Read 1 and Read 2 FASTQ files. 
+
+kb-python will automatically process each sample independently and prepend a **unique, artificially generated sample-specific barcode** to the beginning of every cell barcode. This ensures that cell barcodes from different samples remain distinguishable in the combined output without altering the underlying cellular barcodes themselves.
+
+A list of these sample-specific barcode prefixes is saved in `counts_unfiltered/cells_x_genes.barcodes.prefix.txt`, which maps each cell barcode to its corresponding sample barcode.
+
 ### Parse Evercode WT v3: Using a Custom Specification
 
 Currently, **kb-python** does not include a built-in specification for the **Parse Evercode WT v3** chemistry. To pseudoalign Parse v3 data, you must manually specify the assay configuration by providing:
@@ -151,7 +170,7 @@ kb count --h5ad --strand=forward --parity=paired \
 
 ### Parse Evercode WT: Substituting Barcodes with the `-r` Argument
 The Parse Evercode WT chemistry is unique in that each cell has two cell-specific barcodes rather than one. Since kb-python expects a single barcode per cell, you must collapse barcode pairs before pseudoalignment.
-This is done using the -r argument in kb count, for example:
+This is done using the `-r` argument in kb count, for example:
 
 ```bash
 kb count -r <replace_file> ...
@@ -172,6 +191,43 @@ You can download:
 :::{.callout-important}
 When using `-r` to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file `counts_unfiltered`) and one with the replacement barcodes (stored in the output file `counts_unfiltered_modified`).
 :::
+
+### Validating Pseudoalignment with the `run_info.json` file
+When you run kallisto through kb-python, it generates a file called run_info.json. This file summarizes essential metrics from the pseudoalignment step and helps you verify that your reads were successfully mapped to the reference transcriptome. Although it is a small file, it contains several important fields that give a quick indication of alignment quality and potential issues with your input data, reference files, or library chemistry.
+
+#### Key Metrics to Evaluate
+
+1. `n_processed`
+
+    This value reports the total number of reads (or read pairs) that kallisto attempted to pseudoalign. It should match your expectation based on the number of reads in your FASTQ files. A much smaller number than expected usually indicates truncated FASTQ files, incorrect file paths, corrupted input, or an early pipeline failure.
+
+2. `p_pseudoaligned`
+    
+    This is the fraction of reads that successfully pseudoaligned (`n_pseudoaligned` / `n_processed`). It is the most important single metric.
+    Typical expectations:
+    * Bulk RNA-seq: often >80–90%
+    * scRNA-seq (10x): usually 60–90%
+    * Multiome or non-standard assays: more variable
+
+    Very low values (e.g., <30%) almost always indicate a mismatch between your reference and your reads rather than a biological.
+
+3. `p_unique`
+
+    This value reports the fraction of reads that pseudoaligned uniquely to a single transcript rather than mapping to multiple possible targets. For most scRNA-seq datasets, a value above 20% is expected, though this depends heavily on the organism, assay, and read length; in some cases, values as low as 10% can still be normal.
+
+    A low `p_unique` can occur when:
+
+    * many transcripts share highly similar sequences (e.g., paralogs, pseudogenes),
+    * the reference is incomplete or poorly annotated,
+    * reads are too short or low-quality,
+    * adapters or barcodes were not properly trimmed,
+    * a high percentage of the reads originate from ribosomal RNA.
+
+    While `p_pseudoaligned` tells you how many reads mapped at all, `p_unique` tells you how confidently kallisto could assign those reads.
+
+4. `Runtime information`
+
+    Fields like `start_time`, `end_time`, and sometimes call help you confirm that kallisto completed successfully and show exactly what command was executed.
 
 ## Next Steps
 After generating your count matrix, you can import it into analysis tools such as **Scanpy**, **Seurat**, or **Bioconductor** for downstream processing, clustering, and visualization.
