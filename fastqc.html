@@ -322,8 +322,8 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and follow the displayed instructions.</p>
 <p>If you would prefer to analyze your data through the command-line, simply specify a list of files following the <code>fastqc</code> command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=&lt;</span>outdir<span class="op">&gt;</span> somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>and replace &lt;outdir&gt; with the path to the directory you wish to have your output stored.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=</span>outdir somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and replace <code>outdir</code> with the path to the directory you wish to have your output stored.</p>
 </section>
 <section id="a-brief-tutorial-on-fastq-files" class="level2">
 <h2 class="anchored" data-anchor-id="a-brief-tutorial-on-fastq-files">A Brief Tutorial on FASTQ Files</h2>
@@ -346,7 +346,7 @@ window.Quarto = {
 <p><span class="math display">\[Q = -10\times \log_{10}(P)\]</span></p>
 <p>where <span class="math inline">\(P\)</span> is the probability that a base call is incorrect. For example, a Phred score of 20 means there’s a 1% chance the base is wrong, while a score of 30 corresponds to a 0.1% error rate.</p>
 <p>These scores are stored as ASCII characters in the FASTQ file, allowing both sequence and quality information to be represented compactly.</p>
-<p>During quality control, tools like <strong>FastQC</strong> visualizes these scores across all reads helping identify low-quality regions that may need trimming or filtering before alignment and downstream analysis.</p>
+<p>During quality control, tools like <strong>FastQC</strong> visualize these scores across all reads, helping identify low-quality regions that may need trimming or filtering before alignment and downstream analysis.</p>
 </section>
 </section>
 <section id="understanding-fastqc-plots" class="level2">
