@@ -158,8 +158,9 @@ kb count --h5ad --strand=forward --parity=paired \
 ```
 
 ## Step 2: Assess the Quality of Your Sequencing Data with [`FastQC`](fastqc.qmd)
+If you do not already have FastQC installled, please refer to [**Installing FastQC**](fastqc_install.qmd).
 
-You can launch the graphical interface by simply running:
+You can launch the FastQC graphical interface by simply running:
 
 ```bash
 fastqc
@@ -168,13 +169,13 @@ fastqc
 Alternatively, you can run FastQC directly from the command line:
 
 ```bash
-fastqc --extract --outdir=<outdir> somefile.fastq someotherfile.fastq ...
+fastqc --extract --outdir=outdir somefile.fastq someotherfile.fastq ...
 ```
 
-where you list all the FASTQ files you wish to analyze after the fastq command and <outdir> is the directory in which you would like the output files to be stored.
+where you list all the FASTQ files you wish to analyze after the `fastqc` command, and `outdir` is the directory in which you would like the output files to be stored.
 
-For a detailed tutorial on using FastQC and interpreting the output reports, see our page on [Quality Control of Raw Sequencing Data with FastQC](fastqc.qmd).
+For a detailed tutorial on using FastQC and interpreting the output reports, see our page on [**Quality Control of Raw Sequencing Data with FastQC**](fastqc.qmd).
 
 ## Step 3: Process and Analyze Your Data
-Now you are ready to process your data! To continue with downstream analysis follow our [**example scRNA-seq pipeline**](sample_pipeline.ipynb).
+Now you are ready to process your data! To continue with downstream analysis, follow our [**example scRNA-seq pipeline**](sample_pipeline.ipynb).
 

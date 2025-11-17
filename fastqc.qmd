@@ -21,10 +21,10 @@ and follow the displayed instructions.
 If you would prefer to analyze your data through the command-line, simply specify a list of files following the `fastqc` command:
 
 ```bash
-fastqc --extract --outdir=<outdir> somefile.fastq someotherfile.fastq ...
+fastqc --extract --outdir=outdir somefile.fastq someotherfile.fastq ...
 ```
 
-and replace \<outdir\> with the path to the directory you wish to have your output stored.
+and replace `outdir` with the path to the directory you wish to have your output stored.
 
 ## A Brief Tutorial on FASTQ Files
 To understand the FastQC output, we must first understand what a FASTQ file is and how it is generated.
@@ -58,7 +58,7 @@ where $P$ is the probability that a base call is incorrect. For example, a Phred
 
 These scores are stored as ASCII characters in the FASTQ file, allowing both sequence and quality information to be represented compactly. 
 
-During quality control, tools like **FastQC** visualizes these scores across all reads helping identify low-quality regions that may need trimming or filtering before alignment and downstream analysis.
+During quality control, tools like **FastQC** visualize these scores across all reads, helping identify low-quality regions that may need trimming or filtering before alignment and downstream analysis.
 
 ## Understanding `FASTQC` Plots
 

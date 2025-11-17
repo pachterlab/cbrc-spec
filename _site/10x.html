@@ -392,23 +392,24 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This example is specifically for the <strong>10x Chromium Single Cell Next Gem v3</strong> chemistry for the v4 chemistry, replace the technology string <code>-x 10XV3</code> with <code>-x 10XV4</code>.</p>
+<p>This example is specifically for the <strong>10x Chromium Single Cell Next Gem v3</strong> chemistry. For the <strong>v4 chemistry</strong>, replace the technology string <code>-x 10XV3</code> with <code>-x 10XV4</code>.</p>
 </div>
 </div>
 </section>
 </section>
 <section id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 2: Assess the Quality of Your Sequencing Data with <a href="./fastqc.html"><code>FastQC</code></a></h2>
-<p>You can launch the graphical interface by simply running:</p>
+<p>If you do not already have FastQC installled, please refer to <a href="./fastqc_install.html"><strong>Installing FastQC</strong></a>.</p>
+<p>You can launch the FastQC graphical interface by simply running:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Alternatively, you can run FastQC directly from the command line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=&lt;</span>outdir<span class="op">&gt;</span> somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where you list all the FASTQ files you wish to analyze after the fastq command and <outdir> is the directory in which you would like the output files to be stored.</outdir></p>
-<p>For a detailed tutorial on using FastQC and interpreting the output reports, see our page on <a href="./fastqc.html">Quality Control of Raw Sequencing Data with FastQC</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=</span>outdir somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>where you list all the FASTQ files you wish to analyze after the <code>fastqc</code> command, and <code>outdir</code> is the directory in which you would like the output files to be stored.</p>
+<p>For a detailed tutorial on using FastQC and interpreting the output reports, see our page on <a href="./fastqc.html"><strong>Quality Control of Raw Sequencing Data with FastQC</strong></a>.</p>
 </section>
 <section id="step-3-process-and-analyze-your-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</h2>
-<p>Now you are ready to process your data! To continue with downstream analysis follow our <a href="./sample_pipeline.html"><strong>example scRNA-seq pipeline</strong></a>.</p>
+<p>Now you are ready to process your data! To continue with downstream analysis, follow our <a href="./sample_pipeline.html"><strong>example scRNA-seq pipeline</strong></a>.</p>
 
 
 </section>

@@ -34,7 +34,7 @@ Every AnnData object contains the following major components:
 |----------|-------------|
 | `adata.X` | Expression matrix (cells × genes) |
 | `adata.obs` | Cell-level metadata (Pandas Dataframe) |
-| `adata.var` | Gene-level metadata (Pandas Dataframce)|
+| `adata.var` | Gene-level metadata (Pandas Dataframe)|
 | `adata.layers` | Additional expression matrices |
 | `adata.obsm` | Multi-dimensional cell data (e.g., PCA, UMAP) |
 | `adata.varm` | Multi-dimensional gene data (e.g., loadings) |
@@ -52,7 +52,7 @@ Merging AnnData objects is useful when combining datasets from different samples
 
 ### Saving and Loading AnnData Objects
 
-AnnData objects are saved in the HDF5-based .h5ad format, which is efficient and portable.
+AnnData objects are saved in the HDF5-based `.h5ad` format, which is efficient and portable.
 
 #### Save your dataset:
 ```python

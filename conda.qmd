@@ -57,7 +57,7 @@ To install a package with Conda, you usually have to **specify a channel** — a
 
 * **defaults**  — maintained by Anaconda; includes general-purpose packages.  
 
-* **conda-forge** - a community-maintained channel providing up-to-date, cross-platform scientific software.  uilds of thousands of scientific and technical packages.
+* **conda-forge** - a community-maintained channel providing up-to-date, cross-platform scientific software.
 
 * **bioconda** — specializes in bioinformatics software and builds on conda-forge for its dependencies.
 
