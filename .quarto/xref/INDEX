@@ -91,5 +91,8 @@
   },
   "fastqc_install.qmd": {
     "fastqc_install.html": "791c7c9d"
+  },
+  "scanpy.qmd": {
+    "scanpy.html": "088de686"
   }
 }
