@@ -214,7 +214,7 @@ sequence_spec:
 ```
 
 ### Step 3: Validate Your seqspec file with `seqspec check`
-You can use `seqspec check` command from the seqspec package to verify your seqspec file is correctly formatted.
+You can use the `seqspec check` command from the seqspec package to verify your seqspec file is correctly formatted.
 
 ```bash
 seqspec check seqspec.yaml

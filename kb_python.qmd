@@ -131,7 +131,7 @@ Change `-x 10XV3` according to the specific technology you used to generate your
 To see a complete list of technologies and their corresponding technology strings, type `kb --list` into your terminal.
 
 ### Batch Pseudoaligment
-In most scRNA-seq experiments, you will have multiple samples, each with its own pair of FASTQ files. Instead of running `kb count` separately on every sample, kb-python allows you to process many samples in a single command using the`--batch-barcodes` flag.
+In most scRNA-seq experiments, you will have multiple samples, each with its own pair of FASTQ files. Instead of running `kb count` separately on every sample, kb-python allows you to process many samples in a single command using the `--batch-barcodes` flag.
 
 To perform a batch pseudoalignment, run:
 ```bash
@@ -170,7 +170,7 @@ kb count --h5ad --strand=forward --parity=paired \
 
 ### Parse Evercode WT: Substituting Barcodes with the `-r` Argument
 The Parse Evercode WT chemistry is unique in that each cell has two cell-specific barcodes rather than one. Since kb-python expects a single barcode per cell, you must collapse barcode pairs before pseudoalignment.
-This is done using the `-r` argument in kb count, for example:
+This is done using the `-r` argument in `kb count`, for example:
 
 ```bash
 kb count -r <replace_file> ...
@@ -189,7 +189,7 @@ You can download:
 * v3_replace.txt for v3 chemistry <a href="v3_replace.txt" download>here</a>
 
 :::{.callout-important}
-When using `-r` to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file `counts_unfiltered`) and one with the replacement barcodes (stored in the output file `counts_unfiltered_modified`).
+When using `-r` to specify a replacement list in `kb count`, two count matrices will be produced: one with the original barcodes (stored in the output file `counts_unfiltered`) and one with the replacement barcodes (stored in the output file `counts_unfiltered_modified`).
 :::
 
 ### Validating Pseudoalignment with the `run_info.json` file

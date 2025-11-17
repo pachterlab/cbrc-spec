@@ -412,7 +412,7 @@ Note
 <p>To see a complete list of technologies and their corresponding technology strings, type <code>kb --list</code> into your terminal.</p>
 <section id="batch-pseudoaligment" class="level3">
 <h3 class="anchored" data-anchor-id="batch-pseudoaligment">Batch Pseudoaligment</h3>
-<p>In most scRNA-seq experiments, you will have multiple samples, each with its own pair of FASTQ files. Instead of running <code>kb count</code> separately on every sample, kb-python allows you to process many samples in a single command using the<code>--batch-barcodes</code> flag.</p>
+<p>In most scRNA-seq experiments, you will have multiple samples, each with its own pair of FASTQ files. Instead of running <code>kb count</code> separately on every sample, kb-python allows you to process many samples in a single command using the <code>--batch-barcodes</code> flag.</p>
 <p>To perform a batch pseudoalignment, run:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count ... <span class="at">--batch-barcodes</span> batch.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>filling in the command with the parameters specific to your experiment. The batch.txt file must be a <strong>space-separated</strong> file, with one row per sample. Each row should contain:</p>
@@ -437,7 +437,7 @@ Note
 </section>
 <section id="parse-evercode-wt-substituting-barcodes-with-the--r-argument" class="level3">
 <h3 class="anchored" data-anchor-id="parse-evercode-wt-substituting-barcodes-with-the--r-argument">Parse Evercode WT: Substituting Barcodes with the <code>-r</code> Argument</h3>
-<p>The Parse Evercode WT chemistry is unique in that each cell has two cell-specific barcodes rather than one. Since kb-python expects a single barcode per cell, you must collapse barcode pairs before pseudoalignment. This is done using the <code>-r</code> argument in kb count, for example:</p>
+<p>The Parse Evercode WT chemistry is unique in that each cell has two cell-specific barcodes rather than one. Since kb-python expects a single barcode per cell, you must collapse barcode pairs before pseudoalignment. This is done using the <code>-r</code> argument in <code>kb count</code>, for example:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">-r</span> <span class="op">&lt;</span>replace_file<span class="op">&gt;</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>where &lt;replace_file&gt; is a <strong>TSV</strong> file with two columns:</p>
 <ul>
@@ -459,7 +459,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
+<p>When using <code>-r</code> to specify a replacement list in <code>kb count</code>, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
 </div>
 </div>
 </section>
