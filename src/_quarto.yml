@@ -1,0 +1,77 @@
+project:
+  type: website
+  resources:
+    - seqspec/onlists/**/*
+
+website:
+  title: "CBRC Tutorials"
+  navbar:
+    background: "#013c58"
+    pinned: true
+    search: false
+    left:
+      - text: Technologies
+        menu:
+          - href: pages/technologies/10x.qmd
+            text: 10x Genomics Chromium
+          - href: pages/technologies/parse.qmd
+            text: Parse Evercode WT
+          - href: notebooks/seqfish_pipeline.Rmd
+            text: seqFISH
+      - text: seqspec
+        menu:
+          - href: pages/seqspec/seqspec.qmd
+            text: What is seqspec?
+          - href: pages/seqspec/seqspec_tutorials.qmd
+            text: Tutorials
+      - text: Packages
+        menu:
+        - href: pages/packages/fastqc.qmd
+          text: FastQC
+        - href: pages/packages/kb_python.qmd
+          text: kb-python
+        - href: pages/packages/scanpy.qmd
+          text: Scanpy and Anndata
+      - text: Workflows
+        menu:
+          - href: notebooks/sample_pipeline.ipynb
+            text: An Example scRNA-seq Workflow
+          - text: "---"
+          - href: notebooks/seqfish_pipeline.Rmd
+            text: An Example Spatial Transcriptomics Workflow
+          - text: "---"
+          - href: notebooks/bulk_pipeline.ipynb
+            text: An Example Bulk RNA-seq Workflow
+      - text: Installation
+        menu:
+          - href: pages/installation/conda.qmd
+            text: Creating a Conda Environment
+          - href: pages/installation/python_packages.qmd
+            text: Installing Python Packages
+          - href: pages/installation/R_packages.qmd
+            text: Installing R Packages
+          - href: pages/installation/fastqc_install.qmd
+            text: Installing FastQC
+    right:
+      - href: pages/contact_us.qmd
+        text: Contact Us
+      - href: https://pachterlab.github.io/CBRC/
+        text: CBRC
+
+  page-footer:
+    left: 
+      <img src="/images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300">
+    background: "	#ff8c00"
+format:
+  html:
+    theme:
+      light: flatly
+    css: styles.css
+    toc: true
+    mainfont: "Inter"
+    fontsize: 1rem
+    linestretch: 1.6
+    highlight-style: ayu-dark
+    toc-location: left
+
+

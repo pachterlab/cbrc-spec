@@ -1,0 +1,65 @@
+---
+title: "Scanpy and the AnnData Object"
+---
+
+[**Scanpy**](https://scanpy.readthedocs.io/en/stable/) is a widely used Python-based toolkit for analyzing single-cell RNA-seq data.  
+It provides a full analysis ecosystem, including tools for:
+
+* quality control and filtering  
+* normalization and highly variable gene selection  
+* dimensionality reduction (PCA, UMAP)  
+* clustering  
+* marker gene identification  
+* trajectory inference  
+* visualization
+
+Scanpy is designed for large datasets through use of the [**AnnData**](https://anndata.readthedocs.io/en/stable/) data structure, allowing efficient storage and processing of millions of cells.
+
+## What Is AnnData?
+
+**AnnData** (“Annotated Data”) is a data structure designed to store single-cell omics datasets.  
+It organizes all parts of an scRNA-seq experiment—raw counts, metadata, embeddings, clustering labels, etc.- into a single, compact object.
+
+Scanpy *uses AnnData as its core data container*.
+
+Almost every Scanpy function takes an AnnData object as input and writes results back into it. This keeps your entire workflow contained in one place.
+
+## Explore the AnnData Object
+
+### The AnnData Structure at a Glance
+
+Every AnnData object contains the following major components:
+
+| Attribute | Description |
+|----------|-------------|
+| `adata.X` | Expression matrix (cells × genes) |
+| `adata.obs` | Cell-level metadata (Pandas Dataframe) |
+| `adata.var` | Gene-level metadata (Pandas Dataframe)|
+| `adata.layers` | Additional expression matrices |
+| `adata.obsm` | Multi-dimensional cell data (e.g., PCA, UMAP) |
+| `adata.varm` | Multi-dimensional gene data (e.g., loadings) |
+| `adata.uns` | Unstructured metadata (e.g., clustering results) |
+
+This structure allows Scanpy to store every part of your analysis inside the same object.
+
+### Accessing and Modifying Data in an AnnData Object
+
+AnnData objects behave like structured containers, and you can access or modify their contents using standard Python indexing and assignment. For example, you can retrieve cell-level metadata from `adata.obs`, gene-level metadata from `adata.var`, or expression values from `adata.X` using familiar pandas- and NumPy-like operations. Adding new information is just as simple: assign a new column to `adata.obs` (e.g., `adata.obs["sample"] = "A"`) or create new layers or embeddings (e.g., adata.layers `["counts"] = adata.X.copy()` or `adata.obsm["X_umap"] = umap_coords`). Because AnnData enforces consistent dimensions, any added variables must match the number of cells or genes. This makes it easy to integrate new annotations, computed metrics, or analysis results directly into the same object that holds your expression data.
+
+### Merging Anndata Objects
+
+Merging AnnData objects is useful when combining datasets from different samples, batches, or experimental conditions. The most common approach is to use `anndata.concat()`, which stacks objects along the observations (cells) or variables (genes) while automatically aligning shared features. For example, `anndata.concat([adata1, adata2], join="outer")` merges two datasets and keeps the union of all genes, filling in missing values where needed. You can also merge only cells with matching gene sets using `join="inner"`. Sample-level identifiers—such as batch labels—can be added automatically with the label argument (e.g., `label="batch"`). Because AnnData ensures that dimensions stay consistent, concatenation keeps your metadata synchronized, making it straightforward to integrate multiple datasets before downstream analysis.
+
+### Saving and Loading AnnData Objects
+
+AnnData objects are saved in the HDF5-based `.h5ad` format, which is efficient and portable.
+
+#### Save your dataset:
+```python
+adata.write("dataset.h5ad")
+```
+
+#### Load it later:
+```python
+adata = ad.read_h5ad("dataset.h5ad")
+```

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bulk_pipeline – CBRC Tutorials</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">CBRC Tutorials</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-technologies" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Technologies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
+        <li>
+    <a class="dropdown-item" href="../pages/technologies/10x.html">
+ <span class="dropdown-text">10x Genomics Chromium</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/technologies/parse.html">
+ <span class="dropdown-text">Parse Evercode WT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../notebooks/seqfish_pipeline.html">
+ <span class="dropdown-text">seqFISH</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seqspec" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">seqspec</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
+        <li>
+    <a class="dropdown-item" href="../pages/seqspec/seqspec.html">
+ <span class="dropdown-text">What is seqspec?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/seqspec/seqspec_tutorials.html">
+ <span class="dropdown-text">Tutorials</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-packages" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Packages</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
+        <li>
+    <a class="dropdown-item" href="../pages/packages/fastqc.html">
+ <span class="dropdown-text">FastQC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/packages/kb_python.html">
+ <span class="dropdown-text">kb-python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/packages/scanpy.html">
+ <span class="dropdown-text">Scanpy and Anndata</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Workflows</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
+        <li>
+    <a class="dropdown-item" href="../notebooks/sample_pipeline.html">
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../notebooks/seqfish_pipeline.html">
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../notebooks/bulk_pipeline.html">
+ <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-installation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Installation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
+        <li>
+    <a class="dropdown-item" href="../pages/installation/conda.html">
+ <span class="dropdown-text">Creating a Conda Environment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/installation/python_packages.html">
+ <span class="dropdown-text">Installing Python Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/installation/R_packages.html">
+ <span class="dropdown-text">Installing R Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../pages/installation/fastqc_install.html">
+ <span class="dropdown-text">Installing FastQC</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/contact_us.html"> 
+<span class="menu-text">Contact Us</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://pachterlab.github.io/CBRC/"> 
+<span class="menu-text">CBRC</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#install-kb-python" id="toc-install-kb-python" class="nav-link active" data-scroll-target="#install-kb-python">Install kb-python</a></li>
+  <li><a href="#downloads" id="toc-downloads" class="nav-link" data-scroll-target="#downloads">Downloads</a>
+  <ul class="collapse">
+  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a></li>
+  <li><a href="#kallisto-human-index" id="toc-kallisto-human-index" class="nav-link" data-scroll-target="#kallisto-human-index">kallisto human index</a></li>
+  </ul></li>
+  <li><a href="#kb-python-quantification" id="toc-kb-python-quantification" class="nav-link" data-scroll-target="#kb-python-quantification">kb-python Quantification</a>
+  <ul class="collapse">
+  <li><a href="#kallisto-quantification-and-technical-uncertainty" id="toc-kallisto-quantification-and-technical-uncertainty" class="nav-link" data-scroll-target="#kallisto-quantification-and-technical-uncertainty">Kallisto Quantification and Technical Uncertainty</a></li>
+  <li><a href="#bootstrap-variance-as-a-measure-of-technical-dispersion" id="toc-bootstrap-variance-as-a-measure-of-technical-dispersion" class="nav-link" data-scroll-target="#bootstrap-variance-as-a-measure-of-technical-dispersion">Bootstrap Variance as a Measure of Technical Dispersion</a></li>
+  <li><a href="#map-reads-to-index" id="toc-map-reads-to-index" class="nav-link" data-scroll-target="#map-reads-to-index">Map reads to index</a></li>
+  <li><a href="#now-inspect-the-output" id="toc-now-inspect-the-output" class="nav-link" data-scroll-target="#now-inspect-the-output">Now inspect the output</a></li>
+  </ul></li>
+  <li><a href="#differential-expression-of-transcripts" id="toc-differential-expression-of-transcripts" class="nav-link" data-scroll-target="#differential-expression-of-transcripts">Differential expression of transcripts</a>
+  <ul class="collapse">
+  <li><a href="#set-up-r-environment-and-edger" id="toc-set-up-r-environment-and-edger" class="nav-link" data-scroll-target="#set-up-r-environment-and-edger">Set up R environment and edgeR</a></li>
+  </ul></li>
+  <li><a href="#use-edger-for-differential-transcript-expression-analysis" id="toc-use-edger-for-differential-transcript-expression-analysis" class="nav-link" data-scroll-target="#use-edger-for-differential-transcript-expression-analysis">Use edgeR for differential transcript expression analysis</a>
+  <ul class="collapse">
+  <li><a href="#using-overdispersion-to-weight-counts-for-edger" id="toc-using-overdispersion-to-weight-counts-for-edger" class="nav-link" data-scroll-target="#using-overdispersion-to-weight-counts-for-edger">Using Overdispersion to Weight Counts for edgeR</a></li>
+  </ul></li>
+  <li><a href="#gene-filtering-and-normalization" id="toc-gene-filtering-and-normalization" class="nav-link" data-scroll-target="#gene-filtering-and-normalization">Gene Filtering and Normalization</a>
+  <ul class="collapse">
+  <li><a href="#what-calcnormfactors-does" id="toc-what-calcnormfactors-does" class="nav-link" data-scroll-target="#what-calcnormfactors-does">What <code>calcNormFactors()</code> Does</a></li>
+  <li><a href="#exploring-sample-relationships-with-plotmds" id="toc-exploring-sample-relationships-with-plotmds" class="nav-link" data-scroll-target="#exploring-sample-relationships-with-plotmds">Exploring Sample Relationships with <code>plotMDS()</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<div class="colab-button-container">
+<p><a href="https://colab.research.google.com/drive/1aWvvRbfc861rWxBfv6F6spvri1d4YMda?usp=sharing" target="_blank" class="colab-top-button" title="Open this notebook in Google Colab"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" class="colab-badge"> </a></p>
+</div>
+<h1>
+Introductory Bulk RNA-seq Analysis`
+</h1>
+<h4 class="anchored">
+Written by Maya Caskey (based off an older version by Delaney Sullivan)
+</h4>
+<p><br></p>
+<p>This notebook provides a step-by-step guide to performing basic bulk RNA-seq analysis using <code>kb-python</code> for quantification and <a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf"><code>edgeR</code></a> for downstream analysis. By the end of this tutorial, you will have learned how to process raw sequencing data, perform quality control, normalize the data, and identify differentially expressed genes.</p>
+<section id="install-kb-python" class="level2">
+<h2 class="anchored" data-anchor-id="install-kb-python">Install kb-python</h2>
+<div id="8a9312ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="f88aa667-7857-4345-a0e6-6a21f95f5835">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install kb_python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="downloads" class="level2">
+<h2 class="anchored" data-anchor-id="downloads">Downloads</h2>
+<section id="datasets" class="level3">
+<h3 class="anchored" data-anchor-id="datasets">Datasets</h3>
+<p>This notebook will analyze data from the papers: Differential analysis of gene regulation at transcript resolution with RNA-seq by Cole Trapnell, David G Henderickson, Martin Savageau, Loyal Goff, John L Rinn and Lior Pachter, <em>Nature Biotechnology</em> 31, 46–53 (2013).</p>
+<p>The control (C) and knockdown (KD) fibroblast samples are subsetted to 1 million reads each.</p>
+<section id="control-n3" class="level4">
+<h4 class="anchored" data-anchor-id="control-n3">Control (n=3)</h4>
+<div id="4b6c810d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>C_1_R1.fastq.gz</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>C_1_R2.fastq.gz</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>C_2_R1.fastq.gz</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>C_2_R2.fastq.gz</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>C_3_R1.fastq.gz</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>C_3_R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="knockdown-n3" class="level4">
+<h4 class="anchored" data-anchor-id="knockdown-n3">Knockdown (n=3)</h4>
+<div id="c705c820" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>KD_1_R1.fastq.gz</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>KD_1_R2.fastq.gz</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>KD_2_R1.fastq.gz</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>KD_2_R2.fastq.gz</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>KD_3_R1.fastq.gz</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>github.com<span class="op">/</span>pachterlab<span class="op">/</span>data<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v1<span class="op">/</span>KD_3_R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="kallisto-human-index" class="level3">
+<h3 class="anchored" data-anchor-id="kallisto-human-index">kallisto human index</h3>
+<div id="5477e9cd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e2d2440f-d05c-4abd-a726-6aebc6209a69">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kb ref <span class="op">-</span>d human <span class="op">-</span>i human_index.idx <span class="op">-</span>g human_t2g.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2025-06-19 02:40:51,007]    INFO [download] Downloading files for human (standard workflow) from https://github.com/pachterlab/kallisto-transcriptome-indices/releases/download/v1/human_index_standard.tar.xz to tmp/human_index_standard.tar.xz
+100% 138M/138M [00:01&lt;00:00, 134MB/s]
+[2025-06-19 02:40:52,095]    INFO [download] Extracting files from tmp/human_index_standard.tar.xz</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="kb-python-quantification" class="level2">
+<h2 class="anchored" data-anchor-id="kb-python-quantification">kb-python Quantification</h2>
+<section id="kallisto-quantification-and-technical-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="kallisto-quantification-and-technical-uncertainty">Kallisto Quantification and Technical Uncertainty</h3>
+<p>Kallisto does not produce raw read counts the way alignment-based RNA-seq pipelines do. Instead, it uses a probabilistic model of pseudoalignment to estimate transcript abundances. For each read <span class="math inline">\(r\)</span>, kallisto determines the set of transcripts <span class="math inline">\(T_r\)</span> it is compatible with and assigns abundance parameters <span class="math inline">\(\lambda_t\)</span> by maximizing the likelihood</p>
+<p><span class="math display">\[ L(\lambda \mid \text{reads}) = \prod_{r=1}^{N} \left( \sum_{t \in T_r} \frac{\lambda_t}{l_t}\right),\]</span></p>
+<p>where <span class="math inline">\(l_t\)</span> is the effective length of transcript <span class="math inline">\(t\)</span>. Because these abundances are <em>estimated</em> rather than directly counted, they carry <strong>quantification uncertainty</strong>, which is especially pronounced for genes with multi-mapping reads or overlapping isoforms.</p>
+</section>
+<section id="bootstrap-variance-as-a-measure-of-technical-dispersion" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-variance-as-a-measure-of-technical-dispersion">Bootstrap Variance as a Measure of Technical Dispersion</h3>
+<p>To measure this quantification uncertainty, kallisto performs <strong>bootstrap resampling</strong>, repeatedly re-quantifying the same sample by resampling reads with replacement. This produces bootstrap estimates <span class="math inline">\(\hat{\lambda}_t^{(1)}, \ldots, \hat{\lambda}_t^{(B)}\)</span> whose variability</p>
+<p><span class="math display">\[ \widehat{\mathrm{Var}}_{\text{boot}}(\hat{\lambda}_t) = \frac{1}{B-1} \sum_{b=1}^{B} \left(\hat{\lambda}_t^{(b)} - \overline{\hat{\lambda}_t}\right)^2, \]</span></p>
+<p>reflects <em>technical</em> uncertainty in the abundance estimates. Functions such as <strong>catchKallisto</strong> convert these bootstrap variances into per-gene “overdispersion” values that summarize the precision of kallisto’s quantification for each transcript in each sample.</p>
+</section>
+<section id="map-reads-to-index" class="level3">
+<h3 class="anchored" data-anchor-id="map-reads-to-index">Map reads to index</h3>
+<p>Below, we quantify RNA-seq reads using kallisto (via <code>kb count</code>) with bootstrapping (via <code>--bootstraps</code>) to obtain estimates of quantification uncertainty. Here, we set the number of bootstraps to 10.</p>
+<p>For the input to <code>kb count</code>, we supply all FASTQ files on the command-line (and the order in which the files are supplied determines the sample identities after read quantification).</p>
+<div id="d6952bf7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="03036e95-44c1-49a6-82e3-83e757c8b377">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kb count <span class="op">-</span>x BULK <span class="op">-</span>i human_index.idx <span class="op">-</span>g human_t2g.txt <span class="op">--</span>parity<span class="op">=</span>paired <span class="op">--</span>tcc <span class="op">--</span>matrix<span class="op">-</span>to<span class="op">-</span>directories <span class="op">-</span>o output_dir <span class="op">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">--</span>bootstraps<span class="op">=</span><span class="dv">5</span> <span class="op">-</span>t <span class="dv">2</span> <span class="op">--</span>overwrite <span class="op">--</span>verbose <span class="op">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>C_1_R1.fastq.gz C_1_R2.fastq.gz C_2_R1.fastq.gz C_2_R2.fastq.gz C_3_R1.fastq.gz C_3_R2.fastq.gz <span class="op">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>KD_1_R1.fastq.gz KD_1_R2.fastq.gz KD_2_R1.fastq.gz KD_2_R2.fastq.gz KD_3_R1.fastq.gz KD_3_R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2025-06-19 02:41:28,558]   DEBUG [main] Printing verbose output
+[2025-06-19 02:41:30,761]   DEBUG [main] kallisto binary located at /usr/local/lib/python3.11/dist-packages/kb_python/bins/linux/kallisto/kallisto
+[2025-06-19 02:41:30,761]   DEBUG [main] bustools binary located at /usr/local/lib/python3.11/dist-packages/kb_python/bins/linux/bustools/bustools
+[2025-06-19 02:41:30,761]   DEBUG [main] Creating `output_dir/tmp` directory
+[2025-06-19 02:41:30,762]   DEBUG [main] Namespace(list=False, command='count', tmp=None, keep_tmp=False, verbose=True, i='human_index.idx', g='human_t2g.txt', x='BULK', o='output_dir', num=False, w=None, exact_barcodes=False, r=None, t=2, m='2G', strand=None, inleaved=False, genomebam=False, aa=False, gtf=None, chromosomes=None, workflow='standard', em=False, mm=False, tcc=True, filter=None, filter_threshold=None, c1=None, c2=None, overwrite=True, dry_run=False, batch_barcodes=False, loom=False, h5ad=False, loom_names='barcode,target_name', sum='none', cellranger=False, gene_names=False, N=None, report=False, no_inspect=False, long=False, threshold=0.8, error_rate=None, platform='ONT', kallisto='/usr/local/lib/python3.11/dist-packages/kb_python/bins/linux/kallisto/kallisto', bustools='/usr/local/lib/python3.11/dist-packages/kb_python/bins/linux/bustools/bustools', opt_off=False, k=31, no_validate=False, no_fragment=False, union=False, no_jump=False, quant_umis=False, keep_flags=False, parity='paired', fragment_l=None, fragment_s=None, bootstraps=5, matrix_to_files=False, matrix_to_directories=True, fastqs=['C_1_R1.fastq.gz', 'C_1_R2.fastq.gz', 'C_2_R1.fastq.gz', 'C_2_R2.fastq.gz', 'C_3_R1.fastq.gz', 'C_3_R2.fastq.gz', 'KD_1_R1.fastq.gz', 'KD_1_R2.fastq.gz', 'KD_2_R1.fastq.gz', 'KD_2_R2.fastq.gz', 'KD_3_R1.fastq.gz', 'KD_3_R2.fastq.gz'])
+[2025-06-19 02:41:33,929]    INFO [count] Using index human_index.idx to generate BUS file to output_dir from
+[2025-06-19 02:41:33,929]    INFO [count]         C_1_R1.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         C_1_R2.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         C_2_R1.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         C_2_R2.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         C_3_R1.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         C_3_R2.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         KD_1_R1.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         KD_1_R2.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         KD_2_R1.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         KD_2_R2.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         KD_3_R1.fastq.gz
+[2025-06-19 02:41:33,929]    INFO [count]         KD_3_R2.fastq.gz
+[2025-06-19 02:41:33,929]   DEBUG [count] kallisto bus -i human_index.idx -o output_dir -x BULK -t 2 --paired C_1_R1.fastq.gz C_1_R2.fastq.gz C_2_R1.fastq.gz C_2_R2.fastq.gz C_3_R1.fastq.gz C_3_R2.fastq.gz KD_1_R1.fastq.gz KD_1_R2.fastq.gz KD_2_R1.fastq.gz KD_2_R2.fastq.gz KD_3_R1.fastq.gz KD_3_R2.fastq.gz
+[2025-06-19 02:41:33,933]   DEBUG [count] 
+[2025-06-19 02:41:50,491]   DEBUG [count] [index] k-mer length: 31
+[2025-06-19 02:41:58,110]   DEBUG [count] [index] number of targets: 227,665
+[2025-06-19 02:41:58,110]   DEBUG [count] [index] number of k-mers: 139,900,295
+[2025-06-19 02:41:58,110]   DEBUG [count] [index] number of D-list k-mers: 5,477,475
+[2025-06-19 02:41:58,210]   DEBUG [count] [quant] running in paired-end mode
+[2025-06-19 02:41:58,210]   DEBUG [count] [quant] will process pair 1: C_1_R1.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] C_1_R2.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] [quant] will process pair 1: C_2_R1.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] C_2_R2.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] [quant] will process pair 1: C_3_R1.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] C_3_R2.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] [quant] will process pair 1: KD_1_R1.fastq.gz
+[2025-06-19 02:41:58,210]   DEBUG [count] KD_1_R2.fastq.gz
+[2025-06-19 02:41:58,211]   DEBUG [count] [quant] will process pair 1: KD_2_R1.fastq.gz
+[2025-06-19 02:41:58,211]   DEBUG [count] KD_2_R2.fastq.gz
+[2025-06-19 02:41:58,211]   DEBUG [count] [quant] will process pair 1: KD_3_R1.fastq.gz
+[2025-06-19 02:41:58,211]   DEBUG [count] KD_3_R2.fastq.gz
+[2025-06-19 02:42:36,516]   DEBUG [count] [quant] finding pseudoalignments for all files ...
+[2025-06-19 02:43:12,851]   DEBUG [count] [progress] 1M reads processed (92.9% mapped)
+[2025-06-19 02:43:47,534]   DEBUG [count] [progress] 2M reads processed (92.9% mapped)
+[2025-06-19 02:44:23,935]   DEBUG [count] [progress] 3M reads processed (92.6% mapped)
+[2025-06-19 02:45:01,667]   DEBUG [count] [progress] 4M reads processed (92.4% mapped)
+[2025-06-19 02:45:31,676]   DEBUG [count] [progress] 5M reads processed (92.4% mapped)              done
+[2025-06-19 02:45:31,676]   DEBUG [count] [quant] processed 6,000,000 reads, 5,541,414 reads pseudoaligned
+[2025-06-19 02:45:32,177]   DEBUG [count] 
+[2025-06-19 02:45:34,181]    INFO [count] Sorting BUS file output_dir/output.bus to output_dir/tmp/output.s.bus
+[2025-06-19 02:45:34,181]   DEBUG [count] bustools sort -o output_dir/tmp/output.s.bus -T output_dir/tmp -t 2 -m 2G output_dir/output.bus
+[2025-06-19 02:45:35,887]   DEBUG [count] partition time: 0.034993s
+[2025-06-19 02:45:36,995]   DEBUG [count] all fits in buffer
+[2025-06-19 02:45:38,196]   DEBUG [count] Read in 5541414 BUS records
+[2025-06-19 02:45:38,196]   DEBUG [count] reading time 0.05138s
+[2025-06-19 02:45:38,196]   DEBUG [count] sorting time 1.35408s
+[2025-06-19 02:45:38,196]   DEBUG [count] writing time 0.057799s
+[2025-06-19 02:45:38,196]    INFO [count] Inspecting BUS file output_dir/tmp/output.s.bus
+[2025-06-19 02:45:38,196]   DEBUG [count] bustools inspect -o output_dir/inspect.json output_dir/tmp/output.s.bus
+[2025-06-19 02:45:39,298]    INFO [count] Generating count matrix output_dir/counts_unfiltered/cells_x_tcc from BUS file output_dir/tmp/output.s.bus
+[2025-06-19 02:45:39,298]   DEBUG [count] bustools count -o output_dir/counts_unfiltered/cells_x_tcc -g human_t2g.txt -e output_dir/matrix.ec -t output_dir/transcripts.txt --multimapping --cm output_dir/tmp/output.s.bus
+[2025-06-19 02:45:42,276]   DEBUG [count] output_dir/counts_unfiltered/cells_x_tcc.mtx passed validation
+[2025-06-19 02:45:42,276]    INFO [count] Quantifying transcript abundances to output_dir/quant_unfiltered from mtx file output_dir/counts_unfiltered/cells_x_tcc.mtx
+[2025-06-19 02:45:42,276]   DEBUG [count] kallisto quant-tcc -o output_dir/quant_unfiltered -i human_index.idx -e output_dir/counts_unfiltered/cells_x_tcc.ec.txt -g human_t2g.txt -t 2 -f output_dir/flens.txt -b 5 --matrix-to-directories output_dir/counts_unfiltered/cells_x_tcc.mtx
+[2025-06-19 02:45:42,377]   DEBUG [count] 
+[2025-06-19 02:45:58,624]   DEBUG [count] [index] k-mer length: 31
+[2025-06-19 02:46:07,976]   DEBUG [count] [index] number of targets: 227,665
+[2025-06-19 02:46:07,976]   DEBUG [count] [index] number of k-mers: 139,900,295
+[2025-06-19 02:46:07,976]   DEBUG [count] [index] number of D-list k-mers: 5,477,475
+[2025-06-19 02:46:09,979]   DEBUG [count] [index] number of equivalence classes loaded from file: 404,862
+[2025-06-19 02:46:09,979]   DEBUG [count] [index] not using the D-list k-mers
+[2025-06-19 02:46:09,979]   DEBUG [count] [tcc] Parsing transcript-compatibility counts (TCC) file as a matrix file
+[2025-06-19 02:46:09,979]   DEBUG [count] [tcc] Matrix dimensions: 6 x 404,862
+[2025-06-19 02:46:09,979]   DEBUG [count] [tcc] Bootstrapping will be performed and outputted as HDF5
+[2025-06-19 02:46:10,881]   DEBUG [count] [quant] Running EM algorithm...
+[2025-06-19 02:46:10,881]   DEBUG [count] [quant] Processing sample/cell 0
+[2025-06-19 02:46:10,881]   DEBUG [count] [quant] Processing sample/cell 1
+[2025-06-19 02:59:55,076]   DEBUG [count] [quant] Processing sample/cell 2
+[2025-06-19 02:59:55,076]   DEBUG [count] [quant] Processing sample/cell 3
+[2025-06-19 03:14:38,980]   DEBUG [count] [quant] Processing sample/cell formed and outputted as HDF5 a [quant] Processing sample/cell formed and outputted as HDF5 a 5
+[2025-06-19 03:14:38,980]   DEBUG [count] 4
+[2025-06-19 03:28:33,037]   DEBUG [count] done
+[2025-06-19 03:28:33,038]   DEBUG [count] 
+[2025-06-19 03:28:36,457]   DEBUG [count] output_dir/quant_unfiltered/matrix.abundance.gene.mtx passed validation
+[2025-06-19 03:28:36,468]   DEBUG [count] output_dir/quant_unfiltered/matrix.abundance.gene.tpm.mtx passed validation
+[2025-06-19 03:28:36,495]   DEBUG [count] output_dir/quant_unfiltered/matrix.abundance.mtx passed validation
+[2025-06-19 03:28:36,521]   DEBUG [count] output_dir/quant_unfiltered/matrix.abundance.tpm.mtx passed validation
+[2025-06-19 03:28:36,523]   DEBUG [main] Removing `output_dir/tmp` directory</code></pre>
+</div>
+</div>
+</section>
+<section id="now-inspect-the-output" class="level3">
+<h3 class="anchored" data-anchor-id="now-inspect-the-output">Now inspect the output</h3>
+<p>There are several “abundance” directories that contain our quantifications. The numbers correspond to the order in which we supplied the FASTQ files to the <code>kb count</code> command (i.e.&nbsp;<em>abundance_1</em>, <em>abundance_2</em>, and <em>abundance_3</em> are the control samples and <em>abundance_4</em>, <em>abundance_5</em>, and <em>abundance_6</em> are the knockdown samples)</p>
+<div id="c9be0ca2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="71197af9-3528-4823-fb63-ea100ee5c57c">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls output_dir<span class="op">/</span>quant_unfiltered</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>abundance_1  abundance_6            matrix.abundance.tpm.mtx
+abundance_2  genes.txt              matrix.efflens.mtx
+abundance_3  matrix.abundance.gene.mtx      matrix.fld.tsv
+abundance_4  matrix.abundance.gene.tpm.mtx  transcript_lengths.txt
+abundance_5  matrix.abundance.mtx       transcripts.txt</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="differential-expression-of-transcripts" class="level2">
+<h2 class="anchored" data-anchor-id="differential-expression-of-transcripts">Differential expression of transcripts</h2>
+<section id="set-up-r-environment-and-edger" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-r-environment-and-edger">Set up R environment and edgeR</h3>
+<div id="08f1eaac" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext rpy2.ipython</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="8b47d1f2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:499}}" data-outputid="e2204dbf-2986-4136-9efa-2f873c0d8066">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="op">!</span>require(<span class="st">"BiocManager"</span>, quietly <span class="op">=</span> TRUE))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    install.packages(<span class="st">"BiocManager"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>BiocManager::install(<span class="st">"edgeR"</span>, ask<span class="op">=</span>FALSE, quiet<span class="op">=</span>TRUE)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>BiocManager::install(<span class="st">"rhdf5"</span>, ask<span class="op">=</span>FALSE, quiet<span class="op">=</span>TRUE)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Installing package into ‘/usr/local/lib/R/site-library’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/src/contrib/BiocManager_1.30.26.tar.gz'
+Content type 'application/x-gzip' length 594489 bytes (580 KB)
+==================================================
+downloaded 580 KB
+
+
+The downloaded source packages are in
+    ‘/tmp/RtmplaovhL/downloaded_packages’
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com
+Bioconductor version 3.21 (BiocManager 1.30.26), R 4.5.1 (2025-06-13)
+Installing package(s) 'BiocVersion', 'edgeR'
+also installing the dependencies ‘statmod’, ‘limma’, ‘locfit’
+
+Old packages: 'data.table', 'evaluate'
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com
+Bioconductor version 3.21 (BiocManager 1.30.26), R 4.5.1 (2025-06-13)
+Installing package(s) 'rhdf5'
+also installing the dependencies ‘Rhdf5lib’, ‘rhdf5filters’
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="use-edger-for-differential-transcript-expression-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="use-edger-for-differential-transcript-expression-analysis">Use edgeR for differential transcript expression analysis</h2>
+<p>We now format the data for use with edgeR via the edgeR <code>catchKallisto</code> function. <code>catchKallisto</code> reads in the kallisto output files and returns a matrix of transcript counts (<code>$counts</code>) and a data.frame (<code>$annotation</code>) of transcript information. This transcript information includes the estimated overdispersion coefficients for each transcript obtained via the kallisto bootstraps.</p>
+<div id="39dcab0f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:160}}" data-outputid="8e3deb87-b1a3-4c0b-e92e-792865361a01" data-scrolled="true">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>require(edgeR)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>paths <span class="op">&lt;-</span> c(<span class="st">"output_dir/quant_unfiltered/abundance_1"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"output_dir/quant_unfiltered/abundance_2"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">"output_dir/quant_unfiltered/abundance_3"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">"output_dir/quant_unfiltered/abundance_4"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">"output_dir/quant_unfiltered/abundance_5"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>           <span class="st">"output_dir/quant_unfiltered/abundance_6"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>results <span class="op">&lt;-</span> catchKallisto(paths)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading output_dir/quant_unfiltered/abundance_1, 227665 transcripts, 5 bootstraps
+Reading output_dir/quant_unfiltered/abundance_2, 227665 transcripts, 5 bootstraps
+Reading output_dir/quant_unfiltered/abundance_3, 227665 transcripts, 5 bootstraps
+Reading output_dir/quant_unfiltered/abundance_4, 227665 transcripts, 5 bootstraps
+Reading output_dir/quant_unfiltered/abundance_5, 227665 transcripts, 5 bootstraps
+Reading output_dir/quant_unfiltered/abundance_6, 227665 transcripts, 5 bootstraps</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>Loading required package: edgeR
+Loading required package: limma</code></pre>
+</div>
+</div>
+<section id="using-overdispersion-to-weight-counts-for-edger" class="level3">
+<h3 class="anchored" data-anchor-id="using-overdispersion-to-weight-counts-for-edger">Using Overdispersion to Weight Counts for edgeR</h3>
+<p>When preparing the data for edgeR, the estimated counts are divided by these overdispersion values. This step acts as a <strong>precision weighting</strong>: transcripts whose abundances vary widely across bootstraps (high quantification uncertainty) are down-weighted, while transcripts with stable bootstrap estimates (high precision) are given greater influence.</p>
+<p>After this adjustment, edgeR estimates <strong>biological dispersion</strong> across replicates using its standard negative binomial model,</p>
+<p><span class="math display">\[\mathrm{Var}(X) = \mu + \phi \mu^{2},\]</span></p>
+<p>where <span class="math inline">\(\phi\)</span> captures true biological variability between samples.<br>
+In this workflow, kallisto’s bootstraps handle <em>technical</em> uncertainty, and edgeR models <em>biological</em> variability—ensuring each source of noise is represented appropriately during differential expression analysis.​</p>
+<div id="ed673d82" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="254eb68a-0dec-4110-ccdf-5c04fad5e082">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first 5 rows of the counts matrix </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results$counts[<span class="dv">1</span>:<span class="dv">5</span>,,drop<span class="op">=</span>F])</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the number of transcripts with overdispersion estimates</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(length(results$annotation$Overdispersion))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  output_dir/quant_unfiltered/abundance_1
+ENST00000308647.8                               18.119158
+ENST00000378736.3                                0.000000
+ENST00000472194.6                                3.606886
+ENST00000474481.1                                1.487577
+ENST00000485748.5                                1.878091
+                  output_dir/quant_unfiltered/abundance_2
+ENST00000308647.8                              16.3508487
+ENST00000378736.3                               0.4174387
+ENST00000472194.6                               2.6497518
+ENST00000474481.1                               0.0000000
+ENST00000485748.5                               0.0000000
+                  output_dir/quant_unfiltered/abundance_3
+ENST00000308647.8                               17.676045
+ENST00000378736.3                                2.851005
+ENST00000472194.6                                0.000000
+ENST00000474481.1                                0.000000
+ENST00000485748.5                                0.000000
+                  output_dir/quant_unfiltered/abundance_4
+ENST00000308647.8                                9.134442
+ENST00000378736.3                                2.485286
+ENST00000472194.6                                9.018708
+ENST00000474481.1                                0.000000
+ENST00000485748.5                                0.000000
+                  output_dir/quant_unfiltered/abundance_5
+ENST00000308647.8                               13.095408
+ENST00000378736.3                                0.000000
+ENST00000472194.6                                1.569073
+ENST00000474481.1                                1.475829
+ENST00000485748.5                                1.834814
+                  output_dir/quant_unfiltered/abundance_6
+ENST00000308647.8                                5.862184
+ENST00000378736.3                                1.859032
+ENST00000472194.6                                2.428891
+ENST00000474481.1                                0.000000
+ENST00000485748.5                                0.000000
+[1] 227665</code></pre>
+</div>
+</div>
+<p>Next, we create a DGEList object from the weighted count matrix (counts/overdispersion) and annotation <code>data.frame</code>. We also specify the experimental design via the <code>group</code> argument, indicating which samples are controls and which are knockdowns.</p>
+<p>The DGEList object is composed of:</p>
+<ul>
+<li><code>counts</code>: a table of counts</li>
+<li>group indicators for each sample</li>
+<li>library size (optional)</li>
+<li>a table of feature annotations (optional)</li>
+</ul>
+<div id="cab01ec7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>samples <span class="op">&lt;-</span> c(<span class="st">"Control_1"</span>, <span class="st">"Control_2"</span>, <span class="st">"Control_3"</span>, <span class="st">"Knockdown_1"</span>, <span class="st">"Knockdown_2"</span>, <span class="st">"Knockdown_3"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>group <span class="op">&lt;-</span> c(<span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"K"</span>, <span class="st">"K"</span>, <span class="st">"K"</span>) <span class="co"># C = control; K = knockdown</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="498ec273" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>colnames(results$counts) <span class="op">&lt;-</span> samples</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cts.scaled <span class="op">&lt;-</span> results$counts<span class="op">/</span>results$annotation$Overdispersion</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>dge.scaled <span class="op">&lt;-</span> DGEList(counts <span class="op">=</span> cts.scaled, group<span class="op">=</span>group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>With our DGEList object created, we can now proceed with normalization, dispersion estimation, and differential expression testing using edgeR’s suite of functions.</p>
+</section>
+</section>
+<section id="gene-filtering-and-normalization" class="level2">
+<h2 class="anchored" data-anchor-id="gene-filtering-and-normalization">Gene Filtering and Normalization</h2>
+<p>Next, we normalize the data with the edgeR function <code>calcNormFactors()</code>.</p>
+<p>Before normalizing the data with <code>calcNormFactors()</code>, it is standard practice in edgeR to remove genes that are not expressed at meaningful levels using <code>filterByExpr()</code>. Lowly expressed genes contribute little biological information but can add substantial noise to normalization and dispersion estimation. Many such genes have zero or near-zero counts across most samples, making their expression values unstable. Because TMM normalization (used by <code>calcNormFactors()</code>) compares log-fold changes between samples, these zero-dominated genes can generate extreme or undefined log-ratios that bias the normalization factors.</p>
+<p>By applying <code>filterByExpr()</code> first, we restrict the dataset to genes that have sufficient counts in enough samples to be informative. This ensures that normalization is computed from genes with stable expression levels, improving both the accuracy of the scaling factors and the effectiveness of downstream differential expression analysis.</p>
+<section id="what-calcnormfactors-does" class="level3">
+<h3 class="anchored" data-anchor-id="what-calcnormfactors-does">What <code>calcNormFactors()</code> Does</h3>
+<p>Normalization is a critical step in RNA-seq analysis because samples often differ in sequencing depth and RNA composition. Simply dividing by total library size is not always sufficient—if one sample is dominated by a handful of highly expressed genes, all other genes will appear artificially underexpressed. edgeR addresses this using <strong>TMM (Trimmed Mean of M-values)</strong> normalization, implemented in <code>calcNormFactors()</code>.</p>
+<p>The function computes a scaling factor for each sample by comparing it to a reference sample and calculating gene-wise log-fold changes (M-values). After trimming away genes with extreme log-fold changes or very high expression (which could distort the normalization), it computes a weighted average of the remaining M-values. This trimmed mean is then converted into a normalization factor:</p>
+<p><span class="math display">\[ \text{TMM factor} = 2^{\text{weighted mean}(M_g)}. \]</span></p>
+<p>The resulting normalization factors adjust each sample’s <em>effective</em> library size:</p>
+<p><span class="math display">\[N_i^{\text{eff}} = N_i \times \text{norm.factor}_i,\]</span></p>
+<p>where <span class="math inline">\(N_i\)</span> is the original library size for sample <span class="math inline">\(i\)</span> and <span class="math inline">\(\text{norm.factor}_i\)</span> is the TMM normalization factor computed by <code>calcNormFactors()</code>. This adjustment sllos for differences in sequencing depth and compositional bias to be corrected without altering the underlying counts themselves. These effective library sizes are then used in downstream steps such as CPM calculation, dispersion estimation, and model fitting.</p>
+<p>In short, filtering ensures that normalization is guided by meaningful gene expression patterns, and <code>calcNormFactors()</code> then computes scaling factors that place all samples on a comparable expression scale, enabling accurate differential expression testing.</p>
+<div id="46a1da93" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>keep <span class="op">&lt;-</span> filterByExpr(dge.scaled)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>dge.scaled.filtr <span class="op">&lt;-</span> dge.scaled[keep, , keep.lib.sizes <span class="op">=</span> FALSE]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>dge.scaled.filtr <span class="op">&lt;-</span> calcNormFactors(dge.scaled.filtr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exploring-sample-relationships-with-plotmds" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-sample-relationships-with-plotmds">Exploring Sample Relationships with <code>plotMDS()</code></h3>
+<p>The <code>plotMDS()</code> function in edgeR creates a multidimensional scaling (MDS) plot that visualizes the overall similarity between samples based on their expression profiles. This plot is an essential quality control step because it allows you to identify clustering patterns, detect batch effects, and spot potential outliers before performing differential expression analysis.</p>
+<p>Similar to principal component analysis (PCA), MDS reduces the high-dimensional gene expression data into a two-dimensional representation. However, unlike PCA, which is based on total variance, <code>plotMDS()</code> uses <strong>leading log-fold-change distances</strong>. For each pair of samples, it computes the largest gene-wise log-fold changes and uses the average of these as a distance measure. By default, the top 500 most variable genes contribute to this distance. The MDSplot then positions samples in a 2D space such that the distances between points reflect these computed distances.</p>
+<p>In the MDSplot below, <em>dim 1</em> represents the greatest source of variation between samples, and <em>dim 2</em> represents the second greatest. Examining these dimensions helps you verify that biological groups cluster as expected and that no technical artifacts dominate the data. If unexpected clustering or outliers appear, this can signal issues such as batch effects or mislabeled samples that should be addressed before downstream analysis.</p>
+<div id="9776ec95" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:497}}" data-outputid="397d8b2d-f927-4aa0-b1d0-8f091316a560">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plotMDS(dge.scaled.filtr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bulk_pipeline_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="7cedc68a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:497}}" data-outputid="b5ae0670-bb36-41bd-c1a0-b9d2f3fe1a2a">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>design <span class="op">&lt;-</span> model.matrix(<span class="op">~</span>group<span class="op">-</span><span class="dv">1</span>,data <span class="op">=</span> dge.scaled.filtr$samples)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>colnames(design) <span class="op">&lt;-</span> gsub(<span class="st">'group'</span>,<span class="st">''</span>,colnames(design))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>dge.scaled.filtr <span class="op">&lt;-</span> estimateDisp(dge.scaled.filtr,design)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plotBCV(dge.scaled.filtr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bulk_pipeline_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3fa0ed30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:497}}" data-outputid="f469e27a-6cf2-4090-c1d4-d66f743b2748">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fit <span class="op">&lt;-</span> glmQLFit(dge.scaled.filtr,design)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plotQLDisp(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bulk_pipeline_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="6c293fc8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:497}}" data-outputid="ba1a05b3-4b24-4e92-b294-0fb79898e804">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>qlf <span class="op">&lt;-</span> glmQLFTest(fit, contrast <span class="op">=</span> makeContrasts(K<span class="op">-</span>C, levels <span class="op">=</span> design))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>tt <span class="op">&lt;-</span> topTags(qlf,n <span class="op">=</span> Inf)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">is</span>.de <span class="op">&lt;-</span> decideTests(qlf)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>plotMD(qlf, status <span class="op">=</span> <span class="kw">is</span>.de, values <span class="op">=</span> c(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), col <span class="op">=</span> c(<span class="st">"red"</span>,<span class="st">"blue"</span>), legend <span class="op">=</span> <span class="st">"topright"</span>, cex<span class="op">=</span><span class="fl">0.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bulk_pipeline_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="7c53cf9c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:497}}" data-outputid="253dfec5-a781-4e13-ea1c-5839674480d8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plot(qlf$table$logFC, <span class="op">-</span><span class="dv">1</span><span class="op">*</span>log10(qlf$table$PValue), main<span class="op">=</span><span class="st">"Volcano plot"</span>, xlab<span class="op">=</span><span class="st">"log2FC"</span>, ylab<span class="op">=</span><span class="st">"-log10(P-val)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bulk_pipeline_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="16ed6fe6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="f69e7ef5-981c-40ad-89ee-30420899cea9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>R</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>head(qlf$table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          logFC   logCPM            F    PValue
+ENST00000356607.9  -0.001899721 5.303589 0.0000167155 0.9968000
+ENST00000328089.11  0.321175658 5.765121 1.8001385388 0.2026674
+ENST00000375592.8  -0.041597613 5.700996 0.0332228001 0.8581821
+ENST00000346436.11  0.453813269 4.743627 1.0396290301 0.3265557
+ENST00000378512.5  -0.513499461 4.907051 1.4394727424 0.2516714
+ENST00000443438.5  -0.109194711 5.451238 0.0663814381 0.8007152</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

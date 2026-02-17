@@ -1,0 +1,131 @@
+# Introduction to the Resnick High Performance Computing Center (HPC)
+
+Genomics data produces hundreds of thousands of counts from thousands of cells. A standard experiment produces several gigabytes of raw reads, too many for your personal computer to store and process efficiently. the Resnick High Performance Computing Center (HPC) at Caltech. Here, we provide a tutorial emphasizing the use of the HPC for the analysis of genomics data. For a more general tutorial, please refer to the Caltech HPC [documentation](https://www.hpc.caltech.edu/documentation).
+
+Unlike your personal computer, the HPC is a shared computational environment designed to support hundreds of users and thousands of jobs simultaneously.
+
+Using the HPC is very different from working on a laptop:
+
+- There is no graphical user interface (GUI)
+- Most work is done from the command line via SSH
+- Large computational tasks must be submitted to a job scheduler rather than run directly
+
+You can access the HPC in two main ways:
+
+- The *command-line*
+- The web-based [interactive portal](https://interactive.hpc.caltech.edu/)
+
+## Interfacing with HPC through the Command Line
+
+### Signing In
+To sign into the HPC from the command line, open your terminal and type:
+```bash
+    ssh username@login.hpc.caltech.edu
+```
+The command line will prompt you for your password. After you enter your password, enter `1` to verify your login with DUO two-factor identification.
+
+When you log in from the terminal, you are connecting to a login node. Login nodes are shared machines intended for:
+
+- Editing files
+- Submitting jobs
+- Managing data
+- Loading software modules
+
+::: {.callout-important}
+You should not run large bioinformatics analyses directly on the login node. Instead, computational jobs must be submitted to the scheduler (SLURM), which will run them on dedicated compute nodes.
+:::
+
+### The Command Line, Linux, and Bash
+
+Your terminal (also called a shell) is a text-based interface that allows you to communicate directly with a computer’s operating system.
+
+The Caltech HPC runs the Linux operating system. Most users interact with Linux through a shell called Bash (Bourne Again SHell).
+
+A typical Bash command follows this general structure:
+
+```bash
+command [options] [arguments]
+```
+
+For example, a standard kb-python command might look like:
+
+```bash
+kb -x 10XV4 read1.fastq.gz read2.fastq.gz
+```
+
+In this case:
+
+- `kb` is the command (the program being executed)
+- `-x 10XV4` is an option (or flag) modifying how the program runs
+- `read1.fastq.gz` and read2.fastq.gz are input files
+
+
+### Essential Bash Commands for HPC Users
+
+If you plan to work through the command line, here are the minimum commands you should be comfortable with:
+
+**Navigating the Filesystem**
+
+- `pwd` — Print your current working directory
+- `ls` — List files in the current directory
+- `ls -lh` — List files with human-readable sizes
+- `cd directory_name` — Change directories
+- `cd ..` — Move up one directory
+
+Note that there are two types of file paths: 
+
+- *relative*: the path relative to the current working directory
+- *absolute*: the path starting from the base of the working tree
+
+Let's consider of an image with the path `~/Desktop/images/test.png`. Say that you navigate to the directory `~/Desktop`. You may reference the file either through:
+
+- the relative path: `images/test.png`
+- the absolute path: `~/Desktop/images/test.png`
+
+Whether you choose to use the relative or absolute path depends upon your exact intentions. For instance, if you want to reference a file outside your current directory, you must use the absolute path. Understanding file paths is extremely important to working with the command line.
+
+**Managing Files**
+
+- `mv file newname` — Move or rename a file
+- `cp file destination` — Copy a file
+- `rm file` — Remove a file (permanently)
+- `mkdir new_directory` — Create a directory
+
+**Viewing Large Files**
+
+Genomics files can be tens or hundreds of gigabytes. You should never try to open them in a graphical editor.
+
+Instead, use:
+
+- `less file.txt` — Scroll through a file
+- `head file.txt` — View the first 10 lines
+- `tail file.txt` — View the last 10 lines
+
+These commands can be useful for quickly verifying the format of FASTQ and SAM files.
+
+If your files are zipped, you can also peek into them
+
+## Scheduling a Job with SLURM
+
+The HPC is a shared resource. To ensure fair and efficient usage, computational jobs must be submitted to a scheduling system rather than executed immediately.
+
+Caltech’s HPC uses Simple Linux Utility for Resource Management (SLURM) to:
+- Allocate CPUs, memory, and GPUs
+- Manage job queues
+- Schedule jobs based on priority and availability
+- Monitor running jobs
+- Handle parallel and distributed computing tasks
+
+The means, instead of running a command or script directly, you will typically place your command inside a job submission script and submit it to SLURM.
+
+## 
+
+If you would like to avoid working form the command-line, the HPC offers an Open OnDemand portal, a browser interface with the HPC.
+
+From the Open OnDemand portal, you can:
+- Upload, download, move and delete files and folders through the web browser.
+- Edit and save files.
+- Open a command line shell.
+- View up to date details of jobs pending or running on the cluster.
+- Submit jobs from the web console using preset templates.
+- 

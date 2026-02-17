@@ -1,0 +1,27 @@
+---
+title: "Installing Python Packages"
+---
+
+How you install Python packages depends on whether you are using a **conda environment**. See our page on [conda environments](/pages/installation/conda.qmd) to learn how conda can help with **version control** and **reproducibility**. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install packages using **pip**.
+
+## kb-python
+### Conda
+```bash
+conda install -c conda-forge -c bioconda kb-python
+```
+
+### pip
+```bash
+pip install kb-python
+```
+
+## seqspec
+### Conda
+```bash
+conda install -c conda-forge -c bioconda seqspec
+```
+
+### pip
+```bash
+pip install seqspec
+```

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>seqspec Tutorial: 10X Chromium GEM-X Single Cell 3’ v4 Dual-Indexed Library – CBRC-SPEC Tutorials</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">CBRC-SPEC Tutorials</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-technologies" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Technologies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
+        <li>
+    <a class="dropdown-item" href="../../../../pages/technologies/10x.html">
+ <span class="dropdown-text">10x Genomics Chromium</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/technologies/parse.html">
+ <span class="dropdown-text">Parse Evercode WT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../notebooks/seqfish_pipeline.html">
+ <span class="dropdown-text">seqFISH</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seqspec" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">seqspec</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
+        <li>
+    <a class="dropdown-item" href="../../../../pages/seqspec/seqspec.html">
+ <span class="dropdown-text">What is seqspec?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/seqspec/seqspec_tutorials.html">
+ <span class="dropdown-text">Tutorials</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-packages" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Packages</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
+        <li>
+    <a class="dropdown-item" href="../../../../pages/packages/fastqc.html">
+ <span class="dropdown-text">FastQC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/packages/kb_python.html">
+ <span class="dropdown-text">kb-python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/packages/scanpy.html">
+ <span class="dropdown-text">Scanpy and Anndata</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Workflows</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
+        <li>
+    <a class="dropdown-item" href="../../../../notebooks/sample_pipeline.html">
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../../../notebooks/seqfish_pipeline.html">
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-installation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Installation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
+        <li>
+    <a class="dropdown-item" href="../../../../pages/installation/conda.html">
+ <span class="dropdown-text">Creating a Conda Environment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/installation/python_packages.html">
+ <span class="dropdown-text">Installing Python Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/installation/R_packages.html">
+ <span class="dropdown-text">Installing R Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../pages/installation/fastqc_install.html">
+ <span class="dropdown-text">Installing FastQC</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../pages/contact_us.html"> 
+<span class="menu-text">Contact Us</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://pachterlab.github.io/CBRC/"> 
+<span class="menu-text">CBRC</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summmary-of-library-structure-and-sequencing" id="toc-summmary-of-library-structure-and-sequencing" class="nav-link active" data-scroll-target="#summmary-of-library-structure-and-sequencing">Summmary of Library Structure and Sequencing</a></li>
+  <li><a href="#step-1-fill-in-the-assay-info" id="toc-step-1-fill-in-the-assay-info" class="nav-link" data-scroll-target="#step-1-fill-in-the-assay-info">Step 1: Fill in the Assay Info</a></li>
+  <li><a href="#step-2-alter-the-sequence-spec" id="toc-step-2-alter-the-sequence-spec" class="nav-link" data-scroll-target="#step-2-alter-the-sequence-spec">Step 2: Alter the Sequence Spec</a>
+  <ul class="collapse">
+  <li><a href="#update-the-read-objects" id="toc-update-the-read-objects" class="nav-link" data-scroll-target="#update-the-read-objects">Update the Read Objects</a></li>
+  <li><a href="#add-in-the-file-objects" id="toc-add-in-the-file-objects" class="nav-link" data-scroll-target="#add-in-the-file-objects">Add in the file objects</a></li>
+  </ul></li>
+  <li><a href="#step-3-alter-the-library-spec" id="toc-step-3-alter-the-library-spec" class="nav-link" data-scroll-target="#step-3-alter-the-library-spec">Step 3: Alter the Library Spec</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><code>seqspec</code> Tutorial: 10X Chromium GEM-X Single Cell 3’ v4 Dual-Indexed Library</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="highlight-section">
+<p>To download a template seqspec, click <a href="../../../../seqspec/templates/10x/10xV4_template.yaml" download="">here</a>, and then follow this tutorial to tailor the seqspec to your dataset.</p>
+</div>
+<section id="summmary-of-library-structure-and-sequencing" class="level2">
+<h2 class="anchored" data-anchor-id="summmary-of-library-structure-and-sequencing">Summmary of Library Structure and Sequencing</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="10x_dual.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1000"></p>
+</figure>
+</div>
+<p>Above is a diagram of the <strong>10X Chromium Single Cell 3’ Dual-Indexed v4 Library</strong>. The library is structured as follows from 5’ to 3’:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sequence</th>
+<th style="text-align: center;">Type</th>
+<th style="text-align: center;">Length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Illumina P5 Primer</td>
+<td style="text-align: center;">Fixed</td>
+<td style="text-align: center;">29 bp</td>
+</tr>
+<tr class="even">
+<td>Illumina i5 Index</td>
+<td style="text-align: center;">Fixed</td>
+<td style="text-align: center;">10 bp</td>
+</tr>
+<tr class="odd">
+<td>Truseq Read 1</td>
+<td style="text-align: center;">Fixed</td>
+<td style="text-align: center;">29 bp</td>
+</tr>
+<tr class="even">
+<td>Cell Barcode</td>
+<td style="text-align: center;">Random</td>
+<td style="text-align: center;">16 bp</td>
+</tr>
+<tr class="odd">
+<td>UMI</td>
+<td style="text-align: center;">Random</td>
+<td style="text-align: center;">12 bp</td>
+</tr>
+<tr class="even">
+<td>cDNA</td>
+<td style="text-align: center;">Random</td>
+<td style="text-align: center;">Variable</td>
+</tr>
+<tr class="odd">
+<td>Truseq Read 2</td>
+<td style="text-align: center;">Fixed</td>
+<td style="text-align: center;">34 bp</td>
+</tr>
+<tr class="even">
+<td>Illumina i7 Index</td>
+<td style="text-align: center;">Fixed</td>
+<td style="text-align: center;">10 bp</td>
+</tr>
+<tr class="odd">
+<td>Illumina P7 Primer</td>
+<td style="text-align: center;">Fixed</td>
+<td style="text-align: center;">24 bp</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>10x Genomics recommends that the libary be sequenced in the following way:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Primer</th>
+<th>Cycles</th>
+<th>Strand</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Read 1</td>
+<td>Truseq Read 1</td>
+<td>28</td>
+<td>positive</td>
+<td>Cell Barcode + UMI</td>
+</tr>
+<tr class="even">
+<td>Index 1</td>
+<td>Truseq Read 2</td>
+<td>10</td>
+<td>positive</td>
+<td>Illumina i7 Index</td>
+</tr>
+<tr class="odd">
+<td>Index 2</td>
+<td>Truseq Read 1</td>
+<td>10</td>
+<td>negative</td>
+<td>Illumina i5 Index</td>
+</tr>
+<tr class="even">
+<td>Read 2</td>
+<td>Truseq Read 2</td>
+<td>90</td>
+<td>negative</td>
+<td>cDNA</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</section>
+<section id="step-1-fill-in-the-assay-info" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-fill-in-the-assay-info">Step 1: Fill in the Assay Info</h2>
+<p>Fill in the missing assay info according to the technology you used to sequence your library. For instance, if you used the <strong>Chromium GEM-X Single Cell 3’ Kit v4, 16 rxns PN-1000691</strong> reagent kit to construct your library and then the <strong>Illumina NextSeq 2000</strong> sequencer with the <strong>P3 reagent kit</strong>, your assay info section would look like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">!Assay</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seqspec_version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.3.0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">assay_id</span><span class="kw">:</span><span class="at"> 10x-RNA-v4</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Dual Indexed 10x Genomics Chromium Single Cell 3' v4</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">doi</span><span class="kw">:</span><span class="at"> https://cdn.10xgenomics.com/image/upload/v1725314293/support-documents/CG000732_ChromiumGEM-X_SingleCell3_v4_CellSurfaceProtein_UserGuide_RevB.pdf</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2025-04-18</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> 10x Genomics Chromium Single Cell 3' v4 using dual Illumina multiplex index</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">modalities</span><span class="kw">:</span><span class="at"> rna</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lib_struct</span><span class="kw">:</span><span class="at"> https://teichlab.github.io/scg_lib_structs/methods_html/10xChromium3.html</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence_protocol</span><span class="kw">:</span><span class="at"> Illumina NextSeq 2000</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence_kit</span><span class="kw">:</span><span class="at"> Illumina NextSeq 2000 P3 XLEAP-SBS Reagent kit</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library_protocol</span><span class="kw">:</span><span class="at"> Single-Cell RNA Sequencing Assay (OBI:0002631)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library_kit</span><span class="kw">:</span><span class="at"> Chromium GEM-X Single Cell 3' Kit v4, 16 rxns PN-1000691</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-2-alter-the-sequence-spec" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-alter-the-sequence-spec">Step 2: Alter the Sequence Spec</h2>
+<section id="update-the-read-objects" class="level3">
+<h3 class="anchored" data-anchor-id="update-the-read-objects">Update the Read Objects</h3>
+<p>10x Genomics recommends that you sequence Read 2 to at least 90 nucleotides, but you may have decided to sequence to up to 150 nucleotides. If that is the case, you can modify the length of Read 2 by changing the <code>min_len</code> and <code>max_len</code> to reflect the read length. For example, if you want to sequence 150 nucleotides, update the read as follows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> !Read</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">read_id</span><span class="kw">:</span><span class="at"> read_2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Read 2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">modality</span><span class="kw">:</span><span class="at"> rna</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">primer_id</span><span class="kw">:</span><span class="at"> truseq_read2</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">min_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">150</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">150</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">strand</span><span class="kw">:</span><span class="at"> neg</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">files</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> !File</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You may have also decided not to sequence the sample indices if you did not sequence multiple samples at once. In this case, you should remove the Index 1 and Index 2 read objects.</p>
+</section>
+<section id="add-in-the-file-objects" class="level3">
+<h3 class="anchored" data-anchor-id="add-in-the-file-objects">Add in the file objects</h3>
+<p>Next, for each read, you should fill out a file object referencing the corresponding file.</p>
+<p>A file object in seqspec if formatted as follows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> !File</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">file_id</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">filename</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">filetype</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">filesize</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">url</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">urltype</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">md5</span><span class="kw">:</span><span class="at"> </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>file_id, filetype, filename</strong> — identifies and describes the file</p>
+<p><strong>filesize</strong> - the size of the file</p>
+<p><strong>url</strong> - (optional) the link to the file</p>
+<p><strong>urltype</strong> - (optional) the type of url</p>
+<p><strong>md5</strong> - (optional) MD5 fingerprint of data</p>
+<div class="callout callout-style-default callout-note callout-titled" title="What does md5 stand for?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What does md5 stand for?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An <strong>MD5 checksum</strong> is a short, unique string of letters and numbers generated from a file’s contents. It acts like a digital fingerprint — if even a single byte in the file changes, the checksum will be different.</p>
+<p>Including the MD5 value for your files allows others to verify data integrity after download or transfer, ensuring that the file has not been corrupted or altered.</p>
+<p>To generate an MD5 checksum string, type into your command-line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md5sum</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span> <span class="co"># For Linux</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">md5</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span> <span class="co"># For macOS</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Get-FileHash</span> <span class="at">-Algorithm</span> MD5 <span class="at">-Path</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span> <span class="co"># For Windows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3-alter-the-library-spec" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-alter-the-library-spec">Step 3: Alter the Library Spec</h2>
+<p>You can modify the <code>min_len</code> and <code>max_len</code> values for the cDNA region to reflect your desired read length. For example, if you want to sequence 150 nucleotides of cDNA, update the region as follows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> !Region</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">parent_id</span><span class="kw">:</span><span class="at"> rna</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">region_id</span><span class="kw">:</span><span class="at"> cdna</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">region_type</span><span class="kw">:</span><span class="at"> cdna</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> cDNA</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">sequence_type</span><span class="kw">:</span><span class="at"> random</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">sequence</span><span class="kw">:</span><span class="at"> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">min_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">150</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">max_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">150</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">onlist</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">regions</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Adjust the number of <code>X</code> characters in the <code>sequence</code> field to match the new length, and then adjust the full library sequence and length accordingly.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library_spec</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> !Region</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">region_id</span><span class="kw">:</span><span class="at"> rna</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">region_type</span><span class="kw">:</span><span class="at"> named</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> rna</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">sequence_type</span><span class="kw">:</span><span class="at"> joined</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">sequence</span><span class="kw">:</span><span class="at"> AATGATACGGCGACCACCGAGATCTACACNNNNNNNNNNTCTTTCCCTACACGACGCTCTTCCGATCTNNNNNNNNNNNNNNNNNNNNNNNNNNNNXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXGATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">min_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">314</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">314</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">onlist</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">parent_id</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">regions</span><span class="kw">:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> !Region</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    ...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="emphasis">
+<p>Now you have a complete seqspec file for your data. All that’s left is to save it with your dataset!</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
