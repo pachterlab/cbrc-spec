@@ -1,0 +1,152 @@
+---
+title: "Designing Genomics Experiments"
+---
+
+Modern genomics experiments can generate enormous amounts of data, but the quality of the conclusions you can draw depends far more on the design of the experiment than on the sophistication of the analysis.
+
+No amount of computational processing can recover information that was never measured, and poor experimental design can lead to misleading or uninterpretable results even when the data are analyzed correctly.
+
+Before collecting or analyzing genomics data, it is essential to think carefully about replication, confounding variables, and the structure of your experimental conditions.
+
+## Replication: Estimating Biological Variability
+
+Biological measurements are not fixed values — they are samples drawn from an underlying distribution. Even genetically identical cells or organisms will exhibit variability due to biological noise, technical variation, and measurement error.
+
+Importantly, biological variability is not simply “noise” in the sense of measurement error. In many genomics experiments — particularly single-cell RNA-seq — we measure a biological system at a single moment in time. Each sample represents a snapshot of a dynamic process.
+
+Cells may differ because of:
+
+- stochastic gene expression
+- cell cycle state
+- microenvironmental differences
+- developmental progression
+- temporal fluctuations
+- subtle regulatory dynamics
+
+In single-cell experiments, this heterogeneity is often the very phenomenon we seek to understand.
+
+### Replication is Essential for Estimating Variability
+To understand why replication matters, consider the following conceptual example:
+
+Imagine measuring gene expression in two conditions: Control and Treated. Each condition has a true distribution of expression values, and those distributions overlap.
+
+![](/images/design_figures/normal_overlap.png)
+
+If you measure only one sample from each condition, you are observing just two points drawn from two overlapping distributions. 
+
+![](/images/design_figures/one_replicate.png)
+
+From those two points alone, you cannot estimate:
+
+- The variability within each condition
+- Whether the observed difference is typical or unusual
+- Whether the distributions truly differ
+
+With only one replicate per condition, there is no way to distinguish biological signal from random fluctuation.
+
+By contrast, when multiple biological replicates are included, you begin to estimate:
+
+- The spread of each distribution
+- The mean of each condition
+- The consistency of the effect
+
+![](/images/design_figures/four_replicate.png)
+
+Replication does not simply increase sample size — it allows you to estimate variability, which is essential for meaningful statistical inference.
+
+Importantly, biological replicates (independent samples) are what allow you to estimate biological variation. Technical replicates can assess measurement noise, but they do not substitute for biological replication.
+
+## Avoid Confounding Variables
+
+A confound occurs when two factors vary together in a way that makes it impossible to separate their effects.
+
+For example:
+
+- all control samples processed in one batch
+- all treated samples sequenced on a different day
+- samples from different conditions handled by different people
+
+In these cases, observed differences may reflect technical artifacts rather than biological effects.
+
+Randomizing samples and balancing experimental conditions across batches helps prevent confounding.
+
+## Orthogonality: Separating Biological Signal from Technical Effects
+
+In many genomics experiments, multiple factors influence the data. These may include:
+
+- Biological condition (e.g., control vs treated)
+- Batch (e.g., sequencing run or processing day)
+- Donor identity
+- Time point
+- Library preparation method
+
+A well-designed experiment ensures that these factors can be separated during analysis. This property is known as **orthogonality**.
+
+An experimental design is orthogonal when each factor varies independently of the others in a balanced way.
+
+### A Confounded Design
+
+Consider the folowing design:
+
+|Sample	| Condition| Batch
+|---|---|---|    
+|S1 | Control | A
+|S2 | Control |	A
+|S3 | Treated |	B
+|S4 | Treated |	B
+
+Here, condition and batch are perfectly correlated. All control samples were processed in batch A, and all treated samples were processed in batch B.
+
+If differences are observed between control and treated samples, it is impossible to determine whether they are due to biological condition or batch effects.
+
+No statistical model can separate these effects, because they are structurally inseparable in the data.
+
+### An Orthogonal Design
+
+Now consider a balanced alternative:
+
+|Sample	| Condition| Batch
+|---|---|---|    
+|S1 | Control | A
+|S2 | Control |	B
+|S3 | Treated |	A
+|S4 | Treated |	B
+
+In this design:
+
+- Both conditions appear in both batches.
+- Batch and condition are not perfectly correlated.
+- The effects of condition and batch can be estimated independently.
+
+This symmetry allows downstream statistical models to distinguish biological differences from technical variation.
+
+### Why Orthogonality Matters
+
+Many genomics analyses use statistical models that assume effects can be estimated independently. If your experimental factors are confounded, those assumptions are violated before analysis even begins.
+
+Orthogonality does not require perfection, but it does require intentional balance. When designing experiments, ask:
+
+- Are conditions distributed across batches?
+- Are donors balanced across treatments?
+- Are time points evenly represented?
+
+If one variable is systematically aligned with another, interpretation becomes difficult or impossible.
+
+## Know What Your Experiment Can Answer
+
+Every experimental design limits the questions you can ask:
+
+- Without replication, you cannot estimate variability
+- With confounded factors, you cannot separate effects
+- With unbalanced sampling, results may be biased
+
+Thinking carefully about these constraints before data collection saves substantial time and prevents incorrect conclusions.
+
+## Computational Analysis Cannot Fix Design Problems
+
+The tools described in this tutorial — normalization, clustering, differential expression, and integration — assume that the data were generated under a reasonable experimental design.
+
+They can help correct technical variation, but they cannot recover missing structure or resolve fundamental confounding.
+
+Strong experimental design is the foundation of meaningful genomics analysis.
+

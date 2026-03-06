@@ -1,0 +1,110 @@
+---
+title: "Managing Project Environments with renv"
+---
+
+## Why Should I Use renv?
+**renv** is an R package that provides *project-local* dependency management for R. It helps you:
+
+* Keep each project’s **R package versions isolated** from other projects on your system.
+
+* **Reproduce analyses** by recording exact package versions in a lockfile (`renv.lock`).
+
+* Share a project with collaborators (or re-run it later) by restoring the same package set.
+
+This is especially helpful for genomics workflows in R (e.g., Seurat, Bioconductor, edgeR), where package version differences can subtly change results.
+
+:::{.callout-note title="renv vs conda (R vs Python origins)"}
+**renv** was introduced for **R** project reproducibility. **Conda** was introduced largely in the **Python** ecosystem (but can also manage R and many non-Python tools).
+
+In mixed R + Python projects, a common pattern is:
+
+- Use **renv** to lock down **R** packages for the R portion of the analysis, and
+- Use **conda** (or another Python environment manager) for **Python** dependencies (often accessed from R via *reticulate*).
+
+To learn more about conda, see our [conda tutorial](/pages/resources/conda.qmd).
+:::
+
+## Create a New Environment
+With renv, each **project directory** becomes its own environment. The “environment” is defined by the packages recorded in `renv.lock`, and the packages are installed into a project-local library.
+
+1) Open (or create) an R project folder, ideally as an **RStudio Project**.
+
+2) Install renv (once per machine; you can do this in any R session):
+```r
+install.packages("renv")
+```
+
+3) Initialize renv in your project (run inside the project directory):
+```r
+renv::init()
+```
+
+This will:
+- Create a `renv/` folder,
+- Create a lockfile `renv.lock`, and
+- Set up your project so renv activates when you open it.
+
+:::{.callout-note title="Best practice"}
+Use **one renv project per analysis** (or per paper). This prevents package version drift and makes it much easier to rerun analyses later.
+:::
+
+## Installing a Package with renv
+Once renv is initialized, install packages as you normally would:
+
+```r
+install.packages("Seurat")
+```
+
+or install from Bioconductor:
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+BiocManager::install("edgeR")
+```
+
+After installing (or updating) packages, **record the state** of the project library in the lockfile:
+
+```r
+renv::snapshot()
+```
+
+That updates `renv.lock` so others (and future you) can restore the same package versions.
+
+## Recreate an Old Environment
+If you receive a project that already contains `renv.lock`, you can recreate the exact package library on your machine by running (in that project directory):
+
+```r
+renv::restore()
+```
+
+This reads `renv.lock` and installs the recorded package versions into the project-local library.
+
+## Using renv with RStudio
+Most users run R genomics workflows in **RStudio**, and renv integrates cleanly:
+
+### Recommended workflow
+1. Create an **RStudio Project** for your analysis folder (File → New Project…).
+2. Run `renv::init()` once.
+3. Install packages as needed.
+4. Run `renv::snapshot()` whenever you want to “lock in” the working set of packages (often after a milestone).
+
+### What you should see in RStudio
+- renv usually activates automatically when you open the project.
+- If it doesn’t, run:
+```r
+renv::activate()
+```
+
+### Sanity checks
+Confirm that you are using the project library:
+```r
+.libPaths()
+renv::status()
+```
+
+### Troubleshooting
+If you update R, change system libraries, or switch machines, and packages start failing to load:
+- Run `renv::restore()` again, and
+- Restart R (Session → Restart R) to ensure the project library is reloaded cleanly.

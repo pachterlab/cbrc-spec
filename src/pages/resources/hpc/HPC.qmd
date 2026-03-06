@@ -1,0 +1,179 @@
+---
+title: "Introduction to the Resnick High Performance Computing Center (HPC)"
+---
+
+A single genomics experiment can produce several gigabytes (or more) of raw sequencing data — often too large for a personal computer to store and process efficiently. For this reason, at some point in your analysis, you will likely need to use the Resnick High Performance Computing Center (HPC) at Caltech. 
+
+Here, we provide a tutorial emphasizing the use of the HPC for the analysis of genomics data. For a more general tutorial, please refer to the Caltech HPC [documentation](https://www.hpc.caltech.edu/documentation).
+
+## What is the HPC?
+
+Unlike your personal computer, the HPC is a shared computational environment designed to support hundreds of users and thousands of jobs simultaneously.
+
+Conceptually, you can think of the HPC as a large pool of compute nodes managed by a scheduler (SLURM), which decides when and where your jobs run.
+
+Using the HPC is very different from working on a laptop:
+
+- There is no graphical user interface (GUI)
+- Most work is done from the command line via SSH
+- Large computational tasks must be submitted to a job scheduler rather than run directly
+
+You can access the HPC in two main ways:
+
+- The *command-line*
+- The web-based [interactive portal](https://interactive.hpc.caltech.edu/)
+
+## Storage on the Caltech HPC
+When working on the HPC, it is important to understand how storage is organized and where different types of files should be stored. The Caltech HPC provides several storage locations, each designed for a specific purpose.
+
+- **User Account Space — 50 GB**
+    
+    Located at `/home/<username>`, your home directory. This is your personal storage space and is intended for scripts, configuration files, and small datasets. Because this space is limited, it should not be used for storing large sequencing files or alignment outputs.
+
+- **Group Space — 20 TB**
+    
+    Located at `/resnick/groups/<groupname>`. This space is shared among members of your research group and is appropriate for large genomics datasets, reference genomes, and processed results that need to be accessible to multiple lab members. If your group requires additional storage, your PI can request more space by contacting hpc@caltech.edu.
+
+- **Scratch Space — 500 TB (total shared capacity)**
+   
+    Located at `/resnick/scratch`. Scratch space is intended for temporary storage of large files during active analyses. This space is accessible to all users, so if you wish to use the scratch space, you should create a personal directory (e.g., `/resnick/scratch/<username>`) to work within. Files that have not been accessed for 14 days are automatically purged, so important results must be moved to your home or group directory once your job is complete.
+
+## Interfacing with HPC through the Command Line
+
+::: {.callout-note title="Linux, the Shell, and Bash"}
+Your command line interface (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the Linux operating system. Most users interact with Linux through a shell called Bash (Bourne Again SHell). To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our [Bash tutorial](/pages/resources/hpc/bash.qmd).
+:::
+
+### Signing In
+To sign into the HPC from the command line, open your terminal and type:
+```bash
+ssh username@login.hpc.caltech.edu
+```
+The command line will prompt you for your password. After you enter your password, enter `1` to verify your login with DUO two-factor identification.
+
+When you log in from the terminal, you are connecting to a login node. Login nodes are shared machines intended for:
+
+- Editing files
+- Submitting jobs
+- Managing data
+- Loading software modules
+
+You should not run large analyses directly on the login node. Instead, computational jobs must be submitted to the scheduler (SLURM), which will run them on dedicated compute nodes.
+
+## Scheduling a Job with SLURM
+The HPC is a shared resource. To ensure fair and efficient usage, computational jobs must be submitted to a scheduling system rather than executed immediately.
+
+Caltech’s HPC uses Simple Linux Utility for Resource Management (SLURM) to:
+
+- Allocate CPUs, memory, and GPUs
+- Manage job queues
+- Schedule jobs based on priority and availability
+- Monitor running jobs
+- Handle parallel and distributed computing tasks
+
+The means, instead of running a command or script directly, you will typically place your command inside a job submission script and submit it to SLURM. Below we provide a brief tutorial for basic SLURM usage. To see a complete example of a SLURM job script for running `kb count`, please refer to our [SLURM example script](/pages/resources/hpc/slurm_example.qmd).
+
+### Useful SLURM Commands
+
+- `sbatch job_file.sbatch` - submit your job to SLURM
+- `squeue -u $USER` - show your current running jobs
+- `scancel jobid` - kill a job given its job ID
+- `sacct -l -u $USER -j jobid` - show the run information for a job given its job ID (useful for adjusting your requested resource allocation)
+
+### Submitting a Bash Script.
+On the HPC, computational jobs are typically submitted as Bash scripts. A Bash script is simply a text file containing a series of shell commands that are executed in order. Instead of typing commands interactively into the terminal, you place them into a script and submit the script to SLURM using `sbatch`. SLURM then schedules your job, allocates the requested resources (CPUs, memory, time), and runs the script on a compute node. 
+
+Submitting jobs as scripts has several advantages:
+- Your analysis is reproducible.
+- Resource requests are explicitly documented.
+- Long-running jobs can execute without keeping your terminal session open.
+- You can easily rerun or modify the job later.
+
+A SLURM batch file begins with a series of lines starting with `#SBATCH`. These are instructions to SLURM. They are not regular comments — they control how your job is scheduled.
+
+A few useful #SBATCH lines are:
+
+- `#SBATCH --job-name=job_name`
+    Assigns a descriptive job name. The job name appears in `squeue`.
+- `#SBATCH --account=mylab` 
+    Charges the job to your lab's HPC allocation. If you have access to multiple accounts, you must include this to ensure the proper account is charged. If ommited, your default account will be charged.
+- `#SBATCH -p expansion`
+    Selects the partition. The Caltech HPC has two partitions: *expansion* (for general jobs) and *GPU* (for jobs requiring a GPU). Genome alignment does not currently have the functionality to be run on a GPU, so you must always choose expansion for alignment jobs.
+- `#SBATCH --time=HH:MM:SS`
+    This sets the maximum runtime. If the job exceeds this time limit, SLURM will terminate it.
+- `#SBATCH --cpus-per-task=8` 
+    Allocates 8 CPU cores (threads) to the job. By default, this values is set to 1. You may increase or decrease this depending on your analysis and current cluster availability. If you allocate multiple threads, make sure that the program you are running is configured to use the same number of threads.
+- `#SBATCH --mem=20G`
+    Allocates 20GB of memory for the job. If your job fails with an out-of-memory error, increase this value. Note this setting controls RAM usage only — not disk storage.
+- `#SBATCH --output=\path\to\output`
+    Specifies where standard output will be written. By default, SLURM creates a file named `slurm-<jobid>.out` in the working directory.
+- `#SBATCH --error=\path\to\error`
+    Specifies where standard error messages will be written. By default, SLURM creates `slurm-<jobid>.err` in the working directory.
+- `#SBATCH --chdir=\path\to\working_directory`
+    Sets the working directory for the job. By default, this is the directory from which you submit the job.
+
+For any SLURM job file, we recommend specifying at minimum:
+
+- A descriptive job name
+- Your account
+- A maximum runtime
+- A memory allocation
+
+::: {.callout-important}
+As a rule, you should read every #SBATCH line in your job script, understand what it means, and ensure that it is reasonable for your analysis.
+
+Copying #SBATCH lines from templates, collaborators, or automated tools without verifying them can lead to serious mistakes — such as requesting a GPU partition for non-GPU software or reserving large amounts of memory or runtime unnecessarily. This can delay your job, waste allocation resources, and impact other HPC users.
+
+If you need to rerun a job, use the `sacct` command to review the resources used previously and adjust your requested allocation accordingly. 
+:::
+
+### SLURM Environment Variables
+
+When a job is launched, SLURM automatically defines several environment variables based on your resource requests. These can be used inside your Bash script to make it more flexible and robust.
+
+Two particularly useful variables are:
+
+- `$SLURM_CPUS_PER_TASK` — the number of CPU cores allocated via `#SBATCH --cpus-per-task`
+
+- `$SLURM_JOB_ID` — the unique job ID automatically assigned by SLURM when the job is submitted
+
+Using these variables allows your script to adapt automatically if you modify the #SBATCH directives.
+
+## Interfacing with HPC through the Interactive Portal
+
+If you prefer not to work exclusively from the command line, the HPC provides an Open OnDemand web portal.
+
+From the Open OnDemand portal, you can:
+
+- Upload, download, move, and delete files through the browser
+- Edit and save files
+- Open a command-line shell
+- View up-to-date details of pending or running jobs
+- Submit jobs using preset templates
+- Launch JupyterLab, RStudio, or VS Code on a compute node
+
+For interactive downstream analyses in Python or R, we recommend launching JupyterLab or RStudio through the portal.
+
+::: {.callout-note title="Accessing Group Storage from RStudio or JupyterLab"}
+When launching RStudio or JupyterLab through the Open OnDemand portal, your session may be restricted to using your home directory as the working directory. In some cases, you may not be able to directly select your group directory (e.g., `/resnick/groups/<groupname>`) as the starting location.
+
+If you wish to work with files stored in your group directory, you can create a symbolic link in your home directory:
+
+```bash
+ln -s /resnick/groups/<groupname> ~/group
+```
+This creates a shortcut called `group` in your home directory that points to your group storage space. You can then access your group files through this link inside RStudio or JupyterLab.
+:::
+
+## Transferring Results to Your Local Machine
+
+While raw sequencing files and intermediate alignment outputs are typically too large to process on a personal computer, final count matrices are often much smaller, often no larger than 2 GB. Sparse gene-by-cell matrices (e.g., `.mtx`, `.h5ad`, or `.rds` files) are frequently small enough to download and analyze locally.
+
+If preferred, you may transfer these processed outputs to your personal machine using command-line tools such as `scp` or through the Open OnDemand web interface.
+
+This workflow — heavy preprocessing on the HPC followed by downstream analysis locally — is common in genomics and helps reduce unnecessary use of shared HPC resources.
+
+::: {.callout-important}
+Before downloading a file to your personal device, you should verify the file size with `ls -lh`. Then consider whether your local machine has sufficient, disk storage, RAM (system memory), and processing power to carry out the required downstream analyses. If a file is very large or if downstream analysis requires substantial memory, it is often better to continue working on the HPC.
+:::
+

@@ -1,0 +1,61 @@
+---
+title: "Welcome to CBRC-SPEC Tutorials!"
+toc: false
+toc-location: body
+---
+
+**This site is designed to guide Caltech students and staff through the full process of working with genomics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.**
+
+## Before You Start
+
+### A Quick Note on Experimental Design
+Although this site focuses on the computational side of genomics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on [experimental design](/pages/design.qmd) and consulting with the CBRC team for guidance on your specific project.
+
+
+
+## Explore Our Genomics Workflows
+:::{.highlight-section}
+Click a technology below to access step-by-step tutorials tailored to each assay.
+:::
+
+### Single-Cell RNA Sequencing Tutorials
+
+:::{.banner data-href="/pages/technologies/10x.html"}
+![](/images/icons/droplet.png){width=20}
+<div class="banner-text">
+  <h3>10x Genomics Chromium Single Cell 3'</h3>
+</div>
+:::
+
+:::{.banner data-href="/pages/technologies/parse.html"}
+![](/images/icons/plate.png){width=20}
+<div class="banner-text">
+  <h3>Parse Biosciences Evercode WT</h3>
+</div>
+:::
+
+### Bulk RNA-seq Tutorials
+
+:::{.banner data-href="/pages/technologies/bulk.html"}
+![](/images/icons/bulk.png){width=20}
+<div class="banner-text">
+  <h3>Bulk RNA-seq</h3>
+</div>
+:::
+
+### Spatial Transcriptomics Tutorials
+
+:::{.banner data-href="/pages/technologies/seqfish_pipeline.html"}
+![](/images/icons/probe.png){width=20}
+<div class="banner-text">
+  <h3>seqFISH</h3>
+</div>
+:::
+
+<script>
+document.querySelectorAll('.banner[data-href]').forEach(banner => {
+  banner.addEventListener('click', () => {
+    window.location.href = banner.getAttribute('data-href');
+  });
+});
+</script>

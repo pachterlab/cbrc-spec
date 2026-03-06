@@ -1,0 +1,167 @@
+---
+title: "Git and GitHub"
+---
+GitHub is a web-based platform for hosting and sharing code. It is built on top of Git, a tool that tracks changes to files over time.
+
+In practical terms, Git allows you to:
+
+- Record changes to your scripts
+- Revert to earlier versions if needed
+- Document when and why changes were made
+
+GitHub provides an online location where those tracked files can be stored, backed up, and shared with others.
+
+Below we will provide a quick tutorial to Git and GitHub, highlighting the basic tools you should be familiar with. If you need further clarification or wish to learn about more advanced features (e.g. branching, merging), GitHub has excellent tutorials on their [documentation site](https://docs.github.com/en/get-started/start-your-journey/hello-world).
+
+## Why use GitHub for Genomics Analyses?
+Genomics workflows are often complex, and there is rarely a single “correct” way to analyze a dataset. Even when working with the same raw data, researchers may make different — yet reasonable — choices at each processing step.
+
+For example:
+
+- Counts may be normalized using a simple log1p(CPM) transformation or a more sophisticated method such as `scTransform`.
+- Cells may be filtered using thresholds of 100 genes, 200 genes, or another cutoff entirely.
+- Differential expression may use a p-value threshold of 0.01 or 0.05.
+- Different software packages or parameter settings may be used for clustering or dimensionality reduction.
+
+The number of reasonable analysis paths is enormous.
+
+This complexity is further compounded by:
+
+- Differences in package versions
+- Changes in software dependencies
+- Random seeds used in stochastic algorithms
+- Differences in computing environments
+
+As a result, even identical code can produce different — yet equally reasonable — results on different machines. Because of this, it can be difficult for others to evaluate, critique, or reproduce your analysis workflow unless the exact scripts and parameters are available.
+
+For this reason, when publishing genomics analyses, we strongly recommend saving your analysis scripts and configuration files to a public GitHub repository. Doing so allows other researchers to inspect your exact workflow and build upon your work.
+
+## What Should (and Should Not) Go on GitHub
+Before creating a repository, it is important to understand what belongs there.
+
+### Files to Put on GitHub
+
+- Analysis scripts (.R, .py, .sh)
+- Jupyter notebooks (.ipynb)
+- SLURM job scripts (.sbatch)
+- README files
+- Small configuration files
+- Environment files (environment.yml, requirements.txt)
+
+Processed summary tables (if small)
+
+### Files That Should NOT Go on GitHub
+
+- FASTQ files
+- BAM or CRAM files
+- Count matrices
+- Intermediate alignment outputs
+- Any file larger than ~100–200 MB
+
+Large genomics data files should remain on the HPC or in dedicated storage systems — not on GitHub.
+
+## Creating a Repository
+### Step 1: Create a Repository on GitHub
+
+1. Log in to GitHub.
+2. Click New Repository.
+3. Choose a repository name.
+4. Leave it empty (do not initialize with a README).
+5. Click Create Repository.
+
+GitHub will display a repository URL, such as:
+
+```arduino
+https://github.com/<git_username>/<project_name>.git
+```
+
+### Step 2: Initialize Git Locally
+Navigate to your project directory (on your local machine or HPC):
+```bash
+cd /path/to/project
+```
+Initialize Git:
+```bash
+git init
+```
+This creates a hidden `.git` directory that tracks changes.
+
+### Step 3: Connect to GitHub
+Add the GitHub repository as a remote using the repository URL:
+
+``` bash
+git remote add origin https://github.com/<git_username>/<project_name>.git
+```
+
+## Basic Git Workflow
+You only need three core commands for everyday use:
+
+### Add Files
+
+To add changes to a single file:
+
+``` bash
+git add <filename>
+```
+To add all changes:
+
+``` bash
+git add .
+```
+### Commit Changes
+
+``` bash
+git commit -m "Commit Description"
+```
+A commit message should briefly describe what changed.
+
+### Push to GitHub
+    
+``` bash
+git push -u origin main
+```
+
+After the first push, future pushes can be made with:
+    
+``` bash
+git push
+```
+
+## Using a .gitignore File 
+We usually keep all of our files for an analysis in a single project directory, and it is inconvenient to physically separate out the files that should be saved to GitHub and the ones which should not.
+
+The .gitignore file tells Git which files it should not track. If you do not already have a text file called `.gitignore` in your repository, you should create one.
+
+An example .gitignore file for a genomics analysis project might look like this:
+```text
+# Raw sequencing data
+*.fastq
+*.fastq.gz
+
+# Alignment files
+*.bam
+*.bai
+*.sam
+
+# Large matrices
+*.mtx
+*.h5ad
+*.rds
+
+# Temporary files
+*.log
+*.tmp
+
+# MacOS system files
+.DS_Store
+```
+
+Here, the asterisk (*) is a wildcard that matches any filename with the specified extension. This .gitignore file tells Git to ignore all FASTQ files, BAM files, large matrices, temporary files, and MacOS system files. You can also use .gitignore to ignore specific directories (e.g. `data/`) or files with specific names (e.g. `config.yaml`).
+
+:::{.callout-note title=".gitignore and Already Tracked Files"}
+Note that if you have already added a file to Git (e.g. with `git add .`), it will be tracked even if it matches a pattern in .gitignore. To stop tracking a file that has already been added, you can use:
+```bash
+git rm --cached <filename>
+``` 
+This will remove the file from Git's tracking but keep it on your local filesystem. After running this command, the file will be ignored in future commits.
+:::

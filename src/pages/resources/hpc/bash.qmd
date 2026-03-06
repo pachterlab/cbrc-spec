@@ -1,0 +1,225 @@
+---
+title: "The Command Line, Linux, and Bash"
+---
+
+Your command line or terminal (also called a shell) is a text-based interface that allows you to communicate directly with a computer’s operating system.
+
+Nearly all servers, including the Caltech HPC, run the **Linux operating system**. Most users interact with Linux through a shell called **Bash (Bourne Again SHell)**.
+
+## Bash Commands
+A typical Bash command follows this general structure:
+
+```bash
+command [options] [arguments]
+```
+
+For example, a standard kb-python command might look like:
+
+```bash
+kb -x 10XV4 read1.fastq.gz read2.fastq.gz
+```
+
+In this case:
+
+- `kb` is the command (the program being executed)
+- `-x 10XV4` is an option (or flag) modifying how the program runs
+- `read1.fastq.gz` and `read2.fastq.gz` are inputs specifying file paths
+
+## Understanding Paths and the Linux Filesystem
+A file path is a string that specifies the location of a file or directory within a filesystem. 
+
+Linux organizes files in a hierarchical directory structure that begins at a single top-level directory called the root, written as `/`. Every file and directory on the system exists somewhere under this root directory.
+
+When you log ont a Linux machine (such as the HPC), you are placed in your home directory, typically `/home/<username>`. This directory is also represented by the shortcut `~`.
+
+### Absolute vs Relative Paths
+There are two types of paths:
+- **Absolute paths** start from the root directory and specify the full path to a file. For example: `/home/user/my_project/data/file.txt`
+- **Relative paths** specify the location of a file relative to the current working directory. For example, if your current working directory is `/home/user/my_project`, you can reference the same file with the relative path `data/file.txt`.
+
+Whether you choose to use the relative or absolute path depends on your current working directory and the context of your command. Absolute paths are unambiguous and will always point to the same file, while relative paths can be more concise but depend on your current location in the filesystem.
+
+## Essential Bash Commands for HPC Users
+
+If you plan to work through the command line, here are the minimum commands you should be comfortable with:
+
+**Navigating the Filesystem**
+
+- `pwd` — Print your current working directory
+- `ls` — List files in the current directory
+- `ls -lh` — List files with human-readable sizes
+- `cd directory_name` — Change directories
+- `cd ..` — Move up one directory
+
+**Managing Files**
+
+- `mv file newname` — Move or rename a file
+- `cp file destination` — Copy a file
+- `rm file` — Remove a file (permanently)
+- `mkdir new_directory` — Create a directory
+
+**Viewing Large Files**
+
+Genomics files can be tens or hundreds of gigabytes. You should never try to open them in a graphical editor.
+
+Instead, use:
+
+- `less file.txt` — Scroll through a file
+- `head file.txt` — View the first 10 lines
+- `tail file.txt` — View the last 10 lines
+
+These commands can be useful for quickly checking large FASTQ and SAM files.
+
+::: {.callout-important title="Viewing Compressed Files"}
+Because genomics datasets are so large, most sequencing files (e.g., FASTQ files) are stored in compressed format, typically indicated by the `.gz` extension. Compression reduces storage space but means the file is not directly human-readable.
+
+To inspect a compressed file without fully decompressing it, you can stream its contents using zcat and pipe the output to another command:
+
+- `zcat file.txt | less`
+- `zcat file.txt | head`
+- `zcat file.txt | tail`
+
+This allows you to quickly inspect large compressed files without creating an uncompressed copy, which could consume significant storage space.
+
+:::
+
+**Editing and Creating Files**
+
+`nano filename` — Edit/create a file in the terminal
+
+**Display Text**
+`echo "Hello, World!"` — Print text to the terminal
+
+# An Introduction to Bash Scripting
+
+A Bash script is a plain text file, typically with a `.sh` extension, containing a sequence of shell commands that are executed in order. Instead of typing commands interactively into the terminal, you place them in a file and run the file as a program. You can use Bash scripts to automate repetitive tasks, run complex workflows, and submit jobs to an HPC cluster. 
+
+On HPC systems, most computational jobs are submitted as Bash scripts using SLURM.
+
+A Bash script typically begins with:
+
+```bash
+#!/bin/bash
+```
+
+This line (called a shebang) tells the system to execute the script using the Bash shell.
+
+You can run a Bash script from the command line with:
+```bash
+bash script.sh
+```
+
+## Exit Status
+Every command in Bash returns an exit status, which is a number indicating whether the command succeeded or failed. By convention, an exit status of `0` means success, while any non-zero value indicates an error. You can check the exit status of the last command with:
+```bash
+echo $?
+```
+This is useful for debugging and for writing scripts that can handle errors gracefully.
+You can manually set the exit status of a script with the `exit` command. For example, `exit 1` will cause the script to terminate with an error status.
+
+## Variables
+Variables allow you to store values (such as file paths or parameters) and reuse them throughout your script.
+
+Say you want to define a variable for your project directory:
+
+```bash
+DIR=/home/username/project
+```
+Note that there should be no spaces around the equals sign. To use the variable, prepend $. 
+
+For example, to change to the project directory, you would use:
+```bash
+cd $DIR
+```
+
+It is good practice to wrap variables in quotes:
+```bash
+cd "$DIR"
+```
+This prevents issues if the variable contains spaces or special characters.
+
+### Environment Variables
+Environment variables are predefined variables set by the shell or by systems like SLURM. They provide information about the system and the job environment. For example, when you submit a job array in SLURM, it creates environment variables like `SLURM_ARRAY_TASK_ID` that indicate which task in the array is currently running. You can access these variables in your script just like any other variable. 
+
+Some common linux environment variables include:
+- `HOME` - Your home directory
+- `USER` - Your username
+- `PATH` - A list of directories where the system looks for executable files
+- `PWD` - Your current working directory
+
+## Arrays
+An array stores multiple values in a single variable.
+To define an array in Bash, you can use the following syntax:
+```bash
+ARRAY=( "value1" "value2" "value3" )
+```
+You can access individual elements of the array using their index (starting from 0):
+```bash
+echo "${ARRAY[0]}"  # Outputs: value1
+echo "${ARRAY[1]}"  # Outputs: value2
+echo "${ARRAY[2]}"  # Outputs: value3
+```
+## If Statements
+If statements allow you to execute different commands based on certain conditions. The basic syntax is:
+```bash
+if [ condition ]; then
+  # commands to execute if condition is true
+elif [ another_condition ]; then
+  # commands to execute if another_condition is true
+else
+  # commands to execute if none of the above conditions are true
+fi
+```
+
+For example, to check if a file exists before running a command, you use:
+```bash
+if [ ! -f "$FILE" ]; then
+    echo "File exists and is not empty."
+else
+    echo "File is missing or empty."
+    exit 1
+fi
+```
+
+## For Loops
+For loops allow you to repeatedly execute a block of code for each item in a list.
+A for loop has the basice structure:
+```bash
+for item in list; do
+  # commands to execute for each item
+done
+```
+
+For example, to loop through a list of samples and print their names, you can use:
+```bash
+SAMPLES=( "S1" "S2" "S3" )
+for SAMPLE in "${SAMPLES[@]}"; do
+    echo "Processing sample: $SAMPLE"
+done
+```
+
+You can also loop through files in a directory with:
+```bash
+for FILE in /path/to/directory/*; do
+    echo "Processing file: $FILE"
+done
+```
+
+or loop through all FASTQ files in a directory with:
+```bash
+for FILE in /path/to/directory/*.fastq.gz; do
+    echo "Processing file: $FILE"
+done
+```
+
+## Strict Mode
+When writing Bash scripts, it is good practice to enable strict mode at the beginning of your script. This command tells bash to exit immediately if any command returns a non-zero exit status (i.e., an error occurs). You can enable strict mode with the following line:
+
+```bash
+set -euo pipefail
+```
+
+
+
+
+
