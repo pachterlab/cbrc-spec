@@ -23,13 +23,13 @@ Select the tutorial that matches your operating system.
 
 :::: {.resource-row}
 
-:::{.resource-card data-href="pages/resources/cmd_line/bash.html"}
+:::{.resource-card data-href="bash.html"}
 ![](/images/icons/bash.png){.resource-icon}
 
 Linux / macOS (Bash / zsh)
 :::
 
-:::{.resource-card data-href="pages/resources/cmd_line/windows.html"}
+:::{.resource-card data-href="windows.html"}
 ![](/images/icons/windows.png){.resource-icon}
 
 Windows (PowerShell)
