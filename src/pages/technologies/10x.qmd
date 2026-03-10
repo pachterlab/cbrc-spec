@@ -10,11 +10,11 @@ To ensure that all data generated at Caltech are standardized and reproducible, 
 <div class="tech-selector">
   <!-- 10x Row -->
   <div class="tech-row">
-    <button class="tech-btn tech-10x" data-link="pages/seqspec/technologies/10x/10x_v3.html">
+    <button class="tech-btn tech-10x" data-link="technologies/10x/10x_v3.html">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
       <h3>10x Genomics Next GEM v3</h3>
     </button>
-    <button class="tech-btn tech-10x" data-link="pages/seqspec/technologies/10x/10x_v4.html">
+    <button class="tech-btn tech-10x" data-link="technologies/10x/10x_v4.html">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
       <h3>10x Genomics GEM X v4</h3>
     </button>
