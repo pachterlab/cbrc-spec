@@ -28,13 +28,13 @@ website:
             text: Tutorials
       - text: Workflows
         menu:
-          - href: notebooks/sample_pipeline.ipynb
+          - href: notebooks/sc_workflow.ipynb
             text: An Example scRNA-seq Workflow
           - text: "---"
-          - href: notebooks/seqfish_pipeline.Rmd
+          - href: notebooks/seqfish_workflow.Rmd
             text: An Example Spatial Transcriptomics Workflow
           - text: "---"
-          - href: notebooks/bulk_pipeline.ipynb
+          - href: notebooks/bulk_workflow.ipynb
             text: An Example Bulk RNA-seq Workflow
       - text: Packages
         menu:
@@ -50,10 +50,10 @@ website:
             text: Intro to Caltech HPC
           - href: pages/resources/git.qmd
             text: Intro to Git and GitHub
-          - href: pages/resources/conda.qmd
-            text: Environment Management with Conda
-          - href: pages/resources/renv.qmd
-            text: Environment Management with renv
+          - href: pages/resources/envs/envs.qmd
+            text: Intro to Environment Management
+          - href: pages/resources/cmd_line/cmd_line.qmd
+            text: Intro to the Command Line
       - text: Installation
         menu:
           - href: pages/installation/python_packages.qmd

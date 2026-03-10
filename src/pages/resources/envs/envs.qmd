@@ -1,0 +1,39 @@
+---
+title: "Managing Software Environments"
+toc: false
+toc-location: body
+---
+
+Many genomics analyses rely on dozens of software packages, each with specific version requirements. Installing and updating these packages manually can lead to **version conflicts**, where one tool requires a different version of a dependency than another. This becomes especially problematic if you must run multiple analyses at once.
+
+Environment management tools solve this problem by allowing you to create **isolated software environments** for each project. Each environment contains its own set of packages and versions, ensuring that different projects do not interfere with one another.
+
+These tools also make analyses easier to **reproduce and share**. Environment details can be saved to files, allowing collaborators to recreate the exact software environment used in an analysis.
+
+:::{.highlight-section}
+Below are two commonly used tools for managing environments in genomics workflows.
+:::
+
+:::: {.resource-row}
+
+:::{.resource-card data-href="/pages/resources/envs/conda.html"}
+![](/images/icons/conda.png){.resource-icon}
+
+Conda for Python
+:::
+
+:::{.resource-card data-href="/pages/resources/envs/renv.html"}
+![](/images/icons/renv.svg){.resource-icon}
+
+renv for R
+:::
+
+::::
+
+<script>
+document.querySelectorAll('.resource-card[data-href]').forEach(card => {
+  card.addEventListener('click', () => {
+    window.location.href = card.getAttribute('data-href');
+  });
+});
+</script>

@@ -247,8 +247,12 @@ window.Quarto = {
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/resources/conda.html">
+    <a class="dropdown-item" href="../../pages/resources/conda.qmd">
  <span class="dropdown-text">Environment Management with Conda</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/resources/renv.qmd">
+ <span class="dropdown-text">Environment Management with renv</span></a>
   </li>  
     </ul>
   </li>
@@ -386,14 +390,14 @@ window.Quarto = {
 <p>This plot shows the distribution of quality scores for each base position across all reads. Typically, quality is highest near the 5′ end and drops toward the 3′ end of reads.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/per_base_SQ.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/per_base_SQ.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
 <p>A sharp decline in quality may indicate sequencing problems or the need for trimming low-quality bases before alignment.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/bad/per_base_SQ.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/bad/per_base_SQ.png" class="img-fluid figure-img"></p>
 <figcaption>A Bad FastQC Report</figcaption>
 </figure>
 </div>
@@ -407,7 +411,7 @@ Each tile corresponds to a physical area on the sequencer’s imaging surface.</
 <p>Systematic differences between tiles may point to instrument issues, uneven illumination, or problems during image analysis.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/bad/per_tile_SQ.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/bad/per_tile_SQ.png" class="img-fluid figure-img"></p>
 <figcaption>A Bad FastQC Report</figcaption>
 </figure>
 </div>
@@ -420,14 +424,14 @@ Each tile corresponds to a physical area on the sequencer’s imaging surface.</
 Ideally, most reads should have consistently high average scores.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/per_sequence_QC.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/per_sequence_QC.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
 <p>A broad or bimodal distribution suggests variable read quality, possibly due to uneven sequencing performance or mixed-quality samples.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/bad/per_sequence_QC.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/bad/per_sequence_QC.png" class="img-fluid figure-img"></p>
 <figcaption>A Bad FastQC Report</figcaption>
 </figure>
 </div>
@@ -440,7 +444,7 @@ Ideally, most reads should have consistently high average scores.</p>
 In random libraries, the lines should be roughly parallel.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/per_base_SC.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/per_base_SC.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
@@ -453,7 +457,7 @@ In random libraries, the lines should be roughly parallel.</p>
 <p>This graph compares the GC content distribution of all reads to a theoretical normal distribution.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/per_sequence_GCC.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/per_sequence_GCC.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
@@ -466,14 +470,14 @@ In random libraries, the lines should be roughly parallel.</p>
 <p>This plot shows the percentage of ambiguous bases (“N”) called at each position in the read.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/per_base_NC.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/per_base_NC.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
 <p>High or position-specific N content indicates uncertainty in base calling and may suggest low signal intensity or sequencing chemistry problems.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/bad/per_base_NC.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/bad/per_base_NC.png" class="img-fluid figure-img"></p>
 <figcaption>A Bad FastQC Report</figcaption>
 </figure>
 </div>
@@ -486,7 +490,7 @@ In random libraries, the lines should be roughly parallel.</p>
 For most sequencing platforms, a single consistent read length is expected.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/seq_length_dist.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/seq_length_dist.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
@@ -499,14 +503,14 @@ For most sequencing platforms, a single consistent read length is expected.</p>
 <p>This plot shows how many sequences are duplicated and how often.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/seq_duplication.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/seq_duplication.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>
 <p>High duplication levels can indicate PCR amplification bias or low library complexity.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/bad/seq_duplication.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/bad/seq_duplication.png" class="img-fluid figure-img"></p>
 <figcaption>A Bad FastQC Report</figcaption>
 </figure>
 </div>
@@ -520,7 +524,7 @@ For most sequencing platforms, a single consistent read length is expected.</p>
 Overrepresentation may arise from adapter contamination, primer dimers, or abundant biological sequences such as rRNA.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/bad/overrepresented_sequences.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/bad/overrepresented_sequences.png" class="img-fluid figure-img"></p>
 <figcaption>A Bad FastQC Report</figcaption>
 </figure>
 </div>
@@ -533,7 +537,7 @@ Overrepresentation may arise from adapter contamination, primer dimers, or abund
 <p>This plot quantifies how much adapter sequence remains untrimmed at each read position.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fastqc_plots/good/adapter_content.png" class="img-fluid figure-img"></p>
+<p><img src="../../images/fastqc_plots/good/adapter_content.png" class="img-fluid figure-img"></p>
 <figcaption>A Good FastQC Report</figcaption>
 </figure>
 </div>

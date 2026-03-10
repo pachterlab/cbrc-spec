@@ -86,6 +86,10 @@ kb ref --workflow=nac -i index.idx -g t2g.txt -c1 cdna.txt -c2 nascent.txt \
 ## Step 2: Align to Reference Genome
 The next step is to generate a count matrix by pseudoaligning the reads to your reference index using the `kb count` command. For example, suppose you have two paired-end FASTQ files (read1.fastq and read2.fastq) from a 10x Chromium NextGen v3 library.
 
+:::{.callout-important}
+Note that this section is only applicable to single cell data. Applying `kb count` to bulk data looks slightly different. If you would like to learn how to use `kb count` to pseudoalign bulk RNA-seq reads, refer to our [Bulk RNA-seq tutorial](/pages/technlogies/bulk.qmd).
+:::
+
 For the **standard workflow**, you can perform pseudoalignment with:
 
 ```bash

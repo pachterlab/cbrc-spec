@@ -432,3 +432,112 @@ details[open] {
   background-color: #fff9f0;
   box-shadow: 0 4px 12px rgba(255, 181, 71, 0.25);
 }
+
+/* === Compact programming tools row === */
+
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.mini-tool-card {
+  position: relative;
+  width: 180px;
+  height: 125px;
+  flex: 0 0 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.mini-tool-card p {
+  margin: 0;
+}
+
+.mini-tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+.mini-tool-icon {
+  width: 80px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 0.35rem;
+}
+
+/* Hide normal card contents on hover */
+.mini-tool-card:hover > * {
+  opacity: 0;
+}
+
+/* Show description instead */
+.mini-tool-card::after {
+  content: attr(data-desc);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.65rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.90rem;
+  font-weight: 500;
+  line-height: 1.2;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mini-tool-card:hover::after {
+  opacity: 1;
+}
+
+/* === Environment tool cards === */
+
+.resource-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin: 2rem 0;
+  justify-content: center;
+}
+
+.resource-card {
+  width: 350px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  background-color: var(--navy);
+  color: var(--light-text);
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255, 181, 71, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-3px);
+  background-color: #013c58;
+  box-shadow: 0 6px 18px rgba(255, 181, 71, 0.35);
+}
+
+.resource-icon {
+  width: 48px;
+  margin-bottom: 0.5rem;
+}

@@ -2,9 +2,10 @@
 title: "Installing Python Packages"
 ---
 
-How you install Python packages depends on whether you are using a **conda environment**. See our page on [conda environments](/pages/resources/conda.qmd) to learn how conda can help with **version control** and **reproducibility**. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install packages using **pip**.
+How you install Python packages depends on whether you are using a **conda environment**. See our page on [conda environments](/pages/resources/conda.qmd) to learn how conda can help with **version control** and **reproducibility**. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install packages using **pip** with `pip install`.
 
-## kb-python
+For instance, to install **kb-python**, you may use:
+
 ### Conda
 ```bash
 conda install -c conda-forge -c bioconda kb-python
@@ -15,13 +16,20 @@ conda install -c conda-forge -c bioconda kb-python
 pip install kb-python
 ```
 
-## seqspec
-### Conda
-```bash
-conda install -c conda-forge -c bioconda seqspec
-```
+## Installing JupyterLab
+JupyterLab is an interactive environment for writing Python scripts. It is especially useful for data analysis workflows. You may also install JupyterLab with pip or Conda:
 
 ### pip
 ```bash
-pip install seqspec
+pip install jupyterlab
+```
+
+### Conda
+```bash
+conda install -c conda-forge jupyterlab
+```
+
+Once installed, you can open it with:
+```bash
+jupyter lab
 ```

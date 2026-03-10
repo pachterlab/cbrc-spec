@@ -8,9 +8,9 @@ Here, we provide a tutorial emphasizing the use of the HPC for the analysis of g
 
 ## What is the HPC?
 
-Unlike your personal computer, the HPC is a shared computational environment designed to support hundreds of users and thousands of jobs simultaneously.
+Unlike your personal computer, the HPC is a **shared computational environment** designed to support hundreds of users and thousands of jobs simultaneously.
 
-Conceptually, you can think of the HPC as a large pool of compute nodes managed by a scheduler (SLURM), which decides when and where your jobs run.
+Conceptually, you can think of the HPC as a large pool of compute nodes **managed by a scheduler**, which decides when and where your jobs run.
 
 Using the HPC is very different from working on a laptop:
 
@@ -41,7 +41,7 @@ When working on the HPC, it is important to understand how storage is organized 
 ## Interfacing with HPC through the Command Line
 
 ::: {.callout-note title="Linux, the Shell, and Bash"}
-Your command line interface (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the Linux operating system. Most users interact with Linux through a shell called Bash (Bourne Again SHell). To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our [Bash tutorial](/pages/resources/hpc/bash.qmd).
+Your **command line interface** (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the **Linux operating system**. Most users interact with Linux through a shell called **Bash (Bourne Again SHell)**. To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our [Bash tutorial](/pages/resources/hpc/bash.qmd).
 :::
 
 ### Signing In
@@ -58,12 +58,12 @@ When you log in from the terminal, you are connecting to a login node. Login nod
 - Managing data
 - Loading software modules
 
-You should not run large analyses directly on the login node. Instead, computational jobs must be submitted to the scheduler (SLURM), which will run them on dedicated compute nodes.
+You should not run large analyses directly on the login node. Instead, computational jobs must be submitted to a scheduler, which will run them on dedicated compute nodes.
 
 ## Scheduling a Job with SLURM
 The HPC is a shared resource. To ensure fair and efficient usage, computational jobs must be submitted to a scheduling system rather than executed immediately.
 
-Caltech’s HPC uses Simple Linux Utility for Resource Management (SLURM) to:
+Caltech’s HPC uses **Simple Linux Utility for Resource Management (SLURM)** to:
 
 - Allocate CPUs, memory, and GPUs
 - Manage job queues
@@ -141,7 +141,7 @@ Using these variables allows your script to adapt automatically if you modify th
 
 ## Interfacing with HPC through the Interactive Portal
 
-If you prefer not to work exclusively from the command line, the HPC provides an Open OnDemand web portal.
+If you prefer not to work exclusively from the command line, the HPC provides an **Open OnDemand web portal**.
 
 From the Open OnDemand portal, you can:
 

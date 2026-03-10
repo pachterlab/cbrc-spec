@@ -1,0 +1,190 @@
+---
+title: "The Windows Command Line"
+---
+
+Your command line (also called a **terminal** or **shell**) is a text-based interface that allows you to interact directly with your computer’s operating system.
+
+While most HPC systems run **Linux**, many users perform preliminary analysis and data management on **Windows machines**. Windows provides command-line environments such as:
+
+- **Command Prompt (cmd)**
+- **PowerShell** (modern default)
+
+Both allow you to navigate the filesystem, manipulate files, and run software from the command line.
+
+Even if most of your analysis is performed using Python or R, basic command-line skills are extremely useful when organizing files, running pipelines, or transferring data to an HPC system.
+
+## Command Structure
+
+Regardless of your operating system or command-line interpreter, a command has the same general structure:
+
+```powershell
+command [options] [arguments]
+```
+
+For example, a standard **kb-python** command might look like:
+
+```powershell
+kb -x 10XV4 read1.fastq.gz read2.fastq.gz
+```
+
+In this case:
+
+- `kb` is the command (the program being executed)
+- `-x 10XV4` is an option (or flag) modifying how the program runs
+- `read1.fastq.gz` and `read2.fastq.gz` are inputs specifying file paths
+
+## Understanding Paths and the Windows Filesystem
+
+A **file path** specifies the location of a file or directory within the filesystem.
+
+Windows organizes files using drive letters such as:
+
+```powershell
+C:\
+D:\
+```
+
+Most user files are stored in the **Users directory**:
+
+```powershell
+C:\Users\username
+```
+
+### Absolute vs Relative Paths
+
+There are two types of paths: **absolute** and **relative**.
+
+**Absolute paths**
+
+An absolute path specifies the complete location of a file from the root of the drive.
+
+```powershell
+C:\Users\user\project\data\file.txt
+```
+
+**Relative paths**
+
+A relative path specifies a file relative to your current directory.
+
+For example, if your current directory is:
+
+```powershell
+C:\Users\user\project
+```
+
+you could reference the same file as:
+
+```powershell
+data\file.txt
+```
+
+Absolute paths are always unambiguous, while relative paths depend on your current working directory.
+
+## Essential Windows Command Line Commands
+
+If you plan to work from the command line, here are the most important commands to know.
+
+### Navigating the Filesystem
+
+- `cd directory_name` — Change directories
+- `cd ..` — Move up one directory
+- `cd \` — Go to the root of the drive
+- `dir` — List files in the current directory
+- `pwd` (PowerShell) — Print the current working directory
+
+For example, to navigate to the directory `Documents` and list the file in `Documents`:
+
+```powershell
+cd Documents
+dir
+```
+
+### Managing Files
+
+- `copy file destination` — Copy a file
+- `move file destination` — Move or rename a file
+- `del file` — Delete a file
+- `mkdir new_directory` — Create a directory
+- `rmdir directory_name` — Remove a directory
+
+For example, to create a directory `project` within your current directory and move a file called `data.txt` from your current directory to `project`:
+
+```powershell
+mkdir project
+move data.txt project
+```
+
+### Viewing Files
+
+Omics datasets can be extremely large. You should avoid opening large files in graphical editors.
+
+Instead, use command-line tools to inspect them.
+
+- `type file.txt` — Print the contents of a file
+- `more file.txt` — Scroll through a file page-by-page
+
+In PowerShell, you can also use:
+
+- `Get-Content file.txt`
+
+This allows you to inspect files such as configuration files, logs, or small metadata tables.
+
+**Viewing the Beginning or End of Files (PowerShell)**
+
+To view the first lines of a file:
+
+```powershell
+Get-Content file.txt -Head 10
+```
+
+To view the last lines:
+
+```powershell
+Get-Content file.txt -Tail 10
+```
+
+These are useful for quickly checking large output files or logs.
+
+::: {.callout-important title="Compressed Files in Genomics"}
+
+Omics datasets are often stored in compressed formats to reduce storage requirements. These commonly include files ending in:
+
+```powershell
+.gz
+.zip
+.tar.gz
+```
+
+Windows can extract many compressed formats using built-in tools or utilities such as **7-Zip**.
+
+For example, to extract a ZIP archive using the command line:
+
+```powershell
+Expand-Archive file.zip
+```
+
+When working with large sequencing files, it is often best to inspect them on a **Linux or HPC system**, where tools like `zcat` and `less` allow compressed files to be streamed without full decompression.
+
+:::
+
+### Creating and Editing Files
+
+Windows command lines are not ideal for editing large files, but you can create or open files using simple programs.
+
+To open a file in **Notepad**:
+
+```powershell
+notepad filename.txt
+```
+
+If the file does not exist, Notepad will prompt you to create it.
+
+### Displaying Text
+
+You can print text to the terminal using:
+
+```
+echo Hello World
+```
+
+This is often used to verify commands or display messages.

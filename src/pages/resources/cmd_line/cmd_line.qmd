@@ -1,0 +1,46 @@
+---
+title: "Working from the Command Line"
+toc: false
+toc-location: body
+---
+
+Many genomics workflows are run from the **command line**, a text-based interface for interacting directly with your computer’s operating system.
+
+Working from the command line allows you to:
+
+- run scientific software and analysis pipelines  
+- organize and manipulate large datasets  
+- automate repetitive tasks  
+- interact with remote computing resources such as **high-performance computing (HPC) clusters**
+
+Although graphical interfaces are useful for many tasks, command-line tools provide **greater flexibility and control**, and they are the standard way to run most bioinformatics software.
+
+The exact commands available depend on your operating system. Most HPC systems use **Linux**, while personal computers commonly run **Windows** or **macOS**. Because macOS and Linux are both **UNIX-based**, they share the same command-line tools and conventions.
+
+:::{.highlight-section}
+Select the tutorial that matches your operating system.
+:::
+
+:::: {.resource-row}
+
+:::{.resource-card data-href="/pages/resources/cmd_line/bash.html"}
+![](/images/icons/bash.png){.resource-icon}
+
+Linux / macOS (Bash / zsh)
+:::
+
+:::{.resource-card data-href="/pages/resources/cmd_line/windows.html"}
+![](/images/icons/windows.png){.resource-icon}
+
+Windows (PowerShell)
+:::
+
+::::
+
+<script>
+document.querySelectorAll('.resource-card[data-href]').forEach(card => {
+  card.addEventListener('click', () => {
+    window.location.href = card.getAttribute('data-href');
+  });
+});
+</script>

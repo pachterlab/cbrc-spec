@@ -3,7 +3,7 @@ title: "Creating a Conda Environment"
 ---
 
 ## Why Should I Use Conda?
-Conda is an open-source package and environment management system that simplifies software installation and version control. With Conda, you can:
+[Conda](https://anaconda.org/) is an open-source package and environment management system that simplifies software installation and version control. With Conda, you can:
 
 * Install and manage software (including **Python** and **R** packages) along with all their dependencies
 
@@ -20,7 +20,7 @@ In mixed R + Python projects, a common pattern is:
 
 - Use **renv** to lock down **R** packages for the R portion of the analysis, and
 - Use **conda** (or another Python environment manager) for **Python** dependencies (often accessed from R via *reticulate*).
-If your workflow includes both R and Python components, you may find it helpful to use both tools in tandem. To learn more about renv, see our [renv tutorial](/pages/resources/renv.qmd).
+If your workflow includes both R and Python components, you may find it helpful to use both tools in tandem. To learn more about renv, see our [renv tutorial](/pages/resources/envs/renv.qmd).
 :::
 
 :::{.callout-note title="Installing Conda"}

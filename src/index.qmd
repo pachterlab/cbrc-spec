@@ -1,19 +1,43 @@
 ---
-title: "Welcome to CBRC-SPEC Tutorials!"
+title: "Welcome to CBRC Tutorials!"
 toc: false
 toc-location: body
 ---
 
-**This site is designed to guide Caltech students and staff through the full process of working with genomics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.**
+**This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.**
 
 ## Before You Start
 
 ### A Quick Note on Experimental Design
-Although this site focuses on the computational side of genomics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on [experimental design](/pages/design.qmd) and consulting with the CBRC team for guidance on your specific project.
+Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on [experimental design](/pages/design.qmd) and consulting with the CBRC team for guidance on your specific project.
 
 
+### Recommended Programming Tools and Resources
+Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using **RStudio** (for R) or **JupyterLab** (for Python).
 
-## Explore Our Genomics Workflows
+In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:
+
+:::: {.tool-row}
+
+:::{.mini-tool-card data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it."}
+Sharing Your Code on GitHub
+:::
+
+:::{.mini-tool-card data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions."}
+Managing Software Environments
+:::
+
+:::{.mini-tool-card data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools."}
+Working from the Command line
+:::
+
+:::{.mini-tool-card data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop."}
+Using the HPC for Compute Intensive Tasks
+:::
+
+::::
+
+## Explore Our Workflows
 :::{.highlight-section}
 Click a technology below to access step-by-step tutorials tailored to each assay.
 :::
@@ -45,12 +69,23 @@ Click a technology below to access step-by-step tutorials tailored to each assay
 
 ### Spatial Transcriptomics Tutorials
 
-:::{.banner data-href="/pages/technologies/seqfish_pipeline.html"}
+:::{.banner data-href="/notebooks/seqfish_workflow.html"}
 ![](/images/icons/probe.png){width=20}
 <div class="banner-text">
   <h3>seqFISH</h3>
 </div>
 :::
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
+    card.style.cursor = "pointer";
+    card.addEventListener('click', () => {
+      window.location.href = card.dataset.href;
+    });
+  });
+});
+</script>
 
 <script>
 document.querySelectorAll('.banner[data-href]').forEach(banner => {

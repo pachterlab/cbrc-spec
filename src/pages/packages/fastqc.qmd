@@ -71,11 +71,11 @@ Below are the plots that **FastQC** generates, each providing diagnostic insight
 
 This plot shows the distribution of quality scores for each base position across all reads. Typically, quality is highest near the 5′ end and drops toward the 3′ end of reads. 
 
-![A Good FastQC Report](fastqc_plots/good/per_base_SQ)
+![A Good FastQC Report](/images/fastqc_plots/good/per_base_SQ)
 
 A sharp decline in quality may indicate sequencing problems or the need for trimming low-quality bases before alignment.
 
-![A Bad FastQC Report](fastqc_plots/bad/per_base_SQ)
+![A Bad FastQC Report](/images/fastqc_plots/bad/per_base_SQ)
 
 
 </details>
@@ -88,7 +88,7 @@ Each tile corresponds to a physical area on the sequencer’s imaging surface.
 
 Systematic differences between tiles may point to instrument issues, uneven illumination, or problems during image analysis.
 
-![A Bad FastQC Report](fastqc_plots/bad/per_tile_SQ)
+![A Bad FastQC Report](/images/fastqc_plots/bad/per_tile_SQ)
 
 </details>
 
@@ -98,11 +98,11 @@ Systematic differences between tiles may point to instrument issues, uneven illu
 This plot summarizes the overall distribution of mean quality scores per read.  
 Ideally, most reads should have consistently high average scores.  
 
-![A Good FastQC Report](fastqc_plots/good/per_sequence_QC)
+![A Good FastQC Report](/images/fastqc_plots/good/per_sequence_QC)
 
 A broad or bimodal distribution suggests variable read quality, possibly due to uneven sequencing performance or mixed-quality samples.
 
-![A Bad FastQC Report](fastqc_plots/bad/per_sequence_QC)
+![A Bad FastQC Report](/images/fastqc_plots/bad/per_sequence_QC)
 
 </details>
 
@@ -112,7 +112,7 @@ A broad or bimodal distribution suggests variable read quality, possibly due to 
 This plot shows the proportion of each nucleotide (A, T, G, and C) at every base position.  
 In random libraries, the lines should be roughly parallel. 
 
-![A Good FastQC Report](fastqc_plots/good/per_base_SC)
+![A Good FastQC Report](/images/fastqc_plots/good/per_base_SC)
 
 Deviations early in the read may indicate biased priming, adapter contamination, or non-random base composition typical of certain assays (e.g., single-cell barcoding regions).
 
@@ -123,7 +123,7 @@ Deviations early in the read may indicate biased priming, adapter contamination,
 
 This graph compares the GC content distribution of all reads to a theoretical normal distribution.
 
-![A Good FastQC Report](fastqc_plots/good/per_sequence_GCC)  
+![A Good FastQC Report](/images/fastqc_plots/good/per_sequence_GCC)  
 
 A shifted or multi-peaked curve may reflect contamination from other organisms, amplification bias, or targeted sequencing regions with atypical GC content.
 
@@ -134,11 +134,11 @@ A shifted or multi-peaked curve may reflect contamination from other organisms, 
 
 This plot shows the percentage of ambiguous bases (“N”) called at each position in the read. 
 
-![A Good FastQC Report](fastqc_plots/good/per_base_NC) 
+![A Good FastQC Report](/images/fastqc_plots/good/per_base_NC) 
 
 High or position-specific N content indicates uncertainty in base calling and may suggest low signal intensity or sequencing chemistry problems.
 
-![A Bad FastQC Report](fastqc_plots/bad/per_base_NC) 
+![A Bad FastQC Report](/images/fastqc_plots/bad/per_base_NC) 
 
 </details>
 
@@ -148,7 +148,7 @@ High or position-specific N content indicates uncertainty in base calling and ma
 This plot displays the distribution of read lengths in the dataset.  
 For most sequencing platforms, a single consistent read length is expected.
 
-![A Good FastQC Report](fastqc_plots/good/seq_length_dist)   
+![A Good FastQC Report](/images/fastqc_plots/good/seq_length_dist)   
 
 Variable lengths may indicate trimming, read merging, or incomplete read cycles.
 
@@ -159,11 +159,11 @@ Variable lengths may indicate trimming, read merging, or incomplete read cycles.
 
 This plot shows how many sequences are duplicated and how often.  
 
-![A Good FastQC Report](fastqc_plots/good/seq_duplication)    
+![A Good FastQC Report](/images/fastqc_plots/good/seq_duplication)    
 
 High duplication levels can indicate PCR amplification bias or low library complexity. 
 
-![A Bad FastQC Report](fastqc_plots/bad/seq_duplication)  
+![A Bad FastQC Report](/images/fastqc_plots/bad/seq_duplication)  
 
 However, in RNA-seq or scRNA-seq data, some duplication is expected due to highly expressed genes.
 
@@ -175,7 +175,7 @@ However, in RNA-seq or scRNA-seq data, some duplication is expected due to highl
 This section lists any sequences that occur more frequently than expected by chance.  
 Overrepresentation may arise from adapter contamination, primer dimers, or abundant biological sequences such as rRNA.  
 
-![A Bad FastQC Report](fastqc_plots/bad/overrepresented_sequences.png)  
+![A Bad FastQC Report](/images/fastqc_plots/bad/overrepresented_sequences.png)  
 
 Identifying and removing these sequences improves downstream analysis accuracy.
 
@@ -186,7 +186,7 @@ Identifying and removing these sequences improves downstream analysis accuracy.
 
 This plot quantifies how much adapter sequence remains untrimmed at each read position. 
 
-![A Good FastQC Report](fastqc_plots/good/adapter_content) 
+![A Good FastQC Report](/images/fastqc_plots/good/adapter_content) 
 
 Increasing adapter content toward the 3′ end of reads is a common sign that reads are longer than the actual insert fragment and require adapter trimming before alignment.
 </details>

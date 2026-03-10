@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../../notebooks/seqfish_pipeline.Rmd">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -169,17 +169,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="../../../notebooks/sample_pipeline.html">
+    <a class="dropdown-item" href="../../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../../notebooks/bulk_pipeline.html">
+    <a class="dropdown-item" href="../../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -217,8 +217,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../pages/resources/conda.html">
- <span class="dropdown-text">Environment Management with Conda</span></a>
+    <a class="dropdown-item" href="../../../pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
   </li>
@@ -309,8 +313,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here, we provide a tutorial emphasizing the use of the HPC for the analysis of genomics data. For a more general tutorial, please refer to the Caltech HPC <a href="https://www.hpc.caltech.edu/documentation">documentation</a>.</p>
 <section id="what-is-the-hpc" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-the-hpc">What is the HPC?</h2>
-<p>Unlike your personal computer, the HPC is a shared computational environment designed to support hundreds of users and thousands of jobs simultaneously.</p>
-<p>Conceptually, you can think of the HPC as a large pool of compute nodes managed by a scheduler (SLURM), which decides when and where your jobs run.</p>
+<p>Unlike your personal computer, the HPC is a <strong>shared computational environment</strong> designed to support hundreds of users and thousands of jobs simultaneously.</p>
+<p>Conceptually, you can think of the HPC as a large pool of compute nodes <strong>managed by a scheduler</strong>, which decides when and where your jobs run.</p>
 <p>Using the HPC is very different from working on a laptop:</p>
 <ul>
 <li>There is no graphical user interface (GUI)</li>
@@ -347,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Your command line interface (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the Linux operating system. Most users interact with Linux through a shell called Bash (Bourne Again SHell). To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our <a href="../../../pages/resources/hpc/bash.html">Bash tutorial</a>.</p>
+<p>Your <strong>command line interface</strong> (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the <strong>Linux operating system</strong>. Most users interact with Linux through a shell called <strong>Bash (Bourne Again SHell)</strong>. To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our <a href="../../../pages/resources/hpc/bash.qmd">Bash tutorial</a>.</p>
 </div>
 </div>
 <section id="signing-in" class="level3">
@@ -362,13 +366,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Managing data</li>
 <li>Loading software modules</li>
 </ul>
-<p>You should not run large analyses directly on the login node. Instead, computational jobs must be submitted to the scheduler (SLURM), which will run them on dedicated compute nodes.</p>
+<p>You should not run large analyses directly on the login node. Instead, computational jobs must be submitted to a scheduler, which will run them on dedicated compute nodes.</p>
 </section>
 </section>
 <section id="scheduling-a-job-with-slurm" class="level2">
 <h2 class="anchored" data-anchor-id="scheduling-a-job-with-slurm">Scheduling a Job with SLURM</h2>
 <p>The HPC is a shared resource. To ensure fair and efficient usage, computational jobs must be submitted to a scheduling system rather than executed immediately.</p>
-<p>Caltech’s HPC uses Simple Linux Utility for Resource Management (SLURM) to:</p>
+<p>Caltech’s HPC uses <strong>Simple Linux Utility for Resource Management (SLURM)</strong> to:</p>
 <ul>
 <li>Allocate CPUs, memory, and GPUs</li>
 <li>Manage job queues</li>
@@ -439,7 +443,7 @@ Important
 </section>
 <section id="interfacing-with-hpc-through-the-interactive-portal" class="level2">
 <h2 class="anchored" data-anchor-id="interfacing-with-hpc-through-the-interactive-portal">Interfacing with HPC through the Interactive Portal</h2>
-<p>If you prefer not to work exclusively from the command line, the HPC provides an Open OnDemand web portal.</p>
+<p>If you prefer not to work exclusively from the command line, the HPC provides an <strong>Open OnDemand web portal</strong>.</p>
 <p>From the Open OnDemand portal, you can:</p>
 <ul>
 <li>Upload, download, move, and delete files through the browser</li>

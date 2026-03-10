@@ -217,11 +217,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../pages/resources/conda.html">
+    <a class="dropdown-item" href="../pages/resources/conda.qmd">
  <span class="dropdown-text">Environment Management with Conda</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../pages/resources/renv.html">
+    <a class="dropdown-item" href="../pages/resources/renv.qmd">
  <span class="dropdown-text">Environment Management with renv</span></a>
   </li>  
     </ul>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#test-for-library-saturation" id="toc-test-for-library-saturation" class="nav-link" data-scroll-target="#test-for-library-saturation">Test for Library Saturation</a></li>
   <li><a href="#examine-the-knee-plot" id="toc-examine-the-knee-plot" class="nav-link" data-scroll-target="#examine-the-knee-plot">Examine the Knee Plot</a></li>
   </ul></li>
-  <li><a href="#step-3-doublet-and-multiplet-removal" id="toc-step-3-doublet-and-multiplet-removal" class="nav-link" data-scroll-target="#step-3-doublet-and-multiplet-removal">Step 3: Doublet and Multiplet Removal</a>
+  <li><a href="#step-3-gene-and-cell-filtering" id="toc-step-3-gene-and-cell-filtering" class="nav-link" data-scroll-target="#step-3-gene-and-cell-filtering">Step 3: Gene and Cell Filtering</a>
   <ul class="collapse">
   <li><a href="#filter-empty-droplets-according-to-the-knee-plot" id="toc-filter-empty-droplets-according-to-the-knee-plot" class="nav-link" data-scroll-target="#filter-empty-droplets-according-to-the-knee-plot">Filter empty droplets (According to the Knee Plot)</a></li>
   <li><a href="#filter-multiplets-with-scrublet" id="toc-filter-multiplets-with-scrublet" class="nav-link" data-scroll-target="#filter-multiplets-with-scrublet">Filter Multiplets with Scrublet</a></li>
@@ -300,7 +300,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visualization-with-pca" id="toc-visualization-with-pca" class="nav-link" data-scroll-target="#visualization-with-pca">Visualization with PCA</a></li>
   <li><a href="#nonlinear-visualization" id="toc-nonlinear-visualization" class="nav-link" data-scroll-target="#nonlinear-visualization">Nonlinear Visualization</a></li>
   </ul></li>
-  <li><a href="#step-6-differential-analysis" id="toc-step-6-differential-analysis" class="nav-link" data-scroll-target="#step-6-differential-analysis">Step 6: Differential Analysis</a></li>
+  <li><a href="#step-6-cell-type-annotation" id="toc-step-6-cell-type-annotation" class="nav-link" data-scroll-target="#step-6-cell-type-annotation">Step 6: Cell Type Annotation</a></li>
+  <li><a href="#step-7-differential-expression-analysis-of-pseudobulk-data" id="toc-step-7-differential-expression-analysis-of-pseudobulk-data" class="nav-link" data-scroll-target="#step-7-differential-expression-analysis-of-pseudobulk-data">Step 7: Differential Expression Analysis of Pseudobulk Data</a>
+  <ul class="collapse">
+  <li><a href="#preparing-data-for-pseudobulk-analysis" id="toc-preparing-data-for-pseudobulk-analysis" class="nav-link" data-scroll-target="#preparing-data-for-pseudobulk-analysis">Preparing Data for Pseudobulk Analysis</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -335,17 +339,30 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <li>Quality Control</li>
 <li>Cell and Gene Filters</li>
 <li>Normalization and Variance Stabilization</li>
-<li>Dimensionality Reduction</li>
 <li>Clustering and Visualization</li>
-<li>Differential Expression</li>
+<li>Cell Type Annotation</li>
+<li>Differential Expression Analysis</li>
 </ol>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Working with Multiple Samples">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Working with Multiple Samples
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This workflow is designed for a single sample, but the same principles apply when working with multiple samples. When analyzing multiple samples, it is important to perform quality control and filtering (Steps 2-3) on each sample separately to avoid batch effects distorting your results. After cell filtering, you can combine samples for downstream analysis using <code>anndata.concat()</code>. If samples have technical differences and do not cluster together, you may need to apply batch correction methods before dimensionality reduction and clustering. If this is the case, we recommend using the batch correction tool <a href="https://scanpy.readthedocs.io/en/latest/generated/scanpy.external.pp.harmony_integrate.html">Harmony</a>.</p>
+</div>
 </div>
 </section>
 <section id="initial-set-up" class="level2">
 <h2 class="anchored" data-anchor-id="initial-set-up">Initial Set-Up</h2>
 <section id="install-python-packages" class="level3">
 <h3 class="anchored" data-anchor-id="install-python-packages">Install Python Packages</h3>
-<div id="cell-8" class="cell" data-cellview="form">
+<div id="cell-9" class="cell" data-cellview="form">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># @title</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>quiet scanpy python<span class="op">-</span>igraph louvain pybiomart</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>quiet matplotlib</span>
@@ -355,21 +372,20 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>quiet kb<span class="op">-</span>python<span class="op">==</span><span class="fl">0.29.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-9" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cb922f35-c2ee-4252-d002-5d9510ae3db8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># @title</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> anndata</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib_inline.backend_inline <span class="im">import</span> set_matplotlib_formats</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scanpy <span class="im">as</span> sc</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> TruncatedSVD</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> sparse, io</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>matplotlib.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">12</span>})</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>set_matplotlib_formats(<span class="st">'retina'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-10" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cb922f35-c2ee-4252-d002-5d9510ae3db8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> anndata</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib_inline.backend_inline <span class="im">import</span> set_matplotlib_formats</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scanpy <span class="im">as</span> sc</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> TruncatedSVD</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> sparse, io</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>matplotlib.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">12</span>})</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>set_matplotlib_formats(<span class="st">'retina'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.12/dist-packages/scanpy/_utils/__init__.py:33: FutureWarning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead.
   from anndata import __version__ as anndata_version
@@ -382,7 +398,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </section>
 <section id="download-the-scrna-seq-data" class="level3">
 <h3 class="anchored" data-anchor-id="download-the-scrna-seq-data">Download the scRNA-seq data</h3>
-<div id="cell-11" class="cell">
+<div id="cell-12" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>cf<span class="fl">.10</span><span class="er">xgenomics</span>.com<span class="op">/</span>samples<span class="op">/</span>cell<span class="op">-</span>exp<span class="op">/</span><span class="fl">4.0.0</span><span class="op">/</span>SC3_v3_NextGem_SI_PBMC_CSP_1K<span class="op">/</span>SC3_v3_NextGem_SI_PBMC_CSP_1K_fastqs.tar</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>tar <span class="op">-</span>xf SC3_v3_NextGem_SI_PBMC_CSP_1K_fastqs.tar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -392,7 +408,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <h2 class="anchored" data-anchor-id="step-1-read-pseudoalignment">Step 1: Read Pseudoalignment</h2>
 <section id="download-a-pre-built-index-with-kb-ref" class="level3">
 <h3 class="anchored" data-anchor-id="download-a-pre-built-index-with-kb-ref">Download a Pre-Built Index with <code>kb ref</code></h3>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d7f50e9c-6a87-475f-ba0b-ac624deb60b0">
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d7f50e9c-6a87-475f-ba0b-ac624deb60b0">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kb ref <span class="op">-</span>d human <span class="op">-</span>i index.idx <span class="op">-</span>g t2g.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[2025-10-21 04:48:16,146]    INFO [download] Skipping download because some files already exist. Use the --overwrite flag to overwrite.</code></pre>
@@ -401,7 +417,8 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </section>
 <section id="pseudoalign-reads-to-reference-with-kb-count" class="level3">
 <h3 class="anchored" data-anchor-id="pseudoalign-reads-to-reference-with-kb-count">Pseudoalign Reads to Reference with <code>kb count</code></h3>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="aedcf646-bef1-457f-d8ef-dc4570369240">
+<p>Here we use <code>kb count</code> to pseudoalign our reads to the reference transcriptome and generate a count matrix. This should be done for each sample separately. Here we have only one sample, so we will run <code>kb count</code> once. The data for a single sample can be distributed across multiple files corresponding to different lanes or sequencing runs, but they should all be pseudoaligned together to generate a single count matrix for that sample.</p>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="aedcf646-bef1-457f-d8ef-dc4570369240">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This step runs `kb` to pseudoalign the reads, and then generate the cells x gene matrix in h5ad format.</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kb count <span class="op">-</span>i index.idx <span class="op">-</span>g t2g.txt <span class="op">-</span>x <span class="dv">10</span><span class="er">XV3</span> <span class="op">--</span>h5ad <span class="op">-</span>t <span class="dv">2</span> <span class="op">\</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>SC3_v3_NextGem_SI_CSP<span class="op">-</span>Labeled_PBMCs_1K_fastqs<span class="op">/</span>SC3_v3_NextGem_SI_CSP<span class="op">-</span>Labeled_PBMCs_1K_gex_fastqs<span class="op">/</span>SC3_v3_NextGem_SI_CSP<span class="op">-</span>Labeled_PBMCs_1K_gex_S1_L002_R1_001.fastq.gz <span class="op">\</span></span>
@@ -432,7 +449,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <p>For this tutorial we will be using the Python package <a href="https://scanpy.readthedocs.io/en/stable/"><strong>Scanpy</strong></a>.</p>
 <p>Scanpy is a scalable Python library for analyzing single-cell RNA sequencing (scRNA-seq) data, built around an efficient <a href="https://anndata.readthedocs.io/en/stable/"><strong>AnnData</strong></a> object that stores expression matrices and associated metadata. It provides a comprehensive toolkit for preprocessing, visualization, clustering, and differential expression, enabling end-to-end analysis of large single-cell datasets.</p>
 <p>Below we load the <em>cells x genes</em> matrix generated by kb-python as a H5AD-formatted object so that we can analyze our data with Scanpy.</p>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="6374510d-60d0-473e-c479-398a6abf8c3c">
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="6374510d-60d0-473e-c479-398a6abf8c3c">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import data</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>adata <span class="op">=</span> anndata.read_h5ad(<span class="st">'counts_unfiltered/adata.h5ad'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>adata</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -440,7 +457,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <pre><code>AnnData object with n_obs × n_vars = 281262 × 39546</code></pre>
 </div>
 </div>
-<div id="cell-20" class="cell">
+<div id="cell-22" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the gene names and make them a column in the var dataframe</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"counts_unfiltered/cells_x_genes.genes.names.txt"</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  adata.var[<span class="st">'gene_names'</span>] <span class="op">=</span> <span class="bu">file</span>.readlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -452,7 +469,7 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 <section id="test-for-library-saturation" class="level3">
 <h3 class="anchored" data-anchor-id="test-for-library-saturation">Test for Library Saturation</h3>
 <p>Below is a <strong>Gene vs.&nbsp;UMI plot</strong>, in which, for each cell, we visualize how many genes we detected. The purpose of this plot is to see if we have “saturated” our sequencing library and sampled a representative number of mRNA molecules for each cell. If this is the case, the curve should plateau as we sequence more UMIs.</p>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:625}}" data-outputid="2304f482-ed5e-4eeb-ebdc-7ea6b46a396a">
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:625}}" data-outputid="2304f482-ed5e-4eeb-ebdc-7ea6b46a396a">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot showing genes detected as a function of UMI counts.</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -482,11 +499,11 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </section>
 <section id="examine-the-knee-plot" class="level3">
 <h3 class="anchored" data-anchor-id="examine-the-knee-plot">Examine the Knee Plot</h3>
-<p>In <strong>microfluidics-based scRNA-seq assays</strong>, such as the 10x Genomics Chromium platform, cells are encapsulated into droplets at low concentrations to minimize the formation of <strong>multiplets</strong> (droplets containing more than one cell). However, this approach also results in many droplets that contain no cells at all.</p>
-<p>During cell dissociation and droplet generation, some mRNA molecules are released into the surrounding solution — known as <strong>ambient RNA</strong>. When this ambient RNA is captured and sequenced, <strong>empty droplets</strong> may falsely appear to contain a cell.</p>
-<p>The <strong>knee plot</strong> helps distinguish real cells from empty droplets based on total UMI counts per droplet. It was first introduced in the <a href="https://www.cell.com/fulltext/S0092-8674(15)00549-8">Drop-seq paper by Macosko et al., 2015</a>.</p>
-<p>In this plot, barcodes (droplets) are ranked by the number of associated UMI counts (shown on the x-axis), while the fraction of droplets with at least that many UMIs is shown on the y-axis. The “knee” of the curve represents the point where UMI counts drop sharply — separating droplets that likely contain real cells from those containing only ambient RNA.</p>
-<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:625}}" data-outputid="938d1a5d-0f04-4009-f83e-0a5471123d7f">
+<p>Single-cell RNA-seq experiments generate a large number of <strong>barcode sequences</strong>, each of which may correspond to a real cell or to background signal. In practice, many barcodes capture little or no cellular RNA due to technical noise, ambient RNA, or incomplete barcoding reactions.</p>
+<p>The <strong>knee plot</strong> helps distinguish barcodes associated with real cells from those representing background. It was first introduced in the <a href="https://www.cell.com/fulltext/S0092-8674(15)00549-8">Drop-seq paper by Macosko et al., 2015</a>.</p>
+<p>In this plot, barcodes are ranked by their total number of <strong>UMI counts</strong>. The y-axis shows the ranked barcodes, while the x-axis shows the number of UMIs associated with each barcode (typically on a log scale). A sharp transition — the <strong>“knee”</strong> of the curve — separates barcodes with high UMI counts (likely real cells) from those with very low counts (likely background).</p>
+<p>In droplet-based platforms such as <strong>10x Genomics</strong>, low-count barcodes often correspond to <strong>empty droplets containing ambient RNA</strong>. In other single-cell methods, such as <strong>combinatorial indexing approaches like Split-seq</strong>, low-count barcodes may arise from incomplete barcoding or background capture. In both cases, the knee plot provides a useful heuristic for identifying barcodes that likely correspond to real cells.</p>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:625}}" data-outputid="938d1a5d-0f04-4009-f83e-0a5471123d7f">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#@title Threshold Cells According to Knee Plot { run: "auto", vertical-output: true }</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>cutoff <span class="op">=</span> <span class="dv">400</span>  <span class="co">#@param {type:"integer"}</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>knee <span class="op">=</span> np.sort((np.array(adata.X.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))).flatten())[::<span class="op">-</span><span class="dv">1</span>]</span>
@@ -515,21 +532,20 @@ Written by Maya Caskey (based off older versions by Joe Rich, Kyung Hoi (Joseph)
 </div>
 </div>
 </div>
-<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="0cf3cf6c-975d-4c81-8d6f-b6f6dfa3cfd0">
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="0cf3cf6c-975d-4c81-8d6f-b6f6dfa3cfd0">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>num_cells<span class="sc">:,.0f}</span><span class="ss"> cells passed the </span><span class="sc">{</span>cutoff<span class="sc">}</span><span class="ss"> UMI threshold"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1,212 cells passed the 400 UMI threshold</code></pre>
 </div>
 </div>
-<p>The knee plot can be used to threshold cells based on the number of UMI counts they contain. In this example we use the number 3979 based on the publication describing the data.</p>
 </section>
 </section>
-<section id="step-3-doublet-and-multiplet-removal" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-doublet-and-multiplet-removal">Step 3: Doublet and Multiplet Removal</h2>
+<section id="step-3-gene-and-cell-filtering" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-gene-and-cell-filtering">Step 3: Gene and Cell Filtering</h2>
 <section id="filter-empty-droplets-according-to-the-knee-plot" class="level3">
 <h3 class="anchored" data-anchor-id="filter-empty-droplets-according-to-the-knee-plot">Filter empty droplets (According to the Knee Plot)</h3>
-<p>Ideally, your data will contain no empty droplets that can be mistaken for real cells. We use our results from the knee plot here to filter them out.</p>
-<div id="cell-33" class="cell">
+<p>Ideally, your data will contain no empty droplets that can be mistaken for real cells. We use our results from the knee plot here to filter them out. In addition, we filter out low-quality cells that have fewer than 200 detected genes.</p>
+<div id="cell-34" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the cells according to the threshold determined from the knee plot</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sc.pp.filter_cells(adata, min_genes<span class="op">=</span><span class="dv">200</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sc.pp.filter_cells(adata, min_counts<span class="op">=</span>knee[num_cells])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -544,13 +560,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The knee plot is a very simple method for getting rid of empty droplets. More sophisticated methods also exist. For instance, the methods <strong>EmptyDrops</strong>, <a href="https://github.com/broadinstitute/CellBender"><strong>CellBender</strong></a>, and <a href="https://bioconductor.org/packages/release/bioc/html/decontX.html"><strong>DecontX</strong></a> use a statistical model to distinguish counts from ambient vs.&nbsp;cellular mRNA. This allows for both the identification and removal of empty droplets and the removal of technical noise from your count data.</p>
+<p>The knee plot is a very simple method for getting rid of empty droplets. More sophisticated methods also exist. For instance, the method <a href="https://link.springer.com/article/10.1186/s13059-019-1662-y"><strong>EmptyDrops</strong></a>, uses a statistical model to distinguish cell-containing droplets from empty droplets. It can be emplyed on both 10X and Parse data.</p>
 </div>
 </div>
 </section>
 <section id="filter-multiplets-with-scrublet" class="level3">
 <h3 class="anchored" data-anchor-id="filter-multiplets-with-scrublet">Filter Multiplets with Scrublet</h3>
-<p><a href="https://github.com/swolock/scrublet"><strong>Scrublet</strong></a> is an package designed to identify and remove multiplets (droplets containing more than one cell) from scRNA-seq data. It works by simulating artificial doublets through random pairwise combinations of real cells’ expression profiles. Scrublet then embeds both the simulated and observed cells in a low-dimensional space and flags real cells that lie close to simulated doublets as potential multiplets.</p>
+<p>In any high-throughput single-cell RNA-seq experiment, a small fraction of barcodes will capture more than one cell, resulting in <strong>multiplets</strong> (also called <strong>doublets</strong> when two cells are captured together). These multiplets can confound downstream analyses by appearing as hybrid cell types that do not correspond to any real biological state.</p>
+<p><a href="https://github.com/swolock/scrublet"><strong>Scrublet</strong></a> is an package designed to identify and remove multiplets from scRNA-seq data. It works by simulating artificial doublets through random pairwise combinations of real cells’ expression profiles. Scrublet then embeds both the simulated and observed cells in a low-dimensional space and flags real cells that lie close to simulated doublets as potential multiplets.</p>
 <p>Scrublet operates on a raw count matrix, but requires that empty droplets be removed beforehand. If empty droplets remain in the dataset, they can distort the simulated doublet distribution and lead to inaccurate classifications. In addition, the Scrublet package should be applied to each sample/batch individually to avoid batch effects distorting the simulated doublet distribution.</p>
 <p>Removing multiplets is an important quality-control step, as doublets can appear as hybrid cell types and obscure true biological variation during clustering and downstream analyses.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -563,10 +580,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The Scrublet package is convenient because it is built-in to Scanpy, but it is not the only nor the most accurate doublet removal method. For a review of doublet detection methods, refer to the paper <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7897250/">Benchmarking computational doublet-detection methods for single-cell RNA sequencing data</a> by Nan Miles Chi and Jingyi Jessica Li.</p>
+<p>The Scrublet package is convenient because it is built into Scanpy, but it is not the only nor the most accurate doublet removal method. For a review of doublet detection methods, refer to the paper <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7897250/">Benchmarking computational doublet-detection methods for single-cell RNA sequencing data</a> by Nan Miles Chi and Jingyi Jessica Li.</p>
 </div>
 </div>
-<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="12bfbb7e-9df9-4a62-ff67-26aa90b5c7ec">
+<div id="cell-39" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="12bfbb7e-9df9-4a62-ff67-26aa90b5c7ec">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sc.pp.scrublet(adata, expected_doublet_rate<span class="op">=</span><span class="fl">0.008</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.12/dist-packages/scanpy/neighbors/__init__.py:430: FutureWarning: Use obsm (e.g. `k in adata.obsm` or `adata.obsm.keys() | {'u'}`) instead of AnnData.obsm_keys, AnnData.obsm_keys is deprecated and will be removed in the future.
@@ -574,14 +591,14 @@ Note
 </div>
 </div>
 <p>The expected doublet rate depends upon your assay and the number of cells targeted. Refer to the documentation for you specific technology to get this number. We got the expected double rate 0.008 for 1,000 cells for 10x Chromium NextGem v3.1 <a href="https://kb.10xgenomics.com/s/article/360054599512-What-is-the-cell-multiplet-rate-when-using-the-3-CellPlex-Kit-for-Cell-Multiplexing">here</a>.</p>
-<div id="cell-40" class="cell">
+<div id="cell-41" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>adata <span class="op">=</span> adata[adata.obs[<span class="st">'predicted_doublet'</span>] <span class="op">==</span> <span class="va">False</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="filtering-cells-by-mitochondrial-content" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-cells-by-mitochondrial-content">Filtering Cells by Mitochondrial Content</h3>
 <p>A healthy, intact cell should have no miRNA in the cytoplasm. As such, a high percentage of miRNA in the cytosol indicates cellular damage. We will identify the number of miRNA in each cell and remove cells with a certain percentage of miRNA.</p>
-<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="801f5ec5-c704-4a90-8812-e4fd5bc553f4">
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="801f5ec5-c704-4a90-8812-e4fd5bc553f4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify mitochondrial genes based on human-specific mtRNA prefix</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>adata.var[<span class="st">'is_mito'</span>] <span class="op">=</span> adata.var[<span class="st">'gene_names'</span>].<span class="bu">str</span>.startswith(<span class="st">"MT-"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -599,7 +616,7 @@ Note
   adata.var['is_mito'] = adata_base_var_names.isin(mito_genes_base)</code></pre>
 </div>
 </div>
-<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:491}}" data-outputid="3928cefc-ffff-463b-8922-bbfba6f0a9d2">
+<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:491}}" data-outputid="3928cefc-ffff-463b-8922-bbfba6f0a9d2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sc.pl.scatter(adata, x<span class="op">=</span><span class="st">'n_counts'</span>, y<span class="op">=</span><span class="st">'percent_mito'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.12/dist-packages/scanpy/plotting/_anndata.py:397: FutureWarning: Use obs (e.g. `k in adata.obs` or `str(adata.obs.columns.tolist())`) instead of AnnData.obs_keys, AnnData.obs_keys is deprecated and will be removed in the future.
@@ -614,25 +631,38 @@ Note
 </div>
 </div>
 <p>We see above that the highest density of cells appear to have less than 30% miRNA content, so we will set our threshold to 30%</p>
-<div id="cell-46" class="cell">
+<div id="cell-47" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>adata <span class="op">=</span> adata[adata.obs.percent_mito <span class="op">&lt;</span> <span class="dv">30</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="filter-out-genes-that-are-not-present-in-any-cells" class="level3">
 <h3 class="anchored" data-anchor-id="filter-out-genes-that-are-not-present-in-any-cells">Filter out genes that are not present in any cells</h3>
-<p>In general, we also want to get rid of genes with a low cell count to simplify our data.</p>
-<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d716827c-a4a6-4a8a-c42a-2f188c38783e">
+<p>In general, we also want to get rid of genes with a low cell count to simplify our data. This is not strictly necessary, but it can make downstream analyses more efficient and easier to interpret. We will filter out genes that are not detected in at least 3 cells.</p>
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d716827c-a4a6-4a8a-c42a-2f188c38783e">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sc.pp.filter_genes(adata, min_cells<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.12/dist-packages/scanpy/preprocessing/_simple.py:293: ImplicitModificationWarning: Trying to modify attribute `.var` of view, initializing view as actual.
   adata.var["n_cells"] = number</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the case that you have multiple samples, gene filtering should be performed after concatenating samples into a single adata object using <code>adata.concat</code>. This is because the same gene may be expressed in different samples, and filtering genes separately for each sample may lead to inconsistent gene sets across samples.</p>
+</div>
+</div>
 </section>
 <section id="visualizing-count-distributions" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-count-distributions">Visualizing count distributions</h3>
 <p>Examination of the gene count and UMI count distributions is useful QC to evaluate the quality of the library and how deeply it was sequenced.</p>
-<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:500}}" data-outputid="f47223c0-b6a4-48be-c1a1-25b026b0ea44">
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:500}}" data-outputid="f47223c0-b6a4-48be-c1a1-25b026b0ea44">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sc.pl.violin(adata, [<span class="st">'n_genes'</span>, <span class="st">'n_counts'</span>, <span class="st">'percent_mito'</span>], jitter<span class="op">=</span><span class="fl">0.4</span>, multi_panel<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -662,10 +692,10 @@ Note
 <p>This is a simplified approach for addressing overdispersion. Although log normalization is widely used, it does entirely produce constant-variance data. More sophisticated methods (e.g., variance-stabilizing transformations or model-based approaches) can better correct for overdispersion, but no perfect method currently exists — and those techniques are beyond the scope of this tutorial.</p>
 </div>
 </div>
-<div id="cell-55" class="cell">
+<div id="cell-57" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sc.pp.normalize_total(adata, target_sum<span class="op">=</span><span class="fl">1e6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-56" class="cell">
+<div id="cell-58" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sc.pp.log1p(adata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="identify-highly-variable-genes" class="level3">
@@ -685,7 +715,7 @@ Note
 <p>The <code>sc.pp.highly_variable_genes</code> function in <strong>Scanpy</strong> expects input data that have already been <strong>normalized</strong> and <strong>variance-stabilized</strong>.</p>
 </div>
 </div>
-<div id="cell-59" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:454}}" data-outputid="8a47116f-8ab3-4ac5-89bf-85becda1b2be">
+<div id="cell-61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:454}}" data-outputid="8a47116f-8ab3-4ac5-89bf-85becda1b2be">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sc.pp.highly_variable_genes(adata, min_mean<span class="op">=</span><span class="fl">0.01</span>, max_mean<span class="op">=</span><span class="dv">8</span>, min_disp<span class="op">=</span><span class="dv">1</span>, n_bins<span class="op">=</span><span class="dv">20</span>, flavor<span class="op">=</span><span class="st">"seurat"</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>sc.pl.highly_variable_genes(adata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -697,7 +727,7 @@ Note
 </div>
 </div>
 <p>Finally, we scale the the data to unit variance and zero mean to standardize gene expression by preventing highly expressed genes from dominating downstream analysis and ensuring all genes are weighted equally.</p>
-<div id="cell-61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="ef789c72-b270-4e33-9c9c-087afab057b7">
+<div id="cell-63" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="ef789c72-b270-4e33-9c9c-087afab057b7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sc.pp.scale(adata, max_value<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/lib/python3.12/functools.py:912: UserWarning: zero-centering a sparse array/matrix densifies it.
@@ -723,14 +753,14 @@ Note
 <p>Louvain clustering is a non-deterministic algorithm, meaning it can produce slightly different results across runs. The number and size of clusters depend on a resolution parameter, which controls the granularity of the clustering. There is no universally optimal way to choose this parameter — it typically depends on how specific or fine-grained you want your cell populations to be.</p>
 </div>
 </div>
-<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="75be913b-5146-4204-86bf-29315c63184b">
+<div id="cell-66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="75be913b-5146-4204-86bf-29315c63184b">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sc.pp.pca(adata, mask_var<span class="op">=</span><span class="st">"highly_variable"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.12/dist-packages/scanpy/preprocessing/_pca/__init__.py:245: FutureWarning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead.
   Version(ad.__version__) &lt; Version("0.9")</code></pre>
 </div>
 </div>
-<div id="cell-65" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="11f2503c-3daf-404a-b2eb-9d8fc13bd9ce">
+<div id="cell-67" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="11f2503c-3daf-404a-b2eb-9d8fc13bd9ce">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cluster the cells using Louvain clustering</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sc.pp.neighbors(adata, n_neighbors<span class="op">=</span><span class="dv">30</span>, n_pcs<span class="op">=</span><span class="dv">10</span>, knn<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sc.tl.louvain(adata, resolution <span class="op">=</span> <span class="fl">1.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -742,7 +772,7 @@ Note
 <p>It is useful to revisit the PCA projection with points colored by cluster. Previously we computed the PCA projection directly; here we use a function in Scanpy which does the same.</p>
 <section id="visualization-with-pca" class="level3">
 <h3 class="anchored" data-anchor-id="visualization-with-pca">Visualization with PCA</h3>
-<div id="cell-68" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:621}}" data-outputid="b4b31b01-8b7c-4b28-b71b-3c781d86301d">
+<div id="cell-70" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:621}}" data-outputid="b4b31b01-8b7c-4b28-b71b-3c781d86301d">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA and plot the projection to the first two dimensions, with points colored according to the Louvain clusters.</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>sc.pl.pca(adata, color<span class="op">=</span><span class="st">'louvain'</span>, ax<span class="op">=</span>ax)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -762,7 +792,7 @@ Note
 <p>To read more, please see the <a href="http://biorxiv.org/lookup/doi/10.1101/2021.08.25.457696">Pachter Lab’s paper</a> on the drawbacks of non-linear dimensionality reduction methods.</p>
 <section id="t-sne" class="level4">
 <h4 class="anchored" data-anchor-id="t-sne">t-SNE</h4>
-<div id="cell-71" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:621}}" data-outputid="39fc34a1-85d5-4ac9-a847-8c1f071f664b">
+<div id="cell-73" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:621}}" data-outputid="39fc34a1-85d5-4ac9-a847-8c1f071f664b">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize cells with t-SNE. The n_pcs parameter sets the number of principal components to project to prior to</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># performing t-SNE</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>sc.tl.tsne(adata, n_pcs<span class="op">=</span><span class="dv">10</span>)</span>
@@ -779,7 +809,7 @@ Note
 </section>
 <section id="umap" class="level4">
 <h4 class="anchored" data-anchor-id="umap">UMAP</h4>
-<div id="cell-73" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:657}}" data-outputid="ba593484-9fe1-44ca-a3d2-a426536b78e5">
+<div id="cell-75" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:657}}" data-outputid="ba593484-9fe1-44ca-a3d2-a426536b78e5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sc.tl.umap(adata)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
@@ -799,9 +829,9 @@ Wall time: 2.97 s</code></pre>
 </section>
 </section>
 </section>
-<section id="step-6-differential-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="step-6-differential-analysis">Step 6: Differential Analysis</h2>
-<p>From our clustering of cell states, we can perform <strong>differential expression analysis</strong> to identify <strong>marker genes</strong> that distinguish one cell state or cluster from another. This is typically done using simple statistical tests — such as the <strong>Wilcoxon rank-sum test</strong> or the <strong>t-test</strong> — which compare gene expression levels between clusters, or alternatively by fitting a more complex statistical model that accounts for variability across cells. By examining which genes are upregulated in each cluster, we can annotate clusters with known cell identities or infer novel cellular subpopulations.</p>
+<section id="step-6-cell-type-annotation" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-cell-type-annotation">Step 6: Cell Type Annotation</h2>
+<p>From our clustering of cell states, we can perform a statistical test to identify <strong>marker genes</strong> that distinguish one cell state or cluster from another. This is typically done using simple statistical tests — such as the <strong>Wilcoxon rank-sum test</strong> or the <strong>t-test</strong> — which compare gene expression levels between clusters, or alternatively by fitting a more complex statistical model that accounts for variability across cells. By examining which genes are upregulated in each cluster, we can annotate clusters with known cell identities or infer novel cellular subpopulations.</p>
 <p>Below, we use the <strong>Wilcoxon rank-sum test</strong> to identify marker genes. Because we are performing multiple hypothesis tests on the same dataset, we must adjust our p-values to control the false discovery rate. Several correction methods exist, but here we apply the <strong>Benjamini–Hochberg procedure</strong>, a widely used approach for multiple testing correction.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -816,7 +846,7 @@ Note
 <p>Statistical tests such as the <strong>Wilcoxon rank-sum test</strong> and the <strong>t-test</strong> assume that the groups being compared were defined independently of the data. However, in single-cell analysis, clustering algorithms like Louvain define groups based on the data itself — by minimizing within-cluster variation and maximizing between-cluster separation. This violates the independence assumption, meaning these tests are not strictly valid. Despite this, they remain common in practice and can still provide useful exploratory insights when interpreted cautiously.</p>
 </div>
 </div>
-<div id="cell-76" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="1206dc4b-7a7f-4ceb-f9c3-43aa686c8f64">
+<div id="cell-78" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="1206dc4b-7a7f-4ceb-f9c3-43aa686c8f64">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sc.tl.rank_genes_groups(adata, gene_symbols<span class="op">=</span><span class="st">'gene_names'</span>, groupby<span class="op">=</span><span class="st">'louvain'</span>, method<span class="op">=</span><span class="st">'wilcoxon'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/usr/local/lib/python3.12/dist-packages/scanpy/tools/_rank_genes_groups.py:482: RuntimeWarning: invalid value encountered in log2
@@ -839,8 +869,8 @@ Note
   self.stats[group_name, "logfoldchanges"] = np.log2(</code></pre>
 </div>
 </div>
-<p>The below plot shows the 10 most highly expressed genes in each cluster (compared to the other clusters) according to the Wilcoxon z-score.</p>
-<div id="cell-78" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-outputid="734e9fea-8282-4e27-9070-2293f7cb3004">
+<p>The below plot shows the 10 most highly expressed genes in each cluster (compared to the other clusters) according to the Wilcoxon z-score. We usually inspect these genes to determine if they correspond to known marker genes for specific cell types, which can help us annotate our clusters with putative cell identities.</p>
+<div id="cell-80" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-outputid="734e9fea-8282-4e27-9070-2293f7cb3004">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>sc.pl.rank_genes_groups(adata, n_genes<span class="op">=</span><span class="dv">10</span>, gene_symbols<span class="op">=</span><span class="st">'gene_names'</span>, groupby<span class="op">=</span><span class="st">'louvain'</span>, method<span class="op">=</span><span class="st">'wilcoxon'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -850,8 +880,89 @@ Note
 </div>
 </div>
 </div>
+</section>
+<section id="step-7-differential-expression-analysis-of-pseudobulk-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-differential-expression-analysis-of-pseudobulk-data">Step 7: Differential Expression Analysis of Pseudobulk Data</h2>
+<p>Often, the aim of an scRNA-seq experiment is to identify genes that are differentially expressed between experimental conditions (for example, disease vs.&nbsp;healthy) within specific cell types. Differential expression (DE) analysis asks whether the expression of a gene differs systematically between groups of samples beyond what would be expected from natural biological variability. After cell type annotation, you might wish to compare gene expression between conditions within each cell type to determine how that cell population responds to the experimental perturbation.</p>
+<p>However, individual cells should not be treated as independent biological replicates, because cells originating from the same sample share the same biological and technical sources of variation. A common solution is <strong>pseudobulk analysis</strong>, where counts from cells belonging to the same cell type and sample are aggregated to create a single expression profile per sample. This produces a matrix of gene counts that resembles bulk RNA-seq data while still preserving cell-type resolution. Differential expression analysis of pseudobulk data then proceeds identically to bulk RNA-seq analysis. To learn how to perform this analysis, see our <a href="../notebooks/bulk_pipeline.html"><strong>Bulk RNA-seq Workflow</strong></a>.</p>
+<section id="preparing-data-for-pseudobulk-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-data-for-pseudobulk-analysis">Preparing Data for Pseudobulk Analysis</h3>
+<p>DE tools perform their own normalization, variance modeling, and gene filtering. For this reason, pseudobulk counts should be generated from the <strong>raw count matrix</strong> rather than the processed data used for clustering and visualization. After identifying the clusters of cells we wish to analyze, we therefore return to the original count matrix, extract the cells belonging to the cell type(s) of interest, and aggregate their counts into pseudobulk samples.</p>
+<p>This is typically done by starting with a count matrix containing cells from all samples (after cell filtering but before gene filtering), annotating each cell with its <strong>sample</strong> and <strong>cell-type</strong> labels, and then aggregating counts across cells within each group using <code>sc.get.aggregate</code>.</p>
+<p>This converts the single-cell count matrix:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Cell1</th>
+<th>Cell2</th>
+<th>Cell3</th>
+<th>Cell4</th>
+<th>Cell5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GeneA</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>GeneB</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>GeneC</td>
+<td>5</td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Into a pseudobulk count matrix where each column represents a <strong>sample–cell-type combination</strong>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Sample1_Tcell</th>
+<th>Sample2_Tcell</th>
+<th>Sample1_Bcell</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GeneA</td>
+<td>5</td>
+<td>8</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>GeneB</td>
+<td>1</td>
+<td>4</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>GeneC</td>
+<td>11</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting count matrix can then be exported to a CSV file and analyzed using standard bulk RNA-seq differential expression tools in R.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

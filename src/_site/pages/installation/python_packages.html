@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.Rmd">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -169,17 +169,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="../../notebooks/sample_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/bulk_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -217,8 +217,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/resources/conda.html">
- <span class="dropdown-text">Environment Management with Conda</span></a>
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
   </li>
@@ -262,15 +266,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#kb-python" id="toc-kb-python" class="nav-link active" data-scroll-target="#kb-python">kb-python</a>
-  <ul class="collapse">
-  <li><a href="#conda" id="toc-conda" class="nav-link" data-scroll-target="#conda">Conda</a></li>
+  <li><a href="#conda" id="toc-conda" class="nav-link active" data-scroll-target="#conda">Conda</a></li>
   <li><a href="#pip" id="toc-pip" class="nav-link" data-scroll-target="#pip">pip</a></li>
-  </ul></li>
-  <li><a href="#seqspec" id="toc-seqspec" class="nav-link" data-scroll-target="#seqspec">seqspec</a>
+  <li><a href="#installing-jupyterlab" id="toc-installing-jupyterlab" class="nav-link" data-scroll-target="#installing-jupyterlab">Installing JupyterLab</a>
   <ul class="collapse">
-  <li><a href="#conda-1" id="toc-conda-1" class="nav-link" data-scroll-target="#conda-1">Conda</a></li>
   <li><a href="#pip-1" id="toc-pip-1" class="nav-link" data-scroll-target="#pip-1">pip</a></li>
+  <li><a href="#conda-1" id="toc-conda-1" class="nav-link" data-scroll-target="#conda-1">Conda</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -301,9 +302,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>How you install Python packages depends on whether you are using a <strong>conda environment</strong>. See our page on <a href="../../pages/resources/conda.html">conda environments</a> to learn how conda can help with <strong>version control</strong> and <strong>reproducibility</strong>. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install packages using <strong>pip</strong>.</p>
-<section id="kb-python" class="level2">
-<h2 class="anchored" data-anchor-id="kb-python">kb-python</h2>
+<p>How you install Python packages depends on whether you are using a <strong>conda environment</strong>. See our page on <a href="../../pages/resources/conda.qmd">conda environments</a> to learn how conda can help with <strong>version control</strong> and <strong>reproducibility</strong>. If you’re working within a conda environment, follow the conda installation instructions. Otherwise, you can install packages using <strong>pip</strong> with <code>pip install</code>.</p>
+<p>For instance, to install <strong>kb-python</strong>, you may use:</p>
 <section id="conda" class="level3">
 <h3 class="anchored" data-anchor-id="conda">Conda</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -312,16 +312,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="pip">pip</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kb-python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-</section>
-<section id="seqspec" class="level2">
-<h2 class="anchored" data-anchor-id="seqspec">seqspec</h2>
-<section id="conda-1" class="level3">
-<h3 class="anchored" data-anchor-id="conda-1">Conda</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda seqspec</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+<section id="installing-jupyterlab" class="level2">
+<h2 class="anchored" data-anchor-id="installing-jupyterlab">Installing JupyterLab</h2>
+<p>JupyterLab is an interactive environment for writing Python scripts. It is especially useful for data analysis workflows. You may also install JupyterLab with pip or Conda:</p>
 <section id="pip-1" class="level3">
 <h3 class="anchored" data-anchor-id="pip-1">pip</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install seqspec</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupyterlab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="conda-1" class="level3">
+<h3 class="anchored" data-anchor-id="conda-1">Conda</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge jupyterlab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Once installed, you can open it with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> lab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

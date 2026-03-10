@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.Rmd">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -169,17 +169,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="../../notebooks/sample_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/bulk_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -217,8 +217,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/resources/conda.html">
- <span class="dropdown-text">Environment Management with Conda</span></a>
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
   </li>
@@ -399,6 +403,19 @@ Note
 <section id="step-2-align-to-reference-genome" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-align-to-reference-genome">Step 2: Align to Reference Genome</h2>
 <p>The next step is to generate a count matrix by pseudoaligning the reads to your reference index using the <code>kb count</code> command. For example, suppose you have two paired-end FASTQ files (read1.fastq and read2.fastq) from a 10x Chromium NextGen v3 library.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that this section is only applicable to single cell data. Applying <code>kb count</code> to bulk data looks slightly different. If you would like to learn how to use <code>kb count</code> to pseudoalign bulk RNA-seq reads, refer to our <a href="../../pages/technlogies/bulk.qmd">Bulk RNA-seq tutorial</a>.</p>
+</div>
+</div>
 <p>For the <strong>standard workflow</strong>, you can perform pseudoalignment with:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">-i</span> index_file.idx <span class="at">-g</span> t2g_file.txt <span class="at">-x</span> 10XV3 <span class="dt">\</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> output_dir read1.fastq read2.fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

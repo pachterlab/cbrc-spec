@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.Rmd">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -169,17 +169,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="../../notebooks/sample_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/bulk_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -217,8 +217,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/resources/conda.html">
- <span class="dropdown-text">Environment Management with Conda</span></a>
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
   </li>
@@ -262,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-use-github-for-genomics-analyses" id="toc-why-use-github-for-genomics-analyses" class="nav-link active" data-scroll-target="#why-use-github-for-genomics-analyses">Why use GitHub for Genomics Analyses?</a></li>
+  <li><a href="#why-use-github-for-omics-analyses" id="toc-why-use-github-for-omics-analyses" class="nav-link active" data-scroll-target="#why-use-github-for-omics-analyses">Why use GitHub for Omics Analyses?</a></li>
   <li><a href="#what-should-and-should-not-go-on-github" id="toc-what-should-and-should-not-go-on-github" class="nav-link" data-scroll-target="#what-should-and-should-not-go-on-github">What Should (and Should Not) Go on GitHub</a>
   <ul class="collapse">
   <li><a href="#files-to-put-on-github" id="toc-files-to-put-on-github" class="nav-link" data-scroll-target="#files-to-put-on-github">Files to Put on GitHub</a></li>
@@ -310,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>GitHub is a web-based platform for hosting and sharing code. It is built on top of Git, a tool that tracks changes to files over time.</p>
+<p><a href="www.github.com"><strong>GitHub</strong></a> is a web-based platform for hosting and sharing code. It is built on top of <a href="https://git-scm.com/"><strong>Git</strong></a>, a tool that tracks changes to files over time.</p>
 <p>In practical terms, Git allows you to:</p>
 <ul>
 <li>Record changes to your scripts</li>
@@ -319,12 +323,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>GitHub provides an online location where those tracked files can be stored, backed up, and shared with others.</p>
 <p>Below we will provide a quick tutorial to Git and GitHub, highlighting the basic tools you should be familiar with. If you need further clarification or wish to learn about more advanced features (e.g.&nbsp;branching, merging), GitHub has excellent tutorials on their <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world">documentation site</a>.</p>
-<section id="why-use-github-for-genomics-analyses" class="level2">
-<h2 class="anchored" data-anchor-id="why-use-github-for-genomics-analyses">Why use GitHub for Genomics Analyses?</h2>
-<p>Genomics workflows are often complex, and there is rarely a single “correct” way to analyze a dataset. Even when working with the same raw data, researchers may make different — yet reasonable — choices at each processing step.</p>
-<p>For example:</p>
+<section id="why-use-github-for-omics-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-github-for-omics-analyses">Why use GitHub for Omics Analyses?</h2>
+<p>Omics workflows are often complex, and there is rarely a single “correct” way to analyze a dataset. Even when working with the same raw data, researchers may make different — yet reasonable — choices at each processing step.</p>
+<p>For example, to analyze scRNA-seq data:</p>
 <ul>
-<li>Counts may be normalized using a simple log1p(CPM) transformation or a more sophisticated method such as <code>scTransform</code>.</li>
+<li>Counts may be normalized using a simple log1p(CPM) transformation or a more sophisticated method such as <a href="https://github.com/satijalab/sctransform"><code>scTransform</code></a>.</li>
 <li>Cells may be filtered using thresholds of 100 genes, 200 genes, or another cutoff entirely.</li>
 <li>Differential expression may use a p-value threshold of 0.01 or 0.05.</li>
 <li>Different software packages or parameter settings may be used for clustering or dimensionality reduction.</li>
@@ -338,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Differences in computing environments</li>
 </ul>
 <p>As a result, even identical code can produce different — yet equally reasonable — results on different machines. Because of this, it can be difficult for others to evaluate, critique, or reproduce your analysis workflow unless the exact scripts and parameters are available.</p>
-<p>For this reason, when publishing genomics analyses, we strongly recommend saving your analysis scripts and configuration files to a public GitHub repository. Doing so allows other researchers to inspect your exact workflow and build upon your work.</p>
+<p>For this reason, when publishing omics analyses, we strongly recommend saving your analysis scripts and configuration files to a public GitHub repository. Doing so allows other researchers to inspect your exact workflow and build upon your work.</p>
 </section>
 <section id="what-should-and-should-not-go-on-github" class="level2">
 <h2 class="anchored" data-anchor-id="what-should-and-should-not-go-on-github">What Should (and Should Not) Go on GitHub</h2>
@@ -352,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>README files</li>
 <li>Small configuration files</li>
 <li>Environment files (environment.yml, requirements.txt)</li>
+<li>Small processed summary tables</li>
 </ul>
-<p>Processed summary tables (if small)</p>
 </section>
 <section id="files-that-should-not-go-on-github" class="level3">
 <h3 class="anchored" data-anchor-id="files-that-should-not-go-on-github">Files That Should NOT Go on GitHub</h3>
@@ -364,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Intermediate alignment outputs</li>
 <li>Any file larger than ~100–200 MB</li>
 </ul>
-<p>Large genomics data files should remain on the HPC or in dedicated storage systems — not on GitHub.</p>
+<p>Large omics data files should remain on the HPC or in dedicated storage systems — not on GitHub.</p>
 </section>
 </section>
 <section id="creating-a-repository" class="level2">
@@ -397,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="basic-git-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="basic-git-workflow">Basic Git Workflow</h2>
-<p>You only need three core commands for everyday use:</p>
+<p>You only need three core commands for everyday use: <code>add</code>, <code>commit</code>, and <code>push</code>. First, <code>add</code> selects the files whose changes you want Git to track. Next, <code>commit</code> records those changes as a snapshot in your local repository along with a message describing the update. Finally, <code>push</code> uploads those committed changes to the remote GitHub repository so they are saved online and visible to others.</p>
 <section id="add-files" class="level3">
 <h3 class="anchored" data-anchor-id="add-files">Add Files</h3>
 <p>To add changes to a single file:</p>
@@ -420,28 +424,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-a-.gitignore-file" class="level2">
 <h2 class="anchored" data-anchor-id="using-a-.gitignore-file">Using a .gitignore File</h2>
 <p>We usually keep all of our files for an analysis in a single project directory, and it is inconvenient to physically separate out the files that should be saved to GitHub and the ones which should not.</p>
-<p>The .gitignore file tells Git which files it should not track. If you do not already have a text file called <code>.gitignore</code> in your repository, you should create one.</p>
-<p>An example .gitignore file for a genomics analysis project might look like this:</p>
-<pre class="text"><code># Raw sequencing data
-*.fastq
-*.fastq.gz
-
-# Alignment files
-*.bam
-*.bai
-*.sam
-
-# Large matrices
-*.mtx
-*.h5ad
-*.rds
-
-# Temporary files
-*.log
-*.tmp
-
-# MacOS system files
-.DS_Store</code></pre>
+<p>The <strong>.gitignore file tells Git which files it should not track</strong>. If you do not already have a text file called <code>.gitignore</code> in your repository, you should create one.</p>
+<p>An example .gitignore file for a omics analysis project might look like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw sequencing data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">*.fastq</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">*.fastq.gz</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Alignment files</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">*.bam</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">*.bai</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">*.sam</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Large matrices</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">*.mtx</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ex">*.h5ad</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="ex">*.rds</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Temporary files</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="ex">*.log</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="ex">*.tmp</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># MacOS system files</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="ex">.DS_Store</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Here, the asterisk (*) is a wildcard that matches any filename with the specified extension. This .gitignore file tells Git to ignore all FASTQ files, BAM files, large matrices, temporary files, and MacOS system files. You can also use .gitignore to ignore specific directories (e.g.&nbsp;<code>data/</code>) or files with specific names (e.g.&nbsp;<code>config.yaml</code>).</p>
 <div class="callout callout-style-default callout-note callout-titled" title=".gitignore and Already Tracked Files">
 <div class="callout-header d-flex align-content-center">

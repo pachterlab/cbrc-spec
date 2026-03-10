@@ -3,7 +3,7 @@ title: "Managing Project Environments with renv"
 ---
 
 ## Why Should I Use renv?
-**renv** is an R package that provides *project-local* dependency management for R. It helps you:
+[**renv**](https://rstudio.github.io/renv/articles/renv.html) is an R package that provides *project-local* dependency management for R. It helps you:
 
 * Keep each project’s **R package versions isolated** from other projects on your system.
 
@@ -21,7 +21,7 @@ In mixed R + Python projects, a common pattern is:
 - Use **renv** to lock down **R** packages for the R portion of the analysis, and
 - Use **conda** (or another Python environment manager) for **Python** dependencies (often accessed from R via *reticulate*).
 
-To learn more about conda, see our [conda tutorial](/pages/resources/conda.qmd).
+To learn more about conda, see our [conda tutorial](/pages/resources/envs/conda.qmd).
 :::
 
 ## Create a New Environment
@@ -40,6 +40,7 @@ renv::init()
 ```
 
 This will:
+
 - Create a `renv/` folder,
 - Create a lockfile `renv.lock`, and
 - Set up your project so renv activates when you open it.
@@ -106,5 +107,6 @@ renv::status()
 
 ### Troubleshooting
 If you update R, change system libraries, or switch machines, and packages start failing to load:
+
 - Run `renv::restore()` again, and
 - Restart R (Session → Restart R) to ensure the project library is reloaded cleanly.

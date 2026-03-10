@@ -1,18 +1,18 @@
 ---
-title: "Designing Genomics Experiments"
+title: "Experimental Design"
 ---
 
-Modern genomics experiments can generate enormous amounts of data, but the quality of the conclusions you can draw depends far more on the design of the experiment than on the sophistication of the analysis.
+Modern omics experiments can generate enormous amounts of data, but the quality of the conclusions you can draw depends far more on the design of the experiment than on the sophistication of the analysis.
 
 No amount of computational processing can recover information that was never measured, and poor experimental design can lead to misleading or uninterpretable results even when the data are analyzed correctly.
 
-Before collecting or analyzing genomics data, it is essential to think carefully about replication, confounding variables, and the structure of your experimental conditions.
+Before collecting or analyzing omics data, it is essential to think carefully about replication, confounding variables, and the structure of your experimental conditions.
 
 ## Replication: Estimating Biological Variability
 
 Biological measurements are not fixed values — they are samples drawn from an underlying distribution. Even genetically identical cells or organisms will exhibit variability due to biological noise, technical variation, and measurement error.
 
-Importantly, biological variability is not simply “noise” in the sense of measurement error. In many genomics experiments — particularly single-cell RNA-seq — we measure a biological system at a single moment in time. Each sample represents a snapshot of a dynamic process.
+Importantly, biological variability is not simply “noise” in the sense of measurement error. In many omics experiments — particularly single-cell RNA-seq — we measure a biological system at a single moment in time. Each sample represents a snapshot of a dynamic process.
 
 Cells may differ because of:
 
@@ -56,23 +56,9 @@ Replication does not simply increase sample size — it allows you to estimate v
 
 Importantly, biological replicates (independent samples) are what allow you to estimate biological variation. Technical replicates can assess measurement noise, but they do not substitute for biological replication.
 
-## Avoid Confounding Variables
-
-A confound occurs when two factors vary together in a way that makes it impossible to separate their effects.
-
-For example:
-
-- all control samples processed in one batch
-- all treated samples sequenced on a different day
-- samples from different conditions handled by different people
-
-In these cases, observed differences may reflect technical artifacts rather than biological effects.
-
-Randomizing samples and balancing experimental conditions across batches helps prevent confounding.
-
 ## Orthogonality: Separating Biological Signal from Technical Effects
 
-In many genomics experiments, multiple factors influence the data. These may include:
+In many omics experiments, multiple factors influence the data. These may include:
 
 - Biological condition (e.g., control vs treated)
 - Batch (e.g., sequencing run or processing day)
@@ -122,7 +108,7 @@ This symmetry allows downstream statistical models to distinguish biological dif
 
 ### Why Orthogonality Matters
 
-Many genomics analyses use statistical models that assume effects can be estimated independently. If your experimental factors are confounded, those assumptions are violated before analysis even begins.
+Many omics analyses use statistical models that assume effects can be estimated independently. If your experimental factors are confounded, those assumptions are violated before analysis even begins.
 
 Orthogonality does not require perfection, but it does require intentional balance. When designing experiments, ask:
 
@@ -144,9 +130,9 @@ Thinking carefully about these constraints before data collection saves substant
 
 ## Computational Analysis Cannot Fix Design Problems
 
-The tools described in this tutorial — normalization, clustering, differential expression, and integration — assume that the data were generated under a reasonable experimental design.
+The tools described on this site assume that the input data were generated under a reasonable experimental design.
 
 They can help correct technical variation, but they cannot recover missing structure or resolve fundamental confounding.
 
-Strong experimental design is the foundation of meaningful genomics analysis.
+Strong experimental design is the foundation of meaningful omics analysis.
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Designing Genomics Experiments – CBRC Tutorials</title>
+<title>Experimental Design – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -182,11 +182,11 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../pages/resources/conda.html">
+    <a class="dropdown-item" href="../pages/resources/conda.qmd">
  <span class="dropdown-text">Environment Management with Conda</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../pages/resources/renv.html">
+    <a class="dropdown-item" href="../pages/resources/renv.qmd">
  <span class="dropdown-text">Environment Management with renv</span></a>
   </li>  
     </ul>
@@ -235,7 +235,6 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#replication-is-essential-for-estimating-variability" id="toc-replication-is-essential-for-estimating-variability" class="nav-link" data-scroll-target="#replication-is-essential-for-estimating-variability">Replication is Essential for Estimating Variability</a></li>
   </ul></li>
-  <li><a href="#avoid-confounding-variables" id="toc-avoid-confounding-variables" class="nav-link" data-scroll-target="#avoid-confounding-variables">Avoid Confounding Variables</a></li>
   <li><a href="#orthogonality-separating-biological-signal-from-technical-effects" id="toc-orthogonality-separating-biological-signal-from-technical-effects" class="nav-link" data-scroll-target="#orthogonality-separating-biological-signal-from-technical-effects">Orthogonality: Separating Biological Signal from Technical Effects</a>
   <ul class="collapse">
   <li><a href="#a-confounded-design" id="toc-a-confounded-design" class="nav-link" data-scroll-target="#a-confounded-design">A Confounded Design</a></li>
@@ -256,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Designing Genomics Experiments</h1>
+<h1 class="title">Experimental Design</h1>
 </div>
 
 
@@ -273,13 +272,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Modern genomics experiments can generate enormous amounts of data, but the quality of the conclusions you can draw depends far more on the design of the experiment than on the sophistication of the analysis.</p>
+<p>Modern omics experiments can generate enormous amounts of data, but the quality of the conclusions you can draw depends far more on the design of the experiment than on the sophistication of the analysis.</p>
 <p>No amount of computational processing can recover information that was never measured, and poor experimental design can lead to misleading or uninterpretable results even when the data are analyzed correctly.</p>
-<p>Before collecting or analyzing genomics data, it is essential to think carefully about replication, confounding variables, and the structure of your experimental conditions.</p>
+<p>Before collecting or analyzing omics data, it is essential to think carefully about replication, confounding variables, and the structure of your experimental conditions.</p>
 <section id="replication-estimating-biological-variability" class="level2">
 <h2 class="anchored" data-anchor-id="replication-estimating-biological-variability">Replication: Estimating Biological Variability</h2>
 <p>Biological measurements are not fixed values — they are samples drawn from an underlying distribution. Even genetically identical cells or organisms will exhibit variability due to biological noise, technical variation, and measurement error.</p>
-<p>Importantly, biological variability is not simply “noise” in the sense of measurement error. In many genomics experiments — particularly single-cell RNA-seq — we measure a biological system at a single moment in time. Each sample represents a snapshot of a dynamic process.</p>
+<p>Importantly, biological variability is not simply “noise” in the sense of measurement error. In many omics experiments — particularly single-cell RNA-seq — we measure a biological system at a single moment in time. Each sample represents a snapshot of a dynamic process.</p>
 <p>Cells may differ because of:</p>
 <ul>
 <li>stochastic gene expression</li>
@@ -315,21 +314,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Importantly, biological replicates (independent samples) are what allow you to estimate biological variation. Technical replicates can assess measurement noise, but they do not substitute for biological replication.</p>
 </section>
 </section>
-<section id="avoid-confounding-variables" class="level2">
-<h2 class="anchored" data-anchor-id="avoid-confounding-variables">Avoid Confounding Variables</h2>
-<p>A confound occurs when two factors vary together in a way that makes it impossible to separate their effects.</p>
-<p>For example:</p>
-<ul>
-<li>all control samples processed in one batch</li>
-<li>all treated samples sequenced on a different day</li>
-<li>samples from different conditions handled by different people</li>
-</ul>
-<p>In these cases, observed differences may reflect technical artifacts rather than biological effects.</p>
-<p>Randomizing samples and balancing experimental conditions across batches helps prevent confounding.</p>
-</section>
 <section id="orthogonality-separating-biological-signal-from-technical-effects" class="level2">
 <h2 class="anchored" data-anchor-id="orthogonality-separating-biological-signal-from-technical-effects">Orthogonality: Separating Biological Signal from Technical Effects</h2>
-<p>In many genomics experiments, multiple factors influence the data. These may include:</p>
+<p>In many omics experiments, multiple factors influence the data. These may include:</p>
 <ul>
 <li>Biological condition (e.g., control vs treated)</li>
 <li>Batch (e.g., sequencing run or processing day)</li>
@@ -421,7 +408,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="why-orthogonality-matters" class="level3">
 <h3 class="anchored" data-anchor-id="why-orthogonality-matters">Why Orthogonality Matters</h3>
-<p>Many genomics analyses use statistical models that assume effects can be estimated independently. If your experimental factors are confounded, those assumptions are violated before analysis even begins.</p>
+<p>Many omics analyses use statistical models that assume effects can be estimated independently. If your experimental factors are confounded, those assumptions are violated before analysis even begins.</p>
 <p>Orthogonality does not require perfection, but it does require intentional balance. When designing experiments, ask:</p>
 <ul>
 <li>Are conditions distributed across batches?</li>
@@ -443,9 +430,9 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="computational-analysis-cannot-fix-design-problems" class="level2">
 <h2 class="anchored" data-anchor-id="computational-analysis-cannot-fix-design-problems">Computational Analysis Cannot Fix Design Problems</h2>
-<p>The tools described in this tutorial — normalization, clustering, differential expression, and integration — assume that the data were generated under a reasonable experimental design.</p>
+<p>The tools described on this site assume that the input data were generated under a reasonable experimental design.</p>
 <p>They can help correct technical variation, but they cannot recover missing structure or resolve fundamental confounding.</p>
-<p>Strong experimental design is the foundation of meaningful genomics analysis.</p>
+<p>Strong experimental design is the foundation of meaningful omics analysis.</p>
 
 
 </section>

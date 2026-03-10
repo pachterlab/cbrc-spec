@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to CBRC-SPEC Tutorials! – CBRC Tutorials</title>
+<title>Welcome to CBRC Tutorials! – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="./notebooks/seqfish_pipeline.Rmd">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -134,17 +134,17 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="./notebooks/sample_pipeline.html">
+    <a class="dropdown-item" href="./notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/bulk_pipeline.html">
+    <a class="dropdown-item" href="./notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -182,12 +182,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/conda.html">
- <span class="dropdown-text">Environment Management with Conda</span></a>
+    <a class="dropdown-item" href="./pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/renv.html">
- <span class="dropdown-text">Environment Management with renv</span></a>
+    <a class="dropdown-item" href="./pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
   </li>
@@ -233,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to CBRC-SPEC Tutorials!</h1>
+<h1 class="title">Welcome to CBRC Tutorials!</h1>
 </div>
 
 
@@ -250,16 +250,35 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>This site is designed to guide Caltech students and staff through the full process of working with genomics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
+<p><strong>This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
 <section id="before-you-start" class="level2">
 <h2 class="anchored" data-anchor-id="before-you-start">Before You Start</h2>
 <section id="a-quick-note-on-experimental-design" class="level3">
 <h3 class="anchored" data-anchor-id="a-quick-note-on-experimental-design">A Quick Note on Experimental Design</h3>
-<p>Although this site focuses on the computational side of genomics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
+<p>Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
+</section>
+<section id="recommended-programming-tools-and-resources" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-programming-tools-and-resources">Recommended Programming Tools and Resources</h3>
+<p>Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using <strong>RStudio</strong> (for R) or <strong>JupyterLab</strong> (for Python).</p>
+<p>In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:</p>
+<div class="tool-row">
+<div class="mini-tool-card" data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it.">
+<p>Sharing Your Code on GitHub</p>
+</div>
+<div class="mini-tool-card" data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions.">
+<p>Managing Software Environments</p>
+</div>
+<div class="mini-tool-card" data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools.">
+<p>Working from the Command line</p>
+</div>
+<div class="mini-tool-card" data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop.">
+<p>Using the HPC for Compute Intensive Tasks</p>
+</div>
+</div>
 </section>
 </section>
-<section id="explore-our-genomics-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="explore-our-genomics-workflows">Explore Our Genomics Workflows</h2>
+<section id="explore-our-workflows" class="level2">
+<h2 class="anchored" data-anchor-id="explore-our-workflows">Explore Our Workflows</h2>
 <div class="highlight-section">
 <p>Click a technology below to access step-by-step tutorials tailored to each assay.</p>
 </div>
@@ -295,7 +314,7 @@ Bulk RNA-seq
 </section>
 <section id="spatial-transcriptomics-tutorials" class="level3">
 <h3 class="anchored" data-anchor-id="spatial-transcriptomics-tutorials">Spatial Transcriptomics Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/seqfish_pipeline.html">
+<div class="banner" data-href="/notebooks/seqfish_workflow.html">
 <img src="./images/icons/probe.png" class="img-fluid" width="20">
 <div class="banner-text">
 <h3 class="anchored">
@@ -303,6 +322,16 @@ seqFISH
 </h3>
 </div>
 </div>
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
+    card.style.cursor = "pointer";
+    card.addEventListener('click', () => {
+      window.location.href = card.dataset.href;
+    });
+  });
+});
+</script>
 <script>
 document.querySelectorAll('.banner[data-href]').forEach(banner => {
   banner.addEventListener('click', () => {

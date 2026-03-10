@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.Rmd">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -169,17 +169,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="../../notebooks/sample_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/seqfish_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../../notebooks/bulk_pipeline.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -217,8 +217,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../pages/resources/conda.html">
- <span class="dropdown-text">Environment Management with Conda</span></a>
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
   </li>
@@ -309,20 +313,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-2-pseudoalign-your-library-reads-with-kb-python" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-pseudoalign-your-library-reads-with-kb-python">Step 2: Pseudoalign Your Library Reads with <a href="../../pages/packages/kb_python.html"><code>kb-python</code></a></h2>
-<p>Aligning bulk RNA-seq reads is relatively straightforward. After generating a reference index with <code>kb ref</code>, pseudoalign your reads to the reference with <code>kb count</code>.</p>
+<p>Here we provide a brief example of how to pseudoalign a bulk library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="../../pages/packages/kb_python.html"><strong>kb-python</strong></a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="scRNA-seq vs Bulk RNA-seq with `kb count`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>scRNA-seq vs Bulk RNA-seq with <code>kb count</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The default <code>kb count</code> command is designed for scRNA-seq data, where each captured RNA molecule is reverse transcribed at most once and labeled with a unique molecular identifier (UMI). These UMIs allow PCR duplicates to be identified and collapsed so that the final counts approximate the number of original RNA molecules captured from each cell.</p>
+<p>This is not the case for bulk RNA-seq data. In bulk RNA-seq, RNA from an entire sample is extracted and fragmented before sequencing. As a result, a single RNA molecule can generate multiple sequencing reads, either because the transcript was fragmented into multiple pieces or because fragments were amplified during PCR. Since bulk RNA-seq libraries typically do not include cell barcodes or UMIs, individual reads cannot be directly traced back to their original molecules.</p>
+<p>Instead, transcript abundances must be statistically inferred from the collection of sequenced fragments. In this case, pseudoalignment is used to determine which transcripts are compatible with each read. Then, transcript abundances are estimated using a statistical model while which for factors such as transcript length and shared sequences between transcripts.</p>
+<p>For this reason, using <code>kb count</code> on bulk data requires special flags which generate a separate output than that for scRNA-seq.</p>
+</div>
+</div>
 <section id="an-example" class="level3">
 <h3 class="anchored" data-anchor-id="an-example">An Example</h3>
-<p>Here we provide a brief example of how to pseudoalign a bulk library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="../../pages/packages/kb_python.html"><strong>kb-python</strong></a>.</p>
 <p>To psuedoalign your bulk data, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> BULK <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>where index.idx and t2g.txt are files generated by <code>kb ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. The <code>--h5ad</code> argument outputs an <code>.h5ad</code> file suitable for downstream processing with <a href="https://scanpy.readthedocs.io/en/stable/"><strong>Scanpy</strong></a>.</p>
-<p>If you performed a <strong>bulk nucleus RNA-seq</strong> experiment, generate your index with <code>kb ref</code> using the <strong>NAC workflow</strong>. Then, run <code>kb count</code> with the standard workflow as shown above.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> BULK <span class="at">--tcc</span> <span class="at">--matrix-to-directories</span> <span class="at">--parity</span><span class="op">=</span>paired <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  sample1_R1.fastq.gz sample1_R2.fastq.gz sample2_R1.fastq.gz sample2_R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>where index.idx and t2g.txt are files generated by <code>kb ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. This will command will create a directory for each sample containing the abundance estimates for each transcript.</p>
+<p>The <code>--tcc</code> flag with the <code>--matrix-to-directories</code> flag will create a directory for each sample (here one for sample 1 and one for sample 2). The directory names will begin with <code>abundance</code> and be numbered according to the order in which the samples were listed in the command.</p>
+<p>Assuming paired-end sequencing, we also include the flag <code>--parity=paired</code> to indicate that both read 1 and read 2 for each read contain biological sequence.</p>
+<p>If you performed a <strong>bulk nuclear RNA-seq</strong> experiment, generate your index with <code>kb ref</code> using the <strong>NAC workflow</strong>. Then, run <code>kb count</code> with the standard workflow as shown above.</p>
 </section>
 </section>
 <section id="step-3-process-and-analyze-your-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</h2>
-<p>Now you are ready to process your data! To continue with downstream analysis, follow our <a href="../../notebooks/bulk_pipeline.html"><strong>example bulk rna-seq pipeline</strong></a>.</p>
+<p>Now you are ready to process your data! To continue with downstream analysis, follow our <a href="../../notebooks/bulk_workflow.html"><strong>example bulk rna-seq workflow</strong></a>.</p>
 
 
 </section>
