@@ -7,7 +7,7 @@ In R, you can install packages directly from within your script using the `insta
 install.packages("ggplot2")
 ```
 
-Before you install a package, make sure to set up your R environment with **renv** to manage dependencies and ensure reproducibility. See our page on [renv](/pages/resources/renv.qmd) for more details.
+Before you install a package, make sure to set up your R environment with **renv** to manage dependencies and ensure reproducibility. See our page on [renv](/pages/resources/envs/renv.qmd) for more details.
 
 ## Installing RStudio
 To install RStudio, an interactive environment for writing R scripts, please refer to the [installation instructions](https://posit.co/download/rstudio-desktop/) on the RStudio site.

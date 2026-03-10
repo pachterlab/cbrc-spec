@@ -41,7 +41,7 @@ When working on the HPC, it is important to understand how storage is organized 
 ## Interfacing with HPC through the Command Line
 
 ::: {.callout-note title="Linux, the Shell, and Bash"}
-Your **command line interface** (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the **Linux operating system**. Most users interact with Linux through a shell called **Bash (Bourne Again SHell)**. To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our [Bash tutorial](/pages/resources/hpc/bash.qmd).
+Your **command line interface** (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the **Linux operating system**. Most users interact with Linux through a shell called **Bash (Bourne Again SHell)**. To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our [Bash tutorial](/pages/resources/cmd_line/bash.qmd).
 :::
 
 ### Signing In

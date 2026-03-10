@@ -139,7 +139,7 @@ This loads the Conda environment containing `kb-python` and its dependencies. Us
 - analyses remain reproducible
 - scripts behave the same across systems
 
-Without an explicitly defined environment, differences in software versions or system configurations can lead to unexpected behavior or inconsistent results. If you are unfamiliar with Conda, see our [Conda Tutorial](/pages/resources/conda.qmd).
+Without an explicitly defined environment, differences in software versions or system configurations can lead to unexpected behavior or inconsistent results. If you are unfamiliar with Conda, see our [Conda Tutorial](/pages/resources/envs/conda.qmd).
 
 Altogether, these setup steps help ensure that your SLURM job runs smoothly and produces reliable results.
 

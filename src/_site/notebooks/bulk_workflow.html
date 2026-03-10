@@ -175,7 +175,7 @@ window.Quarto = {
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../notebooks/seqfish_pipeline.Rmd">
+    <a class="dropdown-item" href="../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -620,7 +620,6 @@ Note
 <p>In this tutorial we use edgeR for differential expression analysis because it offers a flexible modeling framework and is widely used for RNA-seq workflows. However, DESeq2 is another commonly used package for differential expression analysis, and the overall analysis strategy used by DESeq2 and edgeR is very similar. The goal of this tutorial is to provide a conceptual overview of differential expression analysis that applies regardless of the specific tool used. If you would like to perform the analysis using DESeq2 instead, you can refer to the official <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 vignette</a>.</p>
 </div>
 </div>
-<p>:::</p>
 <section id="the-dgelist-object" class="level3">
 <h3 class="anchored" data-anchor-id="the-dgelist-object">The DGEList Object</h3>
 <p>Before we can perform analysis with edgeR, we must convert our data into a <strong>DGEList object</strong>, the built-in data class for edgeR. The DGEList object is where edgeR functions will store the results of preprocessing and inference as we move through our analysis.</p>
