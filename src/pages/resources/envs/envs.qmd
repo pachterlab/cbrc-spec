@@ -16,13 +16,13 @@ Below are two commonly used tools for managing environments in genomics workflow
 
 :::: {.resource-row}
 
-:::{.resource-card data-href="/pages/resources/envs/conda.html"}
+:::{.resource-card data-href="pages/resources/envs/conda.html"}
 ![](/images/icons/conda.png){.resource-icon}
 
 Conda for Python
 :::
 
-:::{.resource-card data-href="/pages/resources/envs/renv.html"}
+:::{.resource-card data-href="pages/resources/envs/renv.html"}
 ![](/images/icons/renv.svg){.resource-icon}
 
 renv for R

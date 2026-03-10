@@ -19,19 +19,19 @@ In addition to knowing R and Python, we also recommend becoming familiar with th
 
 :::: {.tool-row}
 
-:::{.mini-tool-card data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it."}
+:::{.mini-tool-card data-href="pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it."}
 Sharing Your Code on GitHub
 :::
 
-:::{.mini-tool-card data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions."}
+:::{.mini-tool-card data-href="pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions."}
 Managing Software Environments
 :::
 
-:::{.mini-tool-card data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools."}
+:::{.mini-tool-card data-href="pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools."}
 Working from the Command line
 :::
 
-:::{.mini-tool-card data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop."}
+:::{.mini-tool-card data-href="pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop."}
 Using the HPC for Compute Intensive Tasks
 :::
 
@@ -44,14 +44,14 @@ Click a technology below to access step-by-step tutorials tailored to each assay
 
 ### Single-Cell RNA Sequencing Tutorials
 
-:::{.banner data-href="/pages/technologies/10x.html"}
+:::{.banner data-href="pages/technologies/10x.html"}
 ![](/images/icons/droplet.png){width=20}
 <div class="banner-text">
   <h3>10x Genomics Chromium Single Cell 3'</h3>
 </div>
 :::
 
-:::{.banner data-href="/pages/technologies/parse.html"}
+:::{.banner data-href="pages/technologies/parse.html"}
 ![](/images/icons/plate.png){width=20}
 <div class="banner-text">
   <h3>Parse Biosciences Evercode WT</h3>
@@ -60,7 +60,7 @@ Click a technology below to access step-by-step tutorials tailored to each assay
 
 ### Bulk RNA-seq Tutorials
 
-:::{.banner data-href="/pages/technologies/bulk.html"}
+:::{.banner data-href="pages/technologies/bulk.html"}
 ![](/images/icons/bulk.png){width=20}
 <div class="banner-text">
   <h3>Bulk RNA-seq</h3>
@@ -69,7 +69,7 @@ Click a technology below to access step-by-step tutorials tailored to each assay
 
 ### Spatial Transcriptomics Tutorials
 
-:::{.banner data-href="/notebooks/seqfish_workflow.html"}
+:::{.banner data-href="notebooks/seqfish_workflow.html"}
 ![](/images/icons/probe.png){width=20}
 <div class="banner-text">
   <h3>seqFISH</h3>
