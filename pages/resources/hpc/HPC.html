@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to the Resnick High Performance Computing Center (HPC) – CBRC Tutorials</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">CBRC Tutorials</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-technologies" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Technologies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/technologies/10x.html">
+ <span class="dropdown-text">10x Genomics Chromium</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/technologies/parse.html">
+ <span class="dropdown-text">Parse Evercode WT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/technologies/bulk.html">
+ <span class="dropdown-text">Bulk RNA-seq</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../notebooks/seqfish_workflow.html">
+ <span class="dropdown-text">seqFISH</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seqspec" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">seqspec</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/seqspec/seqspec.html">
+ <span class="dropdown-text">What is seqspec?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/seqspec/seqspec_tutorials.html">
+ <span class="dropdown-text">Tutorials</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Workflows</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
+        <li>
+    <a class="dropdown-item" href="../../../notebooks/sc_workflow.html">
+ <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../../notebooks/seqfish_workflow.html">
+ <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../../notebooks/bulk_workflow.html">
+ <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-packages" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Packages</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/packages/fastqc.html">
+ <span class="dropdown-text">FastQC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/packages/kb_python.html">
+ <span class="dropdown-text">kb-python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/packages/scanpy.html">
+ <span class="dropdown-text">Scanpy and Anndata</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Resources</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/resources/hpc/HPC.html">
+ <span class="dropdown-text">Intro to Caltech HPC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/resources/git.html">
+ <span class="dropdown-text">Intro to Git and GitHub</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/resources/envs/envs.html">
+ <span class="dropdown-text">Intro to Environment Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/resources/cmd_line/cmd_line.html">
+ <span class="dropdown-text">Intro to the Command Line</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-installation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Installation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
+        <li>
+    <a class="dropdown-item" href="../../../pages/installation/python_packages.html">
+ <span class="dropdown-text">Installing Python Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/installation/R_packages.html">
+ <span class="dropdown-text">Installing R Packages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../pages/installation/fastqc_install.html">
+ <span class="dropdown-text">Installing FastQC</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://pachterlab.github.io/CBRC/"> 
+<span class="menu-text">CBRC</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-the-hpc" id="toc-what-is-the-hpc" class="nav-link active" data-scroll-target="#what-is-the-hpc">What is the HPC?</a></li>
+  <li><a href="#storage-on-the-caltech-hpc" id="toc-storage-on-the-caltech-hpc" class="nav-link" data-scroll-target="#storage-on-the-caltech-hpc">Storage on the Caltech HPC</a></li>
+  <li><a href="#interfacing-with-hpc-through-the-command-line" id="toc-interfacing-with-hpc-through-the-command-line" class="nav-link" data-scroll-target="#interfacing-with-hpc-through-the-command-line">Interfacing with HPC through the Command Line</a>
+  <ul class="collapse">
+  <li><a href="#signing-in" id="toc-signing-in" class="nav-link" data-scroll-target="#signing-in">Signing In</a></li>
+  </ul></li>
+  <li><a href="#scheduling-a-job-with-slurm" id="toc-scheduling-a-job-with-slurm" class="nav-link" data-scroll-target="#scheduling-a-job-with-slurm">Scheduling a Job with SLURM</a>
+  <ul class="collapse">
+  <li><a href="#useful-slurm-commands" id="toc-useful-slurm-commands" class="nav-link" data-scroll-target="#useful-slurm-commands">Useful SLURM Commands</a></li>
+  <li><a href="#submitting-a-bash-script." id="toc-submitting-a-bash-script." class="nav-link" data-scroll-target="#submitting-a-bash-script.">Submitting a Bash Script.</a></li>
+  <li><a href="#slurm-environment-variables" id="toc-slurm-environment-variables" class="nav-link" data-scroll-target="#slurm-environment-variables">SLURM Environment Variables</a></li>
+  </ul></li>
+  <li><a href="#interfacing-with-hpc-through-the-interactive-portal" id="toc-interfacing-with-hpc-through-the-interactive-portal" class="nav-link" data-scroll-target="#interfacing-with-hpc-through-the-interactive-portal">Interfacing with HPC through the Interactive Portal</a></li>
+  <li><a href="#transferring-results-to-your-local-machine" id="toc-transferring-results-to-your-local-machine" class="nav-link" data-scroll-target="#transferring-results-to-your-local-machine">Transferring Results to Your Local Machine</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to the Resnick High Performance Computing Center (HPC)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A single genomics experiment can produce several gigabytes (or more) of raw sequencing data — often too large for a personal computer to store and process efficiently. For this reason, at some point in your analysis, you will likely need to use the Resnick High Performance Computing Center (HPC) at Caltech.</p>
+<p>Here, we provide a tutorial emphasizing the use of the HPC for the analysis of genomics data. For a more general tutorial, please refer to the Caltech HPC <a href="https://www.hpc.caltech.edu/documentation">documentation</a>.</p>
+<section id="what-is-the-hpc" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-hpc">What is the HPC?</h2>
+<p>Unlike your personal computer, the HPC is a <strong>shared computational environment</strong> designed to support hundreds of users and thousands of jobs simultaneously.</p>
+<p>Conceptually, you can think of the HPC as a large pool of compute nodes <strong>managed by a scheduler</strong>, which decides when and where your jobs run.</p>
+<p>Using the HPC is very different from working on a laptop:</p>
+<ul>
+<li>There is no graphical user interface (GUI)</li>
+<li>Most work is done from the command line via SSH</li>
+<li>Large computational tasks must be submitted to a job scheduler rather than run directly</li>
+</ul>
+<p>You can access the HPC in two main ways:</p>
+<ul>
+<li>The <em>command-line</em></li>
+<li>The web-based <a href="https://interactive.hpc.caltech.edu/">interactive portal</a></li>
+</ul>
+</section>
+<section id="storage-on-the-caltech-hpc" class="level2">
+<h2 class="anchored" data-anchor-id="storage-on-the-caltech-hpc">Storage on the Caltech HPC</h2>
+<p>When working on the HPC, it is important to understand how storage is organized and where different types of files should be stored. The Caltech HPC provides several storage locations, each designed for a specific purpose.</p>
+<ul>
+<li><p><strong>User Account Space — 50 GB</strong></p>
+<p>Located at <code>/home/&lt;username&gt;</code>, your home directory. This is your personal storage space and is intended for scripts, configuration files, and small datasets. Because this space is limited, it should not be used for storing large sequencing files or alignment outputs.</p></li>
+<li><p><strong>Group Space — 20 TB</strong></p>
+<p>Located at <code>/resnick/groups/&lt;groupname&gt;</code>. This space is shared among members of your research group and is appropriate for large genomics datasets, reference genomes, and processed results that need to be accessible to multiple lab members. If your group requires additional storage, your PI can request more space by contacting hpc@caltech.edu.</p></li>
+<li><p><strong>Scratch Space — 500 TB (total shared capacity)</strong></p>
+<p>Located at <code>/resnick/scratch</code>. Scratch space is intended for temporary storage of large files during active analyses. This space is accessible to all users, so if you wish to use the scratch space, you should create a personal directory (e.g., <code>/resnick/scratch/&lt;username&gt;</code>) to work within. Files that have not been accessed for 14 days are automatically purged, so important results must be moved to your home or group directory once your job is complete.</p></li>
+</ul>
+</section>
+<section id="interfacing-with-hpc-through-the-command-line" class="level2">
+<h2 class="anchored" data-anchor-id="interfacing-with-hpc-through-the-command-line">Interfacing with HPC through the Command Line</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Linux, the Shell, and Bash">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Linux, the Shell, and Bash
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your <strong>command line interface</strong> (also called a terminal or shell) is a text-based interface that allows you to communicate directly with a computer’s operating system. The Caltech HPC runs the <strong>Linux operating system</strong>. Most users interact with Linux through a shell called <strong>Bash (Bourne Again SHell)</strong>. To use the Caltech HPC, it is essential that you have a basic understanding of Bash and Bash scripting. If, for whatever reason, you are unfamiliar with or uncomfortable with Bash or Bash Scripting, please refer to our <a href="../../../pages/resources/cmd_line/bash.html">Bash tutorial</a>.</p>
+</div>
+</div>
+<section id="signing-in" class="level3">
+<h3 class="anchored" data-anchor-id="signing-in">Signing In</h3>
+<p>To sign into the HPC from the command line, open your terminal and type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@login.hpc.caltech.edu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The command line will prompt you for your password. After you enter your password, enter <code>1</code> to verify your login with DUO two-factor identification.</p>
+<p>When you log in from the terminal, you are connecting to a login node. Login nodes are shared machines intended for:</p>
+<ul>
+<li>Editing files</li>
+<li>Submitting jobs</li>
+<li>Managing data</li>
+<li>Loading software modules</li>
+</ul>
+<p>You should not run large analyses directly on the login node. Instead, computational jobs must be submitted to a scheduler, which will run them on dedicated compute nodes.</p>
+</section>
+</section>
+<section id="scheduling-a-job-with-slurm" class="level2">
+<h2 class="anchored" data-anchor-id="scheduling-a-job-with-slurm">Scheduling a Job with SLURM</h2>
+<p>The HPC is a shared resource. To ensure fair and efficient usage, computational jobs must be submitted to a scheduling system rather than executed immediately.</p>
+<p>Caltech’s HPC uses <strong>Simple Linux Utility for Resource Management (SLURM)</strong> to:</p>
+<ul>
+<li>Allocate CPUs, memory, and GPUs</li>
+<li>Manage job queues</li>
+<li>Schedule jobs based on priority and availability</li>
+<li>Monitor running jobs</li>
+<li>Handle parallel and distributed computing tasks</li>
+</ul>
+<p>The means, instead of running a command or script directly, you will typically place your command inside a job submission script and submit it to SLURM. Below we provide a brief tutorial for basic SLURM usage. To see a complete example of a SLURM job script for running <code>kb count</code>, please refer to our <a href="../../../pages/resources/hpc/slurm_example.html">SLURM example script</a>.</p>
+<section id="useful-slurm-commands" class="level3">
+<h3 class="anchored" data-anchor-id="useful-slurm-commands">Useful SLURM Commands</h3>
+<ul>
+<li><code>sbatch job_file.sbatch</code> - submit your job to SLURM</li>
+<li><code>squeue -u $USER</code> - show your current running jobs</li>
+<li><code>scancel jobid</code> - kill a job given its job ID</li>
+<li><code>sacct -l -u $USER -j jobid</code> - show the run information for a job given its job ID (useful for adjusting your requested resource allocation)</li>
+</ul>
+</section>
+<section id="submitting-a-bash-script." class="level3">
+<h3 class="anchored" data-anchor-id="submitting-a-bash-script.">Submitting a Bash Script.</h3>
+<p>On the HPC, computational jobs are typically submitted as Bash scripts. A Bash script is simply a text file containing a series of shell commands that are executed in order. Instead of typing commands interactively into the terminal, you place them into a script and submit the script to SLURM using <code>sbatch</code>. SLURM then schedules your job, allocates the requested resources (CPUs, memory, time), and runs the script on a compute node.</p>
+<p>Submitting jobs as scripts has several advantages: - Your analysis is reproducible. - Resource requests are explicitly documented. - Long-running jobs can execute without keeping your terminal session open. - You can easily rerun or modify the job later.</p>
+<p>A SLURM batch file begins with a series of lines starting with <code>#SBATCH</code>. These are instructions to SLURM. They are not regular comments — they control how your job is scheduled.</p>
+<p>A few useful #SBATCH lines are:</p>
+<ul>
+<li><code>#SBATCH --job-name=job_name</code> Assigns a descriptive job name. The job name appears in <code>squeue</code>.</li>
+<li><code>#SBATCH --account=mylab</code> Charges the job to your lab’s HPC allocation. If you have access to multiple accounts, you must include this to ensure the proper account is charged. If ommited, your default account will be charged.</li>
+<li><code>#SBATCH -p expansion</code> Selects the partition. The Caltech HPC has two partitions: <em>expansion</em> (for general jobs) and <em>GPU</em> (for jobs requiring a GPU). Genome alignment does not currently have the functionality to be run on a GPU, so you must always choose expansion for alignment jobs.</li>
+<li><code>#SBATCH --time=HH:MM:SS</code> This sets the maximum runtime. If the job exceeds this time limit, SLURM will terminate it.</li>
+<li><code>#SBATCH --cpus-per-task=8</code> Allocates 8 CPU cores (threads) to the job. By default, this values is set to 1. You may increase or decrease this depending on your analysis and current cluster availability. If you allocate multiple threads, make sure that the program you are running is configured to use the same number of threads.</li>
+<li><code>#SBATCH --mem=20G</code> Allocates 20GB of memory for the job. If your job fails with an out-of-memory error, increase this value. Note this setting controls RAM usage only — not disk storage.</li>
+<li><code>#SBATCH --output=\path\to\output</code> Specifies where standard output will be written. By default, SLURM creates a file named <code>slurm-&lt;jobid&gt;.out</code> in the working directory.</li>
+<li><code>#SBATCH --error=\path\to\error</code> Specifies where standard error messages will be written. By default, SLURM creates <code>slurm-&lt;jobid&gt;.err</code> in the working directory.</li>
+<li><code>#SBATCH --chdir=\path\to\working_directory</code> Sets the working directory for the job. By default, this is the directory from which you submit the job.</li>
+</ul>
+<p>For any SLURM job file, we recommend specifying at minimum:</p>
+<ul>
+<li>A descriptive job name</li>
+<li>Your account</li>
+<li>A maximum runtime</li>
+<li>A memory allocation</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As a rule, you should read every #SBATCH line in your job script, understand what it means, and ensure that it is reasonable for your analysis.</p>
+<p>Copying #SBATCH lines from templates, collaborators, or automated tools without verifying them can lead to serious mistakes — such as requesting a GPU partition for non-GPU software or reserving large amounts of memory or runtime unnecessarily. This can delay your job, waste allocation resources, and impact other HPC users.</p>
+<p>If you need to rerun a job, use the <code>sacct</code> command to review the resources used previously and adjust your requested allocation accordingly.</p>
+</div>
+</div>
+</section>
+<section id="slurm-environment-variables" class="level3">
+<h3 class="anchored" data-anchor-id="slurm-environment-variables">SLURM Environment Variables</h3>
+<p>When a job is launched, SLURM automatically defines several environment variables based on your resource requests. These can be used inside your Bash script to make it more flexible and robust.</p>
+<p>Two particularly useful variables are:</p>
+<ul>
+<li><p><code>$SLURM_CPUS_PER_TASK</code> — the number of CPU cores allocated via <code>#SBATCH --cpus-per-task</code></p></li>
+<li><p><code>$SLURM_JOB_ID</code> — the unique job ID automatically assigned by SLURM when the job is submitted</p></li>
+</ul>
+<p>Using these variables allows your script to adapt automatically if you modify the #SBATCH directives.</p>
+</section>
+</section>
+<section id="interfacing-with-hpc-through-the-interactive-portal" class="level2">
+<h2 class="anchored" data-anchor-id="interfacing-with-hpc-through-the-interactive-portal">Interfacing with HPC through the Interactive Portal</h2>
+<p>If you prefer not to work exclusively from the command line, the HPC provides an <strong>Open OnDemand web portal</strong>.</p>
+<p>From the Open OnDemand portal, you can:</p>
+<ul>
+<li>Upload, download, move, and delete files through the browser</li>
+<li>Edit and save files</li>
+<li>Open a command-line shell</li>
+<li>View up-to-date details of pending or running jobs</li>
+<li>Submit jobs using preset templates</li>
+<li>Launch JupyterLab, RStudio, or VS Code on a compute node</li>
+</ul>
+<p>For interactive downstream analyses in Python or R, we recommend launching JupyterLab or RStudio through the portal.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Accessing Group Storage from RStudio or JupyterLab">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Accessing Group Storage from RStudio or JupyterLab
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When launching RStudio or JupyterLab through the Open OnDemand portal, your session may be restricted to using your home directory as the working directory. In some cases, you may not be able to directly select your group directory (e.g., <code>/resnick/groups/&lt;groupname&gt;</code>) as the starting location.</p>
+<p>If you wish to work with files stored in your group directory, you can create a symbolic link in your home directory:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /resnick/groups/<span class="op">&lt;</span>groupname<span class="op">&gt;</span> ~/group</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This creates a shortcut called <code>group</code> in your home directory that points to your group storage space. You can then access your group files through this link inside RStudio or JupyterLab.</p>
+</div>
+</div>
+</section>
+<section id="transferring-results-to-your-local-machine" class="level2">
+<h2 class="anchored" data-anchor-id="transferring-results-to-your-local-machine">Transferring Results to Your Local Machine</h2>
+<p>While raw sequencing files and intermediate alignment outputs are typically too large to process on a personal computer, final count matrices are often much smaller, often no larger than 2 GB. Sparse gene-by-cell matrices (e.g., <code>.mtx</code>, <code>.h5ad</code>, or <code>.rds</code> files) are frequently small enough to download and analyze locally.</p>
+<p>If preferred, you may transfer these processed outputs to your personal machine using command-line tools such as <code>scp</code> or through the Open OnDemand web interface.</p>
+<p>This workflow — heavy preprocessing on the HPC followed by downstream analysis locally — is common in genomics and helps reduce unnecessary use of shared HPC resources.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before downloading a file to your personal device, you should verify the file size with <code>ls -lh</code>. Then consider whether your local machine has sufficient, disk storage, RAM (system memory), and processing power to carry out the required downstream analyses. If a file is very large or if downstream analysis requires substantial memory, it is often better to continue working on the HPC.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pachterlab\.github\.io\/cbrc-spec\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="../../../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>© 2025 Caltech Bioinformatics Resource Center</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

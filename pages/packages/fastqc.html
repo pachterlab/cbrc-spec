@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to CBRC Tutorials! – CBRC Tutorials</title>
+<title>Quality Control of Raw Sequencing Data with FastQC – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,20 +103,50 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="fastqc_figures.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CBRC Tutorials</span>
     </a>
   </div>
@@ -96,19 +161,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
         <li>
-    <a class="dropdown-item" href="./pages/technologies/10x.html">
+    <a class="dropdown-item" href="../../pages/technologies/10x.html">
  <span class="dropdown-text">10x Genomics Chromium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/parse.html">
+    <a class="dropdown-item" href="../../pages/technologies/parse.html">
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/bulk.html">
+    <a class="dropdown-item" href="../../pages/technologies/bulk.html">
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -119,11 +184,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec.html">
  <span class="dropdown-text">What is seqspec?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec_tutorials.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec_tutorials.html">
  <span class="dropdown-text">Tutorials</span></a>
   </li>  
     </ul>
@@ -134,17 +199,17 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="./notebooks/sc_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/bulk_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -155,15 +220,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
         <li>
-    <a class="dropdown-item" href="./pages/packages/fastqc.html">
+    <a class="dropdown-item" href="../../pages/packages/fastqc.html">
  <span class="dropdown-text">FastQC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/kb_python.html">
+    <a class="dropdown-item" href="../../pages/packages/kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/scanpy.html">
+    <a class="dropdown-item" href="../../pages/packages/scanpy.html">
  <span class="dropdown-text">Scanpy and Anndata</span></a>
   </li>  
     </ul>
@@ -174,19 +239,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">    
         <li>
-    <a class="dropdown-item" href="./pages/resources/hpc/HPC.html">
+    <a class="dropdown-item" href="../../pages/resources/hpc/HPC.html">
  <span class="dropdown-text">Intro to Caltech HPC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/git.html">
+    <a class="dropdown-item" href="../../pages/resources/git.html">
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/envs/envs.html">
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
  <span class="dropdown-text">Intro to Environment Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/cmd_line/cmd_line.html">
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
  <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
@@ -197,15 +262,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
         <li>
-    <a class="dropdown-item" href="./pages/installation/python_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/python_packages.html">
  <span class="dropdown-text">Installing Python Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/R_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/fastqc_install.html">
+    <a class="dropdown-item" href="../../pages/installation/fastqc_install.html">
  <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
@@ -226,14 +291,30 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#run-fastqc" id="toc-run-fastqc" class="nav-link active" data-scroll-target="#run-fastqc">Run <code>FastQC</code></a></li>
+  <li><a href="#a-brief-tutorial-on-fastq-files" id="toc-a-brief-tutorial-on-fastq-files" class="nav-link" data-scroll-target="#a-brief-tutorial-on-fastq-files">A Brief Tutorial on FASTQ Files</a>
+  <ul class="collapse">
+  <li><a href="#what-are-quality-scores" id="toc-what-are-quality-scores" class="nav-link" data-scroll-target="#what-are-quality-scores">What Are Quality Scores?</a></li>
+  </ul></li>
+  <li><a href="#understanding-fastqc-plots" id="toc-understanding-fastqc-plots" class="nav-link" data-scroll-target="#understanding-fastqc-plots">Understanding <code>FASTQC</code> Plots</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to CBRC Tutorials!</h1>
+<h1 class="title">Quality Control of Raw Sequencing Data with <code>FastQC</code></h1>
 </div>
 
 
@@ -250,98 +331,220 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
-<section id="before-you-start" class="level2">
-<h2 class="anchored" data-anchor-id="before-you-start">Before You Start</h2>
-<section id="a-quick-note-on-experimental-design" class="level3">
-<h3 class="anchored" data-anchor-id="a-quick-note-on-experimental-design">A Quick Note on Experimental Design</h3>
-<p>Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
+<p><strong>FastQC</strong> is a quality control tool for high-throughput sequencing data. It provides a quick, visual summary of your raw <strong>FASTQ</strong> files, helping you identify potential issues such as low-quality reads, adapter contamination, or biased base composition. FastQC generates easy-to-read HTML reports that summarize key quality metrics like per-base quality scores, GC content, and sequence duplication levels. Running FastQC before alignment or downstream analysis ensures your sequencing data are high-quality and suitable for accurate biological interpretation.</p>
+<p>Here we provide a brief tutorial for analyzing your FASTQ files with FastQC. For a more in-depth explanation of FastQC please refer to the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">website</a> and <a href="https://github.com/s-andrews/FastQC">GitHub page</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Installing FastQC">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Installing FastQC
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To get instructions on how to install the FastQC package, see our page on <a href="../../pages/installation/fastqc_install.html">Installing FastQC</a>.</p>
+</div>
+</div>
+<section id="run-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="run-fastqc">Run <code>FastQC</code></h2>
+<p>FastQC conveniently has a built-in GUI in which to run your analysis. To open the GUI simply type into your command-line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and follow the displayed instructions.</p>
+<p>If you would prefer to analyze your data through the command-line, simply specify a list of files following the <code>fastqc</code> command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=</span>outdir somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and replace <code>outdir</code> with the path to the directory you wish to have your output stored.</p>
 </section>
-<section id="recommended-programming-tools-and-resources" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-programming-tools-and-resources">Recommended Programming Tools and Resources</h3>
-<p>Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using <strong>RStudio</strong> (for R) or <strong>JupyterLab</strong> (for Python).</p>
-<p>In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:</p>
-<div class="tool-row">
-<div class="mini-tool-card" data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it.">
-<p>Sharing Your Code on GitHub</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions.">
-<p>Managing Software Environments</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools.">
-<p>Working from the Command line</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop.">
-<p>Using the HPC for Compute Intensive Tasks</p>
-</div>
-</div>
+<section id="a-brief-tutorial-on-fastq-files" class="level2">
+<h2 class="anchored" data-anchor-id="a-brief-tutorial-on-fastq-files">A Brief Tutorial on FASTQ Files</h2>
+<p>To understand the FastQC output, we must first understand what a FASTQ file is and how it is generated.</p>
+<p>FASTQ files are the standard format for storing raw sequencing reads from next-generation sequencing instruments. Each read in a FASTQ file is represented by four lines:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode ruby code-with-copy"><code class="sourceCode ruby"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">@SEQ_ID</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cn">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span><span class="vs">''</span><span class="op">*</span>((((<span class="op">***+</span>))<span class="op">%</span><span class="ot">%%</span><span class="st">++)(</span><span class="ot">%</span><span class="op">%</span><span class="ot">%%</span><span class="st">).1***-+*''))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><p><strong>Line 1</strong> – Read identifier (begins with @)</p></li>
+<li><p><strong>Line 2</strong> – Nucleotide sequence</p></li>
+<li><p><strong>Line 3</strong> – Separator line (usually just +)</p></li>
+<li><p><strong>Line 4</strong> – Quality scores for each base (encoded as ASCII characters)</p></li>
+</ul>
+<section id="what-are-quality-scores" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-quality-scores">What Are Quality Scores?</h3>
+<p>Each entry in a FASTQ file contains not only the DNA or RNA sequence itself, but also a <strong>quality score</strong> for every base. These scores reflect the sequencing machine’s confidence in each base call — that is, how likely it is that a given nucleotide (A, T, G, or C) was correctly identified.</p>
+<p>FASTQ quality scores are typically encoded using the <strong>Phred scale</strong>, a logarithmic transformation of the error probability:</p>
+<p><span class="math display">\[Q = -10\times \log_{10}(P)\]</span></p>
+<p>where <span class="math inline">\(P\)</span> is the probability that a base call is incorrect. For example, a Phred score of 20 means there’s a 1% chance the base is wrong, while a score of 30 corresponds to a 0.1% error rate.</p>
+<p>These scores are stored as ASCII characters in the FASTQ file, allowing both sequence and quality information to be represented compactly.</p>
+<p>During quality control, tools like <strong>FastQC</strong> visualize these scores across all reads, helping identify low-quality regions that may need trimming or filtering before alignment and downstream analysis.</p>
 </section>
 </section>
-<section id="explore-our-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="explore-our-workflows">Explore Our Workflows</h2>
-<div class="highlight-section">
-<p>Click a technology below to access step-by-step tutorials tailored to each assay.</p>
+<section id="understanding-fastqc-plots" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-fastqc-plots">Understanding <code>FASTQC</code> Plots</h2>
+<p>Below are the plots that <strong>FastQC</strong> generates, each providing diagnostic insights into your sequencing data quality.</p>
+<hr>
+<details>
+<summary>
+<strong>1. Per-Base Sequence Quality Over All Reads</strong>
+</summary>
+<p>This plot shows the distribution of quality scores for each base position across all reads. Typically, quality is highest near the 5′ end and drops toward the 3′ end of reads.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/per_base_SQ.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
 </div>
-<section id="single-cell-rna-sequencing-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="single-cell-rna-sequencing-tutorials">Single-Cell RNA Sequencing Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/10x.html">
-<img src="./images/icons/droplet.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-10x Genomics Chromium Single Cell 3’
-</h3>
+<p>A sharp decline in quality may indicate sequencing problems or the need for trimming low-quality bases before alignment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/bad/per_base_SQ.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
 </div>
+</details>
+<details>
+<summary>
+<strong>2. Per-Tile Sequence Quality Over All Reads</strong>
+</summary>
+<p>This graph visualizes quality variation across different tiles of the sequencing flow cell.<br>
+Each tile corresponds to a physical area on the sequencer’s imaging surface.</p>
+<p>Systematic differences between tiles may point to instrument issues, uneven illumination, or problems during image analysis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/bad/per_tile_SQ.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
 </div>
-<div class="banner" data-href="/pages/technologies/parse.html">
-<img src="./images/icons/plate.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Parse Biosciences Evercode WT
-</h3>
+</details>
+<details>
+<summary>
+<strong>3. Quality Score Distribution Over All Sequences</strong>
+</summary>
+<p>This plot summarizes the overall distribution of mean quality scores per read.<br>
+Ideally, most reads should have consistently high average scores.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/per_sequence_QC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
 </div>
+<p>A broad or bimodal distribution suggests variable read quality, possibly due to uneven sequencing performance or mixed-quality samples.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/bad/per_sequence_QC.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
 </div>
-</section>
-<section id="bulk-rna-seq-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="bulk-rna-seq-tutorials">Bulk RNA-seq Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/bulk.html">
-<img src="./images/icons/bulk.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Bulk RNA-seq
-</h3>
+</details>
+<details>
+<summary>
+<strong>4. Sequence Content Across All Bases</strong>
+</summary>
+<p>This plot shows the proportion of each nucleotide (A, T, G, and C) at every base position.<br>
+In random libraries, the lines should be roughly parallel.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/per_base_SC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
 </div>
+<p>Deviations early in the read may indicate biased priming, adapter contamination, or non-random base composition typical of certain assays (e.g., single-cell barcoding regions).</p>
+</details>
+<details>
+<summary>
+<strong>5. Per Sequence GC Content</strong>
+</summary>
+<p>This graph compares the GC content distribution of all reads to a theoretical normal distribution.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/per_sequence_GCC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
 </div>
-</section>
-<section id="spatial-transcriptomics-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-transcriptomics-tutorials">Spatial Transcriptomics Tutorials</h3>
-<div class="banner" data-href="/notebooks/seqfish_workflow.html">
-<img src="./images/icons/probe.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-seqFISH
-</h3>
+<p>A shifted or multi-peaked curve may reflect contamination from other organisms, amplification bias, or targeted sequencing regions with atypical GC content.</p>
+</details>
+<details>
+<summary>
+<strong>6. Per Base N Content</strong>
+</summary>
+<p>This plot shows the percentage of ambiguous bases (“N”) called at each position in the read.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/per_base_NC.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
 </div>
+<p>High or position-specific N content indicates uncertainty in base calling and may suggest low signal intensity or sequencing chemistry problems.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/bad/per_base_NC.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
 </div>
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
-    card.style.cursor = "pointer";
-    card.addEventListener('click', () => {
-      window.location.href = card.dataset.href;
-    });
-  });
-});
-</script>
-<script>
-document.querySelectorAll('.banner[data-href]').forEach(banner => {
-  banner.addEventListener('click', () => {
-    window.location.href = banner.getAttribute('data-href');
-  });
-});
-</script>
+</details>
+<details>
+<summary>
+<strong>7. Sequence Length Distribution</strong>
+</summary>
+<p>This plot displays the distribution of read lengths in the dataset.<br>
+For most sequencing platforms, a single consistent read length is expected.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/seq_length_dist.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>Variable lengths may indicate trimming, read merging, or incomplete read cycles.</p>
+</details>
+<details>
+<summary>
+<strong>8. Sequence Duplication Levels</strong>
+</summary>
+<p>This plot shows how many sequences are duplicated and how often.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/seq_duplication.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+<p>High duplication levels can indicate PCR amplification bias or low library complexity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/bad/seq_duplication.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+<p>However, in RNA-seq or scRNA-seq data, some duplication is expected due to highly expressed genes.</p>
+</details>
+<details>
+<summary>
+<strong>9. Overrepresented Sequences</strong>
+</summary>
+<p>This section lists any sequences that occur more frequently than expected by chance.<br>
+Overrepresentation may arise from adapter contamination, primer dimers, or abundant biological sequences such as rRNA.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/bad/overrepresented_sequences.png" class="img-fluid figure-img"></p>
+<figcaption>A Bad FastQC Report</figcaption>
+</figure>
+</div>
+<p>Identifying and removing these sequences improves downstream analysis accuracy.</p>
+</details>
+<details>
+<summary>
+<strong>10. Adapter Content</strong>
+</summary>
+<p>This plot quantifies how much adapter sequence remains untrimmed at each read position.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/fastqc_plots/good/adapter_content.png" class="img-fluid figure-img"></p>
+<figcaption>A Good FastQC Report</figcaption>
+</figure>
+</div>
+Increasing adapter content toward the 3′ end of reads is a common sign that reads are longer than the actual insert fragment and require adapter trimming before alignment.
+</details>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -749,7 +952,7 @@ document.querySelectorAll('.banner[data-href]').forEach(banner => {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="./images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+<p><img src="../../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

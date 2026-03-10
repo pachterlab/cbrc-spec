@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to CBRC Tutorials! – CBRC Tutorials</title>
+<title>The Windows Command Line – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,19 +104,19 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">CBRC Tutorials</span>
     </a>
   </div>
@@ -96,19 +131,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
         <li>
-    <a class="dropdown-item" href="./pages/technologies/10x.html">
+    <a class="dropdown-item" href="../../../pages/technologies/10x.html">
  <span class="dropdown-text">10x Genomics Chromium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/parse.html">
+    <a class="dropdown-item" href="../../../pages/technologies/parse.html">
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/bulk.html">
+    <a class="dropdown-item" href="../../../pages/technologies/bulk.html">
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -119,11 +154,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec.html">
+    <a class="dropdown-item" href="../../../pages/seqspec/seqspec.html">
  <span class="dropdown-text">What is seqspec?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec_tutorials.html">
+    <a class="dropdown-item" href="../../../pages/seqspec/seqspec_tutorials.html">
  <span class="dropdown-text">Tutorials</span></a>
   </li>  
     </ul>
@@ -134,17 +169,17 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="./notebooks/sc_workflow.html">
+    <a class="dropdown-item" href="../../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/bulk_workflow.html">
+    <a class="dropdown-item" href="../../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -155,15 +190,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
         <li>
-    <a class="dropdown-item" href="./pages/packages/fastqc.html">
+    <a class="dropdown-item" href="../../../pages/packages/fastqc.html">
  <span class="dropdown-text">FastQC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/kb_python.html">
+    <a class="dropdown-item" href="../../../pages/packages/kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/scanpy.html">
+    <a class="dropdown-item" href="../../../pages/packages/scanpy.html">
  <span class="dropdown-text">Scanpy and Anndata</span></a>
   </li>  
     </ul>
@@ -174,19 +209,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">    
         <li>
-    <a class="dropdown-item" href="./pages/resources/hpc/HPC.html">
+    <a class="dropdown-item" href="../../../pages/resources/hpc/HPC.html">
  <span class="dropdown-text">Intro to Caltech HPC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/git.html">
+    <a class="dropdown-item" href="../../../pages/resources/git.html">
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/envs/envs.html">
+    <a class="dropdown-item" href="../../../pages/resources/envs/envs.html">
  <span class="dropdown-text">Intro to Environment Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/cmd_line/cmd_line.html">
+    <a class="dropdown-item" href="../../../pages/resources/cmd_line/cmd_line.html">
  <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
@@ -197,15 +232,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
         <li>
-    <a class="dropdown-item" href="./pages/installation/python_packages.html">
+    <a class="dropdown-item" href="../../../pages/installation/python_packages.html">
  <span class="dropdown-text">Installing Python Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/R_packages.html">
+    <a class="dropdown-item" href="../../../pages/installation/R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/fastqc_install.html">
+    <a class="dropdown-item" href="../../../pages/installation/fastqc_install.html">
  <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
@@ -226,14 +261,37 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#command-structure" id="toc-command-structure" class="nav-link active" data-scroll-target="#command-structure">Command Structure</a></li>
+  <li><a href="#understanding-paths-and-the-windows-filesystem" id="toc-understanding-paths-and-the-windows-filesystem" class="nav-link" data-scroll-target="#understanding-paths-and-the-windows-filesystem">Understanding Paths and the Windows Filesystem</a>
+  <ul class="collapse">
+  <li><a href="#absolute-vs-relative-paths" id="toc-absolute-vs-relative-paths" class="nav-link" data-scroll-target="#absolute-vs-relative-paths">Absolute vs Relative Paths</a></li>
+  </ul></li>
+  <li><a href="#essential-windows-command-line-commands" id="toc-essential-windows-command-line-commands" class="nav-link" data-scroll-target="#essential-windows-command-line-commands">Essential Windows Command Line Commands</a>
+  <ul class="collapse">
+  <li><a href="#navigating-the-filesystem" id="toc-navigating-the-filesystem" class="nav-link" data-scroll-target="#navigating-the-filesystem">Navigating the Filesystem</a></li>
+  <li><a href="#managing-files" id="toc-managing-files" class="nav-link" data-scroll-target="#managing-files">Managing Files</a></li>
+  <li><a href="#viewing-files" id="toc-viewing-files" class="nav-link" data-scroll-target="#viewing-files">Viewing Files</a></li>
+  <li><a href="#creating-and-editing-files" id="toc-creating-and-editing-files" class="nav-link" data-scroll-target="#creating-and-editing-files">Creating and Editing Files</a></li>
+  <li><a href="#displaying-text" id="toc-displaying-text" class="nav-link" data-scroll-target="#displaying-text">Displaying Text</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to CBRC Tutorials!</h1>
+<h1 class="title">The Windows Command Line</h1>
 </div>
 
 
@@ -250,95 +308,131 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
-<section id="before-you-start" class="level2">
-<h2 class="anchored" data-anchor-id="before-you-start">Before You Start</h2>
-<section id="a-quick-note-on-experimental-design" class="level3">
-<h3 class="anchored" data-anchor-id="a-quick-note-on-experimental-design">A Quick Note on Experimental Design</h3>
-<p>Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
+<p>Your command line (also called a <strong>terminal</strong> or <strong>shell</strong>) is a text-based interface that allows you to interact directly with your computer’s operating system.</p>
+<p>While most HPC systems run <strong>Linux</strong>, many users perform preliminary analysis and data management on <strong>Windows machines</strong>. Windows provides command-line environments such as:</p>
+<ul>
+<li><strong>Command Prompt (cmd)</strong></li>
+<li><strong>PowerShell</strong> (modern default)</li>
+</ul>
+<p>Both allow you to navigate the filesystem, manipulate files, and run software from the command line.</p>
+<p>Even if most of your analysis is performed using Python or R, basic command-line skills are extremely useful when organizing files, running pipelines, or transferring data to an HPC system.</p>
+<section id="command-structure" class="level2">
+<h2 class="anchored" data-anchor-id="command-structure">Command Structure</h2>
+<p>Regardless of your operating system or command-line interpreter, a command has the same general structure:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>command <span class="op">[</span>options<span class="op">]</span> <span class="op">[</span>arguments<span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For example, a standard <strong>kb-python</strong> command might look like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kb <span class="op">-</span>x 10XV4 read1<span class="op">.</span><span class="fu">fastq</span><span class="op">.</span><span class="fu">gz</span> read2<span class="op">.</span><span class="fu">fastq</span><span class="op">.</span><span class="fu">gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In this case:</p>
+<ul>
+<li><code>kb</code> is the command (the program being executed)</li>
+<li><code>-x 10XV4</code> is an option (or flag) modifying how the program runs</li>
+<li><code>read1.fastq.gz</code> and <code>read2.fastq.gz</code> are inputs specifying file paths</li>
+</ul>
 </section>
-<section id="recommended-programming-tools-and-resources" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-programming-tools-and-resources">Recommended Programming Tools and Resources</h3>
-<p>Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using <strong>RStudio</strong> (for R) or <strong>JupyterLab</strong> (for Python).</p>
-<p>In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:</p>
-<div class="tool-row">
-<div class="mini-tool-card" data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it.">
-<p>Sharing Your Code on GitHub</p>
+<section id="understanding-paths-and-the-windows-filesystem" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-paths-and-the-windows-filesystem">Understanding Paths and the Windows Filesystem</h2>
+<p>A <strong>file path</strong> specifies the location of a file or directory within the filesystem.</p>
+<p>Windows organizes files using drive letters such as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>C<span class="op">:</span>\</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>D<span class="op">:</span>\</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Most user files are stored in the <strong>Users directory</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>C<span class="op">:</span>\Users\username</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="absolute-vs-relative-paths" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-vs-relative-paths">Absolute vs Relative Paths</h3>
+<p>There are two types of paths: <strong>absolute</strong> and <strong>relative</strong>.</p>
+<p><strong>Absolute paths</strong></p>
+<p>An absolute path specifies the complete location of a file from the root of the drive.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>C<span class="op">:</span>\Users\user\project\<span class="kw">data</span>\file<span class="op">.</span><span class="fu">txt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Relative paths</strong></p>
+<p>A relative path specifies a file relative to your current directory.</p>
+<p>For example, if your current directory is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>C<span class="op">:</span>\Users\user\project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>you could reference the same file as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span>\file<span class="op">.</span><span class="fu">txt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Absolute paths are always unambiguous, while relative paths depend on your current working directory.</p>
+</section>
+</section>
+<section id="essential-windows-command-line-commands" class="level2">
+<h2 class="anchored" data-anchor-id="essential-windows-command-line-commands">Essential Windows Command Line Commands</h2>
+<p>If you plan to work from the command line, here are the most important commands to know.</p>
+<section id="navigating-the-filesystem" class="level3">
+<h3 class="anchored" data-anchor-id="navigating-the-filesystem">Navigating the Filesystem</h3>
+<ul>
+<li><code>cd directory_name</code> — Change directories</li>
+<li><code>cd ..</code> — Move up one directory</li>
+<li><code>cd \</code> — Go to the root of the drive</li>
+<li><code>dir</code> — List files in the current directory</li>
+<li><code>pwd</code> (PowerShell) — Print the current working directory</li>
+</ul>
+<p>For example, to navigate to the directory <code>Documents</code> and list the file in <code>Documents</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cd</span> Documents</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="managing-files" class="level3">
+<h3 class="anchored" data-anchor-id="managing-files">Managing Files</h3>
+<ul>
+<li><code>copy file destination</code> — Copy a file</li>
+<li><code>move file destination</code> — Move or rename a file</li>
+<li><code>del file</code> — Delete a file</li>
+<li><code>mkdir new_directory</code> — Create a directory</li>
+<li><code>rmdir directory_name</code> — Remove a directory</li>
+</ul>
+<p>For example, to create a directory <code>project</code> within your current directory and move a file called <code>data.txt</code> from your current directory to <code>project</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mkdir project</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">move</span> <span class="kw">data</span><span class="op">.</span><span class="fu">txt</span> project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="viewing-files" class="level3">
+<h3 class="anchored" data-anchor-id="viewing-files">Viewing Files</h3>
+<p>Omics datasets can be extremely large. You should avoid opening large files in graphical editors.</p>
+<p>Instead, use command-line tools to inspect them.</p>
+<ul>
+<li><code>type file.txt</code> — Print the contents of a file</li>
+<li><code>more file.txt</code> — Scroll through a file page-by-page</li>
+</ul>
+<p>In PowerShell, you can also use:</p>
+<ul>
+<li><code>Get-Content file.txt</code></li>
+</ul>
+<p>This allows you to inspect files such as configuration files, logs, or small metadata tables.</p>
+<p><strong>Viewing the Beginning or End of Files (PowerShell)</strong></p>
+<p>To view the first lines of a file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Content</span> file<span class="op">.</span><span class="fu">txt</span> <span class="op">-</span>Head <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To view the last lines:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Content</span> file<span class="op">.</span><span class="fu">txt</span> <span class="op">-</span>Tail <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>These are useful for quickly checking large output files or logs.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Compressed Files in Genomics">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="mini-tool-card" data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions.">
-<p>Managing Software Environments</p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Compressed Files in Genomics
 </div>
-<div class="mini-tool-card" data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools.">
-<p>Working from the Command line</p>
 </div>
-<div class="mini-tool-card" data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop.">
-<p>Using the HPC for Compute Intensive Tasks</p>
+<div class="callout-body-container callout-body">
+<p>Omics datasets are often stored in compressed formats to reduce storage requirements. These commonly include files ending in:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">gz</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">zip</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">tar</span><span class="op">.</span><span class="fu">gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Windows can extract many compressed formats using built-in tools or utilities such as <strong>7-Zip</strong>.</p>
+<p>For example, to extract a ZIP archive using the command line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Expand-Archive file<span class="op">.</span><span class="fu">zip</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>When working with large sequencing files, it is often best to inspect them on a <strong>Linux or HPC system</strong>, where tools like <code>zcat</code> and <code>less</code> allow compressed files to be streamed without full decompression.</p>
 </div>
 </div>
 </section>
+<section id="creating-and-editing-files" class="level3">
+<h3 class="anchored" data-anchor-id="creating-and-editing-files">Creating and Editing Files</h3>
+<p>Windows command lines are not ideal for editing large files, but you can create or open files using simple programs.</p>
+<p>To open a file in <strong>Notepad</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>notepad filename<span class="op">.</span><span class="fu">txt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If the file does not exist, Notepad will prompt you to create it.</p>
 </section>
-<section id="explore-our-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="explore-our-workflows">Explore Our Workflows</h2>
-<div class="highlight-section">
-<p>Click a technology below to access step-by-step tutorials tailored to each assay.</p>
-</div>
-<section id="single-cell-rna-sequencing-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="single-cell-rna-sequencing-tutorials">Single-Cell RNA Sequencing Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/10x.html">
-<img src="./images/icons/droplet.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-10x Genomics Chromium Single Cell 3’
-</h3>
-</div>
-</div>
-<div class="banner" data-href="/pages/technologies/parse.html">
-<img src="./images/icons/plate.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Parse Biosciences Evercode WT
-</h3>
-</div>
-</div>
-</section>
-<section id="bulk-rna-seq-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="bulk-rna-seq-tutorials">Bulk RNA-seq Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/bulk.html">
-<img src="./images/icons/bulk.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Bulk RNA-seq
-</h3>
-</div>
-</div>
-</section>
-<section id="spatial-transcriptomics-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-transcriptomics-tutorials">Spatial Transcriptomics Tutorials</h3>
-<div class="banner" data-href="/notebooks/seqfish_workflow.html">
-<img src="./images/icons/probe.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-seqFISH
-</h3>
-</div>
-</div>
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
-    card.style.cursor = "pointer";
-    card.addEventListener('click', () => {
-      window.location.href = card.dataset.href;
-    });
-  });
-});
-</script>
-<script>
-document.querySelectorAll('.banner[data-href]').forEach(banner => {
-  banner.addEventListener('click', () => {
-    window.location.href = banner.getAttribute('data-href');
-  });
-});
-</script>
+<section id="displaying-text" class="level3">
+<h3 class="anchored" data-anchor-id="displaying-text">Displaying Text</h3>
+<p>You can print text to the terminal using:</p>
+<pre><code>echo Hello World</code></pre>
+<p>This is often used to verify commands or display messages.</p>
 
 
 </section>
@@ -749,7 +843,7 @@ document.querySelectorAll('.banner[data-href]').forEach(banner => {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="./images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+<p><img src="../../../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to CBRC Tutorials! – CBRC Tutorials</title>
+<title>Installing FastQC – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,19 +104,19 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CBRC Tutorials</span>
     </a>
   </div>
@@ -96,19 +131,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
         <li>
-    <a class="dropdown-item" href="./pages/technologies/10x.html">
+    <a class="dropdown-item" href="../../pages/technologies/10x.html">
  <span class="dropdown-text">10x Genomics Chromium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/parse.html">
+    <a class="dropdown-item" href="../../pages/technologies/parse.html">
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/bulk.html">
+    <a class="dropdown-item" href="../../pages/technologies/bulk.html">
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -119,11 +154,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec.html">
  <span class="dropdown-text">What is seqspec?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec_tutorials.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec_tutorials.html">
  <span class="dropdown-text">Tutorials</span></a>
   </li>  
     </ul>
@@ -134,17 +169,17 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="./notebooks/sc_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/bulk_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -155,15 +190,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
         <li>
-    <a class="dropdown-item" href="./pages/packages/fastqc.html">
+    <a class="dropdown-item" href="../../pages/packages/fastqc.html">
  <span class="dropdown-text">FastQC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/kb_python.html">
+    <a class="dropdown-item" href="../../pages/packages/kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/scanpy.html">
+    <a class="dropdown-item" href="../../pages/packages/scanpy.html">
  <span class="dropdown-text">Scanpy and Anndata</span></a>
   </li>  
     </ul>
@@ -174,19 +209,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">    
         <li>
-    <a class="dropdown-item" href="./pages/resources/hpc/HPC.html">
+    <a class="dropdown-item" href="../../pages/resources/hpc/HPC.html">
  <span class="dropdown-text">Intro to Caltech HPC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/git.html">
+    <a class="dropdown-item" href="../../pages/resources/git.html">
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/envs/envs.html">
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
  <span class="dropdown-text">Intro to Environment Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/cmd_line/cmd_line.html">
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
  <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
@@ -197,15 +232,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
         <li>
-    <a class="dropdown-item" href="./pages/installation/python_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/python_packages.html">
  <span class="dropdown-text">Installing Python Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/R_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/fastqc_install.html">
+    <a class="dropdown-item" href="../../pages/installation/fastqc_install.html">
  <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
@@ -226,14 +261,26 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ensure-java-is-properly-installed" id="toc-ensure-java-is-properly-installed" class="nav-link active" data-scroll-target="#ensure-java-is-properly-installed">Ensure Java is Properly Installed</a></li>
+  <li><a href="#install-fastqc" id="toc-install-fastqc" class="nav-link" data-scroll-target="#install-fastqc">Install FastQC</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to CBRC Tutorials!</h1>
+<h1 class="title">Installing <code>FastQC</code></h1>
 </div>
 
 
@@ -250,98 +297,58 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
-<section id="before-you-start" class="level2">
-<h2 class="anchored" data-anchor-id="before-you-start">Before You Start</h2>
-<section id="a-quick-note-on-experimental-design" class="level3">
-<h3 class="anchored" data-anchor-id="a-quick-note-on-experimental-design">A Quick Note on Experimental Design</h3>
-<p>Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
+<section id="ensure-java-is-properly-installed" class="level2">
+<h2 class="anchored" data-anchor-id="ensure-java-is-properly-installed">Ensure Java is Properly Installed</h2>
+<p>FastQC is written in <a href="https://www.java.com/en/">Java</a>, so before installing it, you must ensure that Java is properly installed on your machine (ideally the latest version). To check, open your terminal and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If Java has been properly installed you should get an output like:</p>
+<pre>java version "1.8.0_471"
+Java(TM) SE Runtime Environment (build 1.8.0_471-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.471-b09, mixed mode)</pre>
 </section>
-<section id="recommended-programming-tools-and-resources" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-programming-tools-and-resources">Recommended Programming Tools and Resources</h3>
-<p>Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using <strong>RStudio</strong> (for R) or <strong>JupyterLab</strong> (for Python).</p>
-<p>In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:</p>
-<div class="tool-row">
-<div class="mini-tool-card" data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it.">
-<p>Sharing Your Code on GitHub</p>
+<section id="install-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="install-fastqc">Install FastQC</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Installing by OS">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="mini-tool-card" data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions.">
-<p>Managing Software Environments</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools.">
-<p>Working from the Command line</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop.">
-<p>Using the HPC for Compute Intensive Tasks</p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Installing by OS
 </div>
 </div>
-</section>
-</section>
-<section id="explore-our-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="explore-our-workflows">Explore Our Workflows</h2>
-<div class="highlight-section">
-<p>Click a technology below to access step-by-step tutorials tailored to each assay.</p>
-</div>
-<section id="single-cell-rna-sequencing-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="single-cell-rna-sequencing-tutorials">Single-Cell RNA Sequencing Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/10x.html">
-<img src="./images/icons/droplet.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-10x Genomics Chromium Single Cell 3’
-</h3>
+<div class="callout-body-container callout-body">
+<p>This tutorial uses general installation commands that apply across operating systems. For detailed, OS-specific instructions, see the official FastQC <a href="https://github.com/s-andrews/FastQC/blob/master/INSTALL.md">installation guide</a>.</p>
 </div>
 </div>
-<div class="banner" data-href="/pages/technologies/parse.html">
-<img src="./images/icons/plate.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Parse Biosciences Evercode WT
-</h3>
+<p>The entire FastQC program is distributed as a standalone zip archive. Download the latest version (v0.12.1 at the time of writing) from the official <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip">FastQC website</a>.</p>
+<p>Once downloaded, navigate to the directory containing the file and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xf</span> /path/to/fastqc_v0.12.1.zip</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make fastqc executable</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 /path/to/FastQC/fastqc</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Make a symbolic link so you can run FASTQC from anywhere</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /path/to/FastQC/fastqc /usr/local/bin/fastqc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled" title="Sudo Access">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Sudo Access
 </div>
 </div>
-</section>
-<section id="bulk-rna-seq-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="bulk-rna-seq-tutorials">Bulk RNA-seq Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/bulk.html">
-<img src="./images/icons/bulk.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Bulk RNA-seq
-</h3>
+<div class="callout-body-container callout-body">
+<p>If you don’t have <strong>sudo</strong> privileges on your machine, ask your system administrator to install FastQC for you. Otherwise, you’ll need to call the FastQC executable directly using a relative path each time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./path/to/FastQC/fastqc</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>rather than simply:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> ... </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-</section>
-<section id="spatial-transcriptomics-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-transcriptomics-tutorials">Spatial Transcriptomics Tutorials</h3>
-<div class="banner" data-href="/notebooks/seqfish_workflow.html">
-<img src="./images/icons/probe.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-seqFISH
-</h3>
-</div>
-</div>
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
-    card.style.cursor = "pointer";
-    card.addEventListener('click', () => {
-      window.location.href = card.dataset.href;
-    });
-  });
-});
-</script>
-<script>
-document.querySelectorAll('.banner[data-href]').forEach(banner => {
-  banner.addEventListener('click', () => {
-    window.location.href = banner.getAttribute('data-href');
-  });
-});
-</script>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -749,7 +756,7 @@ document.querySelectorAll('.banner[data-href]').forEach(banner => {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="./images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+<p><img src="../../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

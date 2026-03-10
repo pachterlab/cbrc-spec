@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to CBRC Tutorials! – CBRC Tutorials</title>
+<title>Git and GitHub – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,19 +104,19 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CBRC Tutorials</span>
     </a>
   </div>
@@ -96,19 +131,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
         <li>
-    <a class="dropdown-item" href="./pages/technologies/10x.html">
+    <a class="dropdown-item" href="../../pages/technologies/10x.html">
  <span class="dropdown-text">10x Genomics Chromium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/parse.html">
+    <a class="dropdown-item" href="../../pages/technologies/parse.html">
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/bulk.html">
+    <a class="dropdown-item" href="../../pages/technologies/bulk.html">
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -119,11 +154,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec.html">
  <span class="dropdown-text">What is seqspec?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec_tutorials.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec_tutorials.html">
  <span class="dropdown-text">Tutorials</span></a>
   </li>  
     </ul>
@@ -134,17 +169,17 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="./notebooks/sc_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/bulk_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -155,15 +190,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
         <li>
-    <a class="dropdown-item" href="./pages/packages/fastqc.html">
+    <a class="dropdown-item" href="../../pages/packages/fastqc.html">
  <span class="dropdown-text">FastQC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/kb_python.html">
+    <a class="dropdown-item" href="../../pages/packages/kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/scanpy.html">
+    <a class="dropdown-item" href="../../pages/packages/scanpy.html">
  <span class="dropdown-text">Scanpy and Anndata</span></a>
   </li>  
     </ul>
@@ -174,19 +209,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">    
         <li>
-    <a class="dropdown-item" href="./pages/resources/hpc/HPC.html">
+    <a class="dropdown-item" href="../../pages/resources/hpc/HPC.html">
  <span class="dropdown-text">Intro to Caltech HPC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/git.html">
+    <a class="dropdown-item" href="../../pages/resources/git.html">
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/envs/envs.html">
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
  <span class="dropdown-text">Intro to Environment Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/cmd_line/cmd_line.html">
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
  <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
@@ -197,15 +232,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
         <li>
-    <a class="dropdown-item" href="./pages/installation/python_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/python_packages.html">
  <span class="dropdown-text">Installing Python Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/R_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/fastqc_install.html">
+    <a class="dropdown-item" href="../../pages/installation/fastqc_install.html">
  <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
@@ -226,14 +261,43 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-use-github-for-omics-analyses" id="toc-why-use-github-for-omics-analyses" class="nav-link active" data-scroll-target="#why-use-github-for-omics-analyses">Why use GitHub for Omics Analyses?</a></li>
+  <li><a href="#what-should-and-should-not-go-on-github" id="toc-what-should-and-should-not-go-on-github" class="nav-link" data-scroll-target="#what-should-and-should-not-go-on-github">What Should (and Should Not) Go on GitHub</a>
+  <ul class="collapse">
+  <li><a href="#files-to-put-on-github" id="toc-files-to-put-on-github" class="nav-link" data-scroll-target="#files-to-put-on-github">Files to Put on GitHub</a></li>
+  <li><a href="#files-that-should-not-go-on-github" id="toc-files-that-should-not-go-on-github" class="nav-link" data-scroll-target="#files-that-should-not-go-on-github">Files That Should NOT Go on GitHub</a></li>
+  </ul></li>
+  <li><a href="#creating-a-repository" id="toc-creating-a-repository" class="nav-link" data-scroll-target="#creating-a-repository">Creating a Repository</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-a-repository-on-github" id="toc-step-1-create-a-repository-on-github" class="nav-link" data-scroll-target="#step-1-create-a-repository-on-github">Step 1: Create a Repository on GitHub</a></li>
+  <li><a href="#step-2-initialize-git-locally" id="toc-step-2-initialize-git-locally" class="nav-link" data-scroll-target="#step-2-initialize-git-locally">Step 2: Initialize Git Locally</a></li>
+  <li><a href="#step-3-connect-to-github" id="toc-step-3-connect-to-github" class="nav-link" data-scroll-target="#step-3-connect-to-github">Step 3: Connect to GitHub</a></li>
+  </ul></li>
+  <li><a href="#basic-git-workflow" id="toc-basic-git-workflow" class="nav-link" data-scroll-target="#basic-git-workflow">Basic Git Workflow</a>
+  <ul class="collapse">
+  <li><a href="#add-files" id="toc-add-files" class="nav-link" data-scroll-target="#add-files">Add Files</a></li>
+  <li><a href="#commit-changes" id="toc-commit-changes" class="nav-link" data-scroll-target="#commit-changes">Commit Changes</a></li>
+  <li><a href="#push-to-github" id="toc-push-to-github" class="nav-link" data-scroll-target="#push-to-github">Push to GitHub</a></li>
+  </ul></li>
+  <li><a href="#using-a-.gitignore-file" id="toc-using-a-.gitignore-file" class="nav-link" data-scroll-target="#using-a-.gitignore-file">Using a .gitignore File</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to CBRC Tutorials!</h1>
+<h1 class="title">Git and GitHub</h1>
 </div>
 
 
@@ -250,98 +314,156 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
-<section id="before-you-start" class="level2">
-<h2 class="anchored" data-anchor-id="before-you-start">Before You Start</h2>
-<section id="a-quick-note-on-experimental-design" class="level3">
-<h3 class="anchored" data-anchor-id="a-quick-note-on-experimental-design">A Quick Note on Experimental Design</h3>
-<p>Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
+<p><a href="www.github.com"><strong>GitHub</strong></a> is a web-based platform for hosting and sharing code. It is built on top of <a href="https://git-scm.com/"><strong>Git</strong></a>, a tool that tracks changes to files over time.</p>
+<p>In practical terms, Git allows you to:</p>
+<ul>
+<li>Record changes to your scripts</li>
+<li>Revert to earlier versions if needed</li>
+<li>Document when and why changes were made</li>
+</ul>
+<p>GitHub provides an online location where those tracked files can be stored, backed up, and shared with others.</p>
+<p>Below we will provide a quick tutorial to Git and GitHub, highlighting the basic tools you should be familiar with. If you need further clarification or wish to learn about more advanced features (e.g.&nbsp;branching, merging), GitHub has excellent tutorials on their <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world">documentation site</a>.</p>
+<section id="why-use-github-for-omics-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-github-for-omics-analyses">Why use GitHub for Omics Analyses?</h2>
+<p>Omics workflows are often complex, and there is rarely a single “correct” way to analyze a dataset. Even when working with the same raw data, researchers may make different — yet reasonable — choices at each processing step.</p>
+<p>For example, to analyze scRNA-seq data:</p>
+<ul>
+<li>Counts may be normalized using a simple log1p(CPM) transformation or a more sophisticated method such as <a href="https://github.com/satijalab/sctransform"><code>scTransform</code></a>.</li>
+<li>Cells may be filtered using thresholds of 100 genes, 200 genes, or another cutoff entirely.</li>
+<li>Differential expression may use a p-value threshold of 0.01 or 0.05.</li>
+<li>Different software packages or parameter settings may be used for clustering or dimensionality reduction.</li>
+</ul>
+<p>The number of reasonable analysis paths is enormous.</p>
+<p>This complexity is further compounded by:</p>
+<ul>
+<li>Differences in package versions</li>
+<li>Changes in software dependencies</li>
+<li>Random seeds used in stochastic algorithms</li>
+<li>Differences in computing environments</li>
+</ul>
+<p>As a result, even identical code can produce different — yet equally reasonable — results on different machines. Because of this, it can be difficult for others to evaluate, critique, or reproduce your analysis workflow unless the exact scripts and parameters are available.</p>
+<p>For this reason, when publishing omics analyses, we strongly recommend saving your analysis scripts and configuration files to a public GitHub repository. Doing so allows other researchers to inspect your exact workflow and build upon your work.</p>
 </section>
-<section id="recommended-programming-tools-and-resources" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-programming-tools-and-resources">Recommended Programming Tools and Resources</h3>
-<p>Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using <strong>RStudio</strong> (for R) or <strong>JupyterLab</strong> (for Python).</p>
-<p>In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:</p>
-<div class="tool-row">
-<div class="mini-tool-card" data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it.">
-<p>Sharing Your Code on GitHub</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions.">
-<p>Managing Software Environments</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools.">
-<p>Working from the Command line</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop.">
-<p>Using the HPC for Compute Intensive Tasks</p>
-</div>
-</div>
+<section id="what-should-and-should-not-go-on-github" class="level2">
+<h2 class="anchored" data-anchor-id="what-should-and-should-not-go-on-github">What Should (and Should Not) Go on GitHub</h2>
+<p>Before creating a repository, it is important to understand what belongs there.</p>
+<section id="files-to-put-on-github" class="level3">
+<h3 class="anchored" data-anchor-id="files-to-put-on-github">Files to Put on GitHub</h3>
+<ul>
+<li>Analysis scripts (.R, .py, .sh)</li>
+<li>Jupyter notebooks (.ipynb)</li>
+<li>SLURM job scripts (.sbatch)</li>
+<li>README files</li>
+<li>Small configuration files</li>
+<li>Environment files (environment.yml, requirements.txt)</li>
+<li>Small processed summary tables</li>
+</ul>
+</section>
+<section id="files-that-should-not-go-on-github" class="level3">
+<h3 class="anchored" data-anchor-id="files-that-should-not-go-on-github">Files That Should NOT Go on GitHub</h3>
+<ul>
+<li>FASTQ files</li>
+<li>BAM or CRAM files</li>
+<li>Count matrices</li>
+<li>Intermediate alignment outputs</li>
+<li>Any file larger than ~100–200 MB</li>
+</ul>
+<p>Large omics data files should remain on the HPC or in dedicated storage systems — not on GitHub.</p>
 </section>
 </section>
-<section id="explore-our-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="explore-our-workflows">Explore Our Workflows</h2>
-<div class="highlight-section">
-<p>Click a technology below to access step-by-step tutorials tailored to each assay.</p>
-</div>
-<section id="single-cell-rna-sequencing-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="single-cell-rna-sequencing-tutorials">Single-Cell RNA Sequencing Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/10x.html">
-<img src="./images/icons/droplet.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-10x Genomics Chromium Single Cell 3’
-</h3>
-</div>
-</div>
-<div class="banner" data-href="/pages/technologies/parse.html">
-<img src="./images/icons/plate.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Parse Biosciences Evercode WT
-</h3>
-</div>
-</div>
+<section id="creating-a-repository" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-repository">Creating a Repository</h2>
+<section id="step-1-create-a-repository-on-github" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-a-repository-on-github">Step 1: Create a Repository on GitHub</h3>
+<ol type="1">
+<li>Log in to GitHub.</li>
+<li>Click New Repository.</li>
+<li>Choose a repository name.</li>
+<li>Leave it empty (do not initialize with a README).</li>
+<li>Click Create Repository.</li>
+</ol>
+<p>GitHub will display a repository URL, such as:</p>
+<pre class="arduino"><code>https://github.com/&lt;git_username&gt;/&lt;project_name&gt;.git</code></pre>
 </section>
-<section id="bulk-rna-seq-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="bulk-rna-seq-tutorials">Bulk RNA-seq Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/bulk.html">
-<img src="./images/icons/bulk.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Bulk RNA-seq
-</h3>
-</div>
-</div>
+<section id="step-2-initialize-git-locally" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-initialize-git-locally">Step 2: Initialize Git Locally</h3>
+<p>Navigate to your project directory (on your local machine or HPC):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Initialize Git:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This creates a hidden <code>.git</code> directory that tracks changes.</p>
 </section>
-<section id="spatial-transcriptomics-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-transcriptomics-tutorials">Spatial Transcriptomics Tutorials</h3>
-<div class="banner" data-href="/notebooks/seqfish_workflow.html">
-<img src="./images/icons/probe.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-seqFISH
-</h3>
+<section id="step-3-connect-to-github" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-connect-to-github">Step 3: Connect to GitHub</h3>
+<p>Add the GitHub repository as a remote using the repository URL:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/<span class="op">&lt;</span>git_username<span class="op">&gt;</span>/<span class="op">&lt;</span>project_name<span class="op">&gt;</span>.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="basic-git-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="basic-git-workflow">Basic Git Workflow</h2>
+<p>You only need three core commands for everyday use: <code>add</code>, <code>commit</code>, and <code>push</code>. First, <code>add</code> selects the files whose changes you want Git to track. Next, <code>commit</code> records those changes as a snapshot in your local repository along with a message describing the update. Finally, <code>push</code> uploads those committed changes to the remote GitHub repository so they are saved online and visible to others.</p>
+<section id="add-files" class="level3">
+<h3 class="anchored" data-anchor-id="add-files">Add Files</h3>
+<p>To add changes to a single file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="op">&lt;</span>filename<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To add all changes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="commit-changes" class="level3">
+<h3 class="anchored" data-anchor-id="commit-changes">Commit Changes</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Commit Description"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A commit message should briefly describe what changed.</p>
+</section>
+<section id="push-to-github" class="level3">
+<h3 class="anchored" data-anchor-id="push-to-github">Push to GitHub</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>After the first push, future pushes can be made with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="using-a-.gitignore-file" class="level2">
+<h2 class="anchored" data-anchor-id="using-a-.gitignore-file">Using a .gitignore File</h2>
+<p>We usually keep all of our files for an analysis in a single project directory, and it is inconvenient to physically separate out the files that should be saved to GitHub and the ones which should not.</p>
+<p>The <strong>.gitignore file tells Git which files it should not track</strong>. If you do not already have a text file called <code>.gitignore</code> in your repository, you should create one.</p>
+<p>An example .gitignore file for a omics analysis project might look like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw sequencing data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">*.fastq</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">*.fastq.gz</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Alignment files</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">*.bam</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">*.bai</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">*.sam</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Large matrices</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">*.mtx</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ex">*.h5ad</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="ex">*.rds</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Temporary files</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="ex">*.log</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="ex">*.tmp</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># MacOS system files</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="ex">.DS_Store</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here, the asterisk (*) is a wildcard that matches any filename with the specified extension. This .gitignore file tells Git to ignore all FASTQ files, BAM files, large matrices, temporary files, and MacOS system files. You can also use .gitignore to ignore specific directories (e.g.&nbsp;<code>data/</code>) or files with specific names (e.g.&nbsp;<code>config.yaml</code>).</p>
+<div class="callout callout-style-default callout-note callout-titled" title=".gitignore and Already Tracked Files">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>.gitignore and Already Tracked Files
 </div>
 </div>
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
-    card.style.cursor = "pointer";
-    card.addEventListener('click', () => {
-      window.location.href = card.dataset.href;
-    });
-  });
-});
-</script>
-<script>
-document.querySelectorAll('.banner[data-href]').forEach(banner => {
-  banner.addEventListener('click', () => {
-    window.location.href = banner.getAttribute('data-href');
-  });
-});
-</script>
+<div class="callout-body-container callout-body">
+<p>Note that if you have already added a file to Git (e.g.&nbsp;with <code>git add .</code>), it will be tracked even if it matches a pattern in .gitignore. To stop tracking a file that has already been added, you can use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> <span class="op">&lt;</span>filename<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will remove the file from Git’s tracking but keep it on your local filesystem. After running this command, the file will be ignored in future commits.</p>
+</div>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -749,7 +871,7 @@ document.querySelectorAll('.banner[data-href]').forEach(banner => {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="./images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+<p><img src="../../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

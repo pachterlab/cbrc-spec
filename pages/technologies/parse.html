@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to CBRC Tutorials! – CBRC Tutorials</title>
+<title>Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data – CBRC Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1df33b310b25e824b5acc70bcebddb02.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d6053df382244508c1004bc951ec3d33.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,19 +104,19 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">CBRC Tutorials</span>
     </a>
   </div>
@@ -96,19 +131,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-technologies">    
         <li>
-    <a class="dropdown-item" href="./pages/technologies/10x.html">
+    <a class="dropdown-item" href="../../pages/technologies/10x.html">
  <span class="dropdown-text">10x Genomics Chromium</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/parse.html">
+    <a class="dropdown-item" href="../../pages/technologies/parse.html">
  <span class="dropdown-text">Parse Evercode WT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/technologies/bulk.html">
+    <a class="dropdown-item" href="../../pages/technologies/bulk.html">
  <span class="dropdown-text">Bulk RNA-seq</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">seqFISH</span></a>
   </li>  
     </ul>
@@ -119,11 +154,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-seqspec">    
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec.html">
  <span class="dropdown-text">What is seqspec?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/seqspec/seqspec_tutorials.html">
+    <a class="dropdown-item" href="../../pages/seqspec/seqspec_tutorials.html">
  <span class="dropdown-text">Tutorials</span></a>
   </li>  
     </ul>
@@ -134,17 +169,17 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-workflows">    
         <li>
-    <a class="dropdown-item" href="./notebooks/sc_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/sc_workflow.html">
  <span class="dropdown-text">An Example scRNA-seq Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/seqfish_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/seqfish_workflow.html">
  <span class="dropdown-text">An Example Spatial Transcriptomics Workflow</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="./notebooks/bulk_workflow.html">
+    <a class="dropdown-item" href="../../notebooks/bulk_workflow.html">
  <span class="dropdown-text">An Example Bulk RNA-seq Workflow</span></a>
   </li>  
     </ul>
@@ -155,15 +190,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-packages">    
         <li>
-    <a class="dropdown-item" href="./pages/packages/fastqc.html">
+    <a class="dropdown-item" href="../../pages/packages/fastqc.html">
  <span class="dropdown-text">FastQC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/kb_python.html">
+    <a class="dropdown-item" href="../../pages/packages/kb_python.html">
  <span class="dropdown-text">kb-python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/packages/scanpy.html">
+    <a class="dropdown-item" href="../../pages/packages/scanpy.html">
  <span class="dropdown-text">Scanpy and Anndata</span></a>
   </li>  
     </ul>
@@ -174,19 +209,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-resources">    
         <li>
-    <a class="dropdown-item" href="./pages/resources/hpc/HPC.html">
+    <a class="dropdown-item" href="../../pages/resources/hpc/HPC.html">
  <span class="dropdown-text">Intro to Caltech HPC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/git.html">
+    <a class="dropdown-item" href="../../pages/resources/git.html">
  <span class="dropdown-text">Intro to Git and GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/envs/envs.html">
+    <a class="dropdown-item" href="../../pages/resources/envs/envs.html">
  <span class="dropdown-text">Intro to Environment Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/resources/cmd_line/cmd_line.html">
+    <a class="dropdown-item" href="../../pages/resources/cmd_line/cmd_line.html">
  <span class="dropdown-text">Intro to the Command Line</span></a>
   </li>  
     </ul>
@@ -197,15 +232,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-installation">    
         <li>
-    <a class="dropdown-item" href="./pages/installation/python_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/python_packages.html">
  <span class="dropdown-text">Installing Python Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/R_packages.html">
+    <a class="dropdown-item" href="../../pages/installation/R_packages.html">
  <span class="dropdown-text">Installing R Packages</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pages/installation/fastqc_install.html">
+    <a class="dropdown-item" href="../../pages/installation/fastqc_install.html">
  <span class="dropdown-text">Installing FastQC</span></a>
   </li>  
     </ul>
@@ -226,14 +261,33 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#step-0-get-started-with-seqspec" id="toc-step-0-get-started-with-seqspec" class="nav-link active" data-scroll-target="#step-0-get-started-with-seqspec">Step 0: Get started with <code>seqspec</code></a>
+  <ul class="collapse">
+  <li><a href="#seqspec-tutorials" id="toc-seqspec-tutorials" class="nav-link" data-scroll-target="#seqspec-tutorials">seqspec Tutorials</a></li>
+  </ul></li>
+  <li><a href="#step-1-assess-the-quality-of-your-sequencing-data-with-fastqc" id="toc-step-1-assess-the-quality-of-your-sequencing-data-with-fastqc" class="nav-link" data-scroll-target="#step-1-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 1: Assess the Quality of Your Sequencing Data with <code>FastQC</code></a></li>
+  <li><a href="#step-2-pseudoalign-your-library-reads-with-kb-python" id="toc-step-2-pseudoalign-your-library-reads-with-kb-python" class="nav-link" data-scroll-target="#step-2-pseudoalign-your-library-reads-with-kb-python">Step 2: Pseudoalign Your Library Reads with <code>kb-python</code></a></li>
+  <li><a href="#an-example-v2" id="toc-an-example-v2" class="nav-link" data-scroll-target="#an-example-v2">An Example (v2)</a></li>
+  <li><a href="#an-example-v3" id="toc-an-example-v3" class="nav-link" data-scroll-target="#an-example-v3">An Example (v3)</a></li>
+  <li><a href="#step-3-process-and-analyze-your-data" id="toc-step-3-process-and-analyze-your-data" class="nav-link" data-scroll-target="#step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to CBRC Tutorials!</h1>
+<h1 class="title">Analyzing Your Parse Biosciences Evercode WT scRNA-seq Assay Data</h1>
 </div>
 
 
@@ -250,98 +304,167 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>This site is designed to guide Caltech students and staff through the full process of working with omics data—from formatting and processing to analysis—using the equipment and experimental setups commonly found at Caltech. Whether you’re just getting started or looking to refine your workflow, these tutorials provide step-by-step instructions tailored to our unique environment.</strong></p>
-<section id="before-you-start" class="level2">
-<h2 class="anchored" data-anchor-id="before-you-start">Before You Start</h2>
-<section id="a-quick-note-on-experimental-design" class="level3">
-<h3 class="anchored" data-anchor-id="a-quick-note-on-experimental-design">A Quick Note on Experimental Design</h3>
-<p>Although this site focuses on the computational side of omics experiments, it’s important to remember that good experimental design is crucial for successful data analysis. Without a well-designed experiment, even the best computational tools may not yield meaningful insights. To learn more about the principles of experimental design, we recommend checking out our page on <a href="./pages/design.html">experimental design</a> and consulting with the CBRC team for guidance on your specific project.</p>
-</section>
-<section id="recommended-programming-tools-and-resources" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-programming-tools-and-resources">Recommended Programming Tools and Resources</h3>
-<p>Nearly all modern genomics and bioinformatics tools are developed for R or Python, and all of our analysis workflows rely on libraries from one of these two ecosystems. We assume readers have basic familiarity with at least one of these languages and suggest performing analyses using <strong>RStudio</strong> (for R) or <strong>JupyterLab</strong> (for Python).</p>
-<p>In addition to knowing R and Python, we also recommend becoming familiar with the following tools used to document, manage, and run analysis workflows:</p>
-<div class="tool-row">
-<div class="mini-tool-card" data-href="/pages/resources/git.html" data-desc="Share your code publicly so others can reproduce your work and build on it.">
-<p>Sharing Your Code on GitHub</p>
+<section id="step-0-get-started-with-seqspec" class="level2">
+<h2 class="anchored" data-anchor-id="step-0-get-started-with-seqspec">Step 0: Get started with <a href="../../pages/seqspec/seqspec.html"><code>seqspec</code></a></h2>
+<p>To ensure that all data generated at Caltech are standardized and reproducible, we require that every dataset include a <strong>seqspec file</strong>. A seqspec file provides a machine-readable description of your experiment, specifying the assay information, library structure, and read structure in a YAML-formatted file.</p>
+<section id="seqspec-tutorials" class="level3">
+<h3 class="anchored" data-anchor-id="seqspec-tutorials">seqspec Tutorials</h3>
+<div class="tech-selector">
+  <!-- Parse Row -->
+  <div class="tech-row">
+    <button class="tech-btn tech-parse" data-link="/pages/seqspec/technologies/Parse/parse_v2_single.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M9 9h6v6H9z"></path></svg>
+      <h3 class="anchored">Parse Evercode WT v2 (Single Index)</h3>
+    </button>
+    <button class="tech-btn tech-parse" data-link="/pages/seqspec/technologies/Parse/parse_v2_dual.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M7 7h10v10H7z"></path></svg>
+      <h3 class="anchored">Parse Evercode WT v2 (Dual Index)</h3>
+    </button>
+    <button class="tech-btn tech-parse" data-link="/pages/seqspec/technologies/Parse/parse_v3.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="12" r="4"></circle></svg>
+      <h3 class="anchored">Parse Evercode WT v3</h3>
+    </button>
+  </div>
+
 </div>
-<div class="mini-tool-card" data-href="/pages/resources/envs/envs.html" data-desc="Install and manage packages without worrying about conflicting software versions.">
-<p>Managing Software Environments</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/cmd_line/cmd_line.html" data-desc="Use the command line to navigate your filesystem and run analysis tools.">
-<p>Working from the Command line</p>
-</div>
-<div class="mini-tool-card" data-href="/pages/resources/hpc/HPC.html" data-desc="Run large genomics analyses on Caltech’s high-performance computing cluster instead of your laptop.">
-<p>Using the HPC for Compute Intensive Tasks</p>
-</div>
-</div>
-</section>
-</section>
-<section id="explore-our-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="explore-our-workflows">Explore Our Workflows</h2>
-<div class="highlight-section">
-<p>Click a technology below to access step-by-step tutorials tailored to each assay.</p>
-</div>
-<section id="single-cell-rna-sequencing-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="single-cell-rna-sequencing-tutorials">Single-Cell RNA Sequencing Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/10x.html">
-<img src="./images/icons/droplet.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-10x Genomics Chromium Single Cell 3’
-</h3>
-</div>
-</div>
-<div class="banner" data-href="/pages/technologies/parse.html">
-<img src="./images/icons/plate.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Parse Biosciences Evercode WT
-</h3>
-</div>
-</div>
-</section>
-<section id="bulk-rna-seq-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="bulk-rna-seq-tutorials">Bulk RNA-seq Tutorials</h3>
-<div class="banner" data-href="/pages/technologies/bulk.html">
-<img src="./images/icons/bulk.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-Bulk RNA-seq
-</h3>
-</div>
-</div>
-</section>
-<section id="spatial-transcriptomics-tutorials" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-transcriptomics-tutorials">Spatial Transcriptomics Tutorials</h3>
-<div class="banner" data-href="/notebooks/seqfish_workflow.html">
-<img src="./images/icons/probe.png" class="img-fluid" width="20">
-<div class="banner-text">
-<h3 class="anchored">
-seqFISH
-</h3>
-</div>
-</div>
+
+<style>
+.tech-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 2em auto;
+  max-width: 900px;
+}
+
+.tech-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
+
+.tech-btn {
+  background: #f8f9fa;
+  border: 3px solid #005a91;
+  border-radius: 12px;
+  padding: 1.5em;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  color: #222;
+}
+
+.tech-btn svg {
+  margin-bottom: 0.5em;
+}
+
+.tech-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* Parse brand color */
+.tech-parse {
+  border-color: #0072b2;
+}
+.tech-parse:hover {
+  background: #0072b2;
+  color: white;
+}
+
+.tech-btn h3 {
+  margin: 0.3em 0;
+  font-size: 0.92em;
+}
+
+.tech-btn p {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+h1.title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+</style>
+
 <script>
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.mini-tool-card[data-href]').forEach(card => {
-    card.style.cursor = "pointer";
-    card.addEventListener('click', () => {
-      window.location.href = card.dataset.href;
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tech-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.link;
+      if (target) window.location.href = target;
     });
   });
 });
 </script>
-<script>
-document.querySelectorAll('.banner[data-href]').forEach(banner => {
-  banner.addEventListener('click', () => {
-    window.location.href = banner.getAttribute('data-href');
-  });
-});
-</script>
-
-
 </section>
+</section>
+<section id="step-1-assess-the-quality-of-your-sequencing-data-with-fastqc" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-assess-the-quality-of-your-sequencing-data-with-fastqc">Step 1: Assess the Quality of Your Sequencing Data with <a href="../../pages/packages/fastqc.html"><code>FastQC</code></a></h2>
+<p>If you do not already have FastQC installled, please refer to <a href="../../pages/installation/fastqc_install.html"><strong>Installing FastQC</strong></a>.</p>
+<p>You can launch the FastQC graphical interface by simply running:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alternatively, you can run FastQC directly from the command line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">--extract</span> <span class="at">--outdir</span><span class="op">=</span>outdir somefile.fastq someotherfile.fastq ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>where you list all the FASTQ files you wish to analyze after the <code>fastqc</code> command, and <code>outdir</code> is the directory in which you would like the output files to be stored.</p>
+<p>For a detailed tutorial on using FastQC and interpreting the output reports, see our page on <a href="../../pages/packages/fastqc.html"><strong>Quality Control of Raw Sequencing Data with FastQC</strong></a>.</p>
+</section>
+<section id="step-2-pseudoalign-your-library-reads-with-kb-python" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-pseudoalign-your-library-reads-with-kb-python">Step 2: Pseudoalign Your Library Reads with <a href="../../pages/packages/kb_python.html"><code>kb-python</code></a></h2>
+<p>Aligning reads from a <strong>Parse Evercode WT</strong> library requires additional consideration compared to other scRNA-seq assays. Unlike most platforms, which use primers targeting a specific region of each mRNA molecule, Parse Evercode WT employs two types of primers — <strong>poly(T) primers</strong> that bind to the 3′ poly(A) tail and <strong>random oligo primers</strong> that bind to random internal regions of the transcript. Each primer type has its own corresponding set of cell-specific barcodes. As a result, each cell is represented by two barcodes rather than one, as in assays such as 10x Genomics.</p>
+<p>To generate a unified count matrix from the raw reads, the counts associated with these two barcodes must be collapsed so that each cell is represented once. In kb-python, this is accomplished by replacing all random oligo barcodes with their corresponding poly(T) barcodes using the <code>-r</code> argument.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using <code>-r</code> to specify a replacement list in kb count, two count matrices will be produced: one with the original barcodes (stored in the output file <code>counts_unfiltered</code>) and one with the replacement barcodes (stored in the output file <code>counts_unfiltered_modified</code>).</p>
+</div>
+</div>
+</section>
+<section id="an-example-v2" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-v2">An Example (v2)</h2>
+<p>Here we provide a brief example of how to pseudoalign a Parse Evercode WT v2 library to a reference using <code>kb count</code>. For a more in-depth tutorial, see our page on <a href="../../pages/packages/kb_python.html"><strong>kb-python</strong></a>.</p>
+<p>To psuedoalign your Parse data, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-x</span> SPLIT-SEQ <span class="at">-r</span> v2_replace.txt <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>where index.idx and t2g.txt are files generated by <code>kb-ref</code>, and R1.fastq.gz and R2.fastq.gz are your raw paired-end reads. The replace.txt file specifies the barcode substitution. The <code>--h5ad</code> argument generates an <code>h5ad</code> formatted file for downstream processing with <a href="../../pages/packages/scanpy.html"><strong>Scanpy</strong></a>.</p>
+<p>If you performed a <strong>single-nucleus RNA-seq</strong> experiment, instead use the <strong>NAC workflow</strong> to pseaudoalign both nascent and mature reads:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">-r</span> v2_replace.txt <span class="at">--workflow</span><span class="op">=</span>nac <span class="at">-x</span> 10XV3 <span class="at">-g</span> t2g.txt <span class="at">-i</span> index.idx <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-c1</span> cdna.txt <span class="at">-c2</span> nascent.txt R1.fastq.gz R2.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here, cdna.txt and nascent.text are files generated by <code>kb ref -workflow=nac</code>.</p>
+<p>You can download the file <strong>v2_replace.txt</strong> for the v2 chemistry <a href="../../files/v2_replace.txt" download="">here</a>.</p>
+</section>
+<section id="an-example-v3" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-v3">An Example (v3)</h2>
+<p>Currently, kb-python does not include a built-in specification for Parse Evercode WT v3. Instead, we must provide the assay information manually by specifying:</p>
+<ul>
+<li><p><a href="../../files/v3_onlist.txt" download="">v3_onlist.txt</a> — a list of valid cell barcodes</p></li>
+<li><p>a technology string defining barcode positions within the read: <code>-x "1,10,18,1,30,38,1,50,58:1,0,10:0,0,0"</code></p></li>
+<li><p><a href="../../files/v3_replace.txt" download="">v3_replace.txt</a> - mapping between poly(T) and random oligo barcodes</p></li>
+<li><p>the orientation of the first read (R1) with relative to your library specification: <code>--strand=forward</code></p></li>
+<li><p>the read parity (<code>paired</code> if both paired-end reads contain the biological sequence and <code>single</code> otherwise): <code>--paired=single</code></p></li>
+</ul>
+<p>Then, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">kb</span> count <span class="at">--h5ad</span> <span class="at">--strand</span><span class="op">=</span>forward <span class="at">--parity</span><span class="op">=</span>single <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-r</span> v3_replace.txt <span class="at">-w</span> v3_onlist.txt <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-x</span> <span class="st">"1,10,18,1,30,38,1,50,58:1,0,10:0,0,0 </span><span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">  -g t2g.txt -i index.idx R1.fastq.gz R2.fastq.gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-3-process-and-analyze-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-process-and-analyze-your-data">Step 3: Process and Analyze Your Data</h2>
+<p>Now you are ready to process your data! To continue with downstream analysis, follow our <a href="../../notebooks/sc_workflow.html"><strong>example scRNA-seq workflow</strong></a>.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -749,7 +872,7 @@ document.querySelectorAll('.banner[data-href]').forEach(banner => {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="./images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
+<p><img src="../../images/logos/black_Caltech_logo.png" alt="Caltech Logo" width="300"></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
