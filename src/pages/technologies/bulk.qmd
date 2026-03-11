@@ -36,7 +36,7 @@ For this reason, using `kb count` on bulk data requires special flags which gene
 
 ### An Example
 
-To psuedoalign your bulk data, run:
+To pseudoalign your bulk data, run:
 
 ```bash
 kb count --h5ad -x BULK --tcc --matrix-to-directories --parity=paired -g t2g.txt -i index.idx \

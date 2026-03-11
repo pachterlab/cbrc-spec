@@ -63,7 +63,7 @@ website:
           - href: pages/installation/fastqc_install.qmd
             text: Installing FastQC
     right:
-      - href: https://pachterlab.github.io/CBRC/
+      - href: https://caltech-bioinformatics-resource-center.github.io/CBRC/
         text: CBRC
 
   page-footer:
