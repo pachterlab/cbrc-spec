@@ -1,1 +1,1 @@
-Sitemap: https://pachterlab.github.io/cbrc-spec/sitemap.xml
+Sitemap: https://caltech-bioinformatics-resource-center.github.io/Tutorials/sitemap.xml
